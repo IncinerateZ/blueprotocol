@@ -9,4 +9,6 @@
     line-height: 100vh;
     font-size: 5rem;
     color: #E7EEEA;
+    user-select: none;
+    -webkit-user-select: none;
 }
