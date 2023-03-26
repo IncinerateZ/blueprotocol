@@ -14,7 +14,6 @@ import 'leaflet-defaulticon-compatibility';
 import 'leaflet-defaulticon-compatibility/dist/leaflet-defaulticon-compatibility.css';
 
 import ChevronLeft from '../../public/map/chevron-left.svg';
-import ChevronRight from '../../public/map/chevron-right.svg';
 
 import styles from '../../styles/Map.module.css';
 import Image from 'next/image';
@@ -75,10 +74,13 @@ export default function Map() {
                         }}
                     >
                         <Image
-                            src={chevron ? ChevronLeft.src : ChevronRight.src}
+                            src={ChevronLeft.src}
                             width={25}
                             height={25}
                             alt={'Toggle Drawer'}
+                            style={{
+                                transform: chevron ? '' : 'rotate(180deg)',
+                            }}
                         ></Image>
                     </div>
                 </div>
@@ -98,12 +100,15 @@ export default function Map() {
                 className={styles.Map}
                 scrollWheelZoom={true}
                 zoomControl={false}
+                whenReady={() => {
+                    console.log('Map Loaded');
+                }}
             >
                 <TileLayer
                     attribution='&copy; Bandai Namco Online Inc., &copy; Bandai Namco Studios Inc.'
                     url='./asterleeds/{z}/{x}/{y}.png'
                     maxNativeZoom={3}
-                    maxZoom={5}
+                    maxZoom={7}
                     minZoom={3}
                     noWrap={true}
                     bounds={L.latLngBounds(

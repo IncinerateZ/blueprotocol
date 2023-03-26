@@ -55,4 +55,6 @@
 
 .MCL_chevron img {
     height: 30px;
+
+    transition: 0.3s;
 }
