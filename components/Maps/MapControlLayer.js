@@ -19,6 +19,7 @@ export default function MapControlLayer({
     chosenMap,
     setChosenMap,
     setMapSearch,
+    resetSearch,
 }) {
     const [chevron, setChevron] = useState(true);
     const searchRef = useRef();
@@ -53,11 +54,8 @@ export default function MapControlLayer({
         if (code === 'Enter') {
             searchRef.current.blur();
             let c = Object.keys(searchSuggestions)[ssHighlight];
-            if (maps[c] === chosenMap) {
-                setMapSearch(data[chosenMap].display_name);
-                setSSHighlight(0);
-                setSearchSuggestions([]);
-            } else setChosenMap(maps[c]);
+            if (maps[c] === chosenMap) resetSearch();
+            else setChosenMap(maps[c]);
         }
     }
     return (
@@ -102,13 +100,9 @@ export default function MapControlLayer({
                                     }
                                     onClick={() => {
                                         searchRef.current.blur();
-                                        if (maps[e] === chosenMap) {
-                                            setMapSearch(
-                                                data[chosenMap].display_name,
-                                            );
-                                            setSSHighlight(0);
-                                            setSearchSuggestions([]);
-                                        } else setChosenMap(maps[e]);
+                                        if (maps[e] === chosenMap)
+                                            resetSearch();
+                                        else setChosenMap(maps[e]);
                                     }}
                                 >
                                     {e}

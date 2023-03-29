@@ -15,6 +15,7 @@ import 'leaflet-defaulticon-compatibility/dist/leaflet-defaulticon-compatibility
 
 import styles from '../../styles/Map.module.css';
 import MapControlLayer from './MapControlLayer';
+import Head from 'next/head';
 
 export default function Map() {
     const [chosenMap, setChosenMap] = useState('asterleeds');
@@ -63,11 +64,15 @@ export default function Map() {
         return null;
     };
 
-    useEffect(() => {
-        setMarkers(data[chosenMap].markers);
+    function resetSearch() {
         setMapSearch(data[chosenMap].display_name);
         setSSHighlight(0);
         setSearchSuggestions([]);
+    }
+
+    useEffect(() => {
+        setMarkers(data[chosenMap].markers);
+        resetSearch();
     }, [chosenMap, data]);
 
     useEffect(() => {
@@ -85,6 +90,11 @@ export default function Map() {
 
     return (
         <div>
+            <Head>
+                <title>
+                    {data[chosenMap].display_name} Map | Blue Protocol Resource
+                </title>
+            </Head>
             <MapControlLayer
                 data={data}
                 maps={maps}
@@ -96,6 +106,7 @@ export default function Map() {
                 chosenMap={chosenMap}
                 setChosenMap={setChosenMap}
                 setMapSearch={setMapSearch}
+                resetSearch={resetSearch}
             />
             <MapContainer
                 center={[51.505, -0.09]}
