@@ -19,9 +19,13 @@ import styles from '../../styles/Map.module.css';
 import Image from 'next/image';
 
 export default function Map() {
-    const [markers, setMarkers] = useState(
-        require('./Markers').default.asterleeds,
-    );
+    const [chosenMap, setChosenMap] = useState('asterleeds');
+    const [data, setData] = useState(require('./Markers').default);
+    const [markers, setMarkers] = useState({});
+    const [mapLoaded, setMapLoaded] = useState(false);
+
+    const [mapSearch, setMapSearch] = useState('');
+
     const makeMakerMode = true;
     const iconChest = new L.Icon({
         iconUrl: './map/icons/UI_Map_02.png',
@@ -39,23 +43,34 @@ export default function Map() {
         useMapEvents({
             click(e) {
                 if (makeMakerMode)
-                    setMarkers([
+                    setMarkers({
                         ...markers,
-                        {
-                            lat: e.latlng.lat,
-                            lng: e.latlng.lng,
-                            title: '',
-                            description: '',
-                            type: '',
+                        new: {
+                            ...markers['new'],
+                            arr: [
+                                ...markers['new'].arr,
+                                {
+                                    lat: e.latlng.lat,
+                                    lng: e.latlng.lng,
+                                    title: '',
+                                    description: '',
+                                    type: '',
+                                },
+                            ],
                         },
-                    ]);
+                    });
             },
         });
         return null;
     };
 
     useEffect(() => {
-        console.log(JSON.stringify(markers));
+        setMarkers(data[chosenMap].markers);
+        setMapSearch(data[chosenMap].display_name);
+    }, [chosenMap, data]);
+
+    useEffect(() => {
+        console.log(JSON.stringify(markers.new));
     }, [markers]);
 
     return (
@@ -65,7 +80,17 @@ export default function Map() {
                     chevron ? '' : styles.MCL_in
                 }`}
             >
-                <div className={styles.MCL_content}>Content</div>
+                <div className={styles.MCL_content}>
+                    <span>Selected Map</span>
+                    <div className={styles.MCL_mapsearch}>
+                        <input
+                            type={'text'}
+                            value={mapSearch}
+                            onChange={(e) => setMapSearch(e.value)}
+                        ></input>
+                        <div className={styles.mapsearch_input}></div>
+                    </div>
+                </div>
                 <div className={styles.MCL_chevron}>
                     <div
                         className={styles.MCL_chevron_container}
@@ -102,34 +127,38 @@ export default function Map() {
                 zoomControl={false}
                 whenReady={() => {
                     console.log('Map Loaded');
+                    setMapLoaded(true);
                 }}
             >
-                <TileLayer
-                    attribution='&copy; Bandai Namco Online Inc., &copy; Bandai Namco Studios Inc.'
-                    url='./asterleeds/{z}/{x}/{y}.png'
-                    maxNativeZoom={3}
-                    maxZoom={7}
-                    minZoom={3}
-                    noWrap={true}
-                    bounds={L.latLngBounds(
-                        L.latLng(-22, -180),
-                        L.latLng(85, 179),
-                    )}
-                />
-
-                {markers.map((e) => (
-                    <Marker
-                        position={[e.lat, e.lng]}
-                        key={Math.random()}
-                        icon={iconChest}
-                    >
-                        <Popup>
-                            A pretty CSS3 popup. <br /> Easily customizable.
-                        </Popup>
-                    </Marker>
-                ))}
-                <ClickHandler />
-                <ZoomControl position='topright' />
+                {mapLoaded && (
+                    <>
+                        <TileLayer
+                            attribution='&copy; Bandai Namco Online Inc., &copy; Bandai Namco Studios Inc.'
+                            url={data[chosenMap].map_url}
+                            maxNativeZoom={3}
+                            maxZoom={7}
+                            minZoom={3}
+                            noWrap={true}
+                            bounds={L.latLngBounds(
+                                L.latLng(-22, -180),
+                                L.latLng(85, 179),
+                            )}
+                        />
+                        {Object.keys(markers).map((e) =>
+                            markers[e].arr.map((v) => (
+                                <Marker
+                                    position={[v.lat, v.lng]}
+                                    key={Math.random()}
+                                    icon={iconChest}
+                                >
+                                    <Popup>{v.title}</Popup>
+                                </Marker>
+                            )),
+                        )}
+                        <ClickHandler />
+                        <ZoomControl position='topright' />
+                    </>
+                )}
             </MapContainer>
         </div>
     );

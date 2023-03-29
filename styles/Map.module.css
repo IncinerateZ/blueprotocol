@@ -23,8 +23,23 @@
 
     display: flex;
 
-    align-items: center;
-    justify-content: center;
+    flex-direction: column;
+
+    padding: 0.5rem;
+
+    font-size: 1.2rem;
+
+    color: var(--text-color);
+
+}
+
+.MCL_mapsearch input {
+    all:unset;
+
+    background-color: var(--light);
+    padding: 0.2rem;
+
+    color: black;
 }
 
 .MCL_chevron {
