@@ -51,6 +51,12 @@
     border-radius: 5px;
 
     cursor: pointer;
+    border: 3px solid transparent;
+    transition: 0.3s;
+}
+
+.MCL_mapsearch input:hover {
+    border: 3px solid lightgray;
 }
 
 .mapsearch_suggestions {
