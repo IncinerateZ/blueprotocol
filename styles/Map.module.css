@@ -53,6 +53,9 @@
     cursor: pointer;
     border: 3px solid transparent;
     transition: 0.3s;
+
+    user-select: none;
+    -webkit-user-select: none;
 }
 
 .MCL_mapsearch input:hover {

@@ -27,6 +27,7 @@ export default function Map() {
     const [mapSearch, setMapSearch] = useState('');
     const [ssHighlight, setSSHighlight] = useState(0);
     const [searchSuggestions, setSearchSuggestions] = useState([]);
+    const [doSearch, setDoSearch] = useState(false);
 
     const makeMakerMode = true;
     const iconChest = new L.Icon({
@@ -68,11 +69,13 @@ export default function Map() {
         setMapSearch(data[chosenMap].display_name);
         setSSHighlight(0);
         setSearchSuggestions([]);
+        setDoSearch(false);
     }
 
     useEffect(() => {
         setMarkers(data[chosenMap].markers);
         resetSearch();
+        setDoSearch(false);
     }, [chosenMap, data]);
 
     useEffect(() => {
@@ -107,6 +110,8 @@ export default function Map() {
                 setChosenMap={setChosenMap}
                 setMapSearch={setMapSearch}
                 resetSearch={resetSearch}
+                doSearch={doSearch}
+                setDoSearch={setDoSearch}
             />
             <MapContainer
                 center={[51.505, -0.09]}

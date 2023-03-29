@@ -20,14 +20,16 @@ export default function MapControlLayer({
     setChosenMap,
     setMapSearch,
     resetSearch,
+    doSearch,
+    setDoSearch,
 }) {
     const [chevron, setChevron] = useState(true);
     const searchRef = useRef();
 
     function handleMapSearch(e) {
-        let q = e.target.value;
-        if (q !== '') setMapSearch(q);
-        q = q.toLowerCase();
+        let q = e?.target?.value;
+        if (q?.length >= 0) setMapSearch(q);
+        q = q?.toLowerCase() || '';
 
         let res = {};
 
@@ -70,11 +72,17 @@ export default function MapControlLayer({
                     <input
                         type={'text'}
                         value={mapSearch}
-                        onChange={(e) => handleMapSearch(e)}
+                        onChange={(e) => {
+                            handleMapSearch(e);
+                            setDoSearch(true);
+                        }}
                         onKeyDown={(e) => handleSuggestionsSelect(e.code)}
-                        onClick={() =>
-                            handleMapSearch({ target: { value: '' } })
-                        }
+                        onClick={() => {
+                            if (!doSearch) {
+                                handleMapSearch();
+                                setDoSearch(true);
+                            } else resetSearch();
+                        }}
                         ref={searchRef}
                     ></input>
                     <Image
@@ -89,7 +97,7 @@ export default function MapControlLayer({
                         }}
                     ></Image>
                     <div className={styles.mapsearch_suggestions}>
-                        {Object.keys(searchSuggestions).length > 0 &&
+                        {doSearch &&
                             Object.keys(searchSuggestions).map((e, i) => (
                                 <div
                                     key={Math.random()}
