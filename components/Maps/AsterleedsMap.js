@@ -13,11 +13,8 @@ import 'leaflet/dist/leaflet.css';
 import 'leaflet-defaulticon-compatibility';
 import 'leaflet-defaulticon-compatibility/dist/leaflet-defaulticon-compatibility.css';
 
-import ChevronLeft from '../../public/map/chevron-left.svg';
-
 import styles from '../../styles/Map.module.css';
-import Image from 'next/image';
-import { levenshtein } from '../utils';
+import MapControlLayer from './MapControlLayer';
 
 export default function Map() {
     const [chosenMap, setChosenMap] = useState('asterleeds');
@@ -25,11 +22,10 @@ export default function Map() {
     const [markers, setMarkers] = useState({});
     const [mapLoaded, setMapLoaded] = useState(false);
 
-    const [mapSearch, setMapSearch] = useState('');
     const [maps, setMaps] = useState({});
-
-    const [searchSuggestions, setSearchSuggestions] = useState([]);
+    const [mapSearch, setMapSearch] = useState('');
     const [ssHighlight, setSSHighlight] = useState(0);
+    const [searchSuggestions, setSearchSuggestions] = useState([]);
 
     const makeMakerMode = true;
     const iconChest = new L.Icon({
@@ -41,8 +37,6 @@ export default function Map() {
         shadowSize: null,
         shadowAnchor: null,
     });
-
-    const [chevron, setChevron] = useState(true);
 
     const ClickHandler = () => {
         useMapEvents({
@@ -77,7 +71,8 @@ export default function Map() {
     }, [chosenMap, data]);
 
     useEffect(() => {
-        markers?.new?.length > 0 && console.log(JSON.stringify(markers.new));
+        markers?.new?.arr.length > 0 &&
+            console.log(JSON.stringify(markers.new));
     }, [markers]);
 
     useEffect(() => {
@@ -88,106 +83,20 @@ export default function Map() {
         setMaps(d);
     }, []);
 
-    function handleMapSearch(e) {
-        let q = e.target.value;
-        setMapSearch(q);
-        q = q.toLowerCase();
-
-        let res = {};
-
-        for (let k of Object.keys(maps)) {
-            if (k.toLowerCase().indexOf(q) != -1) res[k] = 0;
-            else {
-                let d = levenshtein(k.toLowerCase(), q);
-                if (d <= 5) res[k] = d;
-            }
-        }
-
-        setSSHighlight(0);
-        setSearchSuggestions(res);
-    }
-
-    function handleSuggestionsSelect(code) {
-        if (Object.keys(searchSuggestions).length === 0) return;
-        if (code === 'ArrowUp') setSSHighlight((e) => Math.max(0, e - 1));
-
-        if (code === 'ArrowDown')
-            setSSHighlight((e) =>
-                Math.min(Object.keys(searchSuggestions).length - 1, e + 1),
-            );
-        if (code === 'Enter') {
-            let c = Object.keys(searchSuggestions)[ssHighlight];
-            if (maps[c] === chosenMap) {
-                setMapSearch(data[chosenMap].display_name);
-                setSSHighlight(0);
-                setSearchSuggestions([]);
-            } else setChosenMap(maps[c]);
-        }
-    }
-
     return (
         <div>
-            <div
-                className={`${styles.MapControlLayer} ${
-                    chevron ? '' : styles.MCL_in
-                }`}
-            >
-                <div className={styles.MCL_content}>
-                    <span>Selected Map</span>
-                    <div className={styles.MCL_mapsearch}>
-                        <input
-                            type={'text'}
-                            value={mapSearch}
-                            onChange={(e) => handleMapSearch(e)}
-                            onKeyDown={(e) => handleSuggestionsSelect(e.code)}
-                        ></input>
-                        <div className={styles.mapsearch_suggestions}>
-                            {Object.keys(searchSuggestions).length > 0 &&
-                                Object.keys(searchSuggestions).map((e, i) => (
-                                    <div
-                                        key={Math.random()}
-                                        className={
-                                            ssHighlight === i
-                                                ? styles.highlight
-                                                : ''
-                                        }
-                                        onClick={() => {
-                                            if (maps[e] === chosenMap) {
-                                                setMapSearch(
-                                                    data[chosenMap]
-                                                        .display_name,
-                                                );
-                                                setSSHighlight(0);
-                                                setSearchSuggestions([]);
-                                            } else setChosenMap(maps[e]);
-                                        }}
-                                    >
-                                        {e}
-                                    </div>
-                                ))}
-                        </div>
-                    </div>
-                    <div>Selectors</div>
-                </div>
-                <div className={styles.MCL_chevron}>
-                    <div
-                        className={styles.MCL_chevron_container}
-                        onClick={() => {
-                            setChevron((s) => !s);
-                        }}
-                    >
-                        <Image
-                            src={ChevronLeft.src}
-                            width={25}
-                            height={25}
-                            alt={'Toggle Drawer'}
-                            style={{
-                                transform: chevron ? '' : 'rotate(180deg)',
-                            }}
-                        ></Image>
-                    </div>
-                </div>
-            </div>
+            <MapControlLayer
+                data={data}
+                maps={maps}
+                mapSearch={mapSearch}
+                searchSuggestions={searchSuggestions}
+                setSearchSuggestions={setSearchSuggestions}
+                ssHighlight={ssHighlight}
+                setSSHighlight={setSSHighlight}
+                chosenMap={chosenMap}
+                setChosenMap={setChosenMap}
+                setMapSearch={setMapSearch}
+            />
             <MapContainer
                 center={[51.505, -0.09]}
                 zoom={2}

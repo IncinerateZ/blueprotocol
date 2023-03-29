@@ -33,19 +33,24 @@
 
 }
 
+.MCL_mapsearch {
+    margin-top: 4px;
+}
+
 .MCL_mapsearch input {
     all:unset;
 
     background-color: var(--light);
-    padding: 0.2rem;
 
-    font-weight: bold;
+    padding: 0.3rem;
 
     color: black;
 
     width: 100%;
 
     border-radius: 5px;
+
+    cursor: pointer;
 }
 
 .mapsearch_suggestions {
