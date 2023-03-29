@@ -108,6 +108,7 @@ export default function Map() {
     }
 
     function handleSuggestionsSelect(code) {
+        if (Object.keys(searchSuggestions).length === 0) return;
         if (code === 'ArrowUp') setSSHighlight((e) => Math.max(0, e - 1));
 
         if (code === 'ArrowDown')
@@ -116,7 +117,11 @@ export default function Map() {
             );
         if (code === 'Enter') {
             let c = Object.keys(searchSuggestions)[ssHighlight];
-            setChosenMap(maps[c]);
+            if (maps[c] === chosenMap) {
+                setMapSearch(data[chosenMap].display_name);
+                setSSHighlight(0);
+                setSearchSuggestions([]);
+            } else setChosenMap(maps[c]);
         }
     }
 
@@ -146,6 +151,16 @@ export default function Map() {
                                                 ? styles.highlight
                                                 : ''
                                         }
+                                        onClick={() => {
+                                            if (maps[e] === chosenMap) {
+                                                setMapSearch(
+                                                    data[chosenMap]
+                                                        .display_name,
+                                                );
+                                                setSSHighlight(0);
+                                                setSearchSuggestions([]);
+                                            } else setChosenMap(maps[e]);
+                                        }}
                                     >
                                         {e}
                                     </div>

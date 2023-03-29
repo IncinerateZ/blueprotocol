@@ -44,6 +44,8 @@
     color: black;
 
     width: 100%;
+
+    border-radius: 5px;
 }
 
 .mapsearch_suggestions {
@@ -62,6 +64,11 @@
 .mapsearch_suggestions div {
     margin: 0.1rem;
     padding: 0.2rem;
+}
+
+.mapsearch_suggestions div:hover {
+    background-color: var(--dark2);
+    filter: brightness(90%);
 }
 
 .highlight {
