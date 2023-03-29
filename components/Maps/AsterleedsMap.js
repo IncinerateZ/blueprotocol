@@ -72,6 +72,8 @@ export default function Map() {
     useEffect(() => {
         setMarkers(data[chosenMap].markers);
         setMapSearch(data[chosenMap].display_name);
+        setSSHighlight(0);
+        setSearchSuggestions([]);
     }, [chosenMap, data]);
 
     useEffect(() => {
