@@ -1,6 +1,6 @@
 const data = {
     asterleeds: {
-        display_name: 'Asterleeds',
+        display_name: 'Asterliese',
         map_url: './asterleeds/{z}/{x}/{y}.png',
         markers: {
             map_corners: {
