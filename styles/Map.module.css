@@ -65,7 +65,7 @@
 .mapsearch_suggestions {
     position: absolute;
         
-    width: 93%;
+    width: 95%;
 
     max-height: 250px;
     overflow-y: auto;
