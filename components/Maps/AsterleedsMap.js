@@ -17,6 +17,7 @@ import ChevronLeft from '../../public/map/chevron-left.svg';
 
 import styles from '../../styles/Map.module.css';
 import Image from 'next/image';
+import { levenshtein } from '../utils';
 
 export default function Map() {
     const [chosenMap, setChosenMap] = useState('asterleeds');
@@ -25,6 +26,10 @@ export default function Map() {
     const [mapLoaded, setMapLoaded] = useState(false);
 
     const [mapSearch, setMapSearch] = useState('');
+    const [maps, setMaps] = useState({});
+
+    const [searchSuggestions, setSearchSuggestions] = useState([]);
+    const [ssHighlight, setSSHighlight] = useState(0);
 
     const makeMakerMode = true;
     const iconChest = new L.Icon({
@@ -70,8 +75,48 @@ export default function Map() {
     }, [chosenMap, data]);
 
     useEffect(() => {
-        console.log(JSON.stringify(markers.new));
+        markers?.new?.length > 0 && console.log(JSON.stringify(markers.new));
     }, [markers]);
+
+    useEffect(() => {
+        let d = {};
+
+        for (let k in data) d[data[k].display_name] = k;
+
+        setMaps(d);
+    }, []);
+
+    function handleMapSearch(e) {
+        let q = e.target.value;
+        setMapSearch(q);
+        q = q.toLowerCase();
+
+        let res = {};
+
+        for (let k of Object.keys(maps)) {
+            if (k.toLowerCase().indexOf(q) != -1) res[k] = 0;
+            else {
+                let d = levenshtein(k.toLowerCase(), q);
+                if (d <= 5) res[k] = d;
+            }
+        }
+
+        setSSHighlight(0);
+        setSearchSuggestions(res);
+    }
+
+    function handleSuggestionsSelect(code) {
+        if (code === 'ArrowUp') setSSHighlight((e) => Math.max(0, e - 1));
+
+        if (code === 'ArrowDown')
+            setSSHighlight((e) =>
+                Math.min(Object.keys(searchSuggestions).length - 1, e + 1),
+            );
+        if (code === 'Enter') {
+            let c = Object.keys(searchSuggestions)[ssHighlight];
+            setChosenMap(maps[c]);
+        }
+    }
 
     return (
         <div>
@@ -86,10 +131,26 @@ export default function Map() {
                         <input
                             type={'text'}
                             value={mapSearch}
-                            onChange={(e) => setMapSearch(e.value)}
+                            onChange={(e) => handleMapSearch(e)}
+                            onKeyDown={(e) => handleSuggestionsSelect(e.code)}
                         ></input>
-                        <div className={styles.mapsearch_input}></div>
+                        <div className={styles.mapsearch_suggestions}>
+                            {Object.keys(searchSuggestions).length > 0 &&
+                                Object.keys(searchSuggestions).map((e, i) => (
+                                    <div
+                                        key={Math.random()}
+                                        className={
+                                            ssHighlight === i
+                                                ? styles.highlight
+                                                : ''
+                                        }
+                                    >
+                                        {e}
+                                    </div>
+                                ))}
+                        </div>
                     </div>
+                    <div>Selectors</div>
                 </div>
                 <div className={styles.MCL_chevron}>
                     <div

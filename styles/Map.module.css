@@ -39,7 +39,33 @@
     background-color: var(--light);
     padding: 0.2rem;
 
+    font-weight: bold;
+
     color: black;
+
+    width: 100%;
+}
+
+.mapsearch_suggestions {
+    position: absolute;
+        
+    width: 93%;
+
+    max-height: 250px;
+    overflow-y: auto;
+
+    background-color: var(--background);
+
+    cursor: pointer;
+}
+
+.mapsearch_suggestions div {
+    margin: 0.1rem;
+    padding: 0.2rem;
+}
+
+.highlight {
+    background-color: var(--dark2);
 }
 
 .MCL_chevron {
