@@ -86,7 +86,10 @@ export default function Map() {
     useEffect(() => {
         let d = {};
 
-        for (let k in data) d[data[k].display_name] = k;
+        for (let k in data) {
+            d[data[k].display_name] = k;
+            for (let _k of data[k].tags) d[_k] = k;
+        }
 
         setMaps(d);
     }, []);

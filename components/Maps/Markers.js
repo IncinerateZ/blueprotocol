@@ -1,6 +1,7 @@
 const data = {
     asterleeds: {
         display_name: 'Asterliese',
+        tags: ['whataboutism'],
         map_url: './asterleeds/{z}/{x}/{y}.png',
         markers: {
             map_corners: {
@@ -45,6 +46,7 @@ const data = {
     skyquakefield: {
         display_name: 'Skyquake Field',
         map_url: './skyquakefield/{z}/{x}/{y}.png',
+        tags: ['idontcare'],
         markers: {
             map_corners: {
                 display_name: 'Corners',

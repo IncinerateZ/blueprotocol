@@ -34,10 +34,11 @@ export default function MapControlLayer({
         let res = {};
 
         for (let k of Object.keys(maps)) {
-            if (k.toLowerCase().indexOf(q) != -1) res[k] = 0;
-            else {
+            if (k.toLowerCase().indexOf(q) != -1) {
+                res[data[maps[k]].display_name] = 0;
+            } else {
                 let d = levenshtein(k.toLowerCase(), q);
-                if (d <= 5) res[k] = d;
+                if (d <= 5) res[data[maps[k]].display_name] = d;
             }
         }
 
