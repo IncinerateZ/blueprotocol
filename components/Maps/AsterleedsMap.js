@@ -35,31 +35,31 @@ export default function Map() {
 
     const [mapConfig, setMapConfig] = useState(null);
 
-    const makeMakerMode = true;
-    const iconChest = new L.Icon({
-        iconUrl: './map/icons/UI_Map_02.png',
-        iconSize: [64, 64],
-        iconAnchor: [32, 32],
-        popupAnchor: [0, 0],
-        shadowUrl: null,
-        shadowSize: null,
-        shadowAnchor: null,
-    });
+    const [mapIcons, setMapIcons] = useState(null);
 
-    function newMarker(lat, lng, options = { title: `x:${lng} y:${lat}` }) {
+    const makeMakerMode = true;
+
+    function newMarker(
+        lat,
+        lng,
+        options = { title: `x:${lng} y:${lat}`, description: '', type: '' },
+    ) {
         return {
             lng: lng,
             lat: lat,
-            title: options.title,
-            description: '',
-            type: '',
+            ...options,
         };
     }
 
     function addMarker(
         lat,
         lng,
-        options = { group: 'new', title: `x:${lng} y:${lat}` },
+        options = {
+            group: 'new',
+            title: `x:${lng} y:${lat}`,
+            type: '',
+            description: '',
+        },
     ) {
         if (Object.keys(markers).length > 0) {
             setMarkers({
@@ -102,16 +102,15 @@ export default function Map() {
         markers?.new?.arr.length > 0 &&
             console.log(JSON.stringify(markers.new));
 
+        //first marker render
         if (Object.keys(markers).length === 0 || loadFlag) return;
         setLoadFlag(true);
         let pts = require('./warppoints.json');
         let a = [];
 
+        //warp points
         for (let pt of pts) {
-            if (
-                pt.game_content_id.includes(data[chosenMap].map_id) &&
-                !pt.dest_game_content_id.includes('pub')
-            ) {
+            if (pt.game_content_id.includes(data[chosenMap].map_id)) {
                 let c = coordTranslate(
                     pt.location_x,
                     -pt.location_y,
@@ -119,10 +118,11 @@ export default function Map() {
                 );
                 let x_ = c.x;
                 let y_ = c.y + data[chosenMap].mapOffset;
-                a.push(newMarker(y_, x_));
+                a.push(newMarker(y_, x_, { type: 'warp' }));
             }
         }
 
+        //render
         setMarkers({
             ...markers,
             new: {
@@ -135,11 +135,30 @@ export default function Map() {
     useEffect(() => {
         let d = {};
 
+        //load map names and tags
         for (let k in data) {
             d[data[k].display_name] = k;
             for (let _k of data[k].tags) d[_k] = k;
         }
 
+        //load map icons
+        let mi = {
+            '': { img: './map/icons/UI_Map_02.png', iconSize: 64 },
+            warp: { img: './map/icons/UI_Map_12.png', iconSize: 40 },
+        };
+
+        for (let label in mi)
+            mi[label] = new L.Icon({
+                iconUrl: mi[label].img,
+                iconSize: [mi[label].iconSize, mi[label].iconSize],
+                iconAnchor: [mi[label].iconSize / 2, mi[label].iconSize / 2],
+                popupAnchor: [0, 0],
+                shadowUrl: null,
+                shadowSize: null,
+                shadowAnchor: null,
+            });
+
+        //load map config
         let _cfg = require('./DT_MapBGConfig.json')[0].Rows;
         let cfg = {};
 
@@ -158,6 +177,7 @@ export default function Map() {
 
         setMapConfig(cfg);
         setMaps(d);
+        setMapIcons(mi);
     }, []);
 
     return (
@@ -209,6 +229,7 @@ export default function Map() {
                     <>
                         <ImageOverlay
                             url={data[chosenMap].map_url}
+                            whenReady={() => console.log('hh')}
                             bounds={[
                                 [
                                     1080 *
@@ -222,17 +243,18 @@ export default function Map() {
                                 ],
                             ]}
                         />
-                        {Object.keys(markers).map((e) =>
-                            markers[e].arr.map((v) => (
-                                <Marker
-                                    position={[v.lat, v.lng]}
-                                    key={Math.random()}
-                                    icon={iconChest}
-                                >
-                                    <Popup>{v.title}</Popup>
-                                </Marker>
-                            )),
-                        )}
+                        {mapIcons &&
+                            Object.keys(markers).map((e) =>
+                                markers[e].arr.map((v) => (
+                                    <Marker
+                                        position={[v.lat, v.lng]}
+                                        key={Math.random()}
+                                        icon={mapIcons[v.type]}
+                                    >
+                                        <Popup>{v.title}</Popup>
+                                    </Marker>
+                                )),
+                            )}
                         <ClickHandler />
                         <ZoomControl position='topright' />
                     </>

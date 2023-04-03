@@ -1,5 +1,4 @@
 function coordTranslate(x, y, cfg) {
-    console.log(cfg);
     return {
         x: (x - cfg.CapturePosition.X) / (cfg.CaptureSize.X / 1920),
         y: (y - cfg.CapturePosition.Y) / (cfg.CaptureSize.Y / 1080),
