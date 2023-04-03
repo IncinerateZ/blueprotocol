@@ -122,12 +122,32 @@ export default function Map() {
             }
         }
 
+        pts = require('./EnemyHabitats.json')[data[chosenMap].map_id] || {};
+
+        for (let p in pts) {
+            let pt = pts[p];
+
+            let c = coordTranslate(
+                pt.X,
+                pt.Y,
+                mapConfig[data[chosenMap].map_id],
+            );
+            let x_ = c.x;
+            let y_ = -c.y + 1080;
+            a.push(
+                newMarker(y_, x_, {
+                    type: 'enemy',
+                    title: pt.Enemies[0].EnemySetId,
+                }),
+            );
+        }
+
         //render
         setMarkers({
             ...markers,
-            new: {
-                ...markers['new'],
-                arr: [...markers['new'].arr, ...a],
+            gamedat: {
+                ...(markers['enemies'] || {}),
+                arr: [...a],
             },
         });
     }, [markers]);
@@ -143,8 +163,9 @@ export default function Map() {
 
         //load map icons
         let mi = {
-            '': { img: './map/icons/UI_Map_02.png', iconSize: 64 },
+            '': { img: './map/icons/UI_Map_02.png', iconSize: 32 },
             warp: { img: './map/icons/UI_Map_12.png', iconSize: 40 },
+            enemy: { img: './map/icons/UI_Map_16.png', iconSize: 40 },
         };
 
         for (let label in mi)
@@ -218,6 +239,7 @@ export default function Map() {
                 scrollWheelZoom={true}
                 zoomControl={false}
                 minZoom={-1}
+                maxZoom={5}
                 whenReady={() => {
                     console.log('Map Loaded');
                     setMapLoaded(true);

@@ -72,6 +72,8 @@
     max-height: 250px;
     overflow-y: auto;
 
+    transform: translateY(40px);
+
     background-color: var(--background);
 
     cursor: pointer;
