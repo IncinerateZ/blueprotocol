@@ -34,29 +34,35 @@ export default function MapControlLayer({
         let res = {};
 
         for (let k of Object.keys(maps)) {
-            if (k.toLowerCase().indexOf(q) != -1) {
-                res[data[maps[k]].display_name] = 0;
+            let ks = k.toLowerCase().indexOf(q);
+            if (ks != -1) {
+                res[data[maps[k]].display_name] = ks;
             } else {
                 let d = levenshtein(k.toLowerCase(), q);
-                if (d <= 5) res[data[maps[k]].display_name] = d;
+                if (d <= 5) res[data[maps[k]].display_name] = 100 + d;
             }
         }
 
+        let res_ = Object.keys(res);
+        res_.sort((a, b) => {
+            return res[a] - res[b];
+        });
+
         setSSHighlight(0);
-        setSearchSuggestions(res);
+        setSearchSuggestions(res_);
     }
 
     function handleSuggestionsSelect(code) {
-        if (Object.keys(searchSuggestions).length === 0) return;
+        if (searchSuggestions.length === 0) return;
         if (code === 'ArrowUp') setSSHighlight((e) => Math.max(0, e - 1));
 
         if (code === 'ArrowDown')
             setSSHighlight((e) =>
-                Math.min(Object.keys(searchSuggestions).length - 1, e + 1),
+                Math.min(searchSuggestions.length - 1, e + 1),
             );
         if (code === 'Enter') {
             searchRef.current.blur();
-            let c = Object.keys(searchSuggestions)[ssHighlight];
+            let c = searchSuggestions[ssHighlight];
             if (maps[c] === chosenMap) resetSearch();
             else setChosenMap(maps[c]);
         }
@@ -99,7 +105,7 @@ export default function MapControlLayer({
                     ></Image>
                     <div className={styles.mapsearch_suggestions}>
                         {doSearch &&
-                            Object.keys(searchSuggestions).map((e, i) => (
+                            searchSuggestions.map((e, i) => (
                                 <div
                                     key={Math.random()}
                                     className={

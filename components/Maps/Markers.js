@@ -2,85 +2,41 @@ const data = {
     asterleeds: {
         display_name: 'Asterliese',
         tags: ['whataboutism'],
-        map_url: './asterleeds/{z}/{x}/{y}.png',
+        map_url: './UI_MapCty001.png',
+        map_id: 'cty01',
+        mapOffset: 90,
         markers: {
-            map_corners: {
-                display_name: 'Corners',
-                arr: [
-                    {
-                        lat: -22,
-                        lng: -179,
-                        title: 'Top Left',
-                        description: '',
-                        type: '',
-                    },
-                    {
-                        lat: 85,
-                        lng: 179,
-                        title: 'Top Right',
-                        description: '',
-                        type: '',
-                    },
-                    {
-                        lat: -22,
-                        lng: 179,
-                        title: 'Bottom Left',
-                        description: '',
-                        type: '',
-                    },
-                    {
-                        lat: 85,
-                        lng: -180,
-                        title: 'Bottom Right',
-                        description: '',
-                        type: '',
-                    },
-                ],
-            },
-            new: {
-                display_name: 'New Marker',
-                arr: [],
-            },
+            new: { display_name: 'New Marker', arr: [] },
         },
     },
     skyquakefield: {
         display_name: 'Skyquake Field',
-        map_url: './skyquakefield/{z}/{x}/{y}.png',
+        map_url: './UI_MapFld001.png',
         tags: ['idontcare'],
+        map_id: 'fld001',
+        mapOffset: -1080,
         markers: {
-            map_corners: {
-                display_name: 'Corners',
-                arr: [
-                    {
-                        lat: -22,
-                        lng: -179,
-                        title: 'Top Left',
-                        description: '',
-                        type: '',
-                    },
-                    {
-                        lat: 85,
-                        lng: 179,
-                        title: 'Top Right',
-                        description: '',
-                        type: '',
-                    },
-                    {
-                        lat: -22,
-                        lng: 179,
-                        title: 'Bottom Left',
-                        description: '',
-                        type: '',
-                    },
-                    {
-                        lat: 85,
-                        lng: -180,
-                        title: 'Bottom Right',
-                        description: '',
-                        type: '',
-                    },
-                ],
-            },
+            new: { display_name: 'New Marker', arr: [] },
+        },
+    },
+    bahamarhighlands: {
+        display_name: 'Bahamar Highlands',
+        map_url: './UI_MapFld002.png',
+        tags: ['deeznuts'],
+        map_id: 'fld002',
+        mapOffset: -1810,
+        markers: {
+            new: { display_name: 'New Marker', arr: [] },
+        },
+    },
+    montegnorvalley: {
+        display_name: 'Montegnor Valley',
+        map_url: './UI_Map_Fld003.png',
+        tags: ['yamamoto'],
+        map_id: 'fld003',
+        mapOffset: 10,
+        markers: {
+            new: { display_name: 'New Marker', arr: [] },
         },
     },
 };

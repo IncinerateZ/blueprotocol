@@ -1,3 +1,11 @@
+function coordTranslate(x, y, cfg) {
+    console.log(cfg);
+    return {
+        x: (x - cfg.CapturePosition.X) / (cfg.CaptureSize.X / 1920),
+        y: (y - cfg.CapturePosition.Y) / (cfg.CaptureSize.Y / 1080),
+    };
+}
+
 function levenshtein(s, t) {
     if (s === t) {
         return 0;
@@ -97,4 +105,4 @@ function levenshtein(s, t) {
     return h;
 }
 
-export { levenshtein };
+export { levenshtein, coordTranslate };
