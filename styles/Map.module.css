@@ -35,6 +35,8 @@
 
 .MCL_mapsearch {
     margin-top: 4px;
+    display: flex;
+    flex-direction: column;
 }
 
 .MCL_mapsearch input {

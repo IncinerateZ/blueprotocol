@@ -99,7 +99,7 @@ export default function MapControlLayer({
                         alt={'Change Maps'}
                         style={{
                             position: 'absolute',
-                            transform: 'translate(295px, -120%) rotate(-90deg)',
+                            transform: 'translate(295px, 40%) rotate(-90deg)',
                             pointerEvents: 'none',
                         }}
                     ></Image>
