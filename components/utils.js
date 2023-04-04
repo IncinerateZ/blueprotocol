@@ -21,7 +21,8 @@ function buildSummary(summaries) {
             <div
                 style={{
                     width: '200px',
-                    height: '150px',
+                    height: 'fit-content',
+                    maxHeight: '150px',
                     overflowY: 'auto',
                 }}
                 className={styles.Popup}
@@ -74,7 +75,12 @@ function entitySummary(DB, entity) {
             page.desc = [];
             page.desc.push(`Levels ${enemy.MinLv} - ${enemy.MaxLv}`);
             page.desc.push('Drops');
-            for (let drop of enemy_.drop_items) {
+
+            let drops = enemy_.drop_items;
+            drops.sort((a, b) => {
+                return b.drop_rate - a.drop_rate;
+            });
+            for (let drop of drops) {
                 if (!entity.idf.includes(drop.content_id)) continue;
 
                 let item = DB.Items[drop.item_index];
