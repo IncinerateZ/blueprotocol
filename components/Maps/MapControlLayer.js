@@ -131,7 +131,7 @@ export default function MapControlLayer({
                         </div>
                     )}
                 </div>
-                <span>Map</span>
+                <span style={{ marginTop: '4px' }}>Map</span>
                 <div className={styles.MCL_mapsearch}>
                     <input
                         type={'text'}
