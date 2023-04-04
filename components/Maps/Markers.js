@@ -2,7 +2,7 @@ const data = {
     asterleeds: {
         display_name: 'Asterliese',
         tags: ['city'],
-        map_url: './UI_MapCty001.png',
+        map_url: './UI_MapCty001.webp',
         map_id: 'cty01',
         mapOffset: 90,
         markers: {
@@ -11,7 +11,7 @@ const data = {
     },
     skyquakefield: {
         display_name: 'Asteria Plains',
-        map_url: './UI_MapFld001.png',
+        map_url: './UI_MapFld001.webp',
         tags: [
             'Skyquake',
             'Field',
@@ -28,7 +28,7 @@ const data = {
     },
     bahamarhighlands: {
         display_name: 'Bahamar Highlands',
-        map_url: './UI_MapFld002.png',
+        map_url: './UI_MapFld002.webp',
         tags: [
             'Field',
             'Divine Haven Hill',
@@ -45,7 +45,7 @@ const data = {
     },
     montegnorvalley: {
         display_name: 'Montegnor Valley',
-        map_url: './UI_Map_Fld003.png',
+        map_url: './UI_Map_Fld003.webp',
         tags: ['yamamoto'],
         map_id: 'fld003',
         mapOffset: 10,
@@ -55,7 +55,7 @@ const data = {
     },
     erstgreensands: {
         display_name: 'Erstgreen Sands',
-        map_url: './UI_Map_Fld004.png',
+        map_url: './UI_Map_Fld004.webp',
         tags: ['shimooka'],
         map_id: 'fld004',
         mapOffset: 250,
@@ -65,7 +65,7 @@ const data = {
     },
     salamzahd: {
         display_name: 'Salamzahd',
-        map_url: './UI_MapCty002.png',
+        map_url: './UI_MapCty002.webp',
         tags: ['suzuki'],
         map_id: 'cty02',
         mapOffset: 110,

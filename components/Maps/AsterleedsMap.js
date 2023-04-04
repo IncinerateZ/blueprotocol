@@ -212,6 +212,8 @@ export default function Map() {
         setMapConfig(cfg);
         setMaps(d);
         setMapIcons(mi);
+
+        //todo prefetch map images
     }, []);
 
     return (
