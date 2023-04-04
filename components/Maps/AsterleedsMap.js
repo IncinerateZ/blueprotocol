@@ -135,7 +135,7 @@ export default function Map() {
             }
 
             //enemies
-            pts = require('./EnemyHabitats.json')[data[chosenMap].map_id] || {};
+            pts = DB.EnemyHabitats[data[chosenMap].map_id] || {};
 
             for (let p in pts) {
                 let pt = pts[p];
@@ -216,22 +216,10 @@ export default function Map() {
             };
         }
 
-        //load entity data
-        let _DB = {};
-        for (let file of [
-            'Enemies',
-            'EnemyHabitats',
-            'EnemySets',
-            'Items',
-            'Loc',
-        ]) {
-            _DB[file] = require(`./${file}.json`);
-        }
-
         setMapConfig(cfg);
         setMaps(d);
         setMapIcons(mi);
-        setDB(_DB);
+        setDB(require('./DB.json'));
 
         //todo prefetch images
     }, []);
