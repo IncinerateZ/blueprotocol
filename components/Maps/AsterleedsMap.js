@@ -34,8 +34,11 @@ export default function Map() {
     const [mapRef, setMapRef] = useState(useRef());
 
     const [mapConfig, setMapConfig] = useState(null);
-
     const [mapIcons, setMapIcons] = useState(null);
+
+    const [imgOvRef, setImgOvRef] = useState(useRef());
+    const [mapChanged, setMapChanged] = useState(true);
+    const [mapLoading, setMapLoading] = useState(false);
 
     const makeMakerMode = true;
 
@@ -96,60 +99,70 @@ export default function Map() {
         resetSearch();
         setDoSearch(false);
         setLoadFlag(false);
+        setMapLoading(true);
+        imgOvRef?.current?.once('load', () => {
+            setMapChanged(true);
+        });
     }, [chosenMap, data]);
+
+    useEffect(() => {
+        if (mapChanged && Object.keys(markers).length > 0) {
+            setMapChanged(false);
+            setMapLoading(false);
+            //first marker render
+            if (Object.keys(markers).length === 0 || loadFlag) return;
+            setLoadFlag(true);
+            let pts = require('./warppoints.json');
+            let a = [];
+
+            //warp points
+            for (let pt of pts) {
+                if (pt.game_content_id.includes(data[chosenMap].map_id)) {
+                    let c = coordTranslate(
+                        pt.location_x,
+                        -pt.location_y,
+                        mapConfig[data[chosenMap].map_id],
+                    );
+                    let x_ = c.x;
+                    let y_ = c.y + data[chosenMap].mapOffset;
+                    a.push(newMarker(y_, x_, { type: 'warp' }));
+                }
+            }
+
+            pts = require('./EnemyHabitats.json')[data[chosenMap].map_id] || {};
+
+            for (let p in pts) {
+                let pt = pts[p];
+
+                let c = coordTranslate(
+                    pt.X,
+                    pt.Y,
+                    mapConfig[data[chosenMap].map_id],
+                );
+                let x_ = c.x;
+                let y_ = -c.y + 1080;
+                a.push(
+                    newMarker(y_, x_, {
+                        type: 'enemy',
+                        title: pt.Enemies[0].EnemySetId,
+                    }),
+                );
+            }
+
+            //render
+            setMarkers({
+                ...markers,
+                gamedat: {
+                    ...(markers['enemies'] || {}),
+                    arr: [...a],
+                },
+            });
+        }
+    }, [mapChanged, markers]);
 
     useEffect(() => {
         markers?.new?.arr.length > 0 &&
             console.log(JSON.stringify(markers.new));
-
-        //first marker render
-        if (Object.keys(markers).length === 0 || loadFlag) return;
-        setLoadFlag(true);
-        let pts = require('./warppoints.json');
-        let a = [];
-
-        //warp points
-        for (let pt of pts) {
-            if (pt.game_content_id.includes(data[chosenMap].map_id)) {
-                let c = coordTranslate(
-                    pt.location_x,
-                    -pt.location_y,
-                    mapConfig[data[chosenMap].map_id],
-                );
-                let x_ = c.x;
-                let y_ = c.y + data[chosenMap].mapOffset;
-                a.push(newMarker(y_, x_, { type: 'warp' }));
-            }
-        }
-
-        pts = require('./EnemyHabitats.json')[data[chosenMap].map_id] || {};
-
-        for (let p in pts) {
-            let pt = pts[p];
-
-            let c = coordTranslate(
-                pt.X,
-                pt.Y,
-                mapConfig[data[chosenMap].map_id],
-            );
-            let x_ = c.x;
-            let y_ = -c.y + 1080;
-            a.push(
-                newMarker(y_, x_, {
-                    type: 'enemy',
-                    title: pt.Enemies[0].EnemySetId,
-                }),
-            );
-        }
-
-        //render
-        setMarkers({
-            ...markers,
-            gamedat: {
-                ...(markers['enemies'] || {}),
-                arr: [...a],
-            },
-        });
     }, [markers]);
 
     useEffect(() => {
@@ -208,6 +221,24 @@ export default function Map() {
                     {data[chosenMap].display_name} Map | Blue Protocol Resource
                 </title>
             </Head>
+            {mapLoading && (
+                <div
+                    style={{
+                        width: '100vw',
+                        height: '100vh',
+                        display: 'flex',
+                        position: 'absolute',
+                        backgroundColor: 'black',
+                        zIndex: '99999',
+                        opacity: '0.6',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        color: 'white',
+                    }}
+                >
+                    <span>Loading...</span>
+                </div>
+            )}
             <MapControlLayer
                 data={data}
                 maps={maps}
@@ -264,6 +295,7 @@ export default function Map() {
                                         (mapConfig?.ResolutionMultiplier || 1),
                                 ],
                             ]}
+                            ref={imgOvRef}
                         />
                         {mapIcons &&
                             Object.keys(markers).map((e) =>
