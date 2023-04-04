@@ -69,8 +69,8 @@ export default function MapControlLayer({
         if (code === 'Enter') {
             searchRef.current.blur();
             let c = searchSuggestions[ssHighlight];
-            if (maps[c] === chosenMap) resetSearch();
-            else setChosenMap(maps[c]);
+            setChosenMap(maps[c][0]);
+            resetSearch();
         }
     }
     return (
@@ -121,9 +121,8 @@ export default function MapControlLayer({
                                     }
                                     onClick={() => {
                                         searchRef.current.blur();
-                                        if (maps[e] === chosenMap)
-                                            resetSearch();
-                                        else setChosenMap(maps[e]);
+                                        setChosenMap(maps[e][0]);
+                                        resetSearch();
                                     }}
                                 >
                                     {e}

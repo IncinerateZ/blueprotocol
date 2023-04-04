@@ -15,10 +15,10 @@ import 'leaflet-defaulticon-compatibility/dist/leaflet-defaulticon-compatibility
 import styles from '../../styles/Map.module.css';
 import MapControlLayer from './MapControlLayer';
 import Head from 'next/head';
-import { coordTranslate } from '../utils';
+import { coordTranslate, entitySummary } from '../utils';
 
 export default function Map() {
-    const [chosenMap, setChosenMap] = useState('asterleeds');
+    const [chosenMap, setChosenMap] = useState('');
     const [data, setData] = useState(require('./Markers').default);
     const [markers, setMarkers] = useState({});
     const [mapLoaded, setMapLoaded] = useState(false);
@@ -39,6 +39,8 @@ export default function Map() {
     const [imgOvRef, setImgOvRef] = useState(useRef());
     const [mapChanged, setMapChanged] = useState(true);
     const [mapLoading, setMapLoading] = useState(false);
+
+    const [DB, setDB] = useState(null);
 
     const makeMakerMode = true;
 
@@ -88,24 +90,27 @@ export default function Map() {
     };
 
     function resetSearch() {
-        setMapSearch(data[chosenMap].display_name);
+        if (chosenMap === '') return;
+        setMapSearch(data[chosenMap]?.display_name);
         setSSHighlight(0);
         setSearchSuggestions([]);
         setDoSearch(false);
     }
 
     useEffect(() => {
-        setMarkers(data[chosenMap].markers);
+        if (chosenMap === '') return;
         resetSearch();
         setDoSearch(false);
         setLoadFlag(false);
         setMapLoading(true);
+        setMarkers(data[chosenMap]?.markers);
         imgOvRef?.current?.once('load', () => {
             setMapChanged(true);
         });
-    }, [chosenMap, data]);
+    }, [chosenMap]);
 
     useEffect(() => {
+        if (chosenMap === '') return;
         if (mapChanged && Object.keys(markers).length > 0) {
             setMapChanged(false);
             setMapLoading(false);
@@ -129,6 +134,7 @@ export default function Map() {
                 }
             }
 
+            //enemies
             pts = require('./EnemyHabitats.json')[data[chosenMap].map_id] || {};
 
             for (let p in pts) {
@@ -209,9 +215,26 @@ export default function Map() {
             };
         }
 
+        //load entity data
+        let _DB = {};
+        for (let file of [
+            'Enemies',
+            'EnemyHabitats',
+            'EnemySets',
+            'Items',
+            'Loc',
+        ]) {
+            _DB[file] = require(`./${file}.json`);
+        }
+
         setMapConfig(cfg);
         setMaps(d);
         setMapIcons(mi);
+        setDB(_DB);
+
+        setTimeout(() => {
+            setChosenMap('asterleeds');
+        }, 200);
 
         //todo prefetch images
     }, []);
@@ -220,7 +243,8 @@ export default function Map() {
         <div>
             <Head>
                 <title>
-                    {data[chosenMap].display_name} Map | Blue Protocol Resource
+                    {data[chosenMap]?.display_name || 'Loading'} Map | Blue
+                    Protocol Resource
                 </title>
             </Head>
             {mapLoading && (
@@ -283,7 +307,7 @@ export default function Map() {
                 {mapLoaded && (
                     <>
                         <ImageOverlay
-                            url={data[chosenMap].map_url}
+                            url={data[chosenMap]?.map_url || ''}
                             whenReady={() => console.log('hh')}
                             bounds={[
                                 [
@@ -307,7 +331,12 @@ export default function Map() {
                                         key={Math.random()}
                                         icon={mapIcons[v.type]}
                                     >
-                                        <Popup>{v.title}</Popup>
+                                        <Popup>
+                                            {entitySummary(DB, {
+                                                type: v.type,
+                                                idf: v.title,
+                                            })}
+                                        </Popup>
                                     </Marker>
                                 )),
                             )}

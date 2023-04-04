@@ -560,454 +560,6 @@
                 }
             ]
         },
-        "ES_fld001_S_Area_10_a_15": {
-            "X": -17958.123,
-            "Y": -36426.99,
-            "Z": 5654,
-            "Enemies": [
-                {
-                    "EnemySetId": "ES_fld001_S_Area_10",
-                    "EnemyId": "",
-                    "LevelMin": 1,
-                    "LevelMax": 1,
-                    "Weight": 1
-                }
-            ]
-        },
-        "ES_fld001_S_Area_10_b_16": {
-            "X": -16785.387,
-            "Y": -48745.23,
-            "Z": 3300,
-            "Enemies": [
-                {
-                    "EnemySetId": "ES_fld001_S_Area_10",
-                    "EnemyId": "",
-                    "LevelMin": 1,
-                    "LevelMax": 1,
-                    "Weight": 1
-                }
-            ]
-        },
-        "ES_fld001_S_Area_10_c": {
-            "X": -13600,
-            "Y": -54600,
-            "Z": 3300,
-            "Enemies": [
-                {
-                    "EnemySetId": "ES_fld001_S_Area_10",
-                    "EnemyId": "",
-                    "LevelMin": 1,
-                    "LevelMax": 1,
-                    "Weight": 1
-                }
-            ]
-        },
-        "ES_fld001_S_Area_10_d": {
-            "X": -11000,
-            "Y": -60300,
-            "Z": 2850,
-            "Enemies": [
-                {
-                    "EnemySetId": "ES_fld001_S_Area_10",
-                    "EnemyId": "",
-                    "LevelMin": 1,
-                    "LevelMax": 1,
-                    "Weight": 1
-                }
-            ]
-        },
-        "ES_fld001_S_Area_11": {
-            "X": -30449.72,
-            "Y": -58320.297,
-            "Z": 2200,
-            "Enemies": [
-                {
-                    "EnemySetId": "ES_fld001_S_Area_11",
-                    "EnemyId": "",
-                    "LevelMin": 1,
-                    "LevelMax": 1,
-                    "Weight": 1
-                }
-            ]
-        },
-        "ES_fld001_S_Area_12": {
-            "X": -47110,
-            "Y": -38690,
-            "Z": 2960,
-            "Enemies": [
-                {
-                    "EnemySetId": "ES_fld001_S_Area_12",
-                    "EnemyId": "",
-                    "LevelMin": 1,
-                    "LevelMax": 1,
-                    "Weight": 1
-                }
-            ]
-        },
-        "ES_fld001_S_Area_1_a": {
-            "X": -50238.43,
-            "Y": -27424.055,
-            "Z": 3850,
-            "Enemies": [
-                {
-                    "EnemySetId": "ES_fld001_S_Area_1",
-                    "EnemyId": "",
-                    "LevelMin": 1,
-                    "LevelMax": 1,
-                    "Weight": 1
-                }
-            ]
-        },
-        "ES_fld001_S_Area_1_b": {
-            "X": -47250,
-            "Y": -24250,
-            "Z": 3000,
-            "Enemies": [
-                {
-                    "EnemySetId": "ES_fld001_S_Area_1",
-                    "EnemyId": "",
-                    "LevelMin": 1,
-                    "LevelMax": 1,
-                    "Weight": 1
-                }
-            ]
-        },
-        "ES_fld001_S_Area_1_c_3": {
-            "X": -45588.258,
-            "Y": -28237.479,
-            "Z": 3543.4094,
-            "Enemies": [
-                {
-                    "EnemySetId": "ES_fld001_S_Area_1",
-                    "EnemyId": "",
-                    "LevelMin": 1,
-                    "LevelMax": 1,
-                    "Weight": 1
-                }
-            ]
-        },
-        "ES_fld001_S_Area_1_d_1": {
-            "X": -49887.16,
-            "Y": -21375.65,
-            "Z": 3054.6282,
-            "Enemies": [
-                {
-                    "EnemySetId": "ES_fld001_S_Area_1",
-                    "EnemyId": "",
-                    "LevelMin": 1,
-                    "LevelMax": 1,
-                    "Weight": 1
-                }
-            ]
-        },
-        "ES_fld001_S_Area_1_e": {
-            "X": -47450,
-            "Y": -20650,
-            "Z": 2200,
-            "Enemies": [
-                {
-                    "EnemySetId": "ES_fld001_S_Area_1",
-                    "EnemyId": "",
-                    "LevelMin": 1,
-                    "LevelMax": 1,
-                    "Weight": 1
-                }
-            ]
-        },
-        "ES_fld001_S_Area_2": {
-            "X": -50900,
-            "Y": -36100,
-            "Z": 3350,
-            "Enemies": [
-                {
-                    "EnemySetId": "ES_fld001_S_Area_2",
-                    "EnemyId": "",
-                    "LevelMin": 1,
-                    "LevelMax": 1,
-                    "Weight": 1
-                }
-            ]
-        },
-        "ES_fld001_S_Area_3_a_6": {
-            "X": -45355.848,
-            "Y": -49989.203,
-            "Z": 3397.9282,
-            "Enemies": [
-                {
-                    "EnemySetId": "ES_fld001_S_Area_3",
-                    "EnemyId": "",
-                    "LevelMin": 1,
-                    "LevelMax": 1,
-                    "Weight": 1
-                }
-            ]
-        },
-        "ES_fld001_S_Area_3_b": {
-            "X": -46145.62,
-            "Y": -43009.41,
-            "Z": 2905.3467,
-            "Enemies": [
-                {
-                    "EnemySetId": "ES_fld001_S_Area_3",
-                    "EnemyId": "",
-                    "LevelMin": 1,
-                    "LevelMax": 1,
-                    "Weight": 1
-                }
-            ]
-        },
-        "ES_fld001_S_Area_4_a_8": {
-            "X": -41024.324,
-            "Y": -52888.69,
-            "Z": 3171.0498,
-            "Enemies": [
-                {
-                    "EnemySetId": "ES_fld001_S_Area_4",
-                    "EnemyId": "",
-                    "LevelMin": 1,
-                    "LevelMax": 1,
-                    "Weight": 1
-                }
-            ]
-        },
-        "ES_fld001_S_Area_4_b": {
-            "X": -37750,
-            "Y": -49950,
-            "Z": 1900,
-            "Enemies": [
-                {
-                    "EnemySetId": "ES_fld001_S_Area_4",
-                    "EnemyId": "",
-                    "LevelMin": 1,
-                    "LevelMax": 1,
-                    "Weight": 1
-                }
-            ]
-        },
-        "ES_fld001_S_Area_6": {
-            "X": -70800,
-            "Y": -38650,
-            "Z": 1600,
-            "Enemies": [
-                {
-                    "EnemySetId": "ES_fld001_S_Area_5",
-                    "EnemyId": "",
-                    "LevelMin": 1,
-                    "LevelMax": 1,
-                    "Weight": 2
-                }
-            ]
-        },
-        "ES_fld001_S_Area_6_a": {
-            "X": -63642.734,
-            "Y": -44772.152,
-            "Z": 2749.999,
-            "Enemies": [
-                {
-                    "EnemySetId": "ES_fld001_S_Area_6",
-                    "EnemyId": "",
-                    "LevelMin": 1,
-                    "LevelMax": 1,
-                    "Weight": 1
-                }
-            ]
-        },
-        "ES_fld001_S_Area_6_b": {
-            "X": -67909.62,
-            "Y": -43577.24,
-            "Z": 2500,
-            "Enemies": [
-                {
-                    "EnemySetId": "ES_fld001_S_Area_6",
-                    "EnemyId": "",
-                    "LevelMin": 1,
-                    "LevelMax": 1,
-                    "Weight": 1
-                }
-            ]
-        },
-        "ES_fld001_S_Area_6_c": {
-            "X": -60029,
-            "Y": -46904,
-            "Z": 3940,
-            "Enemies": [
-                {
-                    "EnemySetId": "ES_fld001_S_Area_6",
-                    "EnemyId": "",
-                    "LevelMin": 1,
-                    "LevelMax": 1,
-                    "Weight": 1
-                }
-            ]
-        },
-        "ES_fld001_S_Area_7_a_10": {
-            "X": -58412.734,
-            "Y": -40429.797,
-            "Z": 2799.996,
-            "Enemies": [
-                {
-                    "EnemySetId": "ES_fld001_S_Area_7",
-                    "EnemyId": "",
-                    "LevelMin": 1,
-                    "LevelMax": 1,
-                    "Weight": 1
-                }
-            ]
-        },
-        "ES_fld001_S_Area_7_b": {
-            "X": -65050,
-            "Y": -39350,
-            "Z": 2800,
-            "Enemies": [
-                {
-                    "EnemySetId": "ES_fld001_S_Area_7",
-                    "EnemyId": "",
-                    "LevelMin": 1,
-                    "LevelMax": 1,
-                    "Weight": 1
-                }
-            ]
-        },
-        "ES_fld001_S_Area_7_c": {
-            "X": -62700,
-            "Y": -33000,
-            "Z": 5200,
-            "Enemies": [
-                {
-                    "EnemySetId": "ES_fld001_S_Area_7",
-                    "EnemyId": "",
-                    "LevelMin": 1,
-                    "LevelMax": 1,
-                    "Weight": 1
-                }
-            ]
-        },
-        "ES_fld001_S_Area_8_a": {
-            "X": -42450.75,
-            "Y": -24018.117,
-            "Z": 2521.2603,
-            "Enemies": [
-                {
-                    "EnemySetId": "ES_fld001_S_Area_8",
-                    "EnemyId": "",
-                    "LevelMin": 1,
-                    "LevelMax": 1,
-                    "Weight": 1
-                }
-            ]
-        },
-        "ES_fld001_S_Area_8_b_12": {
-            "X": -40522.6,
-            "Y": -21605.719,
-            "Z": 2349.999,
-            "Enemies": [
-                {
-                    "EnemySetId": "ES_fld001_S_Area_8",
-                    "EnemyId": "",
-                    "LevelMin": 1,
-                    "LevelMax": 1,
-                    "Weight": 1
-                }
-            ]
-        },
-        "ES_fld001_S_Area_8_c": {
-            "X": -40320.203,
-            "Y": -29820.818,
-            "Z": 3850.0195,
-            "Enemies": [
-                {
-                    "EnemySetId": "ES_fld001_S_Area_8",
-                    "EnemyId": "",
-                    "LevelMin": 1,
-                    "LevelMax": 1,
-                    "Weight": 1
-                }
-            ]
-        },
-        "ES_fld001_S_Area_8_d": {
-            "X": -41472.89,
-            "Y": -34423.05,
-            "Z": 3572.1821,
-            "Enemies": [
-                {
-                    "EnemySetId": "ES_fld001_S_Area_8",
-                    "EnemyId": "",
-                    "LevelMin": 1,
-                    "LevelMax": 1,
-                    "Weight": 1
-                }
-            ]
-        },
-        "ES_fld001_S_Area_9_a": {
-            "X": -29650,
-            "Y": -51250,
-            "Z": 1800,
-            "Enemies": [
-                {
-                    "EnemySetId": "ES_fld001_S_Area_9",
-                    "EnemyId": "",
-                    "LevelMin": 1,
-                    "LevelMax": 1,
-                    "Weight": 1
-                }
-            ]
-        },
-        "ES_fld001_S_Area_9_b": {
-            "X": -31250,
-            "Y": -41350,
-            "Z": 2550,
-            "Enemies": [
-                {
-                    "EnemySetId": "ES_fld001_S_Area_9",
-                    "EnemyId": "",
-                    "LevelMin": 1,
-                    "LevelMax": 1,
-                    "Weight": 1
-                }
-            ]
-        },
-        "ES_fld001_S_Area_9_c": {
-            "X": -33875.38,
-            "Y": -44094.664,
-            "Z": 2151,
-            "Enemies": [
-                {
-                    "EnemySetId": "ES_fld001_S_Area_9",
-                    "EnemyId": "",
-                    "LevelMin": 1,
-                    "LevelMax": 1,
-                    "Weight": 1
-                }
-            ]
-        },
-        "ES_fld001_S_Area_9_d": {
-            "X": -38602.562,
-            "Y": -39117.508,
-            "Z": 2150.997,
-            "Enemies": [
-                {
-                    "EnemySetId": "ES_fld001_S_Area_9",
-                    "EnemyId": "",
-                    "LevelMin": 1,
-                    "LevelMax": 1,
-                    "Weight": 1
-                }
-            ]
-        },
-        "ES_fld001_S_Area_9_e": {
-            "X": -39312.04,
-            "Y": -36108.043,
-            "Z": 2151,
-            "Enemies": [
-                {
-                    "EnemySetId": "ES_fld001_S_Area_9",
-                    "EnemyId": "",
-                    "LevelMin": 1,
-                    "LevelMax": 1,
-                    "Weight": 1
-                }
-            ]
-        },
         "ES_fld001_E_Area_10": {
             "X": 14653.672,
             "Y": -88767.945,
@@ -1481,6 +1033,454 @@
                     "LevelMin": 0,
                     "LevelMax": 0,
                     "Weight": 0
+                }
+            ]
+        },
+        "ES_fld001_S_Area_10_a_15": {
+            "X": -17958.123,
+            "Y": -36426.99,
+            "Z": 5654,
+            "Enemies": [
+                {
+                    "EnemySetId": "ES_fld001_S_Area_10",
+                    "EnemyId": "",
+                    "LevelMin": 1,
+                    "LevelMax": 1,
+                    "Weight": 1
+                }
+            ]
+        },
+        "ES_fld001_S_Area_10_b_16": {
+            "X": -16785.387,
+            "Y": -48745.23,
+            "Z": 3300,
+            "Enemies": [
+                {
+                    "EnemySetId": "ES_fld001_S_Area_10",
+                    "EnemyId": "",
+                    "LevelMin": 1,
+                    "LevelMax": 1,
+                    "Weight": 1
+                }
+            ]
+        },
+        "ES_fld001_S_Area_10_c": {
+            "X": -13600,
+            "Y": -54600,
+            "Z": 3300,
+            "Enemies": [
+                {
+                    "EnemySetId": "ES_fld001_S_Area_10",
+                    "EnemyId": "",
+                    "LevelMin": 1,
+                    "LevelMax": 1,
+                    "Weight": 1
+                }
+            ]
+        },
+        "ES_fld001_S_Area_10_d": {
+            "X": -11000,
+            "Y": -60300,
+            "Z": 2850,
+            "Enemies": [
+                {
+                    "EnemySetId": "ES_fld001_S_Area_10",
+                    "EnemyId": "",
+                    "LevelMin": 1,
+                    "LevelMax": 1,
+                    "Weight": 1
+                }
+            ]
+        },
+        "ES_fld001_S_Area_11": {
+            "X": -30449.72,
+            "Y": -58320.297,
+            "Z": 2200,
+            "Enemies": [
+                {
+                    "EnemySetId": "ES_fld001_S_Area_11",
+                    "EnemyId": "",
+                    "LevelMin": 1,
+                    "LevelMax": 1,
+                    "Weight": 1
+                }
+            ]
+        },
+        "ES_fld001_S_Area_12": {
+            "X": -47110,
+            "Y": -38690,
+            "Z": 2960,
+            "Enemies": [
+                {
+                    "EnemySetId": "ES_fld001_S_Area_12",
+                    "EnemyId": "",
+                    "LevelMin": 1,
+                    "LevelMax": 1,
+                    "Weight": 1
+                }
+            ]
+        },
+        "ES_fld001_S_Area_1_a": {
+            "X": -50238.43,
+            "Y": -27424.055,
+            "Z": 3850,
+            "Enemies": [
+                {
+                    "EnemySetId": "ES_fld001_S_Area_1",
+                    "EnemyId": "",
+                    "LevelMin": 1,
+                    "LevelMax": 1,
+                    "Weight": 1
+                }
+            ]
+        },
+        "ES_fld001_S_Area_1_b": {
+            "X": -47250,
+            "Y": -24250,
+            "Z": 3000,
+            "Enemies": [
+                {
+                    "EnemySetId": "ES_fld001_S_Area_1",
+                    "EnemyId": "",
+                    "LevelMin": 1,
+                    "LevelMax": 1,
+                    "Weight": 1
+                }
+            ]
+        },
+        "ES_fld001_S_Area_1_c_3": {
+            "X": -45588.258,
+            "Y": -28237.479,
+            "Z": 3543.4094,
+            "Enemies": [
+                {
+                    "EnemySetId": "ES_fld001_S_Area_1",
+                    "EnemyId": "",
+                    "LevelMin": 1,
+                    "LevelMax": 1,
+                    "Weight": 1
+                }
+            ]
+        },
+        "ES_fld001_S_Area_1_d_1": {
+            "X": -49887.16,
+            "Y": -21375.65,
+            "Z": 3054.6282,
+            "Enemies": [
+                {
+                    "EnemySetId": "ES_fld001_S_Area_1",
+                    "EnemyId": "",
+                    "LevelMin": 1,
+                    "LevelMax": 1,
+                    "Weight": 1
+                }
+            ]
+        },
+        "ES_fld001_S_Area_1_e": {
+            "X": -47450,
+            "Y": -20650,
+            "Z": 2200,
+            "Enemies": [
+                {
+                    "EnemySetId": "ES_fld001_S_Area_1",
+                    "EnemyId": "",
+                    "LevelMin": 1,
+                    "LevelMax": 1,
+                    "Weight": 1
+                }
+            ]
+        },
+        "ES_fld001_S_Area_2": {
+            "X": -50900,
+            "Y": -36100,
+            "Z": 3350,
+            "Enemies": [
+                {
+                    "EnemySetId": "ES_fld001_S_Area_2",
+                    "EnemyId": "",
+                    "LevelMin": 1,
+                    "LevelMax": 1,
+                    "Weight": 1
+                }
+            ]
+        },
+        "ES_fld001_S_Area_3_a_6": {
+            "X": -45355.848,
+            "Y": -49989.203,
+            "Z": 3397.9282,
+            "Enemies": [
+                {
+                    "EnemySetId": "ES_fld001_S_Area_3",
+                    "EnemyId": "",
+                    "LevelMin": 1,
+                    "LevelMax": 1,
+                    "Weight": 1
+                }
+            ]
+        },
+        "ES_fld001_S_Area_3_b": {
+            "X": -46145.62,
+            "Y": -43009.41,
+            "Z": 2905.3467,
+            "Enemies": [
+                {
+                    "EnemySetId": "ES_fld001_S_Area_3",
+                    "EnemyId": "",
+                    "LevelMin": 1,
+                    "LevelMax": 1,
+                    "Weight": 1
+                }
+            ]
+        },
+        "ES_fld001_S_Area_4_a_8": {
+            "X": -41024.324,
+            "Y": -52888.69,
+            "Z": 3171.0498,
+            "Enemies": [
+                {
+                    "EnemySetId": "ES_fld001_S_Area_4",
+                    "EnemyId": "",
+                    "LevelMin": 1,
+                    "LevelMax": 1,
+                    "Weight": 1
+                }
+            ]
+        },
+        "ES_fld001_S_Area_4_b": {
+            "X": -37750,
+            "Y": -49950,
+            "Z": 1900,
+            "Enemies": [
+                {
+                    "EnemySetId": "ES_fld001_S_Area_4",
+                    "EnemyId": "",
+                    "LevelMin": 1,
+                    "LevelMax": 1,
+                    "Weight": 1
+                }
+            ]
+        },
+        "ES_fld001_S_Area_6": {
+            "X": -70800,
+            "Y": -38650,
+            "Z": 1600,
+            "Enemies": [
+                {
+                    "EnemySetId": "ES_fld001_S_Area_5",
+                    "EnemyId": "",
+                    "LevelMin": 1,
+                    "LevelMax": 1,
+                    "Weight": 2
+                }
+            ]
+        },
+        "ES_fld001_S_Area_6_a": {
+            "X": -63642.734,
+            "Y": -44772.152,
+            "Z": 2749.999,
+            "Enemies": [
+                {
+                    "EnemySetId": "ES_fld001_S_Area_6",
+                    "EnemyId": "",
+                    "LevelMin": 1,
+                    "LevelMax": 1,
+                    "Weight": 1
+                }
+            ]
+        },
+        "ES_fld001_S_Area_6_b": {
+            "X": -67909.62,
+            "Y": -43577.24,
+            "Z": 2500,
+            "Enemies": [
+                {
+                    "EnemySetId": "ES_fld001_S_Area_6",
+                    "EnemyId": "",
+                    "LevelMin": 1,
+                    "LevelMax": 1,
+                    "Weight": 1
+                }
+            ]
+        },
+        "ES_fld001_S_Area_6_c": {
+            "X": -60029,
+            "Y": -46904,
+            "Z": 3940,
+            "Enemies": [
+                {
+                    "EnemySetId": "ES_fld001_S_Area_6",
+                    "EnemyId": "",
+                    "LevelMin": 1,
+                    "LevelMax": 1,
+                    "Weight": 1
+                }
+            ]
+        },
+        "ES_fld001_S_Area_7_a_10": {
+            "X": -58412.734,
+            "Y": -40429.797,
+            "Z": 2799.996,
+            "Enemies": [
+                {
+                    "EnemySetId": "ES_fld001_S_Area_7",
+                    "EnemyId": "",
+                    "LevelMin": 1,
+                    "LevelMax": 1,
+                    "Weight": 1
+                }
+            ]
+        },
+        "ES_fld001_S_Area_7_b": {
+            "X": -65050,
+            "Y": -39350,
+            "Z": 2800,
+            "Enemies": [
+                {
+                    "EnemySetId": "ES_fld001_S_Area_7",
+                    "EnemyId": "",
+                    "LevelMin": 1,
+                    "LevelMax": 1,
+                    "Weight": 1
+                }
+            ]
+        },
+        "ES_fld001_S_Area_7_c": {
+            "X": -62700,
+            "Y": -33000,
+            "Z": 5200,
+            "Enemies": [
+                {
+                    "EnemySetId": "ES_fld001_S_Area_7",
+                    "EnemyId": "",
+                    "LevelMin": 1,
+                    "LevelMax": 1,
+                    "Weight": 1
+                }
+            ]
+        },
+        "ES_fld001_S_Area_8_a": {
+            "X": -42450.75,
+            "Y": -24018.117,
+            "Z": 2521.2603,
+            "Enemies": [
+                {
+                    "EnemySetId": "ES_fld001_S_Area_8",
+                    "EnemyId": "",
+                    "LevelMin": 1,
+                    "LevelMax": 1,
+                    "Weight": 1
+                }
+            ]
+        },
+        "ES_fld001_S_Area_8_b_12": {
+            "X": -40522.6,
+            "Y": -21605.719,
+            "Z": 2349.999,
+            "Enemies": [
+                {
+                    "EnemySetId": "ES_fld001_S_Area_8",
+                    "EnemyId": "",
+                    "LevelMin": 1,
+                    "LevelMax": 1,
+                    "Weight": 1
+                }
+            ]
+        },
+        "ES_fld001_S_Area_8_c": {
+            "X": -40320.203,
+            "Y": -29820.818,
+            "Z": 3850.0195,
+            "Enemies": [
+                {
+                    "EnemySetId": "ES_fld001_S_Area_8",
+                    "EnemyId": "",
+                    "LevelMin": 1,
+                    "LevelMax": 1,
+                    "Weight": 1
+                }
+            ]
+        },
+        "ES_fld001_S_Area_8_d": {
+            "X": -41472.89,
+            "Y": -34423.05,
+            "Z": 3572.1821,
+            "Enemies": [
+                {
+                    "EnemySetId": "ES_fld001_S_Area_8",
+                    "EnemyId": "",
+                    "LevelMin": 1,
+                    "LevelMax": 1,
+                    "Weight": 1
+                }
+            ]
+        },
+        "ES_fld001_S_Area_9_a": {
+            "X": -29650,
+            "Y": -51250,
+            "Z": 1800,
+            "Enemies": [
+                {
+                    "EnemySetId": "ES_fld001_S_Area_9",
+                    "EnemyId": "",
+                    "LevelMin": 1,
+                    "LevelMax": 1,
+                    "Weight": 1
+                }
+            ]
+        },
+        "ES_fld001_S_Area_9_b": {
+            "X": -31250,
+            "Y": -41350,
+            "Z": 2550,
+            "Enemies": [
+                {
+                    "EnemySetId": "ES_fld001_S_Area_9",
+                    "EnemyId": "",
+                    "LevelMin": 1,
+                    "LevelMax": 1,
+                    "Weight": 1
+                }
+            ]
+        },
+        "ES_fld001_S_Area_9_c": {
+            "X": -33875.38,
+            "Y": -44094.664,
+            "Z": 2151,
+            "Enemies": [
+                {
+                    "EnemySetId": "ES_fld001_S_Area_9",
+                    "EnemyId": "",
+                    "LevelMin": 1,
+                    "LevelMax": 1,
+                    "Weight": 1
+                }
+            ]
+        },
+        "ES_fld001_S_Area_9_d": {
+            "X": -38602.562,
+            "Y": -39117.508,
+            "Z": 2150.997,
+            "Enemies": [
+                {
+                    "EnemySetId": "ES_fld001_S_Area_9",
+                    "EnemyId": "",
+                    "LevelMin": 1,
+                    "LevelMax": 1,
+                    "Weight": 1
+                }
+            ]
+        },
+        "ES_fld001_S_Area_9_e": {
+            "X": -39312.04,
+            "Y": -36108.043,
+            "Z": 2151,
+            "Enemies": [
+                {
+                    "EnemySetId": "ES_fld001_S_Area_9",
+                    "EnemyId": "",
+                    "LevelMin": 1,
+                    "LevelMax": 1,
+                    "Weight": 1
                 }
             ]
         }
@@ -3954,328 +3954,6 @@
         }
     },
     "fld004": {
-        "ES_fld004_S_Area_1_a_2": {
-            "X": -47856.758,
-            "Y": 62972.15,
-            "Z": -13511.737,
-            "Enemies": [
-                {
-                    "EnemySetId": "ES_fld004_S_Area_1",
-                    "EnemyId": "",
-                    "LevelMin": 1,
-                    "LevelMax": 1,
-                    "Weight": 1
-                }
-            ]
-        },
-        "ES_fld004_S_Area_1_b_3": {
-            "X": -42421.504,
-            "Y": 56071.582,
-            "Z": -13577.07,
-            "Enemies": [
-                {
-                    "EnemySetId": "ES_fld004_S_Area_1",
-                    "EnemyId": "",
-                    "LevelMin": 0,
-                    "LevelMax": 0,
-                    "Weight": 0
-                }
-            ]
-        },
-        "ES_fld004_S_Area_2_a": {
-            "X": -32615.45,
-            "Y": 52557.87,
-            "Z": -13732.428,
-            "Enemies": [
-                {
-                    "EnemySetId": "ES_fld004_S_Area_2_a",
-                    "EnemyId": "",
-                    "LevelMin": 0,
-                    "LevelMax": 0,
-                    "Weight": 0
-                }
-            ]
-        },
-        "ES_fld004_S_Area_2_b_1": {
-            "X": -28847.924,
-            "Y": 49319.56,
-            "Z": -13385.99,
-            "Enemies": [
-                {
-                    "EnemySetId": "ES_fld004_S_Area_2_b",
-                    "EnemyId": "",
-                    "LevelMin": 0,
-                    "LevelMax": 0,
-                    "Weight": 0
-                }
-            ]
-        },
-        "ES_fld004_S_Area_2_c": {
-            "X": -26698.871,
-            "Y": 47028.895,
-            "Z": -13170.693,
-            "Enemies": [
-                {
-                    "EnemySetId": "ES_fld004_S_Area_2_b",
-                    "EnemyId": "",
-                    "LevelMin": 0,
-                    "LevelMax": 0,
-                    "Weight": 0
-                }
-            ]
-        },
-        "ES_fld004_S_Area_3_a": {
-            "X": -26077.012,
-            "Y": 59930.223,
-            "Z": -12222.486,
-            "Enemies": [
-                {
-                    "EnemySetId": "ES_fld004_S_Area_3_a",
-                    "EnemyId": "",
-                    "LevelMin": 0,
-                    "LevelMax": 0,
-                    "Weight": 0
-                }
-            ]
-        },
-        "ES_fld004_S_Area_3_b": {
-            "X": -26077.012,
-            "Y": 59930.223,
-            "Z": -12222.486,
-            "Enemies": [
-                {
-                    "EnemySetId": "ES_fld004_S_Area_3_b",
-                    "EnemyId": "",
-                    "LevelMin": 0,
-                    "LevelMax": 0,
-                    "Weight": 0
-                }
-            ]
-        },
-        "ES_fld004_S_Area_4_a_1": {
-            "X": -34996.543,
-            "Y": 77623.2,
-            "Z": -13732.427,
-            "Enemies": [
-                {
-                    "EnemySetId": "ES_fld004_S_Area_4",
-                    "EnemyId": "",
-                    "LevelMin": 0,
-                    "LevelMax": 0,
-                    "Weight": 0
-                }
-            ]
-        },
-        "ES_fld004_S_Area_4_b_1": {
-            "X": -40034.336,
-            "Y": 66945.57,
-            "Z": -13732.423,
-            "Enemies": [
-                {
-                    "EnemySetId": "ES_fld004_S_Area_4",
-                    "EnemyId": "",
-                    "LevelMin": 0,
-                    "LevelMax": 0,
-                    "Weight": 0
-                }
-            ]
-        },
-        "ES_fld004_S_Area_4_c": {
-            "X": -41918.44,
-            "Y": 76456.86,
-            "Z": -13902.217,
-            "Enemies": [
-                {
-                    "EnemySetId": "ES_fld004_S_Area_4",
-                    "EnemyId": "",
-                    "LevelMin": 1,
-                    "LevelMax": 1,
-                    "Weight": 1
-                }
-            ]
-        },
-        "ES_fld004_S_Area_5_a": {
-            "X": -48619.945,
-            "Y": 106035.445,
-            "Z": -10821.559,
-            "Enemies": [
-                {
-                    "EnemySetId": "ES_fld004_S_Area_5",
-                    "EnemyId": "",
-                    "LevelMin": 0,
-                    "LevelMax": 0,
-                    "Weight": 0
-                }
-            ]
-        },
-        "ES_fld004_S_Area_5_b": {
-            "X": -42989.906,
-            "Y": 103701.41,
-            "Z": -12176.481,
-            "Enemies": [
-                {
-                    "EnemySetId": "ES_fld004_S_Area_5",
-                    "EnemyId": "",
-                    "LevelMin": 0,
-                    "LevelMax": 0,
-                    "Weight": 0
-                }
-            ]
-        },
-        "ES_fld004_S_Area_6_a": {
-            "X": -69767.19,
-            "Y": 110540.78,
-            "Z": -11849.706,
-            "Enemies": [
-                {
-                    "EnemySetId": "ES_fld004_S_Area_6",
-                    "EnemyId": "",
-                    "LevelMin": 0,
-                    "LevelMax": 0,
-                    "Weight": 0
-                }
-            ]
-        },
-        "ES_fld004_S_Area_6_b": {
-            "X": -62594.617,
-            "Y": 106072.96,
-            "Z": -12770.315,
-            "Enemies": [
-                {
-                    "EnemySetId": "ES_fld004_S_Area_6",
-                    "EnemyId": "",
-                    "LevelMin": 1,
-                    "LevelMax": 1,
-                    "Weight": 1
-                }
-            ]
-        },
-        "ES_fld004_S_Area_6_c": {
-            "X": -57780.633,
-            "Y": 111461.37,
-            "Z": -12770.272,
-            "Enemies": [
-                {
-                    "EnemySetId": "ES_fld004_S_Area_6",
-                    "EnemyId": "",
-                    "LevelMin": 1,
-                    "LevelMax": 1,
-                    "Weight": 1
-                }
-            ]
-        },
-        "ES_fld004_S_Area_6_d": {
-            "X": -67987.055,
-            "Y": 111779.44,
-            "Z": -14135.157,
-            "Enemies": [
-                {
-                    "EnemySetId": "ES_fld004_S_Area_6",
-                    "EnemyId": "",
-                    "LevelMin": 1,
-                    "LevelMax": 1,
-                    "Weight": 1
-                }
-            ]
-        },
-        "ES_fld004_S_Area_6_e": {
-            "X": -63476.504,
-            "Y": 110426.87,
-            "Z": -14135.171,
-            "Enemies": [
-                {
-                    "EnemySetId": "ES_fld004_S_Area_6",
-                    "EnemyId": "",
-                    "LevelMin": 1,
-                    "LevelMax": 1,
-                    "Weight": 1
-                }
-            ]
-        },
-        "ES_fld004_S_Area_7_a_19": {
-            "X": -50759.11,
-            "Y": 78757.61,
-            "Z": -13793.879,
-            "Enemies": [
-                {
-                    "EnemySetId": "ES_fld004_S_Area_7",
-                    "EnemyId": "",
-                    "LevelMin": 1,
-                    "LevelMax": 1,
-                    "Weight": 1
-                }
-            ]
-        },
-        "ES_fld004_S_Area_7_b_20": {
-            "X": -54577.12,
-            "Y": 77464.25,
-            "Z": -13793.855,
-            "Enemies": [
-                {
-                    "EnemySetId": "ES_fld004_S_Area_7",
-                    "EnemyId": "",
-                    "LevelMin": 1,
-                    "LevelMax": 1,
-                    "Weight": 1
-                }
-            ]
-        },
-        "ES_fld004_S_Area_7_c_21": {
-            "X": -63711.062,
-            "Y": 76190.43,
-            "Z": -13794.009,
-            "Enemies": [
-                {
-                    "EnemySetId": "ES_fld004_S_Area_7",
-                    "EnemyId": "",
-                    "LevelMin": 1,
-                    "LevelMax": 1,
-                    "Weight": 1
-                }
-            ]
-        },
-        "ES_fld004_S_Area_7_d": {
-            "X": -65755.37,
-            "Y": 79828.445,
-            "Z": -13794.01,
-            "Enemies": [
-                {
-                    "EnemySetId": "ES_fld004_S_Area_7",
-                    "EnemyId": "",
-                    "LevelMin": 1,
-                    "LevelMax": 1,
-                    "Weight": 1
-                }
-            ]
-        },
-        "ES_fld004_S_Area_7_e": {
-            "X": -62483.25,
-            "Y": 83524.32,
-            "Z": -13793.949,
-            "Enemies": [
-                {
-                    "EnemySetId": "ES_fld004_S_Area_7",
-                    "EnemyId": "",
-                    "LevelMin": 1,
-                    "LevelMax": 1,
-                    "Weight": 1
-                }
-            ]
-        },
-        "ES_fld004_S_Area_7_f": {
-            "X": -58158.2,
-            "Y": 83429.875,
-            "Z": -13793.909,
-            "Enemies": [
-                {
-                    "EnemySetId": "ES_fld004_S_Area_7",
-                    "EnemyId": "",
-                    "LevelMin": 1,
-                    "LevelMax": 1,
-                    "Weight": 1
-                }
-            ]
-        },
         "ES_fld004_N_Area_1_a": {
             "X": -8200.167,
             "Y": -13929.39,
@@ -4675,6 +4353,328 @@
             "Enemies": [
                 {
                     "EnemySetId": "ES_fld004_N_Area_8",
+                    "EnemyId": "",
+                    "LevelMin": 1,
+                    "LevelMax": 1,
+                    "Weight": 1
+                }
+            ]
+        },
+        "ES_fld004_S_Area_1_a_2": {
+            "X": -47856.758,
+            "Y": 62972.15,
+            "Z": -13511.737,
+            "Enemies": [
+                {
+                    "EnemySetId": "ES_fld004_S_Area_1",
+                    "EnemyId": "",
+                    "LevelMin": 1,
+                    "LevelMax": 1,
+                    "Weight": 1
+                }
+            ]
+        },
+        "ES_fld004_S_Area_1_b_3": {
+            "X": -42421.504,
+            "Y": 56071.582,
+            "Z": -13577.07,
+            "Enemies": [
+                {
+                    "EnemySetId": "ES_fld004_S_Area_1",
+                    "EnemyId": "",
+                    "LevelMin": 0,
+                    "LevelMax": 0,
+                    "Weight": 0
+                }
+            ]
+        },
+        "ES_fld004_S_Area_2_a": {
+            "X": -32615.45,
+            "Y": 52557.87,
+            "Z": -13732.428,
+            "Enemies": [
+                {
+                    "EnemySetId": "ES_fld004_S_Area_2_a",
+                    "EnemyId": "",
+                    "LevelMin": 0,
+                    "LevelMax": 0,
+                    "Weight": 0
+                }
+            ]
+        },
+        "ES_fld004_S_Area_2_b_1": {
+            "X": -28847.924,
+            "Y": 49319.56,
+            "Z": -13385.99,
+            "Enemies": [
+                {
+                    "EnemySetId": "ES_fld004_S_Area_2_b",
+                    "EnemyId": "",
+                    "LevelMin": 0,
+                    "LevelMax": 0,
+                    "Weight": 0
+                }
+            ]
+        },
+        "ES_fld004_S_Area_2_c": {
+            "X": -26698.871,
+            "Y": 47028.895,
+            "Z": -13170.693,
+            "Enemies": [
+                {
+                    "EnemySetId": "ES_fld004_S_Area_2_b",
+                    "EnemyId": "",
+                    "LevelMin": 0,
+                    "LevelMax": 0,
+                    "Weight": 0
+                }
+            ]
+        },
+        "ES_fld004_S_Area_3_a": {
+            "X": -26077.012,
+            "Y": 59930.223,
+            "Z": -12222.486,
+            "Enemies": [
+                {
+                    "EnemySetId": "ES_fld004_S_Area_3_a",
+                    "EnemyId": "",
+                    "LevelMin": 0,
+                    "LevelMax": 0,
+                    "Weight": 0
+                }
+            ]
+        },
+        "ES_fld004_S_Area_3_b": {
+            "X": -26077.012,
+            "Y": 59930.223,
+            "Z": -12222.486,
+            "Enemies": [
+                {
+                    "EnemySetId": "ES_fld004_S_Area_3_b",
+                    "EnemyId": "",
+                    "LevelMin": 0,
+                    "LevelMax": 0,
+                    "Weight": 0
+                }
+            ]
+        },
+        "ES_fld004_S_Area_4_a_1": {
+            "X": -34996.543,
+            "Y": 77623.2,
+            "Z": -13732.427,
+            "Enemies": [
+                {
+                    "EnemySetId": "ES_fld004_S_Area_4",
+                    "EnemyId": "",
+                    "LevelMin": 0,
+                    "LevelMax": 0,
+                    "Weight": 0
+                }
+            ]
+        },
+        "ES_fld004_S_Area_4_b_1": {
+            "X": -40034.336,
+            "Y": 66945.57,
+            "Z": -13732.423,
+            "Enemies": [
+                {
+                    "EnemySetId": "ES_fld004_S_Area_4",
+                    "EnemyId": "",
+                    "LevelMin": 0,
+                    "LevelMax": 0,
+                    "Weight": 0
+                }
+            ]
+        },
+        "ES_fld004_S_Area_4_c": {
+            "X": -41918.44,
+            "Y": 76456.86,
+            "Z": -13902.217,
+            "Enemies": [
+                {
+                    "EnemySetId": "ES_fld004_S_Area_4",
+                    "EnemyId": "",
+                    "LevelMin": 1,
+                    "LevelMax": 1,
+                    "Weight": 1
+                }
+            ]
+        },
+        "ES_fld004_S_Area_5_a": {
+            "X": -48619.945,
+            "Y": 106035.445,
+            "Z": -10821.559,
+            "Enemies": [
+                {
+                    "EnemySetId": "ES_fld004_S_Area_5",
+                    "EnemyId": "",
+                    "LevelMin": 0,
+                    "LevelMax": 0,
+                    "Weight": 0
+                }
+            ]
+        },
+        "ES_fld004_S_Area_5_b": {
+            "X": -42989.906,
+            "Y": 103701.41,
+            "Z": -12176.481,
+            "Enemies": [
+                {
+                    "EnemySetId": "ES_fld004_S_Area_5",
+                    "EnemyId": "",
+                    "LevelMin": 0,
+                    "LevelMax": 0,
+                    "Weight": 0
+                }
+            ]
+        },
+        "ES_fld004_S_Area_6_a": {
+            "X": -69767.19,
+            "Y": 110540.78,
+            "Z": -11849.706,
+            "Enemies": [
+                {
+                    "EnemySetId": "ES_fld004_S_Area_6",
+                    "EnemyId": "",
+                    "LevelMin": 0,
+                    "LevelMax": 0,
+                    "Weight": 0
+                }
+            ]
+        },
+        "ES_fld004_S_Area_6_b": {
+            "X": -62594.617,
+            "Y": 106072.96,
+            "Z": -12770.315,
+            "Enemies": [
+                {
+                    "EnemySetId": "ES_fld004_S_Area_6",
+                    "EnemyId": "",
+                    "LevelMin": 1,
+                    "LevelMax": 1,
+                    "Weight": 1
+                }
+            ]
+        },
+        "ES_fld004_S_Area_6_c": {
+            "X": -57780.633,
+            "Y": 111461.37,
+            "Z": -12770.272,
+            "Enemies": [
+                {
+                    "EnemySetId": "ES_fld004_S_Area_6",
+                    "EnemyId": "",
+                    "LevelMin": 1,
+                    "LevelMax": 1,
+                    "Weight": 1
+                }
+            ]
+        },
+        "ES_fld004_S_Area_6_d": {
+            "X": -67987.055,
+            "Y": 111779.44,
+            "Z": -14135.157,
+            "Enemies": [
+                {
+                    "EnemySetId": "ES_fld004_S_Area_6",
+                    "EnemyId": "",
+                    "LevelMin": 1,
+                    "LevelMax": 1,
+                    "Weight": 1
+                }
+            ]
+        },
+        "ES_fld004_S_Area_6_e": {
+            "X": -63476.504,
+            "Y": 110426.87,
+            "Z": -14135.171,
+            "Enemies": [
+                {
+                    "EnemySetId": "ES_fld004_S_Area_6",
+                    "EnemyId": "",
+                    "LevelMin": 1,
+                    "LevelMax": 1,
+                    "Weight": 1
+                }
+            ]
+        },
+        "ES_fld004_S_Area_7_a_19": {
+            "X": -50759.11,
+            "Y": 78757.61,
+            "Z": -13793.879,
+            "Enemies": [
+                {
+                    "EnemySetId": "ES_fld004_S_Area_7",
+                    "EnemyId": "",
+                    "LevelMin": 1,
+                    "LevelMax": 1,
+                    "Weight": 1
+                }
+            ]
+        },
+        "ES_fld004_S_Area_7_b_20": {
+            "X": -54577.12,
+            "Y": 77464.25,
+            "Z": -13793.855,
+            "Enemies": [
+                {
+                    "EnemySetId": "ES_fld004_S_Area_7",
+                    "EnemyId": "",
+                    "LevelMin": 1,
+                    "LevelMax": 1,
+                    "Weight": 1
+                }
+            ]
+        },
+        "ES_fld004_S_Area_7_c_21": {
+            "X": -63711.062,
+            "Y": 76190.43,
+            "Z": -13794.009,
+            "Enemies": [
+                {
+                    "EnemySetId": "ES_fld004_S_Area_7",
+                    "EnemyId": "",
+                    "LevelMin": 1,
+                    "LevelMax": 1,
+                    "Weight": 1
+                }
+            ]
+        },
+        "ES_fld004_S_Area_7_d": {
+            "X": -65755.37,
+            "Y": 79828.445,
+            "Z": -13794.01,
+            "Enemies": [
+                {
+                    "EnemySetId": "ES_fld004_S_Area_7",
+                    "EnemyId": "",
+                    "LevelMin": 1,
+                    "LevelMax": 1,
+                    "Weight": 1
+                }
+            ]
+        },
+        "ES_fld004_S_Area_7_e": {
+            "X": -62483.25,
+            "Y": 83524.32,
+            "Z": -13793.949,
+            "Enemies": [
+                {
+                    "EnemySetId": "ES_fld004_S_Area_7",
+                    "EnemyId": "",
+                    "LevelMin": 1,
+                    "LevelMax": 1,
+                    "Weight": 1
+                }
+            ]
+        },
+        "ES_fld004_S_Area_7_f": {
+            "X": -58158.2,
+            "Y": 83429.875,
+            "Z": -13793.909,
+            "Enemies": [
+                {
+                    "EnemySetId": "ES_fld004_S_Area_7",
                     "EnemyId": "",
                     "LevelMin": 1,
                     "LevelMax": 1,

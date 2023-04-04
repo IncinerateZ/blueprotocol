@@ -5,6 +5,93 @@ function coordTranslate(x, y, cfg) {
     };
 }
 
+function buildSummary(summaries) {
+    if (Object.keys(summaries).length === 0)
+        return <div style={{ textAlign: 'center' }}>No Data</div>;
+    return (
+        <div
+            style={{
+                display: 'flex',
+                flexDirection: 'row',
+                alignItems: 'center',
+            }}
+        >
+            <div
+                style={{
+                    flexGrow: '2',
+                    height: '100%',
+                    margin: '0.25rem',
+                }}
+            >
+                {'<'}
+            </div>
+            <div style={{ flexGrow: '8' }}>
+                {summaries.map((summary) => (
+                    <div
+                        style={{ display: 'flex', flexDirection: 'column' }}
+                        key={Math.random()}
+                    >
+                        <span style={{ fontSize: '1rem' }}>
+                            <b>{summary.name}</b>
+                        </span>
+                        {summary.desc.map((r) => (
+                            <span
+                                key={Math.random()}
+                                style={{
+                                    fontSize: r.includes('%')
+                                        ? '0.8rem'
+                                        : '0.9rem',
+                                }}
+                            >
+                                {r}
+                            </span>
+                        ))}
+                    </div>
+                ))}
+            </div>
+            <div
+                style={{
+                    flexGrow: '2',
+                    height: '100%',
+                    margin: '0.25rem',
+                }}
+            >
+                {'>'}
+            </div>
+        </div>
+    );
+}
+
+function entitySummary(DB, entity) {
+    let res = [];
+    if (entity.type === 'enemy') {
+        let enemies = DB.EnemySets.field[entity.idf];
+        for (let enemy of enemies?.Members || []) {
+            let page = {};
+            let enemy_ = DB.Enemies[enemy.EnemyId];
+            page.name = DB.Loc.ja_JP.enemyparam_text.texts[enemy_.name_id].text;
+
+            page.desc = [];
+            page.desc.push(`Levels ${enemy.MinLv} - ${enemy.MaxLv}`);
+            page.desc.push('Drops');
+            for (let drop of enemy_.drop_items) {
+                if (!entity.idf.includes(drop.content_id)) continue;
+
+                let item = DB.Items[drop.item_index];
+                if (!item) continue;
+
+                page.desc.push(
+                    `${DB.Loc.ja_JP.item_text.texts[item.name].text} ${
+                        drop.drop_rate / 100
+                    }%`,
+                );
+            }
+            res.push(page);
+        }
+    }
+    return buildSummary(res);
+}
+
 function levenshtein(s, t) {
     if (s === t) {
         return 0;
@@ -104,4 +191,4 @@ function levenshtein(s, t) {
     return h;
 }
 
-export { levenshtein, coordTranslate };
+export { levenshtein, coordTranslate, entitySummary };
