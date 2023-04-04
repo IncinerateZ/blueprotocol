@@ -18,7 +18,7 @@ import Head from 'next/head';
 import { coordTranslate, entitySummary } from '../utils';
 
 export default function Map() {
-    const [chosenMap, setChosenMap] = useState('');
+    const [chosenMap, setChosenMap] = useState('asterleeds');
     const [data, setData] = useState(require('./Markers').default);
     const [markers, setMarkers] = useState({});
     const [mapLoaded, setMapLoaded] = useState(false);
@@ -231,10 +231,6 @@ export default function Map() {
         setMaps(d);
         setMapIcons(mi);
         setDB(_DB);
-
-        setTimeout(() => {
-            setChosenMap('asterleeds');
-        }, 200);
 
         //todo prefetch images
     }, []);
