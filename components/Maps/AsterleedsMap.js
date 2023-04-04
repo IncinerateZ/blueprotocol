@@ -42,7 +42,7 @@ export default function Map() {
 
     const [DB, setDB] = useState(null);
 
-    const makeMakerMode = true;
+    const makeMakerMode = !true;
 
     function newMarker(
         lat,
@@ -149,7 +149,7 @@ export default function Map() {
                 let y_ = -c.y + 1080;
                 a.push(
                     newMarker(y_, x_, {
-                        type: 'enemy',
+                        type: pt.type,
                         title: pt.Enemies[0].EnemySetId,
                     }),
                 );
@@ -185,6 +185,7 @@ export default function Map() {
             '': { img: './map/icons/UI_Map_02.png', iconSize: 32 },
             warp: { img: './map/icons/UI_Map_12.png', iconSize: 40 },
             enemy: { img: './map/icons/UI_Map_16.png', iconSize: 40 },
+            elite: { img: './map/icons/UI_Map_04.png', iconSize: 32 },
         };
 
         for (let label in mi)
@@ -331,6 +332,7 @@ export default function Map() {
                                             {entitySummary(DB, {
                                                 type: v.type,
                                                 idf: v.title,
+                                                metadata: { ...v },
                                             })}
                                         </Popup>
                                     </Marker>

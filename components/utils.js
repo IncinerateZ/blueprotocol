@@ -65,10 +65,10 @@ function buildSummary(summaries) {
 
 function entitySummary(DB, entity) {
     let res = [];
-    if (entity.type === 'enemy') {
+    if (['enemy', 'elite'].includes(entity.type)) {
         let enemies = DB.EnemySets.field[entity.idf];
         for (let enemy of enemies?.Members || []) {
-            let page = {};
+            let page = { ...entity.metadata };
             let enemy_ = DB.Enemies[enemy.EnemyId];
             page.name = DB.Loc.ja_JP.enemyparam_text.texts[enemy_.name_id].text;
 
@@ -80,6 +80,7 @@ function entitySummary(DB, entity) {
             drops.sort((a, b) => {
                 return b.drop_rate - a.drop_rate;
             });
+
             for (let drop of drops) {
                 if (!entity.idf.includes(drop.content_id)) continue;
 
