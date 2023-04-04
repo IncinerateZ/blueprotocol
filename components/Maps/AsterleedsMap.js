@@ -170,8 +170,8 @@ export default function Map() {
 
         //load map names and tags
         for (let k in data) {
-            d[data[k].display_name] = k;
-            for (let _k of data[k].tags) d[_k] = k;
+            d[data[k].display_name] = [k];
+            for (let _k of data[k].tags) d[_k] = [...(d[_k] || []), k];
         }
 
         //load map icons
@@ -213,7 +213,7 @@ export default function Map() {
         setMaps(d);
         setMapIcons(mi);
 
-        //todo prefetch map images
+        //todo prefetch images
     }, []);
 
     return (

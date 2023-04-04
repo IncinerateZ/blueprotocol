@@ -36,10 +36,16 @@ export default function MapControlLayer({
         for (let k of Object.keys(maps)) {
             let ks = k.toLowerCase().indexOf(q);
             if (ks != -1) {
-                res[data[maps[k]].display_name] = ks;
+                for (let t of maps[k]) {
+                    res[data[t].display_name] = ks;
+                }
             } else {
                 let d = levenshtein(k.toLowerCase(), q);
-                if (d <= 5) res[data[maps[k]].display_name] = 100 + d;
+                if (d <= 5)
+                    for (let t of maps[k]) {
+                        if (res[data[t].display_name] >= 0) continue;
+                        res[data[t].display_name] = 100 + d;
+                    }
             }
         }
 
