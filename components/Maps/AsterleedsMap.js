@@ -41,7 +41,6 @@ export default function Map() {
     const [mapLoading, setMapLoading] = useState(false);
 
     const [DB, setDB] = useState(null);
-    // const [lang, setLang] = useState('en_US');
     const [lang, setLang] = useState('ja_JP');
 
     const makeMakerMode = !true;
@@ -93,7 +92,11 @@ export default function Map() {
 
     function resetSearch() {
         if (chosenMap === '') return;
-        setMapSearch(data[chosenMap]?.display_name);
+        setMapSearch(
+            lang === 'ja_JP' && DB
+                ? DB.LocationNames[data[chosenMap].map_id]
+                : data[chosenMap].display_name,
+        );
         setSSHighlight(0);
         setSearchSuggestions([]);
         setDoSearch(false);
@@ -201,9 +204,15 @@ export default function Map() {
     useEffect(() => {
         let d = {};
 
+        let DB_ = require('./DB.json');
+
         //load map names and tags
         for (let k in data) {
             d[data[k].display_name] = [k];
+            d[DB_.LocationNames[data[k].map_id]] = [
+                ...(d[DB_.LocationNames[data[k].map_id]] || []),
+                k,
+            ];
             for (let _k of data[k].tags) d[_k] = [...(d[_k] || []), k];
         }
 
@@ -246,7 +255,7 @@ export default function Map() {
         setMapConfig(cfg);
         setMaps(d);
         setMapIcons(mi);
-        setDB(require('./DB.json'));
+        setDB(DB_);
 
         //todo prefetch images
     }, []);

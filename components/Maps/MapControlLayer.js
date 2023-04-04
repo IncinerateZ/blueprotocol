@@ -44,14 +44,29 @@ export default function MapControlLayer({
             let ks = k.toLowerCase().indexOf(q);
             if (ks != -1) {
                 for (let t of maps[k]) {
-                    res[data[t].display_name] = ks;
+                    res[
+                        lang === 'ja_JP'
+                            ? DB.LocationNames[data[t].map_id]
+                            : data[t].display_name
+                    ] = ks;
                 }
             } else {
                 let d = levenshtein(k.toLowerCase(), q);
                 if (d <= 5)
                     for (let t of maps[k]) {
-                        if (res[data[t].display_name] >= 0) continue;
-                        res[data[t].display_name] = 100 + d;
+                        if (
+                            res[
+                                lang === 'ja_JP'
+                                    ? DB.LocationNames[data[t].map_id]
+                                    : data[t].display_name
+                            ] >= 0
+                        )
+                            continue;
+                        res[
+                            lang === 'ja_JP'
+                                ? DB.LocationNames[data[t].map_id]
+                                : data[t].display_name
+                        ] = 100 + d;
                     }
             }
         }
@@ -80,6 +95,7 @@ export default function MapControlLayer({
             resetSearch();
         }
     }
+
     return (
         <div
             className={`${styles.MapControlLayer} ${
@@ -135,7 +151,11 @@ export default function MapControlLayer({
                 <div className={styles.MCL_mapsearch}>
                     <input
                         type={'text'}
-                        value={mapSearch}
+                        value={
+                            doSearch || !DB || lang !== 'ja_JP'
+                                ? mapSearch
+                                : DB?.LocationNames?.[data[chosenMap].map_id]
+                        }
                         onChange={(e) => {
                             handleMapSearch(e);
                             setDoSearch(true);
