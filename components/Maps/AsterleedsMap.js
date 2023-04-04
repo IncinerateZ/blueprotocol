@@ -264,8 +264,11 @@ export default function Map() {
         <div>
             <Head>
                 <title>
-                    {data[chosenMap]?.display_name || 'Loading'} Map | Blue
-                    Protocol Resource
+                    {!DB || lang !== 'ja_JP'
+                        ? data[chosenMap]?.display_name
+                        : DB.LocationNames[data[chosenMap].map_id] ||
+                          'Loading'}{' '}
+                    Map | Blue Protocol Resource
                 </title>
             </Head>
             {mapLoading && (
