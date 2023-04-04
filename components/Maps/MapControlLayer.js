@@ -1,6 +1,7 @@
 import Image from 'next/image';
 
 import ChevronLeft from '../../public/map/chevron-left.svg';
+import ChevronLeftDark from '../../public/map/chevron-left-black.svg';
 import ChevronLight from '../../public/map/chevron-left-light.svg';
 
 import { levenshtein } from '../utils';
@@ -22,9 +23,15 @@ export default function MapControlLayer({
     resetSearch,
     doSearch,
     setDoSearch,
+    lang,
+    setLang,
+    DB,
 }) {
     const [chevron, setChevron] = useState(true);
+    const [doLangDrop, setDoLangDrop] = useState(false);
     const searchRef = useRef();
+
+    const ReadableString = { en_US: 'EN', ja_JP: 'JP' };
 
     function handleMapSearch(e) {
         let q = e?.target?.value;
@@ -80,6 +87,50 @@ export default function MapControlLayer({
             }`}
         >
             <div className={styles.MCL_content}>
+                <div className={`${styles.langPicker} ${styles.noSelect}`}>
+                    <div
+                        className={styles.langPicker_display}
+                        style={{
+                            borderBottomLeftRadius: doLangDrop ? '0' : '5px',
+                        }}
+                        onClick={() => {
+                            setDoLangDrop((p) => !p);
+                        }}
+                    >
+                        {ReadableString[lang]}
+                    </div>
+                    <Image
+                        src={ChevronLeftDark.src}
+                        width={25}
+                        height={25}
+                        alt={'Change Maps'}
+                        style={{
+                            position: 'absolute',
+                            transform:
+                                'translate(140%, -110%) ' +
+                                `rotate(${doLangDrop ? '-270' : '-90'}deg)`,
+                            pointerEvents: 'none',
+                            transition: '0.1s',
+                        }}
+                    ></Image>
+                    {doLangDrop && (
+                        <div className={styles.langPicker_dropdown}>
+                            {Object.keys(DB.Loc)
+                                .filter((lang_) => lang !== lang_)
+                                .map((lang_) => (
+                                    <div
+                                        key={Math.random()}
+                                        onClick={() => {
+                                            setDoLangDrop(false);
+                                            setLang(lang_);
+                                        }}
+                                    >
+                                        {ReadableString[lang_]}
+                                    </div>
+                                ))}
+                        </div>
+                    )}
+                </div>
                 <span>Map</span>
                 <div className={styles.MCL_mapsearch}>
                     <input
@@ -105,8 +156,11 @@ export default function MapControlLayer({
                         alt={'Change Maps'}
                         style={{
                             position: 'absolute',
-                            transform: 'translate(295px, 40%) rotate(-90deg)',
+                            transform:
+                                'translate(295px, 40%) ' +
+                                `rotate(${doSearch ? '-270' : '-90'}deg)`,
                             pointerEvents: 'none',
+                            transition: '0.1s',
                         }}
                     ></Image>
                     <div className={styles.mapsearch_suggestions}>

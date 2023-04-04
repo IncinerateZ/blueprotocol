@@ -41,6 +41,8 @@ export default function Map() {
     const [mapLoading, setMapLoading] = useState(false);
 
     const [DB, setDB] = useState(null);
+    // const [lang, setLang] = useState('en_US');
+    const [lang, setLang] = useState('ja_JP');
 
     const makeMakerMode = !true;
 
@@ -130,7 +132,12 @@ export default function Map() {
                     );
                     let x_ = c.x;
                     let y_ = c.y + data[chosenMap].mapOffset;
-                    a.push(newMarker(y_, x_, { type: 'warp' }));
+                    a.push(
+                        newMarker(y_, x_, {
+                            type: 'warp',
+                            selectors: ['Warp Gate'],
+                        }),
+                    );
                 }
             }
 
@@ -147,10 +154,30 @@ export default function Map() {
                 );
                 let x_ = c.x;
                 let y_ = -c.y + 1080;
+
+                let selectors = [];
+
+                let enemies = (
+                    DB.EnemySets.field[pt.Enemies[0].EnemySetId] || {
+                        Members: [],
+                    }
+                ).Members;
+
+                for (let enemy of enemies) {
+                    for (let lang_ in DB.Loc) {
+                        selectors.push(
+                            DB.Loc[lang_].enemyparam_text.texts[
+                                DB.Enemies[enemy.EnemyId].name_id
+                            ].text,
+                        );
+                    }
+                }
+
                 a.push(
                     newMarker(y_, x_, {
                         type: pt.type,
                         title: pt.Enemies[0].EnemySetId,
+                        selectors: selectors,
                     }),
                 );
             }
@@ -264,6 +291,9 @@ export default function Map() {
                 resetSearch={resetSearch}
                 doSearch={doSearch}
                 setDoSearch={setDoSearch}
+                lang={lang}
+                setLang={setLang}
+                DB={DB}
             />
             <MapContainer
                 center={[540, 960]}
@@ -318,11 +348,15 @@ export default function Map() {
                                         icon={mapIcons[v.type]}
                                     >
                                         <Popup>
-                                            {entitySummary(DB, {
-                                                type: v.type,
-                                                idf: v.title,
-                                                metadata: { ...v },
-                                            })}
+                                            {entitySummary(
+                                                DB,
+                                                {
+                                                    type: v.type,
+                                                    idf: v.title,
+                                                    metadata: { ...v },
+                                                },
+                                                lang,
+                                            )}
                                         </Popup>
                                     </Marker>
                                 )),

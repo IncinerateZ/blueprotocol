@@ -148,3 +148,45 @@
     user-select: none;
     -webkit-user-select: none;
 }
+
+.langPicker_display {
+    background-color: var(--light);
+    width: 65px;
+    padding: 0.1rem;
+    padding-left: 0.4rem;
+    border: 3px solid transparent;
+    color: black;
+    font-weight: bold;
+
+    border-radius: 5px;
+
+    cursor: pointer;
+}
+
+.langPicker_display:hover {
+    border: 3px solid lightgray;
+}
+
+.langPicker_dropdown {
+    position: absolute;
+
+    cursor: pointer;
+
+    color: black;
+
+    background-color: var(--light);
+
+    border: 3px solid transparent;
+
+    width: 60px;
+    padding: 0.1rem;
+    padding-left: 0.4rem;
+
+    font-weight: bold;
+
+    filter: brightness(90%);
+}
+
+.langPicker_dropdown:hover {
+    border: 3px solid lightgray;
+}

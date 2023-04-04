@@ -63,14 +63,14 @@ function buildSummary(summaries) {
     );
 }
 
-function entitySummary(DB, entity) {
+function entitySummary(DB, entity, lang) {
     let res = [];
     if (['enemy', 'elite'].includes(entity.type)) {
         let enemies = DB.EnemySets.field[entity.idf];
         for (let enemy of enemies?.Members || []) {
             let page = { ...entity.metadata };
             let enemy_ = DB.Enemies[enemy.EnemyId];
-            page.name = DB.Loc.ja_JP.enemyparam_text.texts[enemy_.name_id].text;
+            page.name = DB.Loc[lang].enemyparam_text.texts[enemy_.name_id].text;
 
             page.desc = [];
             page.desc.push(`Levels ${enemy.MinLv} - ${enemy.MaxLv}`);
@@ -88,7 +88,7 @@ function entitySummary(DB, entity) {
                 if (!item) continue;
 
                 page.desc.push(
-                    `${DB.Loc.ja_JP.item_text.texts[item.name].text} ${
+                    `${DB.Loc[lang].item_text.texts[item.name].text} ${
                         drop.drop_rate / 100
                     }%`,
                 );
