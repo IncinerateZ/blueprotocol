@@ -319,6 +319,7 @@ export default function Map() {
                                 ],
                             ]}
                             ref={imgOvRef}
+                            attribution='&copy; Bandai Namco Online Inc., &copy; Bandai Namco Studios Inc.'
                         />
                         {mapIcons &&
                             Object.keys(markers).map((e) =>
