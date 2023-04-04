@@ -1,3 +1,5 @@
+import styles from '../styles/Map.module.css';
+
 function coordTranslate(x, y, cfg) {
     return {
         x: (x - cfg.CapturePosition.X) / (cfg.CaptureSize.X / 1920),
@@ -18,17 +20,20 @@ function buildSummary(summaries) {
         >
             <div
                 style={{
-                    flexGrow: '2',
-                    height: '100%',
-                    margin: '0.25rem',
+                    width: '200px',
+                    height: '150px',
+                    overflowY: 'auto',
                 }}
+                className={styles.Popup}
             >
-                {'<'}
-            </div>
-            <div style={{ flexGrow: '8' }}>
                 {summaries.map((summary) => (
                     <div
-                        style={{ display: 'flex', flexDirection: 'column' }}
+                        style={{
+                            flexDirection: 'column',
+                            position: 'relative',
+                            display: 'flex',
+                            marginBottom: '1rem',
+                        }}
                         key={Math.random()}
                     >
                         <span style={{ fontSize: '1rem' }}>
@@ -38,9 +43,13 @@ function buildSummary(summaries) {
                             <span
                                 key={Math.random()}
                                 style={{
-                                    fontSize: r.includes('%')
-                                        ? '0.8rem'
-                                        : '0.9rem',
+                                    fontSize:
+                                        r.includes('%') || r.includes('Level')
+                                            ? '0.8rem'
+                                            : '0.9rem',
+                                    color: r.includes('Level')
+                                        ? 'darkslategray'
+                                        : 'black',
                                 }}
                             >
                                 {r}
@@ -48,15 +57,6 @@ function buildSummary(summaries) {
                         ))}
                     </div>
                 ))}
-            </div>
-            <div
-                style={{
-                    flexGrow: '2',
-                    height: '100%',
-                    margin: '0.25rem',
-                }}
-            >
-                {'>'}
             </div>
         </div>
     );
