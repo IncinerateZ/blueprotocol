@@ -44,6 +44,7 @@ export default function Map() {
     const [lang, setLang] = useState('ja_JP');
 
     const [selectors, setSelectors] = useState({});
+    const [excludedSelectors, setExcludedSelectors] = useState({});
 
     const makeMakerMode = !true;
 
@@ -179,26 +180,23 @@ export default function Map() {
                 ).Members;
 
                 for (let enemy of enemies) {
-                    for (let lang_ in DB.Loc) {
-                        selectors.push(
-                            DB.Loc[lang_].enemyparam_text.texts[
-                                DB.Enemies[enemy.EnemyId].name_id
-                            ].text,
-                        );
-                        if (lang === lang_)
-                            _selectors = {
-                                ..._selectors,
-                                Enemies: {
-                                    ..._selectors.Enemies,
-                                    [DB.Enemies[enemy.EnemyId].name_id]: {
-                                        selected: true,
-                                        display_name:
-                                            DB.Enemies[enemy.EnemyId].name_id,
-                                        type: pt.type,
-                                    },
-                                },
-                            };
-                    }
+                    selectors.push(
+                        DB.Loc.ja_JP.enemyparam_text.texts[
+                            DB.Enemies[enemy.EnemyId].name_id
+                        ].text,
+                    );
+
+                    _selectors = {
+                        ..._selectors,
+                        Enemies: {
+                            ..._selectors.Enemies,
+                            [DB.Enemies[enemy.EnemyId].name_id]: {
+                                selected: true,
+                                display_name: DB.Enemies[enemy.EnemyId].name_id,
+                                type: pt.type,
+                            },
+                        },
+                    };
                 }
 
                 a.push(
@@ -336,6 +334,8 @@ export default function Map() {
                 mapIcons={mapIcons}
                 selectors={selectors}
                 setSelectors={setSelectors}
+                excludedSelectors={excludedSelectors}
+                setExcludedSelectors={setExcludedSelectors}
             />
             <MapContainer
                 center={[540, 960]}
@@ -383,11 +383,21 @@ export default function Map() {
                         />
                         {mapIcons &&
                             Object.keys(markers).map((e) =>
-                                markers[e].arr.map((v) => (
+                                markers[e].arr.map((v, i) => (
                                     <Marker
                                         position={[v.lat, v.lng]}
-                                        key={v.title}
+                                        key={i}
                                         icon={mapIcons[v.type]}
+                                        opacity={
+                                            v.selectors.reduce(
+                                                (s, c) =>
+                                                    s +
+                                                    (excludedSelectors[c] || 0),
+                                                0,
+                                            ) >= 1
+                                                ? 0.5
+                                                : 1
+                                        }
                                     >
                                         <Popup>
                                             {entitySummary(

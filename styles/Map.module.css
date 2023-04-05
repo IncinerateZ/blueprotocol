@@ -194,6 +194,11 @@
     border: 3px solid lightgray;
 }
 
+.MCL_selectorsContainer {
+    user-select: none;
+    -webkit-user-select: none;
+}
+
 .MCL_selectors {
     display: flex;
     flex-direction: row;
@@ -219,6 +224,8 @@
 
     font-weight: bold;
     border: 3px solid transparent;
+
+    padding-right: 0.2rem;
 }
 
 .MCL_selector:hover {

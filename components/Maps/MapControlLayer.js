@@ -29,6 +29,8 @@ export default function MapControlLayer({
     mapIcons,
     selectors,
     setSelectors,
+    excludedSelectors,
+    setExcludedSelectors,
 }) {
     const [chevron, setChevron] = useState(true);
     const [doLangDrop, setDoLangDrop] = useState(false);
@@ -209,7 +211,10 @@ export default function MapControlLayer({
                             ))}
                     </div>
                 </div>
-                <div style={{ marginTop: '16px' }}>
+                <div
+                    style={{ marginTop: '16px' }}
+                    className={styles.MCL_selectorsContainer}
+                >
                     {selectors &&
                         Object.keys(selectors).map((e, i) => (
                             <div key={i} style={{ marginBottom: '4px' }}>
@@ -220,8 +225,32 @@ export default function MapControlLayer({
                                     {Object.keys(selectors[e]).map((s, si) => (
                                         <div
                                             key={si}
-                                            style={{ fontSize: '0.9rem' }}
+                                            style={{
+                                                fontSize: '0.9rem',
+                                                filter: selectors[e][s].selected
+                                                    ? ''
+                                                    : 'brightness(50%)',
+                                            }}
                                             className={styles.MCL_selector}
+                                            onClick={() => {
+                                                let temp = { ...selectors };
+                                                temp[e][s].selected =
+                                                    !temp[e][s].selected;
+                                                setSelectors({ ...temp });
+                                                setExcludedSelectors({
+                                                    ...excludedSelectors,
+                                                    [selectors[e][s].type
+                                                        ? DB.Loc.ja_JP
+                                                              .enemyparam_text
+                                                              .texts[
+                                                              selectors[e][s]
+                                                                  .display_name
+                                                          ].text
+                                                        : selectors[e][s]
+                                                              .display_name]:
+                                                        !temp[e][s].selected,
+                                                });
+                                            }}
                                         >
                                             {mapIcons && (
                                                 <img
