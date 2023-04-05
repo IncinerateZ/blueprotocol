@@ -120,20 +120,22 @@ export default function MapControlLayer({
                     >
                         {ReadableString[lang]}
                     </div>
-                    <Image
-                        src={ChevronLeftDark.src}
-                        width={25}
-                        height={25}
-                        alt={'Change Maps'}
-                        style={{
-                            position: 'absolute',
-                            transform:
-                                'translate(140%, -110%) ' +
-                                `rotate(${doLangDrop ? '-270' : '-90'}deg)`,
-                            pointerEvents: 'none',
-                            transition: '0.1s',
-                        }}
-                    ></Image>
+                    <div style={{ position: 'relative' }}>
+                        <Image
+                            src={ChevronLeftDark.src}
+                            width={25}
+                            height={25}
+                            alt={'Change Maps'}
+                            style={{
+                                position: 'absolute',
+                                transform:
+                                    'translate(140%, -110%) ' +
+                                    `rotate(${doLangDrop ? '-270' : '-90'}deg)`,
+                                pointerEvents: 'none',
+                                transition: '0.1s',
+                            }}
+                        ></Image>
+                    </div>
                     {doLangDrop && (
                         <div className={styles.langPicker_dropdown}>
                             {Object.keys(DB.Loc)
@@ -176,20 +178,22 @@ export default function MapControlLayer({
                         }}
                         ref={searchRef}
                     ></input>
-                    <Image
-                        src={ChevronLight.src}
-                        width={25}
-                        height={25}
-                        alt={'Change Maps'}
-                        style={{
-                            position: 'absolute',
-                            transform:
-                                'translate(285px, 40%) ' +
-                                `rotate(${doSearch ? '-270' : '-90'}deg)`,
-                            pointerEvents: 'none',
-                            transition: '0.1s',
-                        }}
-                    ></Image>
+                    <div style={{ position: 'relative' }}>
+                        <Image
+                            src={ChevronLight.src}
+                            width={25}
+                            height={25}
+                            alt={'Change Maps'}
+                            style={{
+                                position: 'absolute',
+                                transform:
+                                    'translate(285px, -120%) ' +
+                                    `rotate(${doSearch ? '-270' : '-90'}deg)`,
+                                pointerEvents: 'none',
+                                transition: '0.1s',
+                            }}
+                        ></Image>
+                    </div>
                     <div className={styles.mapsearch_suggestions}>
                         {doSearch &&
                             searchSuggestions.map((e, i) => (

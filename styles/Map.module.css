@@ -32,7 +32,7 @@
     color: var(--text-color);
 
     overflow-x: hidden;
-    overflow-y: auto;
+    overflow-y: hidden;
 
 }
 
@@ -197,7 +197,25 @@
 .MCL_selectorsContainer {
     user-select: none;
     -webkit-user-select: none;
+
+    overflow-y: auto;
 }
+
+.MCL_selectorsContainer::-webkit-scrollbar {
+    width: 0.8px;
+}
+ 
+ .MCL_selectorsContainer::-webkit-scrollbar-track {
+    background: transparent;
+}
+ 
+ .MCL_selectorsContainer::-webkit-scrollbar-thumb {
+    background: silver;
+}
+ 
+ .MCL_selectorsContainer::-webkit-scrollbar-thumb:hover {
+    background: #555;
+} 
 
 .MCL_selectors {
     display: flex;
@@ -208,7 +226,7 @@
 .MCL_selector {
     margin: 0.2rem;
 
-    width: 48%;
+    width: 47%;
     height: 2.3rem;
     background-color: #555;
 
