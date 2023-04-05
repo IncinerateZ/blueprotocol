@@ -40,22 +40,24 @@ function buildSummary(summaries) {
                         <span style={{ fontSize: '1rem' }}>
                             <b>{summary.name}</b>
                         </span>
-                        {summary.desc.map((r) => (
-                            <span
-                                key={Math.random()}
-                                style={{
-                                    fontSize:
-                                        r.includes('%') || r.includes('Level')
-                                            ? '0.8rem'
-                                            : '0.9rem',
-                                    color: r.includes('Level')
-                                        ? 'darkslategray'
-                                        : 'black',
-                                }}
-                            >
-                                {r}
-                            </span>
-                        ))}
+                        {summary.desc &&
+                            summary.desc.map((r) => (
+                                <span
+                                    key={Math.random()}
+                                    style={{
+                                        fontSize:
+                                            r.includes('%') ||
+                                            r.includes('Level')
+                                                ? '0.8rem'
+                                                : '0.9rem',
+                                        color: r.includes('Level')
+                                            ? 'darkslategray'
+                                            : 'black',
+                                    }}
+                                >
+                                    {r}
+                                </span>
+                            ))}
                     </div>
                 ))}
             </div>
@@ -95,6 +97,8 @@ function entitySummary(DB, entity, lang) {
             }
             res.push(page);
         }
+    } else if (entity.idf) {
+        res = [{ name: entity.idf, pages: [] }];
     }
     return buildSummary(res);
 }
