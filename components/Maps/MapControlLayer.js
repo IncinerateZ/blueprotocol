@@ -243,7 +243,12 @@ export default function MapControlLayer({
                                                 setSelectors({ ...temp });
                                                 setExcludedSelectors({
                                                     ...excludedSelectors,
-                                                    [selectors[e][s].type
+                                                    [[
+                                                        'enemy',
+                                                        'elite',
+                                                    ].includes(
+                                                        selectors[e][s].type,
+                                                    )
                                                         ? DB.Loc.ja_JP
                                                               .enemyparam_text
                                                               .texts[

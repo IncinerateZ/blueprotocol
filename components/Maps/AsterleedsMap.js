@@ -122,40 +122,45 @@ export default function Map() {
         if (mapChanged && Object.keys(markers).length > 0) {
             setMapChanged(false);
             setMapLoading(false);
+
             //first marker render
             if (Object.keys(markers).length === 0 || loadFlag) return;
             setLoadFlag(true);
+
             let pts = require('./warppoints.json');
             let a = [];
 
-            //warp points
-            for (let pt of pts) {
-                if (pt.game_content_id.includes(data[chosenMap].map_id)) {
-                    let c = coordTranslate(
-                        pt.location_x,
-                        -pt.location_y,
-                        mapConfig[data[chosenMap].map_id],
-                    );
-                    let x_ = c.x;
-                    let y_ = c.y + data[chosenMap].mapOffset;
-                    a.push(
-                        newMarker(y_, x_, {
-                            type: 'warp',
-                            selectors: ['Warp Gate'],
-                        }),
-                    );
-                }
-            }
-
             let _selectors = {};
 
-            if (a.length > 0)
-                _selectors = {
-                    ..._selectors,
-                    Exploration: {
-                        warp: { selected: true, display_name: 'Warp Gate' },
-                    },
+            //adventure
+            pts = DB.POI[data[chosenMap].map_id] || {};
+            for (let p in pts) {
+                if (!_selectors.Adventure) _selectors.Adventure = {};
+                let pt = pts[p];
+
+                let c = coordTranslate(
+                    pt.X,
+                    -pt.Y,
+                    mapConfig[data[chosenMap].map_id],
+                );
+                let x_ = c.x;
+                let y_ = c.y + data[chosenMap].mapOffset;
+
+                let title = DB.LocationNames[pt.title] || pt.selector;
+
+                a.push(
+                    newMarker(y_, x_, {
+                        type: pt.type,
+                        selectors: [pt.selector],
+                        title: title,
+                    }),
+                );
+
+                _selectors.Adventure[pt.type] = {
+                    selected: true,
+                    display_name: pt.type === 'utility' ? 'Utility' : title,
                 };
+            }
 
             //enemies
             pts = DB.EnemyHabitats[data[chosenMap].map_id] || {};
@@ -247,6 +252,9 @@ export default function Map() {
             warp: { img: './map/icons/UI_Map_12.png', iconSize: 40 },
             enemy: { img: './map/icons/UI_Map_16.png', iconSize: 40 },
             elite: { img: './map/icons/UI_Map_04.png', iconSize: 32 },
+            utility: { img: './map/icons/UI_Map_67.png', iconSize: 32 },
+            campfire: { img: './map/icons/UI_Map_107.png', iconSize: 32 },
+            fishing: { img: './map/icons/UI_Map_110.png', iconSize: 32 },
         };
 
         for (let label in mi)
@@ -365,7 +373,7 @@ export default function Map() {
                     <>
                         <ImageOverlay
                             url={data[chosenMap]?.map_url || ''}
-                            whenReady={() => console.log('hh')}
+                            whenReady={() => {}}
                             bounds={[
                                 [
                                     1080 *
@@ -394,8 +402,8 @@ export default function Map() {
                                                     s +
                                                     (excludedSelectors[c] || 0),
                                                 0,
-                                            ) >= 1
-                                                ? 0.5
+                                            ) === v.selectors.length
+                                                ? 0
                                                 : 1
                                         }
                                     >
