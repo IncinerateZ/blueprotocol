@@ -386,7 +386,7 @@ export default function Map() {
                                 markers[e].arr.map((v) => (
                                     <Marker
                                         position={[v.lat, v.lng]}
-                                        key={Math.random()}
+                                        key={v.title}
                                         icon={mapIcons[v.type]}
                                     >
                                         <Popup>
