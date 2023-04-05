@@ -17,7 +17,7 @@ export default function Home() {
                 <link rel='icon' href='/favicon.ico' />
             </Head>
 
-            <div className={styles.comingSoon}>Coming Soon?</div>
+            <div className={styles.comingSoon}>Under Development</div>
         </div>
     );
 }

@@ -23,8 +23,76 @@
 
     display: flex;
 
-    align-items: center;
-    justify-content: center;
+    flex-direction: column;
+
+    padding: 0.5rem;
+
+    font-size: 1.2rem;
+
+    color: var(--text-color);
+
+    overflow-x: hidden;
+    overflow-y: hidden;
+
+}
+
+.MCL_mapsearch {
+    margin-top: 4px;
+    display: flex;
+    flex-direction: column;
+}
+
+.MCL_mapsearch input {
+    all:unset;
+
+    background-color: var(--light);
+
+    padding: 0.3rem;
+
+    color: black;
+
+    width: 95%;
+
+    border-radius: 5px;
+
+    cursor: pointer;
+    border: 3px solid transparent;
+    transition: 0.3s;
+
+    user-select: none;
+    -webkit-user-select: none;
+}
+
+.MCL_mapsearch input:hover {
+    border: 3px solid lightgray;
+}
+
+.mapsearch_suggestions {
+    position: absolute;
+        
+    width: 90%;
+
+    max-height: 250px;
+    overflow-y: auto;
+
+    transform: translateY(40px);
+
+    background-color: var(--background);
+
+    cursor: pointer;
+}
+
+.mapsearch_suggestions div {
+    padding: 0.3rem;
+}
+
+.mapsearch_suggestions div:hover {
+    background-color: var(--dark2);
+    filter: brightness(90%);
+}
+
+.highlight {
+    background-color: var(--dark2);
 }
 
 .MCL_chevron {
@@ -55,4 +123,134 @@
 
 .MCL_chevron img {
     height: 30px;
+
+    transition: 0.3s;
+}
+
+.Popup {
+    scrollbar-width: thin;
+}
+
+.Popup::-webkit-scrollbar {
+    width: 2px;
+}
+ 
+ .Popup::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+ 
+ .Popup::-webkit-scrollbar-thumb {
+    background: #888;
+}
+ 
+ .Popup::-webkit-scrollbar-thumb:hover {
+    background: #555;
+} 
+
+.noSelect {
+    user-select: none;
+    -webkit-user-select: none;
+}
+
+.langPicker_display {
+    background-color: var(--light);
+    width: 65px;
+    padding: 0.1rem;
+    padding-left: 0.4rem;
+    border: 3px solid transparent;
+    color: black;
+    font-weight: bold;
+
+    border-radius: 5px;
+
+    cursor: pointer;
+}
+
+.langPicker_display:hover {
+    border: 3px solid lightgray;
+}
+
+.langPicker_dropdown {
+    position: absolute;
+
+    cursor: pointer;
+
+    color: black;
+
+    background-color: var(--light);
+
+    border: 3px solid transparent;
+
+    width: 60px;
+    padding: 0.1rem;
+    padding-left: 0.4rem;
+
+    font-weight: bold;
+
+    filter: brightness(90%);
+}
+
+.langPicker_dropdown:hover {
+    border: 3px solid lightgray;
+}
+
+.MCL_selectorsContainer {
+    user-select: none;
+    -webkit-user-select: none;
+
+    overflow-y: auto;
+}
+
+.MCL_selectorsContainer::-webkit-scrollbar {
+    width: 0.8px;
+}
+ 
+ .MCL_selectorsContainer::-webkit-scrollbar-track {
+    background: transparent;
+}
+ 
+ .MCL_selectorsContainer::-webkit-scrollbar-thumb {
+    background: silver;
+}
+ 
+ .MCL_selectorsContainer::-webkit-scrollbar-thumb:hover {
+    background: #555;
+} 
+
+.MCL_selectors {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.MCL_selector {
+    margin: 0.2rem;
+
+    width: 47%;
+    height: 2.3rem;
+    background-color: #555;
+
+    display: flex;
+    flex-direction: row;
+
+    justify-content: left;
+    align-items: center;
+
+    cursor: pointer;
+
+    border-radius: 5px;
+
+    font-weight: bold;
+    border: 3px solid transparent;
+
+    padding-right: 0.2rem;
+}
+
+.MCL_selector:hover {
+    border: 3px solid lightgray;
+}
+
+.MCL_selector div {
+    max-width: 90%;
+    line-height: 1rem;
 }
