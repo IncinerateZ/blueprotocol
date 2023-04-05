@@ -26,6 +26,9 @@ export default function MapControlLayer({
     lang,
     setLang,
     DB,
+    mapIcons,
+    selectors,
+    setSelectors,
 }) {
     const [chevron, setChevron] = useState(true);
     const [doLangDrop, setDoLangDrop] = useState(false);
@@ -147,7 +150,9 @@ export default function MapControlLayer({
                         </div>
                     )}
                 </div>
-                <span style={{ marginTop: '4px' }}>Map</span>
+                <span style={{ marginTop: '4px' }}>
+                    <b>Map</b>
+                </span>
                 <div className={styles.MCL_mapsearch}>
                     <input
                         type={'text'}
@@ -177,7 +182,7 @@ export default function MapControlLayer({
                         style={{
                             position: 'absolute',
                             transform:
-                                'translate(295px, 40%) ' +
+                                'translate(285px, 40%) ' +
                                 `rotate(${doSearch ? '-270' : '-90'}deg)`,
                             pointerEvents: 'none',
                             transition: '0.1s',
@@ -204,7 +209,52 @@ export default function MapControlLayer({
                             ))}
                     </div>
                 </div>
-                <div style={{ marginTop: '16px' }}>Selectors</div>
+                <div style={{ marginTop: '16px' }}>
+                    {selectors &&
+                        Object.keys(selectors).map((e, i) => (
+                            <div key={i} style={{ marginBottom: '4px' }}>
+                                <span>
+                                    <b>{e}</b>
+                                </span>
+                                <div className={styles.MCL_selectors}>
+                                    {Object.keys(selectors[e]).map((s, si) => (
+                                        <div
+                                            key={si}
+                                            style={{ fontSize: '0.9rem' }}
+                                            className={styles.MCL_selector}
+                                        >
+                                            {mapIcons && (
+                                                <img
+                                                    src={
+                                                        mapIcons[
+                                                            selectors[e][s]
+                                                                .type || s
+                                                        ].options.iconUrl
+                                                    }
+                                                    alt={
+                                                        mapIcons[
+                                                            selectors[e][s]
+                                                                .type || s
+                                                        ].options.iconUrl
+                                                    }
+                                                    width={32}
+                                                    height={32}
+                                                />
+                                            )}
+                                            <div>
+                                                {selectors[e][s].type
+                                                    ? DB.Loc[lang]
+                                                          .enemyparam_text
+                                                          .texts[s].text
+                                                    : selectors[e][s]
+                                                          .display_name}
+                                            </div>
+                                        </div>
+                                    ))}
+                                </div>
+                            </div>
+                        ))}
+                </div>
             </div>
             <div className={styles.MCL_chevron}>
                 <div

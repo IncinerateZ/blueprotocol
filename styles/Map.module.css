@@ -31,6 +31,9 @@
 
     color: var(--text-color);
 
+    overflow-x: hidden;
+    overflow-y: auto;
+
 }
 
 .MCL_mapsearch {
@@ -48,7 +51,7 @@
 
     color: black;
 
-    width: 100%;
+    width: 95%;
 
     border-radius: 5px;
 
@@ -67,7 +70,7 @@
 .mapsearch_suggestions {
     position: absolute;
         
-    width: 95%;
+    width: 90%;
 
     max-height: 250px;
     overflow-y: auto;
@@ -189,4 +192,40 @@
 
 .langPicker_dropdown:hover {
     border: 3px solid lightgray;
+}
+
+.MCL_selectors {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.MCL_selector {
+    margin: 0.2rem;
+
+    width: 48%;
+    height: 2.3rem;
+    background-color: #555;
+
+    display: flex;
+    flex-direction: row;
+
+    justify-content: left;
+    align-items: center;
+
+    cursor: pointer;
+
+    border-radius: 5px;
+
+    font-weight: bold;
+    border: 3px solid transparent;
+}
+
+.MCL_selector:hover {
+    border: 3px solid lightgray;
+}
+
+.MCL_selector div {
+    max-width: 90%;
+    line-height: 1rem;
 }

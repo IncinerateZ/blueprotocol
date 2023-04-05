@@ -43,6 +43,8 @@ export default function Map() {
     const [DB, setDB] = useState(null);
     const [lang, setLang] = useState('ja_JP');
 
+    const [selectors, setSelectors] = useState({});
+
     const makeMakerMode = !true;
 
     function newMarker(
@@ -144,6 +146,16 @@ export default function Map() {
                 }
             }
 
+            let _selectors = {};
+
+            if (a.length > 0)
+                _selectors = {
+                    ..._selectors,
+                    Exploration: {
+                        warp: { selected: true, display_name: 'Warp Gate' },
+                    },
+                };
+
             //enemies
             pts = DB.EnemyHabitats[data[chosenMap].map_id] || {};
 
@@ -173,6 +185,19 @@ export default function Map() {
                                 DB.Enemies[enemy.EnemyId].name_id
                             ].text,
                         );
+                        if (lang === lang_)
+                            _selectors = {
+                                ..._selectors,
+                                Enemies: {
+                                    ..._selectors.Enemies,
+                                    [DB.Enemies[enemy.EnemyId].name_id]: {
+                                        selected: true,
+                                        display_name:
+                                            DB.Enemies[enemy.EnemyId].name_id,
+                                        type: pt.type,
+                                    },
+                                },
+                            };
                     }
                 }
 
@@ -184,6 +209,8 @@ export default function Map() {
                     }),
                 );
             }
+
+            setSelectors(_selectors);
 
             //render
             setMarkers({
@@ -306,6 +333,9 @@ export default function Map() {
                 lang={lang}
                 setLang={setLang}
                 DB={DB}
+                mapIcons={mapIcons}
+                selectors={selectors}
+                setSelectors={setSelectors}
             />
             <MapContainer
                 center={[540, 960]}
