@@ -20,24 +20,33 @@ function buildSummary(summaries) {
         >
             <div
                 style={{
-                    width: '200px',
+                    width: summaries[0].desc ? '200px' : 'fit-content',
                     height: 'fit-content',
                     maxHeight: '150px',
                     overflowY: 'auto',
                 }}
                 className={styles.Popup}
             >
-                {summaries.map((summary) => (
+                {summaries.map((summary, idx) => (
                     <div
                         style={{
                             flexDirection: 'column',
                             position: 'relative',
                             display: 'flex',
-                            marginBottom: '1rem',
+                            marginBottom:
+                                summaries[0].desc &&
+                                idx !== summaries.length - 1
+                                    ? '1rem'
+                                    : '0',
                         }}
                         key={Math.random()}
                     >
-                        <span style={{ fontSize: '1rem' }}>
+                        <span
+                            style={{
+                                fontSize: '1rem',
+                                textAlign: summary.desc ? 'left' : 'center',
+                            }}
+                        >
                             <b>{summary.name}</b>
                         </span>
                         {summary.desc &&

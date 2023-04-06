@@ -1,5 +1,5 @@
 const data = {
-    asterleeds: {
+    asterliese: {
         display_name: 'Asterliese',
         tags: ['city'],
         map_url: './UI_MapCty001.webp',

@@ -9,6 +9,7 @@ export default function Home() {
     useEffect(() => {
         router.push('map');
     }, []);
+
     return (
         <div className={styles.bg}>
             <Head>

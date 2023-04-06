@@ -1,8 +1,10 @@
+/* eslint-disable @next/next/no-img-element */
 import Image from 'next/image';
 
 import ChevronLeft from '../../public/map/chevron-left.svg';
 import ChevronLeftDark from '../../public/map/chevron-left-black.svg';
 import ChevronLight from '../../public/map/chevron-left-light.svg';
+import ChevronLightWhite from '../../public/map/chevron-left-light-white.svg';
 
 import { levenshtein } from '../utils';
 import { useRef, useState } from 'react';
@@ -31,9 +33,13 @@ export default function MapControlLayer({
     setSelectors,
     excludedSelectors,
     setExcludedSelectors,
+    selectorsSource,
+    setSelectorsSource,
 }) {
     const [chevron, setChevron] = useState(true);
     const [doLangDrop, setDoLangDrop] = useState(false);
+    const [collapsedSelectors, setCollapsedSelectors] = useState({});
+
     const searchRef = useRef();
 
     const ReadableString = { en_US: 'EN', ja_JP: 'JP' };
@@ -216,7 +222,7 @@ export default function MapControlLayer({
                     </div>
                 </div>
                 <div
-                    style={{ marginTop: '16px' }}
+                    style={{ marginTop: '16px', height: '100%' }}
                     className={styles.MCL_selectorsContainer}
                 >
                     {selectors &&
@@ -224,8 +230,137 @@ export default function MapControlLayer({
                             <div key={i} style={{ marginBottom: '4px' }}>
                                 <span>
                                     <b>{e}</b>
+                                    <div
+                                        style={{
+                                            fontSize: '0.7rem',
+                                            color: 'lightblue',
+                                        }}
+                                    >
+                                        <span
+                                            className={styles.selectors_toggle}
+                                            onClick={() => {
+                                                let temp = { ...selectors };
+                                                let _excludedSelectors = {
+                                                    ...excludedSelectors,
+                                                };
+                                                for (let s in selectors[e]) {
+                                                    temp[e][s].selected = true;
+                                                    _excludedSelectors = {
+                                                        ..._excludedSelectors,
+                                                        [[
+                                                            'enemy',
+                                                            'elite',
+                                                        ].includes(
+                                                            selectors[e][s]
+                                                                .type,
+                                                        )
+                                                            ? DB.Loc.ja_JP
+                                                                  .enemyparam_text
+                                                                  .texts[
+                                                                  selectors[e][
+                                                                      s
+                                                                  ].display_name
+                                                              ].text
+                                                            : selectors[e][s]
+                                                                  .display_name]: false,
+                                                    };
+                                                }
+                                                setSelectors({ ...temp });
+                                                setSelectorsSource({
+                                                    ...selectorsSource,
+                                                    ...temp,
+                                                });
+                                                setExcludedSelectors(
+                                                    _excludedSelectors,
+                                                );
+                                            }}
+                                        >
+                                            Show
+                                        </span>{' '}
+                                        <span>/</span>{' '}
+                                        <span
+                                            className={styles.selectors_toggle}
+                                            onClick={() => {
+                                                let temp = { ...selectors };
+                                                let _excludedSelectors = {
+                                                    ...excludedSelectors,
+                                                };
+                                                for (let s in selectors[e]) {
+                                                    temp[e][s].selected = false;
+                                                    _excludedSelectors = {
+                                                        ..._excludedSelectors,
+                                                        [[
+                                                            'enemy',
+                                                            'elite',
+                                                        ].includes(
+                                                            selectors[e][s]
+                                                                .type,
+                                                        )
+                                                            ? DB.Loc.ja_JP
+                                                                  .enemyparam_text
+                                                                  .texts[
+                                                                  selectors[e][
+                                                                      s
+                                                                  ].display_name
+                                                              ].text
+                                                            : selectors[e][s]
+                                                                  .display_name]: true,
+                                                    };
+                                                }
+                                                setSelectors({ ...temp });
+                                                setSelectorsSource({
+                                                    ...selectorsSource,
+                                                    ...temp,
+                                                });
+                                                setExcludedSelectors(
+                                                    _excludedSelectors,
+                                                );
+                                            }}
+                                        >
+                                            Hide
+                                        </span>{' '}
+                                        <span>All</span>
+                                    </div>
+                                    <div
+                                        style={{
+                                            position: 'relative',
+                                        }}
+                                    >
+                                        <Image
+                                            src={ChevronLightWhite.src}
+                                            width={25}
+                                            height={25}
+                                            alt={'Change Maps'}
+                                            style={{
+                                                position: 'absolute',
+                                                transform:
+                                                    'translate(285px, -100%) ' +
+                                                    `rotate(${
+                                                        collapsedSelectors[e]
+                                                            ? '-270'
+                                                            : '-90'
+                                                    }deg)`,
+                                                cursor: 'pointer',
+                                                transition: '0.1s',
+                                            }}
+                                            onClick={() => {
+                                                setCollapsedSelectors({
+                                                    ...collapsedSelectors,
+                                                    [e]: !collapsedSelectors[e],
+                                                });
+                                            }}
+                                        ></Image>
+                                    </div>
                                 </span>
-                                <div className={styles.MCL_selectors}>
+                                <div
+                                    className={styles.MCL_selectors}
+                                    style={{
+                                        maxHeight: collapsedSelectors[e]
+                                            ? '0'
+                                            : '200vw',
+                                        overflowY: 'hidden',
+                                    }}
+                                >
                                     {Object.keys(selectors[e]).map((s, si) => (
                                         <div
                                             key={si}
@@ -241,6 +376,10 @@ export default function MapControlLayer({
                                                 temp[e][s].selected =
                                                     !temp[e][s].selected;
                                                 setSelectors({ ...temp });
+                                                setSelectorsSource({
+                                                    ...selectorsSource,
+                                                    ...temp,
+                                                });
                                                 setExcludedSelectors({
                                                     ...excludedSelectors,
                                                     [[
@@ -267,13 +406,13 @@ export default function MapControlLayer({
                                                         mapIcons[
                                                             selectors[e][s]
                                                                 .type || s
-                                                        ].options.iconUrl
+                                                        ]?.options?.iconUrl
                                                     }
                                                     alt={
                                                         mapIcons[
                                                             selectors[e][s]
                                                                 .type || s
-                                                        ].options.iconUrl
+                                                        ]?.options?.iconUrl
                                                     }
                                                     width={32}
                                                     height={32}
