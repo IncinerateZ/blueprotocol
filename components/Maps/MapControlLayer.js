@@ -32,6 +32,8 @@ export default function MapControlLayer({
     setSelectors,
     excludedSelectors,
     setExcludedSelectors,
+    selectorsSource,
+    setSelectorsSource,
 }) {
     const [chevron, setChevron] = useState(true);
     const [doLangDrop, setDoLangDrop] = useState(false);
@@ -282,6 +284,10 @@ export default function MapControlLayer({
                                                 temp[e][s].selected =
                                                     !temp[e][s].selected;
                                                 setSelectors({ ...temp });
+                                                setSelectorsSource({
+                                                    ...selectorsSource,
+                                                    ...temp,
+                                                });
                                                 setExcludedSelectors({
                                                     ...excludedSelectors,
                                                     [[
@@ -308,13 +314,13 @@ export default function MapControlLayer({
                                                         mapIcons[
                                                             selectors[e][s]
                                                                 .type || s
-                                                        ].options.iconUrl
+                                                        ]?.options?.iconUrl
                                                     }
                                                     alt={
                                                         mapIcons[
                                                             selectors[e][s]
                                                                 .type || s
-                                                        ].options.iconUrl
+                                                        ]?.options?.iconUrl
                                                     }
                                                     width={32}
                                                     height={32}

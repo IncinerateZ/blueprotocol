@@ -16,10 +16,17 @@ import styles from '../../styles/Map.module.css';
 import MapControlLayer from './MapControlLayer';
 import Head from 'next/head';
 import { coordTranslate, entitySummary } from '../utils';
+import { useRouter } from 'next/router';
 
 export default function Map() {
-    const [chosenMap, setChosenMap] = useState('asterleeds');
-    const [data, setData] = useState(require('./Markers').default);
+    const { asPath, push } = useRouter();
+    const data = require('./Markers').default;
+    const mapRef = useRef();
+    const imgOvRef = useRef();
+
+    const [chosenMap, setChosenMap] = useState(
+        asPath.split('#')[1] in data ? asPath.split('#')[1] : 'asterliese',
+    );
     const [markers, setMarkers] = useState({});
     const [mapLoaded, setMapLoaded] = useState(false);
 
@@ -31,12 +38,9 @@ export default function Map() {
 
     const [loadFlag, setLoadFlag] = useState(false);
 
-    const [mapRef, setMapRef] = useState(useRef());
-
     const [mapConfig, setMapConfig] = useState(null);
     const [mapIcons, setMapIcons] = useState(null);
 
-    const [imgOvRef, setImgOvRef] = useState(useRef());
     const [mapChanged, setMapChanged] = useState(true);
     const [mapLoading, setMapLoading] = useState(false);
 
@@ -44,7 +48,13 @@ export default function Map() {
     const [lang, setLang] = useState('ja_JP');
 
     const [selectors, setSelectors] = useState({});
-    const [excludedSelectors, setExcludedSelectors] = useState({});
+    const [excludedSelectors, setExcludedSelectors] = useState(
+        JSON.parse(localStorage.getItem('Map_excludedSelectors')) || {},
+    );
+
+    const [selectorsSource, setSelectorsSource] = useState(
+        JSON.parse(localStorage.getItem('Map_selectorsSource')) || {},
+    );
 
     const makeMakerMode = true;
 
@@ -107,6 +117,7 @@ export default function Map() {
 
     useEffect(() => {
         if (chosenMap === '') return;
+
         resetSearch();
         setDoSearch(false);
         setLoadFlag(false);
@@ -119,7 +130,8 @@ export default function Map() {
 
     useEffect(() => {
         if (chosenMap === '') return;
-        if (mapChanged && Object.keys(markers).length > 0) {
+        if (mapChanged && DB && Object.keys(markers).length > 0) {
+            window.history.pushState('', '', `#${chosenMap}`);
             setMapChanged(false);
             setMapLoading(false);
 
@@ -157,7 +169,10 @@ export default function Map() {
                 );
 
                 _selectors.Adventure[pt.type] = {
-                    selected: true,
+                    selected:
+                        pt.type in (selectorsSource.Adventure || {})
+                            ? selectorsSource.Adventure[pt.type].selected
+                            : true,
                     display_name: pt.type === 'utility' ? 'Utility' : title,
                 };
             }
@@ -176,7 +191,7 @@ export default function Map() {
                 let x_ = c.x;
                 let y_ = -c.y + 1080;
 
-                let selectors = [];
+                let selectors_ = [];
 
                 let enemies = (
                     DB.EnemySets.field[pt.Enemies[0].EnemySetId] || {
@@ -185,19 +200,23 @@ export default function Map() {
                 ).Members;
 
                 for (let enemy of enemies) {
-                    selectors.push(
-                        DB.Loc.ja_JP.enemyparam_text.texts[
-                            DB.Enemies[enemy.EnemyId].name_id
-                        ].text,
+                    let enemyNameId = DB.Enemies[enemy.EnemyId].name_id;
+                    selectors_.push(
+                        DB.Loc.ja_JP.enemyparam_text.texts[enemyNameId].text,
                     );
 
                     _selectors = {
                         ..._selectors,
                         Enemies: {
                             ..._selectors.Enemies,
-                            [DB.Enemies[enemy.EnemyId].name_id]: {
-                                selected: true,
-                                display_name: DB.Enemies[enemy.EnemyId].name_id,
+                            [enemyNameId]: {
+                                selected:
+                                    enemyNameId in
+                                    (selectorsSource.Enemies || {})
+                                        ? selectorsSource.Enemies[enemyNameId]
+                                              .selected
+                                        : true,
+                                display_name: enemyNameId,
                                 type: pt.type,
                             },
                         },
@@ -208,7 +227,7 @@ export default function Map() {
                     newMarker(y_, x_, {
                         type: pt.type,
                         title: pt.Enemies[0].EnemySetId,
-                        selectors: selectors,
+                        selectors: selectors_,
                     }),
                 );
             }
@@ -255,8 +274,14 @@ export default function Map() {
             utility: { img: './map/icons/UI_Map_67.png', iconSize: 32 },
             campfire: { img: './map/icons/UI_Map_107.png', iconSize: 32 },
             fishing: { img: './map/icons/UI_Map_110.png', iconSize: 32 },
-            aquatic: { img: './map/icons/UI_Icon_Aquatic.png', iconSize: 25 },
-            mineral: { img: './map/icons/UI_Icon_Mineral.png', iconSize: 25 },
+            aquatic: {
+                img: './map/icons/UI_Icon_Aquatic.png',
+                iconSize: 25,
+            },
+            mineral: {
+                img: './map/icons/UI_Icon_Mineral.png',
+                iconSize: 25,
+            },
             plant: { img: './map/icons/UI_Icon_Plant.png', iconSize: 25 },
             treasure: { img: './map/icons/UI_ItemBox.png', iconSize: 32 },
             buff: { img: './map/icons/UI_Map_95.png', iconSize: 32 },
@@ -295,9 +320,18 @@ export default function Map() {
         setMaps(d);
         setMapIcons(mi);
         setDB(DB_);
-
-        //todo prefetch images
     }, []);
+
+    useEffect(() => {
+        localStorage.setItem(
+            'Map_selectorsSource',
+            JSON.stringify(selectorsSource),
+        );
+        localStorage.setItem(
+            'Map_excludedSelectors',
+            JSON.stringify(excludedSelectors),
+        );
+    }, [selectorsSource]);
 
     return (
         <div>
@@ -350,6 +384,8 @@ export default function Map() {
                 setSelectors={setSelectors}
                 excludedSelectors={excludedSelectors}
                 setExcludedSelectors={setExcludedSelectors}
+                selectorsSource={selectorsSource}
+                setSelectorsSource={setSelectorsSource}
             />
             <MapContainer
                 center={[540, 960]}
