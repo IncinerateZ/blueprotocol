@@ -1,4 +1,4 @@
-//2023-04-04
+//2023-04-06
 
 const fs = require('fs');
 
@@ -8,8 +8,10 @@ const DB = {
     EnemySets: { field: {} },
     EnemyHabitats: {},
     Enemies: {},
-    Loc: { ja_JP: {} },
     Items: {},
+    Loc: { ja_JP: {}, en_US: {} },
+    LocationNames: {},
+    POI: { cty: {}, fld: {} },
 };
 
 const CQST = {};
@@ -29,7 +31,6 @@ for (let mapType in DB.EnemySets) {
     let baseMapDir = `./Maps/${MapTypeMapping[mapType]}`;
     for (let map of fs.readdirSync(baseMapDir)) {
         for (let cardinal of ['C', 'N', 'E', 'S', 'W']) {
-            readStart = true;
             readCount++;
             fs.readFile(
                 `${baseMapDir}/${map}/sublevel/${map}_${cardinal}_EN.json`,
@@ -83,14 +84,113 @@ for (let mapType in DB.EnemySets) {
     }
 }
 
+for (let mapType in DB.POI) {
+    let baseMapDir = `./Maps/${mapType}`;
+    for (let map of fs.readdirSync(baseMapDir)) {
+        readCount++;
+        if (!DB.POI[map]) DB.POI[map] = {};
+        fs.readFile(
+            `${baseMapDir}/${map}/sublevel/${map}_SC.json`,
+            'utf8',
+            (err, data) => {
+                if (err) return readCount--;
+                data = JSON.parse(data);
+                for (let dat of data) {
+                    if (
+                        dat.Type === 'SceneComponent' &&
+                        dat.Name.includes('Root') &&
+                        !dat.Outer.includes('Sit') &&
+                        !dat.Outer.includes('Return') &&
+                        !dat.Outer.includes('Replicated') &&
+                        !dat.Outer.includes('Coin') &&
+                        !dat.Outer.includes('FieldTravel') &&
+                        !dat.Outer.includes('Temple') &&
+                        !dat.Outer.includes('Dungeon') &&
+                        !dat.Outer.includes('Water') &&
+                        !dat.Outer.includes('Spline') &&
+                        dat.Properties?.RelativeLocation
+                    ) {
+                        DB.POI[map][dat.Outer] = {
+                            ...DB.POI[map][dat.Outer],
+                            ...dat.Properties.RelativeLocation,
+                            type: poiToType(dat.Outer),
+                            selector: poiToSelector(dat.Outer),
+                        };
+                    }
+                    if (dat.Type === 'BP_UtillityAreaActor_C') {
+                        DB.POI[map][dat.Name] = {
+                            ...DB.POI[map][dat.Name],
+                            title: dat.Properties.LocationId.RowName,
+                        };
+                    }
+                }
+                readCount--;
+            },
+        );
+        for (let cardinal of ['C', 'N', 'E', 'S', 'W']) {
+            readCount += 2;
+            fs.readFile(
+                `${baseMapDir}/${map}/sublevel/${map}_${cardinal}_PU.json`,
+                'utf8',
+                (err, data) => {
+                    if (err) return readCount--;
+                    data = JSON.parse(data);
+                    for (let o of data) {
+                        if (o.Outer && o.Properties?.RelativeLocation)
+                            DB.POI[map][o.Outer] = {
+                                ...DB.POI[map][o.Outer],
+                                title: poiToSelector(o.Outer),
+                                selector: poiToSelector(o.Outer),
+                                type: poiToType(o.Outer),
+                                ...o.Properties.RelativeLocation,
+                            };
+                    }
+                    readCount--;
+                },
+            );
+            fs.readFile(
+                `${baseMapDir}/${map}/sublevel/${map}_${cardinal}_Nappo.json`,
+                'utf8',
+                (err, data) => {
+                    if (err) return readCount--;
+                    data = JSON.parse(data);
+                    for (let o of data) {
+                        if (o.Outer && o.Properties?.RelativeLocation)
+                            DB.POI[map][o.Outer] = {
+                                ...DB.POI[map][o.Outer],
+                                title: 'Nappo',
+                                selector: 'Nappo',
+                                type: 'nappo',
+                                ...o.Properties.RelativeLocation,
+                            };
+                    }
+                    readCount--;
+                },
+            );
+        }
+    }
+}
+
 for (let loc in DB.Loc) {
     readCount++;
     text = require(`./apiext/texts/${loc}.json`);
+    console.log(loc);
+    if (loc !== 'ja_JP') {
+        DB.Loc[loc] = { ...DB.Loc.ja_JP };
+        console.log('793' in DB.Loc[loc].item_text.texts);
+    }
     for (let cat of text) {
-        console.log(cat.name);
-        DB.Loc[loc][cat.name] = { name: cat.name, texts: {} };
+        if (!['enemyparam_text', 'item_text'].includes(cat.name)) continue;
+        DB.Loc[loc][cat.name] = {
+            ...DB.Loc[loc][cat.name],
+            name: cat.name,
+            texts: DB.Loc[loc][cat.name]?.texts
+                ? { ...DB.Loc[loc][cat.name].texts }
+                : {},
+        };
 
         for (let o of cat.texts) {
+            if (loc === 'en_US' && o.id === 793) console.log('hi');
             DB.Loc[loc][cat.name].texts[o.id] = { ...o };
         }
     }
@@ -103,8 +203,14 @@ for (let enemy of require('./apiext/enemyparams.json'))
 for (let item of require('./apiext/items.json'))
     DB.Items[item.id] = { ...item };
 
+for (let location of require('./Text/LocationName.json')[0].Properties
+    .TextTable)
+    DB.LocationNames[location.Id.IdString] = location.Text;
+
+readStart = true;
+
 function save(dir, condense = false) {
-    if (condese)
+    if (condense)
         fs.writeFile(
             dir + `/DB.json`,
             JSON.stringify(DB, null, 4),
@@ -119,6 +225,42 @@ function save(dir, condense = false) {
                 'utf8',
                 () => {},
             );
+}
+
+function poiToType(name) {
+    name = name.toLowerCase();
+    let mapping = {
+        warp: null,
+        fishing: null,
+        utillity: 'utility',
+        campfire: null,
+        aquatic: null,
+        mineral: null,
+        plant: null,
+        treasure: null,
+        buff: null,
+    };
+    for (let m in mapping) if (name.includes(m)) return mapping[m] || m;
+
+    return 'default';
+}
+
+function poiToSelector(name) {
+    name = name.toLowerCase();
+    let mapping = {
+        warp: 'Warp Gate',
+        fishing: 'Fishing',
+        utillity: 'Utility',
+        campfire: 'Camp Fire',
+        aquatic: 'Gathering - Aquatic',
+        mineral: 'Gathering - Minerals',
+        plant: 'Gathering - Plants',
+        treasure: 'Treasure Box',
+        buff: 'Buff',
+    };
+    for (let m in mapping) if (name.includes(m)) return mapping[m] || m;
+
+    return '';
 }
 
 let interval = setInterval(() => {
