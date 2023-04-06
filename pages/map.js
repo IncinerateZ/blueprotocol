@@ -4,7 +4,24 @@ import { useEffect, useState } from 'react';
 
 export default function Map() {
     const Map = dynamic(() => import('../components/Maps/AsterleedsMap'), {
-        loading: () => <p>loading...</p>,
+        loading: () => (
+            <div
+                style={{
+                    width: '100vw',
+                    height: '100vh',
+                    display: 'flex',
+                    position: 'absolute',
+                    backgroundColor: 'black',
+                    zIndex: '99999',
+                    opacity: '0.8',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    color: 'white',
+                }}
+            >
+                <span>Loading...</span>
+            </div>
+        ),
         ssr: false,
     });
     return (
