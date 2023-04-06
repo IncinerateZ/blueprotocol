@@ -259,3 +259,11 @@
     max-width: 90%;
     line-height: 1rem;
 }
+
+.selectors_toggle {
+    cursor: pointer;
+}
+
+.selectors_toggle:hover {
+    border-bottom: 1px solid lightblue;
+}

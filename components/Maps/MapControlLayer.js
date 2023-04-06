@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 import Image from 'next/image';
 
 import ChevronLeft from '../../public/map/chevron-left.svg';
@@ -229,6 +230,97 @@ export default function MapControlLayer({
                             <div key={i} style={{ marginBottom: '4px' }}>
                                 <span>
                                     <b>{e}</b>
+                                    <div
+                                        style={{
+                                            fontSize: '0.7rem',
+                                            color: 'lightblue',
+                                        }}
+                                    >
+                                        <span
+                                            className={styles.selectors_toggle}
+                                            onClick={() => {
+                                                let temp = { ...selectors };
+                                                let _excludedSelectors = {
+                                                    ...excludedSelectors,
+                                                };
+                                                for (let s in selectors[e]) {
+                                                    temp[e][s].selected = true;
+                                                    _excludedSelectors = {
+                                                        ..._excludedSelectors,
+                                                        [[
+                                                            'enemy',
+                                                            'elite',
+                                                        ].includes(
+                                                            selectors[e][s]
+                                                                .type,
+                                                        )
+                                                            ? DB.Loc.ja_JP
+                                                                  .enemyparam_text
+                                                                  .texts[
+                                                                  selectors[e][
+                                                                      s
+                                                                  ].display_name
+                                                              ].text
+                                                            : selectors[e][s]
+                                                                  .display_name]: false,
+                                                    };
+                                                }
+                                                setSelectors({ ...temp });
+                                                setSelectorsSource({
+                                                    ...selectorsSource,
+                                                    ...temp,
+                                                });
+                                                setExcludedSelectors(
+                                                    _excludedSelectors,
+                                                );
+                                            }}
+                                        >
+                                            Show
+                                        </span>{' '}
+                                        <span>/</span>{' '}
+                                        <span
+                                            className={styles.selectors_toggle}
+                                            onClick={() => {
+                                                let temp = { ...selectors };
+                                                let _excludedSelectors = {
+                                                    ...excludedSelectors,
+                                                };
+                                                for (let s in selectors[e]) {
+                                                    temp[e][s].selected = false;
+                                                    _excludedSelectors = {
+                                                        ..._excludedSelectors,
+                                                        [[
+                                                            'enemy',
+                                                            'elite',
+                                                        ].includes(
+                                                            selectors[e][s]
+                                                                .type,
+                                                        )
+                                                            ? DB.Loc.ja_JP
+                                                                  .enemyparam_text
+                                                                  .texts[
+                                                                  selectors[e][
+                                                                      s
+                                                                  ].display_name
+                                                              ].text
+                                                            : selectors[e][s]
+                                                                  .display_name]: true,
+                                                    };
+                                                }
+                                                setSelectors({ ...temp });
+                                                setSelectorsSource({
+                                                    ...selectorsSource,
+                                                    ...temp,
+                                                });
+                                                setExcludedSelectors(
+                                                    _excludedSelectors,
+                                                );
+                                            }}
+                                        >
+                                            Hide
+                                        </span>{' '}
+                                        <span>All</span>
+                                    </div>
                                     <div
                                         style={{
                                             position: 'relative',
