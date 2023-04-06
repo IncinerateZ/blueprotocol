@@ -260,6 +260,7 @@ export default function Map() {
             plant: { img: './map/icons/UI_Icon_Plant.png', iconSize: 25 },
             treasure: { img: './map/icons/UI_ItemBox.png', iconSize: 32 },
             buff: { img: './map/icons/UI_Map_95.png', iconSize: 32 },
+            nappo: { img: './map/icons/UI_Icon_Nappo.png', iconSize: 32 },
         };
 
         for (let label in mi)
