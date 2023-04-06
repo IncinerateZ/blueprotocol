@@ -46,7 +46,7 @@ export default function Map() {
     const [selectors, setSelectors] = useState({});
     const [excludedSelectors, setExcludedSelectors] = useState({});
 
-    const makeMakerMode = !true;
+    const makeMakerMode = true;
 
     function newMarker(
         lat,
@@ -255,6 +255,11 @@ export default function Map() {
             utility: { img: './map/icons/UI_Map_67.png', iconSize: 32 },
             campfire: { img: './map/icons/UI_Map_107.png', iconSize: 32 },
             fishing: { img: './map/icons/UI_Map_110.png', iconSize: 32 },
+            aquatic: { img: './map/icons/UI_Icon_Aquatic.png', iconSize: 25 },
+            mineral: { img: './map/icons/UI_Icon_Mineral.png', iconSize: 25 },
+            plant: { img: './map/icons/UI_Icon_Plant.png', iconSize: 25 },
+            treasure: { img: './map/icons/UI_ItemBox.png', iconSize: 32 },
+            buff: { img: './map/icons/UI_Map_95.png', iconSize: 32 },
         };
 
         for (let label in mi)
@@ -392,33 +397,31 @@ export default function Map() {
                         {mapIcons &&
                             Object.keys(markers).map((e) =>
                                 markers[e].arr.map((v, i) => (
-                                    <Marker
-                                        position={[v.lat, v.lng]}
-                                        key={i}
-                                        icon={mapIcons[v.type]}
-                                        opacity={
-                                            v.selectors.reduce(
-                                                (s, c) =>
-                                                    s +
-                                                    (excludedSelectors[c] || 0),
-                                                0,
-                                            ) === v.selectors.length
-                                                ? 0
-                                                : 1
-                                        }
-                                    >
-                                        <Popup>
-                                            {entitySummary(
-                                                DB,
-                                                {
-                                                    type: v.type,
-                                                    idf: v.title,
-                                                    metadata: { ...v },
-                                                },
-                                                lang,
-                                            )}
-                                        </Popup>
-                                    </Marker>
+                                    <>
+                                        {v.selectors.reduce(
+                                            (s, c) =>
+                                                s + (excludedSelectors[c] || 0),
+                                            0,
+                                        ) !== v.selectors.length && (
+                                            <Marker
+                                                position={[v.lat, v.lng]}
+                                                key={i}
+                                                icon={mapIcons[v.type]}
+                                            >
+                                                <Popup>
+                                                    {entitySummary(
+                                                        DB,
+                                                        {
+                                                            type: v.type,
+                                                            idf: v.title,
+                                                            metadata: { ...v },
+                                                        },
+                                                        lang,
+                                                    )}
+                                                </Popup>
+                                            </Marker>
+                                        )}
+                                    </>
                                 )),
                             )}
                         <ClickHandler />
