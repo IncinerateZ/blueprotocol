@@ -399,11 +399,11 @@ export default function Map() {
                             Object.keys(markers).map((e) =>
                                 markers[e].arr.map((v, i) => (
                                     <>
-                                        {v.selectors.reduce(
+                                        {(v.selectors || []).reduce(
                                             (s, c) =>
                                                 s + (excludedSelectors[c] || 0),
                                             0,
-                                        ) !== v.selectors.length && (
+                                        ) !== (v.selectors || []).length && (
                                             <Marker
                                                 position={[v.lat, v.lng]}
                                                 key={i}

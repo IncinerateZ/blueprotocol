@@ -3,6 +3,7 @@ import Image from 'next/image';
 import ChevronLeft from '../../public/map/chevron-left.svg';
 import ChevronLeftDark from '../../public/map/chevron-left-black.svg';
 import ChevronLight from '../../public/map/chevron-left-light.svg';
+import ChevronLightWhite from '../../public/map/chevron-left-light-white.svg';
 
 import { levenshtein } from '../utils';
 import { useRef, useState } from 'react';
@@ -34,6 +35,8 @@ export default function MapControlLayer({
 }) {
     const [chevron, setChevron] = useState(true);
     const [doLangDrop, setDoLangDrop] = useState(false);
+    const [collapsedSelectors, setCollapsedSelectors] = useState({});
+
     const searchRef = useRef();
 
     const ReadableString = { en_US: 'EN', ja_JP: 'JP' };
@@ -216,7 +219,7 @@ export default function MapControlLayer({
                     </div>
                 </div>
                 <div
-                    style={{ marginTop: '16px' }}
+                    style={{ marginTop: '16px', height: '100%' }}
                     className={styles.MCL_selectorsContainer}
                 >
                     {selectors &&
@@ -224,8 +227,46 @@ export default function MapControlLayer({
                             <div key={i} style={{ marginBottom: '4px' }}>
                                 <span>
                                     <b>{e}</b>
+                                    <div
+                                        style={{
+                                            position: 'relative',
+                                        }}
+                                    >
+                                        <Image
+                                            src={ChevronLightWhite.src}
+                                            width={25}
+                                            height={25}
+                                            alt={'Change Maps'}
+                                            style={{
+                                                position: 'absolute',
+                                                transform:
+                                                    'translate(285px, -100%) ' +
+                                                    `rotate(${
+                                                        collapsedSelectors[e]
+                                                            ? '-270'
+                                                            : '-90'
+                                                    }deg)`,
+                                                cursor: 'pointer',
+                                                transition: '0.1s',
+                                            }}
+                                            onClick={() => {
+                                                setCollapsedSelectors({
+                                                    ...collapsedSelectors,
+                                                    [e]: !collapsedSelectors[e],
+                                                });
+                                            }}
+                                        ></Image>
+                                    </div>
                                 </span>
-                                <div className={styles.MCL_selectors}>
+                                <div
+                                    className={styles.MCL_selectors}
+                                    style={{
+                                        maxHeight: collapsedSelectors[e]
+                                            ? '0'
+                                            : '200vw',
+                                        overflowY: 'hidden',
+                                    }}
+                                >
                                     {Object.keys(selectors[e]).map((s, si) => (
                                         <div
                                             key={si}
