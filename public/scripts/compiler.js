@@ -1,4 +1,4 @@
-//2023-04-06
+//2023-04-07
 
 const fs = require('fs');
 
@@ -10,7 +10,7 @@ const DB = {
     Enemies: {},
     Items: {},
     Loc: { ja_JP: {}, en_US: {} },
-    LocationNames: {},
+    LocationNames: { en_US: {}, ja_JP: {} },
     POI: { cty: {}, fld: {} },
 };
 
@@ -174,11 +174,8 @@ for (let mapType in DB.POI) {
 for (let loc in DB.Loc) {
     readCount++;
     text = require(`./apiext/texts/${loc}.json`);
-    console.log(loc);
-    if (loc !== 'ja_JP') {
-        DB.Loc[loc] = { ...DB.Loc.ja_JP };
-        console.log('793' in DB.Loc[loc].item_text.texts);
-    }
+    if (loc !== 'ja_JP') DB.Loc[loc] = { ...DB.Loc.ja_JP };
+
     for (let cat of text) {
         if (!['enemyparam_text', 'item_text'].includes(cat.name)) continue;
         DB.Loc[loc][cat.name] = {
@@ -205,7 +202,9 @@ for (let item of require('./apiext/items.json'))
 
 for (let location of require('./Text/LocationName.json')[0].Properties
     .TextTable)
-    DB.LocationNames[location.Id.IdString] = location.Text;
+    DB.LocationNames.ja_JP[location.Id.IdString] = location.Text;
+
+DB.LocationNames.en_US = { ...require('./LocationNames_EN.json') };
 
 readStart = true;
 
