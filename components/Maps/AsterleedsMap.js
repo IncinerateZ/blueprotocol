@@ -149,6 +149,7 @@ export default function Map() {
             for (let p in pts) {
                 if (!_selectors.Adventure) _selectors.Adventure = {};
                 let pt = pts[p];
+                if (!pt.X || !pt.Y) continue;
 
                 let c = coordTranslate(
                     pt.X,
@@ -173,7 +174,12 @@ export default function Map() {
                         pt.type in (selectorsSource.Adventure || {})
                             ? selectorsSource.Adventure[pt.type].selected
                             : true,
-                    display_name: pt.type === 'utility' ? 'Utility' : title,
+                    display_name:
+                        {
+                            utility: 'Utility',
+                            travel: 'Travel Point',
+                            dungeon: 'Dungeon',
+                        }[pt.type] || title,
                 };
             }
 
@@ -286,6 +292,8 @@ export default function Map() {
             treasure: { img: './map/icons/UI_ItemBox.png', iconSize: 32 },
             buff: { img: './map/icons/UI_Map_95.png', iconSize: 32 },
             nappo: { img: './map/icons/UI_Icon_Nappo.png', iconSize: 32 },
+            travel: { img: './map/icons/UI_Map_99.png', iconSize: 32 },
+            dungeon: { img: './map/icons/UI_Map_14.png', iconSize: 32 },
         };
 
         for (let label in mi)

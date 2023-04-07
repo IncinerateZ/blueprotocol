@@ -123,12 +123,53 @@ for (let mapType in DB.POI) {
                             title: dat.Properties.LocationId.RowName,
                         };
                     }
+                    if (
+                        (dat.Type === 'BP_DungeonActivator_C' ||
+                            dat.Type === 'BP_DungeonEntrance_C' ||
+                            dat.Type === 'SBFieldTravelTrigger') &&
+                        dat.Properties.TravelFieldMapName
+                    ) {
+                        DB.POI[map][dat.Name] = {
+                            ...DB.POI[map][dat.Name],
+                            title: dat.Properties.TravelFieldMapName.split(
+                                '_',
+                            )[0],
+                        };
+                    }
+                    if (
+                        dat.Name === 'CollisionComp' &&
+                        dat.Properties?.RelativeLocation &&
+                        !dat.Outer.includes('Utillity') &&
+                        !dat.Outer.includes('Blocking') &&
+                        !dat.Outer.includes('Landscape') &&
+                        !dat.Outer.includes('PlayerStart') &&
+                        !dat.Outer.includes('Spline') &&
+                        !dat.Outer.includes('Fld') &&
+                        !dat.Outer.includes('exq003') &&
+                        !dat.Outer.includes('Tutorial') &&
+                        !dat.Outer.includes('Sit') &&
+                        !dat.Outer.includes('Return') &&
+                        !dat.Outer.includes('Replicated') &&
+                        !dat.Outer.includes('Coin') &&
+                        !dat.Outer.includes('Temple') &&
+                        !dat.Outer.includes('Water') &&
+                        !dat.Outer.includes('FallDead') &&
+                        !dat.Outer.includes('Spline')
+                    ) {
+                        DB.POI[map][dat.Outer] = {
+                            ...DB.POI[map][dat.Outer],
+                            ...dat.Properties.RelativeLocation,
+                            type: poiToType(dat.Outer),
+                            selector: poiToSelector(dat.Outer),
+                        };
+                    }
                 }
+
                 readCount--;
             },
         );
         for (let cardinal of ['C', 'N', 'E', 'S', 'W']) {
-            readCount += 2;
+            readCount += 3;
             fs.readFile(
                 `${baseMapDir}/${map}/sublevel/${map}_${cardinal}_PU.json`,
                 'utf8',
@@ -163,6 +204,61 @@ for (let mapType in DB.POI) {
                                 type: 'nappo',
                                 ...o.Properties.RelativeLocation,
                             };
+                    }
+                    readCount--;
+                },
+            );
+            fs.readFile(
+                `${baseMapDir}/${map}/sublevel/${map}_${cardinal}_SC.json`,
+                'utf8',
+                (err, data) => {
+                    if (err) return readCount--;
+                    data = JSON.parse(data);
+                    for (let o of data) {
+                        if (
+                            (o.Type.includes('_DungeonActivator_') ||
+                                o.Type.includes('_DungeonEntrance_') ||
+                                o.Type.includes('FieldTravel')) &&
+                            o.Properties.TravelFieldMapName
+                        ) {
+                            DB.POI[map][o.Name] = {
+                                ...DB.POI[map][o.Name],
+                                title: o.Properties.TravelFieldMapName.split(
+                                    '_',
+                                )[0],
+                            };
+                        }
+                        if (
+                            (o.Name === 'CollisionComp' ||
+                                o.Type === 'SceneComponent') &&
+                            o.Properties?.RelativeLocation &&
+                            !o.Outer.includes('Utillity') &&
+                            !o.Outer.includes('Blocking') &&
+                            !o.Outer.includes('Landscape') &&
+                            !o.Outer.includes('PlayerStart') &&
+                            !o.Outer.includes('Spline') &&
+                            !o.Outer.includes('Fld') &&
+                            !o.Outer.includes('exq003') &&
+                            !o.Outer.includes('Tutorial') &&
+                            !o.Outer.includes('Sit') &&
+                            !o.Outer.includes('Return') &&
+                            !o.Outer.includes('Replicated') &&
+                            !o.Outer.includes('Coin') &&
+                            !o.Outer.includes('Temple') &&
+                            !o.Outer.includes('Water') &&
+                            !o.Outer.includes('FallDead') &&
+                            !o.Outer.includes('Train') &&
+                            !o.Outer.includes('Raid') &&
+                            !o.Outer.includes('MQ') &&
+                            !o.Outer.includes('Spline')
+                        ) {
+                            DB.POI[map][o.Outer] = {
+                                ...DB.POI[map][o.Outer],
+                                ...o.Properties.RelativeLocation,
+                                type: poiToType(o.Outer),
+                                selector: poiToSelector(o.Outer),
+                            };
+                        }
                     }
                     readCount--;
                 },
@@ -238,6 +334,9 @@ function poiToType(name) {
         plant: null,
         treasure: null,
         buff: null,
+        travel: null,
+        dungeon: null,
+        nappo: null,
     };
     for (let m in mapping) if (name.includes(m)) return mapping[m] || m;
 
@@ -256,6 +355,9 @@ function poiToSelector(name) {
         plant: 'Gathering - Plants',
         treasure: 'Treasure Box',
         buff: 'Buff',
+        dungeon: 'Dungeon',
+        travel: 'Travel Point',
+        nappo: 'Nappo',
     };
     for (let m in mapping) if (name.includes(m)) return mapping[m] || m;
 
@@ -265,6 +367,16 @@ function poiToSelector(name) {
 let interval = setInterval(() => {
     if (readStart && readCount === 0) {
         clearInterval(interval);
+        for (let map in DB.POI)
+            for (let row in DB.POI[map])
+                if (
+                    !DB.POI[map][row].X ||
+                    (!['warp', 'campfire', 'fishing'].includes(
+                        DB.POI[map][row].type,
+                    ) &&
+                        !DB.POI[map][row].title)
+                )
+                    delete DB.POI[map][row];
         save(`.`);
         save(`E:/Main Data/Project Files/next/bp/components/Maps`, true);
     }
