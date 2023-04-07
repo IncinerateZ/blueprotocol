@@ -107,7 +107,7 @@ export default function Map() {
         if (chosenMap === '') return;
         setMapSearch(
             lang === 'ja_JP' && DB
-                ? DB.LocationNames[data[chosenMap].map_id]
+                ? DB.LocationNames[lang][data[chosenMap].map_id]
                 : data[chosenMap].display_name,
         );
         setSSHighlight(0);
@@ -158,7 +158,7 @@ export default function Map() {
                 let x_ = c.x;
                 let y_ = c.y + data[chosenMap].mapOffset;
 
-                let title = DB.LocationNames[pt.title] || pt.selector;
+                let title = pt.title || pt.selector;
 
                 a.push(
                     newMarker(y_, x_, {
@@ -258,8 +258,8 @@ export default function Map() {
         //load map names and tags
         for (let k in data) {
             d[data[k].display_name] = [k];
-            d[DB_.LocationNames[data[k].map_id]] = [
-                ...(d[DB_.LocationNames[data[k].map_id]] || []),
+            d[DB_.LocationNames[lang][data[k].map_id]] = [
+                ...(d[DB_.LocationNames[lang][data[k].map_id]] || []),
                 k,
             ];
             for (let _k of data[k].tags) d[_k] = [...(d[_k] || []), k];
@@ -339,7 +339,7 @@ export default function Map() {
                 <title>
                     {!DB || lang !== 'ja_JP'
                         ? data[chosenMap]?.display_name
-                        : DB.LocationNames[data[chosenMap].map_id] ||
+                        : DB.LocationNames[lang][data[chosenMap].map_id] ||
                           'Loading'}{' '}
                     Map | Blue Protocol Resource
                 </title>

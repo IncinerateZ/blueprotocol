@@ -107,7 +107,12 @@ function entitySummary(DB, entity, lang) {
             res.push(page);
         }
     } else if (entity.idf) {
-        res = [{ name: entity.idf, pages: [] }];
+        res = [
+            {
+                name: DB.LocationNames[lang][entity.idf] || entity.idf,
+                pages: [],
+            },
+        ];
     }
     return buildSummary(res);
 }

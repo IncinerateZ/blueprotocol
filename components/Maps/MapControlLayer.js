@@ -57,7 +57,7 @@ export default function MapControlLayer({
                 for (let t of maps[k]) {
                     res[
                         lang === 'ja_JP'
-                            ? DB.LocationNames[data[t].map_id]
+                            ? DB.LocationNames[lang][data[t].map_id]
                             : data[t].display_name
                     ] = ks;
                 }
@@ -68,14 +68,14 @@ export default function MapControlLayer({
                         if (
                             res[
                                 lang === 'ja_JP'
-                                    ? DB.LocationNames[data[t].map_id]
+                                    ? DB.LocationNames[lang][data[t].map_id]
                                     : data[t].display_name
                             ] >= 0
                         )
                             continue;
                         res[
                             lang === 'ja_JP'
-                                ? DB.LocationNames[data[t].map_id]
+                                ? DB.LocationNames[lang][data[t].map_id]
                                 : data[t].display_name
                         ] = 100 + d;
                     }
@@ -169,7 +169,9 @@ export default function MapControlLayer({
                         value={
                             doSearch || !DB || lang !== 'ja_JP'
                                 ? mapSearch
-                                : DB?.LocationNames?.[data[chosenMap].map_id]
+                                : DB?.LocationNames[lang]?.[
+                                      data[chosenMap].map_id
+                                  ]
                         }
                         onChange={(e) => {
                             handleMapSearch(e);
