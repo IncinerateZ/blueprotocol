@@ -336,6 +336,7 @@ function poiToType(name) {
         buff: null,
         travel: null,
         dungeon: null,
+        nappo: null,
     };
     for (let m in mapping) if (name.includes(m)) return mapping[m] || m;
 
@@ -356,6 +357,7 @@ function poiToSelector(name) {
         buff: 'Buff',
         dungeon: 'Dungeon',
         travel: 'Travel Point',
+        nappo: 'Nappo',
     };
     for (let m in mapping) if (name.includes(m)) return mapping[m] || m;
 
@@ -367,7 +369,13 @@ let interval = setInterval(() => {
         clearInterval(interval);
         for (let map in DB.POI)
             for (let row in DB.POI[map])
-                if (!DB.POI[map][row].X || !DB.POI[map][row].title)
+                if (
+                    !DB.POI[map][row].X ||
+                    (!['warp', 'campfire', 'fishing'].includes(
+                        DB.POI[map][row].type,
+                    ) &&
+                        !DB.POI[map][row].title)
+                )
                     delete DB.POI[map][row];
         save(`.`);
         save(`E:/Main Data/Project Files/next/bp/components/Maps`, true);
