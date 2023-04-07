@@ -31,17 +31,21 @@ function MyApp({ Component, pageProps }) {
                 <meta property='og:image' content={icon} key='ogimage' />
                 <meta
                     property='og:site_name'
-                    content='Blue Protocol Resource, Interactive Map'
+                    content='Blue Protocol Resource, Interactive Map, Locations'
                     key='ogsitename'
                 />
                 <meta
                     property='og:title'
-                    content={'Blue Protocol Resource, Interactive Map'}
+                    content={
+                        'Blue Protocol Resource, Interactive Map, Locations'
+                    }
                     key='ogtitle'
                 />
                 <meta
                     property='og:description'
-                    content={'Blue Protocol Resource, Interactive Map'}
+                    content={
+                        'Blue Protocol Resource, Interactive Map, Locations'
+                    }
                     key='ogdesc'
                 />
 
@@ -50,11 +54,15 @@ function MyApp({ Component, pageProps }) {
                 <meta name='twitter:site' content='@The_IncinerateZ' />
                 <meta
                     name='twitter:title'
-                    content={'Blue Protocol Resource, Interactive Map'}
+                    content={
+                        'Blue Protocol Resource, Interactive Map, Locations'
+                    }
                 />
                 <meta
                     name='twitter:description'
-                    content={'Blue Protocol Resource, Interactive Map'}
+                    content={
+                        'Blue Protocol Resource, Interactive Map, Locations'
+                    }
                 />
                 <meta name='twitter:creator' content='@The_IncinerateZ' />
                 <meta property='og:url' content={'https://bp.incin.net/'} />
