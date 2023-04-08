@@ -145,10 +145,11 @@ export default function Map() {
             let _selectors = {};
 
             //adventure
-            pts = DB.POI[data[chosenMap].map_id] || {};
-            for (let p in pts) {
+            pts = (DB.POI[data[chosenMap].map_id] || { dat: [] }).dat;
+
+            for (let p of pts) {
                 if (!_selectors.Adventure) _selectors.Adventure = {};
-                let pt = pts[p];
+                let pt = p;
                 if (!pt.X || !pt.Y) continue;
 
                 let c = coordTranslate(
