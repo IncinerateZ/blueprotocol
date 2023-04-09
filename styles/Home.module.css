@@ -2,13 +2,16 @@
   background-color: var(--background);
   width: 100vw;
   height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .comingSoon {
     text-align: center;
-    line-height: 100vh;
-    font-size: 5rem;
+    font-size: min(8vw, 5rem);
     color: #E7EEEA;
     user-select: none;
     -webkit-user-select: none;
+    height: fit-content;
 }
