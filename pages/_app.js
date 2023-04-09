@@ -22,6 +22,10 @@ function MyApp({ Component, pageProps }) {
                 `}
             </Script>
             <Head>
+                <meta
+                    name='viewport'
+                    content='width=device-width, initial-scale=1.0'
+                ></meta>
                 {/* OpenGraph */}
                 <meta
                     property='og:url'
