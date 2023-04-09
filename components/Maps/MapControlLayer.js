@@ -268,10 +268,20 @@ export default function MapControlLayer({
                                                     };
                                                 }
                                                 setSelectors({ ...temp });
-                                                setSelectorsSource({
+                                                let _selectorsSource = {
                                                     ...selectorsSource,
-                                                    ...temp,
-                                                });
+                                                };
+                                                for (let type in temp)
+                                                    _selectorsSource[type] = {
+                                                        ...selectorsSource[
+                                                            type
+                                                        ],
+                                                        ...temp[type],
+                                                    };
+
+                                                setSelectorsSource(
+                                                    _selectorsSource,
+                                                );
                                                 setExcludedSelectors(
                                                     _excludedSelectors,
                                                 );
@@ -310,10 +320,20 @@ export default function MapControlLayer({
                                                     };
                                                 }
                                                 setSelectors({ ...temp });
-                                                setSelectorsSource({
+                                                let _selectorsSource = {
                                                     ...selectorsSource,
-                                                    ...temp,
-                                                });
+                                                };
+                                                for (let type in temp)
+                                                    _selectorsSource[type] = {
+                                                        ...selectorsSource[
+                                                            type
+                                                        ],
+                                                        ...temp[type],
+                                                    };
+
+                                                setSelectorsSource(
+                                                    _selectorsSource,
+                                                );
                                                 setExcludedSelectors(
                                                     _excludedSelectors,
                                                 );
