@@ -26,6 +26,16 @@ const data = {
             new: { display_name: 'New Marker', arr: [] },
         },
     },
+    dragonclaw: {
+        display_name: "Giant Dragon's Claw Marks",
+        map_url: './UI_Mapdng009.webp',
+        tags: ['dungeon'],
+        map_id: 'dng009',
+        mapOffset: -265,
+        markers: {
+            new: { display_name: 'New Marker', arr: [] },
+        },
+    },
     bahamarhighlands: {
         display_name: 'Bahamar Highlands',
         map_url: './UI_MapFld002.webp',
