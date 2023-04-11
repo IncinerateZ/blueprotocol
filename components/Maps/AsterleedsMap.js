@@ -154,11 +154,11 @@ export default function Map() {
 
                 let c = coordTranslate(
                     pt.X,
-                    -pt.Y,
+                    pt.Y,
                     mapConfig[data[chosenMap].map_id],
                 );
                 let x_ = c.x;
-                let y_ = c.y + data[chosenMap].mapOffset;
+                let y_ = c.y;
 
                 let title = pt.title || pt.selector;
 
@@ -196,7 +196,7 @@ export default function Map() {
                     mapConfig[data[chosenMap].map_id],
                 );
                 let x_ = c.x;
-                let y_ = -c.y + 1080;
+                let y_ = c.y;
 
                 let selectors_ = [];
 
@@ -418,7 +418,9 @@ export default function Map() {
                     setMapLoaded(true);
                 }}
                 ref={mapRef}
-                crs={L.CRS.Simple}
+                crs={L.extend({}, L.CRS.Simple, {
+                    transformation: L.transformation(1, 0, 1, 0),
+                })}
             >
                 {mapLoaded && (
                     <>
