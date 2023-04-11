@@ -4,7 +4,6 @@ const data = {
         tags: ['city'],
         map_url: './UI_MapCty001.webp',
         map_id: 'cty01',
-        mapOffset: 90,
         markers: {
             new: { display_name: 'New Marker', arr: [] },
         },
@@ -21,7 +20,6 @@ const data = {
             'minsterhorn',
         ],
         map_id: 'fld001',
-        mapOffset: -1080,
         markers: {
             new: { display_name: 'New Marker', arr: [] },
         },
@@ -31,7 +29,6 @@ const data = {
         map_url: './UI_Mapdng009.webp',
         tags: ['dungeon'],
         map_id: 'dng009',
-        mapOffset: -265,
         markers: {
             new: { display_name: 'New Marker', arr: [] },
         },
@@ -48,7 +45,6 @@ const data = {
             'bergmahl',
         ],
         map_id: 'fld002',
-        mapOffset: -1810,
         markers: {
             new: { display_name: 'New Marker', arr: [] },
         },
@@ -58,7 +54,6 @@ const data = {
         map_url: './UI_Map_Fld003.webp',
         tags: ['yamamoto'],
         map_id: 'fld003',
-        mapOffset: 10,
         markers: {
             new: { display_name: 'New Marker', arr: [] },
         },
@@ -68,7 +63,6 @@ const data = {
         map_url: './UI_Map_Fld004.webp',
         tags: ['shimooka'],
         map_id: 'fld004',
-        mapOffset: 250,
         markers: {
             new: { display_name: 'New Marker', arr: [] },
         },
@@ -78,7 +72,6 @@ const data = {
         map_url: './UI_MapCty002.webp',
         tags: ['suzuki'],
         map_id: 'cty02',
-        mapOffset: 110,
         markers: {
             new: { display_name: 'New Marker', arr: [] },
         },
