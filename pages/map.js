@@ -27,7 +27,9 @@ export default function Map() {
     return (
         <div>
             <Head>
-                <title>Map | Blue Protocol Resource</title>
+                <title>
+                    Blue Protocol Interactive Map | Blue Protocol Resource
+                </title>
             </Head>
             <Map></Map>
         </div>

@@ -1,17 +1,17 @@
-//2023-04-08
+//2023-04-14
 
 const fs = require('fs');
 
 const MapTypeMapping = { field: 'fld', dungeon: 'dng' };
 
 const DB = {
-    EnemySets: { field: {} },
+    EnemySets: { field: {}, dungeon: {} },
     EnemyHabitats: {},
     Enemies: {},
     Items: {},
     Loc: { ja_JP: {}, en_US: {} },
     LocationNames: { en_US: {}, ja_JP: {} },
-    POI: { cty: {}, fld: {} },
+    POI: { cty: {}, fld: {}, dng: {} },
 };
 
 const CQST = {};
@@ -30,10 +30,13 @@ for (let mapType in DB.EnemySets) {
 
     let baseMapDir = `./Maps/${MapTypeMapping[mapType]}`;
     for (let map of fs.readdirSync(baseMapDir)) {
-        for (let cardinal of ['C', 'N', 'E', 'S', 'W']) {
+        for (let cardinal of ['C_', 'N_', 'E_', 'S_', 'W_', '']) {
             readCount++;
             fs.readFile(
-                `${baseMapDir}/${map}/sublevel/${map}_${cardinal}_EN.json`,
+                `${baseMapDir}/${map}/sublevel/${map.replace(
+                    'dng',
+                    'pub',
+                )}_${cardinal}EN.json`,
                 'utf8',
                 (err, data) => {
                     if (err) return readCount--;
@@ -88,83 +91,91 @@ for (let mapType in DB.POI) {
     let baseMapDir = `./Maps/${mapType}`;
     for (let map of fs.readdirSync(baseMapDir)) {
         if (!DB.POI[map]) DB.POI[map] = { temp: {}, dat: [] };
-        let data = fs.readFileSync(
-            `${baseMapDir}/${map}/sublevel/${map}_SC.json`,
-            'utf8',
-            (err) => {},
-        );
-        data = JSON.parse(data);
-        for (let dat of data) {
-            if (
-                dat.Type === 'SceneComponent' &&
-                dat.Name.includes('Root') &&
-                !dat.Outer.includes('Sit') &&
-                !dat.Outer.includes('Return') &&
-                !dat.Outer.includes('Replicated') &&
-                !dat.Outer.includes('Coin') &&
-                !dat.Outer.includes('FieldTravel') &&
-                !dat.Outer.includes('Temple') &&
-                !dat.Outer.includes('Dungeon') &&
-                !dat.Outer.includes('Water') &&
-                !dat.Outer.includes('Spline') &&
-                dat.Properties?.RelativeLocation
-            ) {
-                DB.POI[map].temp[dat.Outer] = {
-                    ...DB.POI[map].temp[dat.Outer],
-                    ...dat.Properties.RelativeLocation,
-                    type: poiToType(dat.Outer),
-                    selector: poiToSelector(dat.Outer),
-                };
+        try {
+            let data = fs.readFileSync(
+                `${baseMapDir}/${map}/sublevel/${map.replace(
+                    'dng',
+                    'pub',
+                )}_SC.json`,
+                'utf8',
+                (err) => {},
+            );
+            data = JSON.parse(data);
+            for (let dat of data) {
+                if (
+                    dat.Type === 'SceneComponent' &&
+                    dat.Name.includes('Root') &&
+                    !dat.Outer.includes('Sit') &&
+                    !dat.Outer.includes('Return') &&
+                    !dat.Outer.includes('Replicated') &&
+                    !dat.Outer.includes('Coin') &&
+                    !dat.Outer.includes('FieldTravel') &&
+                    !dat.Outer.includes('Temple') &&
+                    !dat.Outer.includes('Dungeon') &&
+                    !dat.Outer.includes('Water') &&
+                    !dat.Outer.includes('Spline') &&
+                    dat.Properties?.RelativeLocation
+                ) {
+                    DB.POI[map].temp[dat.Outer] = {
+                        ...DB.POI[map].temp[dat.Outer],
+                        ...dat.Properties.RelativeLocation,
+                        type: poiToType(dat.Outer),
+                        selector: poiToSelector(dat.Outer),
+                    };
+                }
+                if (dat.Type === 'BP_UtillityAreaActor_C') {
+                    DB.POI[map].temp[dat.Name] = {
+                        ...DB.POI[map].temp[dat.Name],
+                        title: dat.Properties.LocationId.RowName,
+                    };
+                }
+                if (
+                    (dat.Type === 'BP_DungeonActivator_C' ||
+                        dat.Type === 'BP_DungeonEntrance_C' ||
+                        dat.Type === 'SBFieldTravelTrigger') &&
+                    dat.Properties.TravelFieldMapName
+                ) {
+                    DB.POI[map].temp[dat.Name] = {
+                        ...DB.POI[map].temp[dat.Name],
+                        title: dat.Properties.TravelFieldMapName.split('_')[0],
+                    };
+                }
+                if (
+                    dat.Name === 'CollisionComp' &&
+                    dat.Properties?.RelativeLocation &&
+                    !dat.Outer.includes('Utillity') &&
+                    !dat.Outer.includes('Blocking') &&
+                    !dat.Outer.includes('Landscape') &&
+                    !dat.Outer.includes('PlayerStart') &&
+                    !dat.Outer.includes('Spline') &&
+                    !dat.Outer.includes('Fld') &&
+                    !dat.Outer.includes('exq003') &&
+                    !dat.Outer.includes('Tutorial') &&
+                    !dat.Outer.includes('Sit') &&
+                    !dat.Outer.includes('Return') &&
+                    !dat.Outer.includes('Replicated') &&
+                    !dat.Outer.includes('Coin') &&
+                    !dat.Outer.includes('Temple') &&
+                    !dat.Outer.includes('Water') &&
+                    !dat.Outer.includes('FallDead') &&
+                    !dat.Outer.includes('Spline')
+                ) {
+                    DB.POI[map].temp[dat.Outer] = {
+                        ...DB.POI[map].temp[dat.Outer],
+                        ...dat.Properties.RelativeLocation,
+                        type: poiToType(dat.Outer),
+                        selector: poiToSelector(dat.Outer),
+                    };
+                }
             }
-            if (dat.Type === 'BP_UtillityAreaActor_C') {
-                DB.POI[map].temp[dat.Name] = {
-                    ...DB.POI[map].temp[dat.Name],
-                    title: dat.Properties.LocationId.RowName,
-                };
-            }
-            if (
-                (dat.Type === 'BP_DungeonActivator_C' ||
-                    dat.Type === 'BP_DungeonEntrance_C' ||
-                    dat.Type === 'SBFieldTravelTrigger') &&
-                dat.Properties.TravelFieldMapName
-            ) {
-                DB.POI[map].temp[dat.Name] = {
-                    ...DB.POI[map].temp[dat.Name],
-                    title: dat.Properties.TravelFieldMapName.split('_')[0],
-                };
-            }
-            if (
-                dat.Name === 'CollisionComp' &&
-                dat.Properties?.RelativeLocation &&
-                !dat.Outer.includes('Utillity') &&
-                !dat.Outer.includes('Blocking') &&
-                !dat.Outer.includes('Landscape') &&
-                !dat.Outer.includes('PlayerStart') &&
-                !dat.Outer.includes('Spline') &&
-                !dat.Outer.includes('Fld') &&
-                !dat.Outer.includes('exq003') &&
-                !dat.Outer.includes('Tutorial') &&
-                !dat.Outer.includes('Sit') &&
-                !dat.Outer.includes('Return') &&
-                !dat.Outer.includes('Replicated') &&
-                !dat.Outer.includes('Coin') &&
-                !dat.Outer.includes('Temple') &&
-                !dat.Outer.includes('Water') &&
-                !dat.Outer.includes('FallDead') &&
-                !dat.Outer.includes('Spline')
-            ) {
-                DB.POI[map].temp[dat.Outer] = {
-                    ...DB.POI[map].temp[dat.Outer],
-                    ...dat.Properties.RelativeLocation,
-                    type: poiToType(dat.Outer),
-                    selector: poiToSelector(dat.Outer),
-                };
-            }
-        }
-        for (let cardinal of ['C', 'N', 'E', 'S', 'W']) {
+        } catch (err) {}
+        for (let cardinal of ['C_', 'N_', 'E_', 'S_', 'W_', '']) {
             try {
                 data = fs.readFileSync(
-                    `${baseMapDir}/${map}/sublevel/${map}_${cardinal}_PU.json`,
+                    `${baseMapDir}/${map}/sublevel/${map.replace(
+                        'dng',
+                        'pub',
+                    )}_${cardinal}PU.json`,
                     'utf8',
                     (err) => {},
                 );
@@ -183,7 +194,10 @@ for (let mapType in DB.POI) {
             } catch (err) {}
             try {
                 data = fs.readFileSync(
-                    `${baseMapDir}/${map}/sublevel/${map}_${cardinal}_Nappo.json`,
+                    `${baseMapDir}/${map}/sublevel/${map.replace(
+                        'dng',
+                        'pub',
+                    )}_${cardinal}Nappo.json`,
                     'utf8',
                     (err) => {},
                 );
@@ -202,7 +216,10 @@ for (let mapType in DB.POI) {
             } catch (err) {}
             try {
                 data = fs.readFileSync(
-                    `${baseMapDir}/${map}/sublevel/${map}_${cardinal}_SC.json`,
+                    `${baseMapDir}/${map}/sublevel/${map.replace(
+                        'dng',
+                        'pub',
+                    )}_${cardinal}SC.json`,
                     'utf8',
                     (err) => {},
                 );
@@ -364,7 +381,7 @@ let interval = setInterval(() => {
     if (readStart && readCount === 0) {
         clearInterval(interval);
         for (let map in DB.POI) {
-            if (!DB.POI[map].dat) {
+            if (!DB.POI[map].dat || DB.POI[map].dat.length === 0) {
                 delete DB.POI[map];
                 continue;
             }
@@ -377,6 +394,16 @@ let interval = setInterval(() => {
                         !DB.POI[map].dat[row].title)
                 )
                     DB.POI[map].dat[row] = {};
+            let i = 0;
+            let last = DB.POI[map].dat.length;
+            while (i < last) {
+                if (Object.keys(DB.POI[map].dat[i]).length !== 0) i++;
+                else {
+                    DB.POI[map].dat.splice(i, 1);
+                    last--;
+                }
+            }
+            console.log(map);
         }
         save(`.`);
         save(`E:/Main Data/Project Files/next/bp/components/Maps`, true);
