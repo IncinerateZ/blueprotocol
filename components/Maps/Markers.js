@@ -52,7 +52,7 @@ const data = {
     montegnorvalley: {
         display_name: 'Montegnor Valley',
         map_url: './UI_Map_Fld003.webp',
-        tags: ['yamamoto'],
+        tags: ['yamamoto', 'field'],
         map_id: 'fld003',
         markers: {
             new: { display_name: 'New Marker', arr: [] },
@@ -61,7 +61,7 @@ const data = {
     erstgreensands: {
         display_name: 'Erstgreen Sands',
         map_url: './UI_Map_Fld004.webp',
-        tags: ['shimooka'],
+        tags: ['shimooka', 'field'],
         map_id: 'fld004',
         markers: {
             new: { display_name: 'New Marker', arr: [] },
@@ -70,7 +70,7 @@ const data = {
     salamzahd: {
         display_name: 'Salamzahd',
         map_url: './UI_MapCty002.webp',
-        tags: ['suzuki'],
+        tags: ['suzuki', 'city'],
         map_id: 'cty02',
         markers: {
             new: { display_name: 'New Marker', arr: [] },
