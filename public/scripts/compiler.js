@@ -1,4 +1,4 @@
-//2023-04-14
+//2023-04-17
 
 const fs = require('fs');
 
@@ -12,6 +12,7 @@ const DB = {
     Loc: { ja_JP: {}, en_US: {} },
     LocationNames: { en_US: {}, ja_JP: {} },
     POI: { cty: {}, fld: {}, dng: {} },
+    Treasures: { fld: {}, dng: {} },
 };
 
 const CQST = {};
@@ -190,6 +191,18 @@ for (let mapType in DB.POI) {
                             ...o.Properties.RelativeLocation,
                         };
                     }
+                    if (
+                        o.Properties &&
+                        (o.Properties.GatherPointId ||
+                            o.Properties.TreasureBoxId)
+                    ) {
+                        DB.POI[map].temp[o.Name] = {
+                            ...DB.POI[map].temp[o.Name],
+                            treasureId:
+                                o.Properties.GatherPointId ||
+                                o.Properties.TreasureBoxId,
+                        };
+                    }
                 }
             } catch (err) {}
             try {
@@ -308,6 +321,9 @@ for (let enemy of require('./apiext/enemyparams.json'))
 
 for (let item of require('./apiext/items.json'))
     DB.Items[item.id] = { ...item };
+
+for (let treasure of require('./apiext/treasures.json'))
+    DB.Treasures[treasure.id] = { ...treasure };
 
 for (let location of require('./Text/LocationName.json')[0].Properties
     .TextTable)
