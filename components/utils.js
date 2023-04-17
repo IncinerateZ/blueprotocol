@@ -34,6 +34,7 @@ function buildSummary(summaries) {
                             position: 'relative',
                             display: 'flex',
                             marginBottom:
+                                !summaries.noMargin &&
                                 summaries[0].desc &&
                                 idx !== summaries.length - 1
                                     ? '1rem'
@@ -45,6 +46,7 @@ function buildSummary(summaries) {
                             style={{
                                 fontSize: '1rem',
                                 textAlign: summary.desc ? 'left' : 'center',
+                                display: summary.name ? 'block' : 'none',
                             }}
                         >
                             <b>{summary.name}</b>
@@ -106,6 +108,41 @@ function entitySummary(DB, entity, lang) {
             }
             res.push(page);
         }
+    } else if (
+        ['plant', 'aquatic', 'mineral', 'treasure'].includes(entity.type)
+    ) {
+        let treasures = DB.Treasures[entity.metadata.title];
+        let i = 1;
+
+        let lot_rates = treasures.lot_rate;
+
+        lot_rates.sort((a, b) => {
+            return b.rate - a.rate;
+        });
+
+        for (let treasure of lot_rates) {
+            let page = { ...entity.metadata };
+            let treasure_ = DB.Items[treasure.reward_master_id];
+
+            page.desc = [];
+
+            if (i++ === 1)
+                page.name = `Gathering: ${
+                    entity.type.charAt(0).toUpperCase() +
+                    entity.type.substring(1)
+                }`;
+
+            if (treasure_)
+                page.desc.push(
+                    `${DB.Loc[lang].item_text.texts[treasure_.name].text} x${
+                        treasure.reward_amount_min
+                    }-${treasure.reward_amount_max} ${treasure.rate / 100}%`,
+                );
+            else console.log(treasure);
+
+            res.push(page);
+        }
+        res.noMargin = true;
     } else if (entity.idf) {
         res = [
             {

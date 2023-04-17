@@ -166,7 +166,7 @@ export default function Map() {
                     newMarker(y_, x_, {
                         type: pt.type,
                         selectors: [pt.selector],
-                        title: title,
+                        title: pt.treasureId || title,
                     }),
                 );
 
