@@ -180,6 +180,7 @@ export default function Map() {
                             utility: 'Utility',
                             travel: 'Travel Point',
                             dungeon: 'Dungeon',
+                            raid: 'Raid',
                         }[pt.type] || title,
                 };
             }
@@ -295,6 +296,7 @@ export default function Map() {
             nappo: { img: './map/icons/UI_Icon_Nappo.png', iconSize: 32 },
             travel: { img: './map/icons/UI_Map_99.png', iconSize: 32 },
             dungeon: { img: './map/icons/UI_Map_14.png', iconSize: 32 },
+            raid: { img: './map/icons/UI_Map_73.png', iconSize: 32 },
         };
 
         for (let label in mi)
@@ -450,25 +452,28 @@ export default function Map() {
                                             (s, c) =>
                                                 s + (excludedSelectors[c] || 0),
                                             0,
-                                        ) !== (v.selectors || []).length && (
-                                            <Marker
-                                                position={[v.lat, v.lng]}
-                                                key={i}
-                                                icon={mapIcons[v.type]}
-                                            >
-                                                <Popup>
-                                                    {entitySummary(
-                                                        DB,
-                                                        {
-                                                            type: v.type,
-                                                            idf: v.title,
-                                                            metadata: { ...v },
-                                                        },
-                                                        lang,
-                                                    )}
-                                                </Popup>
-                                            </Marker>
-                                        )}
+                                        ) !== (v.selectors || []).length &&
+                                            mapIcons[v.type] && (
+                                                <Marker
+                                                    position={[v.lat, v.lng]}
+                                                    key={i}
+                                                    icon={mapIcons[v.type]}
+                                                >
+                                                    <Popup>
+                                                        {entitySummary(
+                                                            DB,
+                                                            {
+                                                                type: v.type,
+                                                                idf: v.title,
+                                                                metadata: {
+                                                                    ...v,
+                                                                },
+                                                            },
+                                                            lang,
+                                                        )}
+                                                    </Popup>
+                                                </Marker>
+                                            )}
                                     </>
                                 )),
                             )}
