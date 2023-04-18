@@ -1,4 +1,4 @@
-//2023-04-17
+//2023-04-18
 
 const fs = require('fs');
 
@@ -19,6 +19,13 @@ const CQST = {};
 
 let readStart = false;
 let readCount = 0;
+
+const raidNames = {};
+for (let raid of require('./apiext/master_raid_settings.json')) {
+    for (let gate of raid.entry_gate) {
+        raidNames[gate.name_text] = raid.map_id;
+    }
+}
 
 //startup
 for (let mapType in DB.EnemySets) {
@@ -239,16 +246,17 @@ for (let mapType in DB.POI) {
                 data = JSON.parse(data);
                 for (let o of data) {
                     if (
-                        (o.Type.includes('_DungeonActivator_') ||
-                            o.Type.includes('_DungeonEntrance_') ||
+                        (o.Type.includes('Dungeon') ||
+                            o.Type.includes('_RaidGate') ||
                             o.Type.includes('FieldTravel')) &&
-                        o.Properties.TravelFieldMapName
+                        (o.Properties.TravelFieldMapName ||
+                            o.Properties.DungeonID)
                     ) {
                         DB.POI[map].temp[o.Name] = {
                             ...DB.POI[map].temp[o.Name],
-                            title: o.Properties.TravelFieldMapName.split(
-                                '_',
-                            )[0],
+                            title:
+                                o.Properties.DungeonID ||
+                                o.Properties.TravelFieldMapName?.split('_')[0],
                         };
                     }
                     if (
@@ -261,7 +269,7 @@ for (let mapType in DB.POI) {
                         !o.Outer.includes('PlayerStart') &&
                         !o.Outer.includes('Spline') &&
                         !o.Outer.includes('Fld') &&
-                        !o.Outer.includes('exq003') &&
+                        !o.Outer.includes('exq') &&
                         !o.Outer.includes('Tutorial') &&
                         !o.Outer.includes('Sit') &&
                         !o.Outer.includes('Return') &&
@@ -271,7 +279,6 @@ for (let mapType in DB.POI) {
                         !o.Outer.includes('Water') &&
                         !o.Outer.includes('FallDead') &&
                         !o.Outer.includes('Train') &&
-                        !o.Outer.includes('Raid') &&
                         !o.Outer.includes('MQ') &&
                         !o.Outer.includes('Spline')
                     ) {
@@ -281,9 +288,17 @@ for (let mapType in DB.POI) {
                             type: poiToType(o.Outer),
                             selector: poiToSelector(o.Outer),
                         };
+                        if (o.Outer.includes('Raid')) {
+                            DB.POI[map].temp[o.Outer].title =
+                                raidNames[o.Outer] || 'Raid Gate';
+                        }
+                        if (!DB.POI[map].temp[o.Outer].selector)
+                            delete DB.POI[map].temp[o.Outer];
                     }
                 }
-            } catch (err) {}
+            } catch (err) {
+                err.errno !== -4058 && console.log(err);
+            }
             for (let row in DB.POI[map].temp) {
                 DB.POI[map].dat.push({ ...DB.POI[map].temp[row] });
             }
@@ -365,6 +380,7 @@ function poiToType(name) {
         buff: null,
         travel: null,
         dungeon: null,
+        raid: null,
         nappo: null,
     };
     for (let m in mapping) if (name.includes(m)) return mapping[m] || m;
@@ -385,6 +401,7 @@ function poiToSelector(name) {
         treasure: 'Treasure Box',
         buff: 'Buff',
         dungeon: 'Dungeon',
+        raid: 'Raid',
         travel: 'Travel Point',
         nappo: 'Nappo',
     };
