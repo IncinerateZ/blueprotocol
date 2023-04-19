@@ -54,6 +54,14 @@ export default function MapControlLayer({
                     selectorsSource={selectorsSource}
                     setSelectorsSource={setSelectorsSource}
                 />
+                <div
+                    style={{ fontSize: '0.8rem', cursor: 'pointer' }}
+                    onClick={() => {
+                        window.location = './contact';
+                    }}
+                >
+                    Contact
+                </div>
             </div>
             <div className={styles.MCL_chevron}>
                 <div
