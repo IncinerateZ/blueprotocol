@@ -7,7 +7,7 @@ import { useState } from 'react';
 import styles from '@/styles/Map.module.css';
 import LangPicker from './LangPicker';
 import MapPicker from './MapPicker';
-import SelectorsSection from '../Selectors/SelectorsSection';
+import SelectorsSection from './Selectors/SelectorsSection';
 
 export default function MapControlLayer({
     data,
