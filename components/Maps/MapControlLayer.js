@@ -65,19 +65,12 @@ export default function MapControlLayer({
                 let d = levenshtein(k.toLowerCase(), q);
                 if (d <= 5)
                     for (let t of maps[k]) {
-                        if (
-                            res[
-                                lang === 'ja_JP'
-                                    ? DB.LocationNames[lang][data[t].map_id]
-                                    : data[t].display_name
-                            ] >= 0
-                        )
-                            continue;
-                        res[
+                        let name =
                             lang === 'ja_JP'
                                 ? DB.LocationNames[lang][data[t].map_id]
-                                : data[t].display_name
-                        ] = 100 + d;
+                                : data[t].display_name;
+                        if (res[name] >= 0) continue;
+                        res[name] = 100 + d;
                     }
             }
         }
