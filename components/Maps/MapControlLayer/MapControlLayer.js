@@ -7,7 +7,7 @@ import { useState } from 'react';
 import styles from '@/styles/Map.module.css';
 import LangPicker from './LangPicker';
 import MapPicker from './MapPicker';
-import SelectorsSection from '../Selectors/SelectorsSection';
+import SelectorsSection from './Selectors/SelectorsSection';
 
 export default function MapControlLayer({
     data,
@@ -54,6 +54,14 @@ export default function MapControlLayer({
                     selectorsSource={selectorsSource}
                     setSelectorsSource={setSelectorsSource}
                 />
+                <div
+                    style={{ fontSize: '0.8rem', cursor: 'pointer' }}
+                    onClick={() => {
+                        window.location = './contact';
+                    }}
+                >
+                    Contact
+                </div>
             </div>
             <div className={styles.MCL_chevron}>
                 <div
