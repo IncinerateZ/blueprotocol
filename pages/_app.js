@@ -1,8 +1,8 @@
 import Script from 'next/script';
-import '../styles/globals.css';
+import '@/styles/globals.css';
 import Head from 'next/head';
 
-import icon from '../public/favicon-32x32.png';
+import icon from '@/public/favicon-32x32.png';
 
 function MyApp({ Component, pageProps }) {
     return (
