@@ -3,7 +3,7 @@ import Head from 'next/head';
 import { useEffect, useState } from 'react';
 
 export default function Map() {
-    const Map = dynamic(() => import('../components/Maps/AsterleedsMap'), {
+    const Map = dynamic(() => import('@/components/Maps/AsterleedsMap'), {
         loading: () => (
             <div
                 style={{

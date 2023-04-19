@@ -1,5 +1,5 @@
 /* eslint-disable @next/next/no-img-element */
-import styles from '../../../styles/Map.module.css';
+import styles from '@/styles/Map.module.css';
 
 export default function Selector({
     e,

@@ -1,4 +1,4 @@
-import styles from '../styles/Map.module.css';
+import styles from '@/styles/Map.module.css';
 
 function coordTranslate(x, y, cfg) {
     return {

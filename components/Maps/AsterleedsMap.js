@@ -12,15 +12,15 @@ import 'leaflet/dist/leaflet.css';
 import 'leaflet-defaulticon-compatibility';
 import 'leaflet-defaulticon-compatibility/dist/leaflet-defaulticon-compatibility.css';
 
-import styles from '../../styles/Map.module.css';
-import MapControlLayer from './MapControlLayer';
+import styles from '@/styles/Map.module.css';
+import MapControlLayer from './MapControlLayer/MapControlLayer';
 import Head from 'next/head';
 import { coordTranslate, entitySummary } from '../utils';
 import { useRouter } from 'next/router';
 
 export default function Map() {
     const { asPath, push } = useRouter();
-    const data = require('./Markers').default;
+    const data = require('./data/Markers').default;
     const mapRef = useRef();
     const imgOvRef = useRef();
 
@@ -121,7 +121,7 @@ export default function Map() {
             if (Object.keys(markers).length === 0 || loadFlag) return;
             setLoadFlag(true);
 
-            let pts = require('./warppoints.json');
+            let pts = require('./data/warppoints.json');
             let a = [];
 
             let _selectors = {};
@@ -243,7 +243,7 @@ export default function Map() {
     useEffect(() => {
         let d = {};
 
-        let DB_ = require('./DB.json');
+        let DB_ = require('./data/DB.json');
 
         //load map names and tags
         for (let k in data) {
@@ -293,7 +293,7 @@ export default function Map() {
             });
 
         //load map config
-        let _cfg = require('./DT_MapBGConfig.json')[0].Rows;
+        let _cfg = require('./data/DT_MapBGConfig.json')[0].Rows;
         let cfg = {};
 
         for (let mapId in _cfg) {

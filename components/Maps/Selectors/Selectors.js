@@ -1,5 +1,5 @@
-import styles from '../../../styles/Map.module.css';
-import ChevronLightWhite from '../../../public/map/chevron-left-light-white.svg';
+import styles from '@/styles/Map.module.css';
+import ChevronLightWhite from '@/public/map/chevron-left-light-white.svg';
 
 import Image from 'next/image';
 
