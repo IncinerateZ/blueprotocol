@@ -31,10 +31,6 @@ export default function Map() {
     const [mapLoaded, setMapLoaded] = useState(false);
 
     const [maps, setMaps] = useState({});
-    const [mapSearch, setMapSearch] = useState('');
-    const [ssHighlight, setSSHighlight] = useState(0);
-    const [searchSuggestions, setSearchSuggestions] = useState([]);
-    const [doSearch, setDoSearch] = useState(false);
 
     const [loadFlag, setLoadFlag] = useState(false);
 
@@ -103,23 +99,9 @@ export default function Map() {
         return null;
     };
 
-    function resetSearch() {
-        if (chosenMap === '') return;
-        setMapSearch(
-            lang === 'ja_JP' && DB
-                ? DB.LocationNames[lang][data[chosenMap].map_id]
-                : data[chosenMap].display_name,
-        );
-        setSSHighlight(0);
-        setSearchSuggestions([]);
-        setDoSearch(false);
-    }
-
     useEffect(() => {
         if (chosenMap === '') return;
 
-        resetSearch();
-        setDoSearch(false);
         setLoadFlag(false);
         setMapLoading(true);
         setMarkers(data[chosenMap]?.markers);
@@ -376,17 +358,8 @@ export default function Map() {
             <MapControlLayer
                 data={data}
                 maps={maps}
-                mapSearch={mapSearch}
-                searchSuggestions={searchSuggestions}
-                setSearchSuggestions={setSearchSuggestions}
-                ssHighlight={ssHighlight}
-                setSSHighlight={setSSHighlight}
                 chosenMap={chosenMap}
                 setChosenMap={setChosenMap}
-                setMapSearch={setMapSearch}
-                resetSearch={resetSearch}
-                doSearch={doSearch}
-                setDoSearch={setDoSearch}
                 lang={lang}
                 setLang={setLang}
                 DB={DB}

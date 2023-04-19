@@ -10,20 +10,28 @@ export default function MapPicker({
     DB,
     data,
     maps,
-    doSearch,
-    setDoSearch,
-    mapSearch,
-    setMapSearch,
-    ssHighlight,
-    setSSHighlight,
-    searchSuggestions,
-    setSearchSuggestions,
     chosenMap,
     setChosenMap,
-    resetSearch,
     lang,
 }) {
+    const [mapSearch, setMapSearch] = useState('');
+    const [ssHighlight, setSSHighlight] = useState(0);
+    const [searchSuggestions, setSearchSuggestions] = useState([]);
+    const [doSearch, setDoSearch] = useState(false);
+
     const searchRef = useRef();
+
+    function resetSearch() {
+        if (chosenMap === '') return;
+        setMapSearch(
+            lang === 'ja_JP' && DB
+                ? DB.LocationNames[lang][data[chosenMap].map_id]
+                : data[chosenMap].display_name,
+        );
+        setSSHighlight(0);
+        setSearchSuggestions([]);
+        setDoSearch(false);
+    }
 
     function handleMapSearch(e) {
         let q = e?.target?.value;

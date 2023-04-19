@@ -13,17 +13,8 @@ import MapPicker from './MapPicker';
 export default function MapControlLayer({
     data,
     maps,
-    mapSearch,
-    ssHighlight,
-    setSSHighlight,
-    searchSuggestions,
-    setSearchSuggestions,
     chosenMap,
     setChosenMap,
-    setMapSearch,
-    resetSearch,
-    doSearch,
-    setDoSearch,
     lang,
     setLang,
     DB,
@@ -49,19 +40,10 @@ export default function MapControlLayer({
                 <MapPicker
                     DB={DB}
                     data={data}
-                    doSearch={doSearch}
-                    mapSearch={mapSearch}
-                    setMapSearch={setMapSearch}
-                    ssHighlight={ssHighlight}
-                    setSSHighlight={setSSHighlight}
-                    searchSuggestions={searchSuggestions}
-                    setSearchSuggestions={setSearchSuggestions}
                     chosenMap={chosenMap}
                     setChosenMap={setChosenMap}
-                    resetSearch={resetSearch}
                     lang={lang}
                     maps={maps}
-                    setDoSearch={setDoSearch}
                 />
                 <div
                     style={{ marginTop: '16px', height: '100%' }}
