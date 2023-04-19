@@ -90,6 +90,7 @@ export default function MapPicker({
             resetSearch();
         }
     }
+
     return (
         <>
             <span style={{ marginTop: '4px' }}>

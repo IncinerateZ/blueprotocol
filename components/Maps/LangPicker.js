@@ -1,6 +1,6 @@
 import ChevronLeftDark from '../../public/map/chevron-left-black.svg';
 
-import { useRef, useState } from 'react';
+import { useState } from 'react';
 
 import styles from '../../styles/Map.module.css';
 import Image from 'next/image';
