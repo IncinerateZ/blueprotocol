@@ -281,9 +281,11 @@ for (let mapType in DB.POI) {
                         DB.POI[map].temp[o.Name] = {
                             ...DB.POI[map].temp[o.Name],
                             title:
-                                o.Properties.TravelFieldMapName?.split(
-                                    '_',
-                                )[0] || o.Properties.DungeonID,
+                                (DB.LocationNames.ja_JP[
+                                    o.Properties.TravelFieldGameContentId
+                                ] &&
+                                    o.Properties.TravelFieldGameContentId) ||
+                                o.Properties.DungeonID,
                         };
                     }
                     if (
