@@ -1,4 +1,4 @@
-//2023-04-18
+//2023-04-20
 
 const fs = require('fs');
 
@@ -16,9 +16,8 @@ const DB = {
 };
 
 const CQST = {};
-
-let readStart = false;
-let readCount = 0;
+let t = require(`./apiext/masterchallengequest.json`);
+for (let quest of t) CQST[quest.quest_id] = quest;
 
 const raidNames = {};
 for (let raid of require('./apiext/master_raid_settings.json')) {
@@ -27,70 +26,97 @@ for (let raid of require('./apiext/master_raid_settings.json')) {
     }
 }
 
-//startup
+for (let loc in DB.Loc) {
+    text = require(`./apiext/texts/${loc}.json`);
+    if (loc !== 'ja_JP') DB.Loc[loc] = { ...DB.Loc.ja_JP };
+
+    for (let cat of text) {
+        if (!['enemyparam_text', 'item_text'].includes(cat.name)) continue;
+        DB.Loc[loc][cat.name] = {
+            ...DB.Loc[loc][cat.name],
+            name: cat.name,
+            texts: DB.Loc[loc][cat.name]?.texts
+                ? { ...DB.Loc[loc][cat.name].texts }
+                : {},
+        };
+
+        for (let o of cat.texts) {
+            if (loc === 'en_US' && o.id === 793) console.log('hi');
+            DB.Loc[loc][cat.name].texts[o.id] = { ...o };
+        }
+    }
+}
+
+for (let enemy of require('./apiext/enemyparams.json'))
+    DB.Enemies[enemy.enemy_id] = enemy;
+
+for (let item of require('./apiext/items.json'))
+    DB.Items[item.id] = { ...item };
+
+for (let treasure of require('./apiext/treasures.json'))
+    DB.Treasures[treasure.id] = { ...treasure };
+
+for (let location of require('./Text/LocationName.json')[0].Properties
+    .TextTable)
+    DB.LocationNames.ja_JP[location.Id.IdString] = location.Text;
+
+DB.LocationNames.en_US = { ...require('./LocationNames_EN.json') };
+
 for (let mapType in DB.EnemySets) {
     let t = require(`./Blueprints/Manager/EnemySet/EnemySet_${mapType}.json`)[0]
         .Properties.EnemySets;
     for (let set of t) DB.EnemySets[mapType][set.EnemySetId] = set;
 
-    t = require(`./apiext/masterchallengequest.json`);
-    for (let quest of t) CQST[quest.quest_id] = quest;
-
     let baseMapDir = `./Maps/${MapTypeMapping[mapType]}`;
     for (let map of fs.readdirSync(baseMapDir)) {
         for (let cardinal of ['C_', 'N_', 'E_', 'S_', 'W_', '']) {
-            readCount++;
-            fs.readFile(
-                `${baseMapDir}/${map}/sublevel/${map.replace(
-                    'dng',
-                    'pub',
-                )}_${cardinal}EN.json`,
-                'utf8',
-                (err, data) => {
-                    if (err) return readCount--;
-                    data = JSON.parse(data);
-                    for (let entry of data)
-                        if (entry.Type === 'SBEnemyHabitat') {
-                            if (!DB.EnemyHabitats[map])
-                                DB.EnemyHabitats[map] = {};
-                            DB.EnemyHabitats[map][entry.Name] = {
-                                ...DB.EnemyHabitats[map][entry.Name],
-                                Enemies: [...entry.Properties.Enemies],
-                                ...entry.Properties.Density,
-                                ...entry.Properties.RespawnTime,
-                                type: 'enemy',
-                            };
-                        } else if (entry.Type === 'BrushComponent') {
-                            if (!DB.EnemyHabitats[map])
-                                DB.EnemyHabitats[map] = {};
-                            DB.EnemyHabitats[map][entry.Outer] = {
-                                ...DB.EnemyHabitats[map][entry.Outer],
-                                ...entry.Properties.RelativeLocation,
-                            };
-                        } else if (entry.Type === 'SceneComponent') {
-                            if (!DB.EnemyHabitats[map])
-                                DB.EnemyHabitats[map] = {};
-                            if (!CQST[entry.Outer])
-                                delete DB.EnemyHabitats[map][entry.Outer];
-                            else
-                                DB.EnemyHabitats[map][entry.Outer] = {
-                                    ...DB.EnemyHabitats[map][entry.Outer],
-                                    ...entry.Properties.RelativeLocation,
-                                    Enemies: [
-                                        {
-                                            EnemySetId:
-                                                CQST[entry.Outer]
-                                                    ?.event_param_1_1,
-                                        },
-                                    ],
-                                    type: 'elite',
-                                };
+            try {
+                const data = JSON.parse(
+                    fs.readFileSync(
+                        `${baseMapDir}/${map}/sublevel/${map.replace(
+                            'dng',
+                            'pub',
+                        )}_${cardinal}EN.json`,
+                        'utf8',
+                    ),
+                );
+
+                if (!DB.EnemyHabitats[map]) DB.EnemyHabitats[map] = {};
+
+                for (let entry of data) {
+                    if (
+                        (entry.Type === 'SceneComponent' &&
+                            CQST[entry.Outer]) ||
+                        entry.Type === 'BrushComponent'
+                    ) {
+                        DB.EnemyHabitats[map][entry.Outer] = {
+                            ...DB.EnemyHabitats[map][entry.Outer],
+                            ...entry.Properties.RelativeLocation,
+                        };
+
+                        if (CQST[entry.Outer]) {
+                            DB.EnemyHabitats[map][entry.Outer].Enemies = [
+                                {
+                                    EnemySetId:
+                                        CQST[entry.Outer]?.event_param_1_1,
+                                },
+                            ];
+                            DB.EnemyHabitats[map][entry.Outer].type = 'elite';
                         }
-                    setTimeout(() => {
-                        readCount--;
-                    }, 0);
-                },
-            );
+                    }
+                    if (entry.Type === 'SBEnemyHabitat') {
+                        DB.EnemyHabitats[map][entry.Name] = {
+                            ...DB.EnemyHabitats[map][entry.Name],
+                            Enemies: [...entry.Properties.Enemies],
+                            ...entry.Properties.Density,
+                            ...entry.Properties.RespawnTime,
+                            type: 'enemy',
+                        };
+                    }
+                }
+            } catch (exception) {
+                exception.errno !== -4058 && console.log(exception);
+            }
         }
     }
 }
@@ -255,8 +281,9 @@ for (let mapType in DB.POI) {
                         DB.POI[map].temp[o.Name] = {
                             ...DB.POI[map].temp[o.Name],
                             title:
-                                o.Properties.DungeonID ||
-                                o.Properties.TravelFieldMapName?.split('_')[0],
+                                o.Properties.TravelFieldMapName?.split(
+                                    '_',
+                                )[0] || o.Properties.DungeonID,
                         };
                     }
                     if (
@@ -308,64 +335,6 @@ for (let mapType in DB.POI) {
     }
 }
 
-for (let loc in DB.Loc) {
-    readCount++;
-    text = require(`./apiext/texts/${loc}.json`);
-    if (loc !== 'ja_JP') DB.Loc[loc] = { ...DB.Loc.ja_JP };
-
-    for (let cat of text) {
-        if (!['enemyparam_text', 'item_text'].includes(cat.name)) continue;
-        DB.Loc[loc][cat.name] = {
-            ...DB.Loc[loc][cat.name],
-            name: cat.name,
-            texts: DB.Loc[loc][cat.name]?.texts
-                ? { ...DB.Loc[loc][cat.name].texts }
-                : {},
-        };
-
-        for (let o of cat.texts) {
-            if (loc === 'en_US' && o.id === 793) console.log('hi');
-            DB.Loc[loc][cat.name].texts[o.id] = { ...o };
-        }
-    }
-    readCount--;
-}
-
-for (let enemy of require('./apiext/enemyparams.json'))
-    DB.Enemies[enemy.enemy_id] = enemy;
-
-for (let item of require('./apiext/items.json'))
-    DB.Items[item.id] = { ...item };
-
-for (let treasure of require('./apiext/treasures.json'))
-    DB.Treasures[treasure.id] = { ...treasure };
-
-for (let location of require('./Text/LocationName.json')[0].Properties
-    .TextTable)
-    DB.LocationNames.ja_JP[location.Id.IdString] = location.Text;
-
-DB.LocationNames.en_US = { ...require('./LocationNames_EN.json') };
-
-readStart = true;
-
-function save(dir, condense = false) {
-    if (condense)
-        fs.writeFile(
-            dir + `/DB.json`,
-            JSON.stringify(DB, null, 4),
-            'utf8',
-            () => {},
-        );
-    else
-        for (let d in DB)
-            fs.writeFile(
-                dir + `/${d}.json`,
-                JSON.stringify(DB[d], null, 4),
-                'utf8',
-                () => {},
-            );
-}
-
 function poiToType(name) {
     name = name.toLowerCase();
     let mapping = {
@@ -410,35 +379,49 @@ function poiToSelector(name) {
     return '';
 }
 
-let interval = setInterval(() => {
-    if (readStart && readCount === 0) {
-        clearInterval(interval);
-        for (let map in DB.POI) {
-            if (!DB.POI[map].dat || DB.POI[map].dat.length === 0) {
-                delete DB.POI[map];
-                continue;
-            }
-            for (let row = 0; row < DB.POI[map].dat.length; row++)
-                if (
-                    !DB.POI[map].dat[row].X ||
-                    (!['warp', 'campfire', 'fishing'].includes(
-                        DB.POI[map].dat[row].type,
-                    ) &&
-                        !DB.POI[map].dat[row].title)
-                )
-                    DB.POI[map].dat[row] = {};
-            let i = 0;
-            let last = DB.POI[map].dat.length;
-            while (i < last) {
-                if (Object.keys(DB.POI[map].dat[i]).length !== 0) i++;
-                else {
-                    DB.POI[map].dat.splice(i, 1);
-                    last--;
-                }
-            }
-            console.log(map);
-        }
-        save(`.`);
-        save(`E:/Main Data/Project Files/next/bp/components/Maps`, true);
+for (let map in DB.POI) {
+    if (!DB.POI[map].dat || DB.POI[map].dat.length === 0) {
+        delete DB.POI[map];
+        continue;
     }
-}, 0);
+    for (let row = 0; row < DB.POI[map].dat.length; row++)
+        if (
+            !DB.POI[map].dat[row].X ||
+            (!['warp', 'campfire', 'fishing'].includes(
+                DB.POI[map].dat[row].type,
+            ) &&
+                !DB.POI[map].dat[row].title)
+        )
+            DB.POI[map].dat[row] = {};
+    let i = 0;
+    let last = DB.POI[map].dat.length;
+    while (i < last) {
+        if (Object.keys(DB.POI[map].dat[i]).length !== 0) i++;
+        else {
+            DB.POI[map].dat.splice(i, 1);
+            last--;
+        }
+    }
+    console.log(map);
+}
+
+save(`./_out`);
+save(`E:/Main Data/Project Files/next/bp/components/Maps/data`, true);
+
+function save(dir, condense = false) {
+    if (condense)
+        fs.writeFileSync(
+            dir + `/DB.json`,
+            JSON.stringify(DB),
+            'utf8',
+            () => {},
+        );
+    else
+        for (let d in DB)
+            fs.writeFileSync(
+                dir + `/${d}.json`,
+                JSON.stringify(DB[d]),
+                'utf8',
+                () => {},
+            );
+}
