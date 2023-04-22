@@ -76,15 +76,15 @@ const data = {
             new: { display_name: 'New Marker', arr: [] },
         },
     },
-    '007': {
-        display_name: '007',
-        map_url: './UI_Mapdng007.png',
-        tags: ['suzuki', 'city'],
-        map_id: 'dng007',
-        markers: {
-            new: { display_name: 'New Marker', arr: [] },
-        },
-    },
+    // '007': {
+    //     display_name: '007',
+    //     map_url: './UI_Mapdng007.png',
+    //     tags: ['suzuki', 'city'],
+    //     map_id: 'dng007',
+    //     markers: {
+    //         new: { display_name: 'New Marker', arr: [] },
+    //     },
+    // },
 };
 
 export default data;
