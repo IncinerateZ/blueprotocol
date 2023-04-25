@@ -43,6 +43,10 @@ export default function Map() {
     const [DB, setDB] = useState(null);
     const [lang, setLang] = useState('ja_JP');
 
+    const [showLeak, setShowLeak] = useState(
+        localStorage.getItem('Map_showLeak') === 'true',
+    );
+
     const [selectors, setSelectors] = useState({});
     const [excludedSelectors, setExcludedSelectors] = useState(
         JSON.parse(localStorage.getItem('Map_excludedSelectors')) || {},
@@ -370,6 +374,8 @@ export default function Map() {
                 setExcludedSelectors={setExcludedSelectors}
                 selectorsSource={selectorsSource}
                 setSelectorsSource={setSelectorsSource}
+                showLeak={showLeak}
+                setShowLeak={setShowLeak}
             />
             <MapContainer
                 center={[540, 960]}
@@ -420,7 +426,7 @@ export default function Map() {
                         {mapIcons &&
                             Object.keys(markers).map((e) =>
                                 markers[e].arr.map((v, i) => (
-                                    <>
+                                    <div key={i}>
                                         {(v.selectors || []).reduce(
                                             (s, c) =>
                                                 s + (excludedSelectors[c] || 0),
@@ -429,7 +435,6 @@ export default function Map() {
                                             mapIcons[v.type] && (
                                                 <Marker
                                                     position={[v.lat, v.lng]}
-                                                    key={i}
                                                     icon={mapIcons[v.type]}
                                                 >
                                                     <Popup>
@@ -443,11 +448,12 @@ export default function Map() {
                                                                 },
                                                             },
                                                             lang,
+                                                            showLeak,
                                                         )}
                                                     </Popup>
                                                 </Marker>
                                             )}
-                                    </>
+                                    </div>
                                 )),
                             )}
                         <ClickHandler />

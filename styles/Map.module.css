@@ -267,3 +267,23 @@
 .selectors_toggle:hover {
     border-bottom: 1px solid lightblue;
 }
+
+.settings {
+    position: fixed;
+
+    transform: translate(50px, -100%);
+
+    background-color: var(--dark2);
+    padding: 0.5rem;
+
+    border-radius: 5px;
+}
+
+.settings h1 {
+    font-size: 0.8rem;
+    margin-top: 0;
+}
+
+.settings input {
+    transform: translateY(2.5px);
+}

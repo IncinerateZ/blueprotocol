@@ -76,7 +76,7 @@ function buildSummary(summaries) {
     );
 }
 
-function entitySummary(DB, entity, lang) {
+function entitySummary(DB, entity, lang, showLeak) {
     let res = [];
     if (['enemy', 'elite'].includes(entity.type)) {
         let enemies = DB.EnemySets.field[entity.idf];
@@ -102,8 +102,8 @@ function entitySummary(DB, entity, lang) {
 
                 page.desc.push(
                     `${DB.Loc[lang].item_text.texts[item.name].text} ${
-                        drop.drop_rate / 100
-                    }%`,
+                        showLeak ? `${drop.drop_rate / 100}%` : ''
+                    }`,
                 );
             }
             res.push(page);
@@ -135,11 +135,13 @@ function entitySummary(DB, entity, lang) {
 
                 if (treasure_)
                     page.desc.push(
-                        `${
-                            DB.Loc[lang].item_text.texts[treasure_.name].text
-                        } x${treasure.reward_amount_min}-${
-                            treasure.reward_amount_max
-                        } ${treasure.rate / 100}%`,
+                        `${DB.Loc[lang].item_text.texts[treasure_.name].text} ${
+                            showLeak
+                                ? `x${treasure.reward_amount_min}-${
+                                      treasure.reward_amount_max
+                                  } ${treasure.rate / 100}%`
+                                : ''
+                        }`,
                     );
                 else console.log(treasure);
 

@@ -1,6 +1,7 @@
 import Image from 'next/image';
 
 import ChevronLeft from '@/public/map/chevron-left.svg';
+import SettingIcon from '@/public/Setting.svg';
 
 import { useState } from 'react';
 
@@ -24,8 +25,11 @@ export default function MapControlLayer({
     setExcludedSelectors,
     selectorsSource,
     setSelectorsSource,
+    showLeak,
+    setShowLeak,
 }) {
     const [chevron, setChevron] = useState(true);
+    const [showSettings, setShowSettings] = useState(false);
 
     return (
         <div
@@ -55,12 +59,48 @@ export default function MapControlLayer({
                     setSelectorsSource={setSelectorsSource}
                 />
                 <div
-                    style={{ fontSize: '0.8rem', cursor: 'pointer' }}
-                    onClick={() => {
-                        window.location = './contact';
+                    style={{
+                        fontSize: '0.8rem',
+                        display: 'flex',
+                        justifyContent: 'space-between',
                     }}
                 >
-                    Contact
+                    <span
+                        onClick={() => {
+                            window.location = './contact';
+                        }}
+                        style={{ cursor: 'pointer' }}
+                    >
+                        Contact
+                    </span>
+                    <div style={{ cursor: 'pointer' }}>
+                        <Image
+                            src={SettingIcon}
+                            width={20}
+                            height={20}
+                            onClick={() => setShowSettings(!showSettings)}
+                            alt={'settings'}
+                        ></Image>
+                        {showSettings && (
+                            <div className={styles.settings}>
+                                <h1>Settings</h1>
+                                <div>
+                                    <span>Display detailed info?</span>
+                                    <input
+                                        type='checkbox'
+                                        checked={showLeak}
+                                        onChange={() => {
+                                            setShowLeak(!showLeak);
+                                            localStorage.setItem(
+                                                'Map_showLeak',
+                                                !showLeak,
+                                            );
+                                        }}
+                                    ></input>
+                                </div>
+                            </div>
+                        )}
+                    </div>
                 </div>
             </div>
             <div className={styles.MCL_chevron}>
