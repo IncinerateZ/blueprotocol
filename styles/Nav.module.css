@@ -1,0 +1,39 @@
+.Nav {
+    width: 50px;
+    height: 100vh;
+
+    background-color: var(--dark2);
+
+    cursor: pointer;
+
+    transition: 0.1s;
+
+    overflow-x: hidden;
+}
+
+.Nav:hover {
+    width: 250px;
+}
+
+.Nav ul li{
+    list-style-type: none;
+    height: 30px;
+
+    overflow: hidden;
+}
+
+.Nav ul {
+    margin-top: 0;
+    padding-left: 0.3rem;
+
+    height: 30px;
+
+    overflow: hidden;
+}
+
+.NavItem p {
+    margin: 0;
+    line-height: 35px;
+
+    transform: translateX(1rem);
+}
