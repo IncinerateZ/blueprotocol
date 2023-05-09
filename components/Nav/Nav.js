@@ -8,20 +8,39 @@ import Image from 'next/image';
 export default function Nav() {
     return (
         <nav className={styles.Nav}>
-            <div>
+            <div
+                style={{
+                    display: 'flex',
+                    width: '250px',
+                    marginTop: '0.5rem',
+                    marginLeft: '0.2rem',
+                }}
+            >
                 <Image src={Logo} width={45} height={45}></Image>
+                <div
+                    style={{
+                        marginTop: '0.25rem',
+                        marginLeft: '0.5rem',
+                        overflow: 'hidden',
+                        fontSize: '1.5rem',
+                        height: '4rem',
+                        fontWeight: 'bold',
+                        lineHeight: '1.2rem',
+                    }}
+                >
+                    Blue Protocol Resource
+                </div>
             </div>
-            <ul>
+            <ul style={{ marginLeft: '0.1crem' }}>
                 <li className={styles.NavItem}>
                     <Link
                         href='/map'
                         style={{
                             display: 'flex',
-                            alignitems: 'center',
                         }}
                     >
                         <Image src={CommandMap} width={35} height={35}></Image>
-                        <p>World Map</p>
+                        <p title='World Map'>World Map</p>
                     </Link>
                 </li>
             </ul>
