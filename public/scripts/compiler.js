@@ -1,4 +1,4 @@
-//2023-04-20
+//2023-05-09
 
 const fs = require('fs');
 
@@ -408,17 +408,40 @@ for (let map in DB.POI) {
 }
 
 save(`./_out`);
-save(`E:/Main Data/Project Files/next/bp/components/Maps/data`, true);
+save(`E:/Main Files/Projects/next/bp/components/Maps/data`, true);
 
 function save(dir, condense = false) {
-    if (condense)
+    if (condense) {
         fs.writeFileSync(
             dir + `/DB.json`,
             JSON.stringify(DB),
             'utf8',
             () => {},
         );
-    else
+
+        fs.writeFileSync(
+            dir + '/../../Board/data/board.json',
+            JSON.stringify(require('./apiext/master_adventure_board.json')),
+            'utf8',
+            () => {},
+        );
+        fs.writeFileSync(
+            dir + '/../../Board/data/panels.json',
+            JSON.stringify(
+                require('./apiext/master_adventure_board_panel.json'),
+            ),
+            'utf8',
+            () => {},
+        );
+        fs.writeFileSync(
+            dir + '/../../Board/data/quests.json',
+            JSON.stringify(
+                require('./apiext/master_adventure_board_quest.json'),
+            ),
+            'utf8',
+            () => {},
+        );
+    } else {
         for (let d in DB)
             fs.writeFileSync(
                 dir + `/${d}.json`,
@@ -426,4 +449,5 @@ function save(dir, condense = false) {
                 'utf8',
                 () => {},
             );
+    }
 }
