@@ -2,6 +2,7 @@ import Image from 'next/image';
 
 import ChevronLeft from '@/public/map/chevron-left.svg';
 import SettingIcon from '@/public/Setting.svg';
+import CommandQuest from '@/public/CommandQuest.png';
 
 import { useState } from 'react';
 
@@ -9,6 +10,7 @@ import styles from '@/styles/Map.module.css';
 import LangPicker from './LangPicker';
 import MapPicker from './MapPicker';
 import SelectorsSection from './Selectors/SelectorsSection';
+import Link from 'next/link';
 
 export default function MapControlLayer({
     data,
@@ -38,7 +40,21 @@ export default function MapControlLayer({
             }`}
         >
             <div className={styles.MCL_content}>
-                <LangPicker DB={DB} lang={lang} setLang={setLang} />
+                <div
+                    style={{ display: 'flex', justifyContent: 'space-between' }}
+                >
+                    <LangPicker DB={DB} lang={lang} setLang={setLang} />
+                    <Link href='/board' className={styles.tooltipParent}>
+                        <Image
+                            src={CommandQuest}
+                            width={35}
+                            height={35}
+                            style={{ cursor: 'pointer' }}
+                        ></Image>
+                        <div className={styles.tooltip}>Adventure Board</div>
+                    </Link>
+                </div>
+
                 <MapPicker
                     DB={DB}
                     data={data}
