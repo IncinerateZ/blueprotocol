@@ -81,11 +81,19 @@ export default function Board() {
                                                           e.id
                                                       ]?.substring(1)
                                                   }`
+                                                : DB.Sources[e.id].charAt(0) ===
+                                                  'D'
+                                                ? `Clearing ${DB.Sources[
+                                                      e.id
+                                                  ].substring(1)}`
                                                 : `Treasure Box ${DB.Sources[
                                                       e.id
                                                   ]?.substring(1)}`
                                             : 'Adventure Rankup'}
                                     </p>
+                                    <div className={styles.questId}>
+                                        <span>ID {e.id}</span>
+                                    </div>
                                 </div>
                             ))}
                     </div>
