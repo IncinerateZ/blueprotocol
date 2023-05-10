@@ -10,6 +10,7 @@ function coordTranslate(x, y, cfg) {
 function buildSummary(summaries) {
     if (Object.keys(summaries).length === 0)
         return <div style={{ textAlign: 'center' }}>No Data</div>;
+    let id = typeof summaries[0] === 'string' ? summaries.shift() : null;
     return (
         <div
             style={{
@@ -27,6 +28,11 @@ function buildSummary(summaries) {
                 }}
                 className={styles.Popup}
             >
+                {id && (
+                    <span style={{ color: '#5e5e5e', fontSize: '0.75rem' }}>
+                        ID: {id}
+                    </span>
+                )}
                 {summaries.map((summary, idx) => (
                     <div
                         style={{
@@ -51,6 +57,16 @@ function buildSummary(summaries) {
                         >
                             <b>{summary.name}</b>
                         </span>
+                        {summary.id && (
+                            <span
+                                style={{
+                                    color: '#5e5e5e',
+                                    fontSize: '0.75rem',
+                                }}
+                            >
+                                ID: {summary.id}
+                            </span>
+                        )}
                         {summary.desc &&
                             summary.desc.map((r) => (
                                 <span
@@ -80,6 +96,7 @@ function entitySummary(DB, entity, lang, showLeak) {
     let res = [];
     if (['enemy', 'elite'].includes(entity.type)) {
         let enemies = DB.EnemySets.field[entity.idf];
+        res.push(entity.idf);
         for (let enemy of enemies?.Members || []) {
             let page = { ...entity.metadata };
             let enemy_ = DB.Enemies[enemy.EnemyId];
@@ -127,11 +144,13 @@ function entitySummary(DB, entity, lang, showLeak) {
 
                 page.desc = [];
 
-                if (i++ === 1)
+                if (i++ === 1) {
+                    page.id = entity.metadata.title;
                     page.name = `Gathering: ${
                         entity.type.charAt(0).toUpperCase() +
                         entity.type.substring(1)
                     }`;
+                }
 
                 if (treasure_)
                     page.desc.push(
