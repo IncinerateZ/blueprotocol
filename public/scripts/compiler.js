@@ -415,7 +415,26 @@ const boards = {
     panels: require('./apiext/master_adventure_board_panel.json'),
     quests: require('./apiext/master_adventure_board_quest.json'),
     Loc: { ja_JP: {}, en_US: {} },
+    Sources: {},
+    srcQuests: {},
 };
+
+const srcQuests = require('./apiext/quests.json');
+let srcQ = {};
+
+for (let q of srcQuests) srcQ[q.long_id] = { name: q.name, desc: q.desc };
+
+for (let source of require('./apiext/rewards.json'))
+    if (source.reward_type === 28) {
+        let id = ('' + source.id).substring(0, '' + source.id.lastIndexOf('_'));
+        boards.Sources[source.item_id] = 'Q' + id;
+        boards.srcQuests[id] = srcQ[id];
+    }
+
+for (let source of require('./apiext/treasures.json'))
+    for (let treasure of source.lot_rate)
+        if (treasure.reward_type === 28)
+            boards.Sources[treasure.reward_master_id] = 'T' + source.id;
 
 for (let loc in boards.Loc) {
     text = require(`./apiext/texts/${loc}.json`);
@@ -426,6 +445,12 @@ for (let loc in boards.Loc) {
             ![
                 'master_adventure_boards_text',
                 'master_adventure_board_quests_text',
+                'quest_main_chapter01_text',
+                'quest_main_chapter02_text',
+                'quest_main_chapter03_text',
+                'quest_sub_chapter01_text',
+                'quest_sub_chapter02_text',
+                'quest_sub_chapter03_text',
             ].includes(cat.name)
         )
             continue;
