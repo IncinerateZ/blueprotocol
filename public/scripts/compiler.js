@@ -427,7 +427,12 @@ for (let q of srcQuests) srcQ[q.long_id] = { name: q.name, desc: q.desc };
 for (let source of require('./apiext/rewards.json'))
     if (source.reward_type === 28) {
         let id = ('' + source.id).substring(0, '' + source.id.lastIndexOf('_'));
-        boards.Sources[source.item_id] = 'Q' + id;
+        boards.Sources[source.item_id] =
+            (id.charAt(0) === id.charAt(0).toLowerCase()
+                ? 'D'
+                : id.charAt(0) === 'A'
+                ? 'A'
+                : 'Q') + id;
         boards.srcQuests[id] = srcQ[id];
     }
 

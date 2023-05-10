@@ -82,6 +82,11 @@ export default function Board() {
                                                       ]?.substring(1)
                                                   }`
                                                 : DB.Sources[e.id].charAt(0) ===
+                                                  'A'
+                                                ? `Adventure Board ${DB.Sources[
+                                                      e.id
+                                                  ].substring(4)}`
+                                                : DB.Sources[e.id].charAt(0) ===
                                                   'D'
                                                 ? `Clearing ${DB.Sources[
                                                       e.id
