@@ -55,12 +55,15 @@ export default function Board() {
                                                 ? `Completing ${
                                                       DB.Loc[loc][
                                                           `quest_${
-                                                              DB.Sources[
-                                                                  e.id
-                                                              ].charAt(1) ===
-                                                              'M'
-                                                                  ? 'main'
-                                                                  : 'sub'
+                                                              {
+                                                                  M: 'main',
+                                                                  S: 'sub',
+                                                                  E: 'main',
+                                                              }[
+                                                                  DB.Sources[
+                                                                      e.id
+                                                                  ].charAt(1)
+                                                              ]
                                                           }_chapter${DB.Sources[
                                                               e.id
                                                           ].substring(
