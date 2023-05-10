@@ -31,7 +31,14 @@ for (let loc in DB.Loc) {
     if (loc !== 'ja_JP') DB.Loc[loc] = { ...DB.Loc.ja_JP };
 
     for (let cat of text) {
-        if (!['enemyparam_text', 'item_text'].includes(cat.name)) continue;
+        if (
+            ![
+                'enemyparam_text',
+                'item_text',
+                'master_adventure_boards_text',
+            ].includes(cat.name)
+        )
+            continue;
         DB.Loc[loc][cat.name] = {
             ...DB.Loc[loc][cat.name],
             name: cat.name,
@@ -407,6 +414,39 @@ for (let map in DB.POI) {
     console.log(map);
 }
 
+//boards
+const boards = {
+    boards: require('./apiext/master_adventure_board.json'),
+    panels: require('./apiext/master_adventure_board_panel.json'),
+    quests: require('./apiext/master_adventure_board_quest.json'),
+    Loc: { ja_JP: {}, en_US: {} },
+};
+
+for (let loc in boards.Loc) {
+    text = require(`./apiext/texts/${loc}.json`);
+    if (loc !== 'ja_JP') boards.Loc[loc] = { ...boards.Loc.ja_JP };
+
+    for (let cat of text) {
+        if (
+            ![
+                'master_adventure_boards_text',
+                'master_adventure_board_quests_text',
+            ].includes(cat.name)
+        )
+            continue;
+        boards.Loc[loc][cat.name] = {
+            ...boards.Loc[loc][cat.name],
+            name: cat.name,
+            texts: boards.Loc[loc][cat.name]?.texts
+                ? { ...boards.Loc[loc][cat.name].texts }
+                : {},
+        };
+
+        for (let o of cat.texts)
+            boards.Loc[loc][cat.name].texts[o.id] = { ...o };
+    }
+}
+
 save(`./_out`);
 save(`E:/Main Files/Projects/next/bp/components/Maps/data`, true);
 
@@ -420,24 +460,8 @@ function save(dir, condense = false) {
         );
 
         fs.writeFileSync(
-            dir + '/../../Board/data/board.json',
-            JSON.stringify(require('./apiext/master_adventure_board.json')),
-            'utf8',
-            () => {},
-        );
-        fs.writeFileSync(
-            dir + '/../../Board/data/panels.json',
-            JSON.stringify(
-                require('./apiext/master_adventure_board_panel.json'),
-            ),
-            'utf8',
-            () => {},
-        );
-        fs.writeFileSync(
-            dir + '/../../Board/data/quests.json',
-            JSON.stringify(
-                require('./apiext/master_adventure_board_quest.json'),
-            ),
+            dir + '/../../Board/data/DB.json',
+            JSON.stringify(boards),
             'utf8',
             () => {},
         );

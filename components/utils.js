@@ -152,9 +152,14 @@ function entitySummary(DB, entity, lang, showLeak) {
                     }`;
                 }
 
-                if (treasure_)
+                if (treasure_ || treasure.reward_type === 28)
                     page.desc.push(
-                        `${DB.Loc[lang].item_text.texts[treasure_.name].text} ${
+                        `${
+                            treasure_
+                                ? DB.Loc[lang].item_text.texts[treasure_.name]
+                                      .text
+                                : ''
+                        } ${
                             showLeak
                                 ? `x${treasure.reward_amount_min}-${
                                       treasure.reward_amount_max
@@ -162,7 +167,10 @@ function entitySummary(DB, entity, lang, showLeak) {
                                 : ''
                         }`,
                     );
-                else console.log(treasure);
+                else {
+                    console.log(entity.metadata.title);
+                    console.log(treasure);
+                }
 
                 res.push(page);
             }
