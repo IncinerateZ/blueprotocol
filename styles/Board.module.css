@@ -38,7 +38,7 @@
 .quest {
     border: 1px solid var(--light);
     width: 205px;
-    height: 250px;
+    height: 270px;
     border-radius: 5px;
     margin: 0.5rem;
     display: flex;
@@ -62,7 +62,7 @@
 .quest p {
     width: 90%;
     margin-top: 0.2rem;
-    font-size: 0.9rem;
+    font-size: 0.75rem;
 }
 
 .questId {
@@ -70,7 +70,9 @@
     display: flex;
     align-items: end;
     width: 90%;
-    color: var(--light)
+    color: var(--light);
+    margin-top: auto;
+    margin-bottom: 0.2rem;
 }
 
 .questThumbnail {
