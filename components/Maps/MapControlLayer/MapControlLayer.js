@@ -50,6 +50,7 @@ export default function MapControlLayer({
                             width={35}
                             height={35}
                             style={{ cursor: 'pointer' }}
+                            alt='CommandQuest'
                         ></Image>
                         <div className={styles.tooltip}>Adventure Board</div>
                     </Link>

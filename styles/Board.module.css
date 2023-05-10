@@ -16,11 +16,14 @@
     margin-left: 5rem;
 
     padding: 1rem;
-    padding-top: 0;
 
     border-radius: 5px;
 
     overflow-y: auto;
+}
+
+.content h1 {
+    margin-top: 0;
 }
 
 .quests {
@@ -31,8 +34,66 @@
 
 .quest {
     border: 1px solid var(--light);
-    width: 220px;
+    width: 205px;
     height: 300px;
     border-radius: 5px;
     margin: 0.5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    
+    cursor: pointer;
+}
+
+.quest:hover {
+    border: 1px solid var(--text-color);
+}
+
+.quest h5 {
+    margin-top: 0.5rem;
+    width: 90%;
+    text-align: start;
+}
+
+.questThumbnail {
+    margin-left: 0.5rem;
+    margin-right: 0.5rem;
+    margin-bottom: 0;
+}
+
+.questTitleContainer {
+    width: 90%;
+    height: 3rem;
+    border-bottom: 1px solid var(--light);
+    text-align: center;
+    display: flex;
+    align-items: center;
+}
+
+.questTitle {
+    width: 100%;
+    margin-bottom: 0;
+    margin-left: 0.5rem;
+    margin-right: 0.5rem;
+}
+
+.content::-webkit-scrollbar {
+    width: 15px;
+}
+  
+.content::-webkit-scrollbar-track {
+}
+
+.content::-webkit-scrollbar-thumb {
+    border: 5px solid transparent;
+    background-clip: padding-box;
+    border-radius: 99999px;
+    background-color: var(--dark2);
+}
+
+.content::-webkit-scrollbar-thumb:hover {
+    border: 5px solid transparent;
+    background-clip: padding-box;
+    border-radius: 99999px;
+    background-color: #5e5e5e;
 }

@@ -16,7 +16,7 @@ export default function Nav() {
                     marginLeft: '0.2rem',
                 }}
             >
-                <Image src={Logo} width={45} height={45}></Image>
+                <Image src={Logo} width={45} height={45} alt='Logo'></Image>
                 <div
                     style={{
                         marginTop: '0.25rem',
@@ -39,7 +39,12 @@ export default function Nav() {
                             display: 'flex',
                         }}
                     >
-                        <Image src={CommandMap} width={35} height={35}></Image>
+                        <Image
+                            src={CommandMap}
+                            width={35}
+                            height={35}
+                            alt='CommandMap'
+                        ></Image>
                         <p title='World Map'>World Map</p>
                     </Link>
                 </li>
