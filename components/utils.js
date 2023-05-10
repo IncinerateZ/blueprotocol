@@ -158,7 +158,10 @@ function entitySummary(DB, entity, lang, showLeak) {
                             treasure_
                                 ? DB.Loc[lang].item_text.texts[treasure_.name]
                                       .text
-                                : ''
+                                : DB.Loc[lang].master_adventure_boards_text
+                                      .texts[
+                                      DB.Boards[treasure.reward_master_id]
+                                  ].text
                         } ${
                             showLeak
                                 ? `x${treasure.reward_amount_min}-${

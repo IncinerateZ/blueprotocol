@@ -1,4 +1,4 @@
-//2023-05-09
+//2023-05-10
 
 const fs = require('fs');
 
@@ -13,18 +13,19 @@ const DB = {
     LocationNames: { en_US: {}, ja_JP: {} },
     POI: { cty: {}, fld: {}, dng: {} },
     Treasures: { fld: {}, dng: {} },
+    Boards: {},
 };
+
+for (let board of require('./apiext/master_adventure_board.json'))
+    DB.Boards[board.id] = board.name;
 
 const CQST = {};
 let t = require(`./apiext/masterchallengequest.json`);
 for (let quest of t) CQST[quest.quest_id] = quest;
 
 const raidNames = {};
-for (let raid of require('./apiext/master_raid_settings.json')) {
-    for (let gate of raid.entry_gate) {
-        raidNames[gate.name_text] = raid.map_id;
-    }
-}
+for (let raid of require('./apiext/master_raid_settings.json'))
+    for (let gate of raid.entry_gate) raidNames[gate.name_text] = raid.map_id;
 
 for (let loc in DB.Loc) {
     text = require(`./apiext/texts/${loc}.json`);
@@ -47,10 +48,7 @@ for (let loc in DB.Loc) {
                 : {},
         };
 
-        for (let o of cat.texts) {
-            if (loc === 'en_US' && o.id === 793) console.log('hi');
-            DB.Loc[loc][cat.name].texts[o.id] = { ...o };
-        }
+        for (let o of cat.texts) DB.Loc[loc][cat.name].texts[o.id] = { ...o };
     }
 }
 
@@ -111,7 +109,7 @@ for (let mapType in DB.EnemySets) {
                             DB.EnemyHabitats[map][entry.Outer].type = 'elite';
                         }
                     }
-                    if (entry.Type === 'SBEnemyHabitat') {
+                    if (entry.Type === 'SBEnemyHabitat')
                         DB.EnemyHabitats[map][entry.Name] = {
                             ...DB.EnemyHabitats[map][entry.Name],
                             Enemies: [...entry.Properties.Enemies],
@@ -119,7 +117,6 @@ for (let mapType in DB.EnemySets) {
                             ...entry.Properties.RespawnTime,
                             type: 'enemy',
                         };
-                    }
                 }
             } catch (exception) {
                 exception.errno !== -4058 && console.log(exception);
@@ -255,8 +252,8 @@ for (let mapType in DB.POI) {
                     (err) => {},
                 );
                 data = JSON.parse(data);
-                for (let o of data) {
-                    if (o.Outer && o.Properties?.RelativeLocation) {
+                for (let o of data)
+                    if (o.Outer && o.Properties?.RelativeLocation)
                         DB.POI[map].temp[o.Outer] = {
                             ...DB.POI[map].temp[o.Outer],
                             title: 'Nappo',
@@ -264,8 +261,6 @@ for (let mapType in DB.POI) {
                             type: 'nappo',
                             ...o.Properties.RelativeLocation,
                         };
-                    }
-                }
             } catch (err) {}
             try {
                 data = fs.readFileSync(
@@ -324,10 +319,10 @@ for (let mapType in DB.POI) {
                             type: poiToType(o.Outer),
                             selector: poiToSelector(o.Outer),
                         };
-                        if (o.Outer.includes('Raid')) {
+                        if (o.Outer.includes('Raid'))
                             DB.POI[map].temp[o.Outer].title =
                                 raidNames[o.Outer] || 'Raid Gate';
-                        }
+
                         if (!DB.POI[map].temp[o.Outer].selector)
                             delete DB.POI[map].temp[o.Outer];
                     }
@@ -335,9 +330,9 @@ for (let mapType in DB.POI) {
             } catch (err) {
                 err.errno !== -4058 && console.log(err);
             }
-            for (let row in DB.POI[map].temp) {
+            for (let row in DB.POI[map].temp)
                 DB.POI[map].dat.push({ ...DB.POI[map].temp[row] });
-            }
+
             DB.POI[map].temp = {};
         }
         delete DB.POI[map].temp;
