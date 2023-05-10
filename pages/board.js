@@ -88,9 +88,16 @@ export default function Board() {
                                                   ].substring(4)}`
                                                 : DB.Sources[e.id].charAt(0) ===
                                                   'D'
-                                                ? `Clearing ${DB.Sources[
-                                                      e.id
-                                                  ].substring(1)}`
+                                                ? `Clearing ${
+                                                      DB.LocationNames[loc][
+                                                          DB.Sources[
+                                                              e.id
+                                                          ].substring(1)
+                                                      ] ||
+                                                      DB.Sources[
+                                                          e.id
+                                                      ].substring(1)
+                                                  }`
                                                 : `Treasure Box ${DB.Sources[
                                                       e.id
                                                   ]?.substring(1)}`
