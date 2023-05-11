@@ -5,6 +5,7 @@ import Image from 'next/image';
 import { useEffect, useRef, useState } from 'react';
 import CommandQuest from '@/public/CommandQuest.png';
 import Quest from '@/components/Board/Quest';
+import { connectingPts } from '@/components/utils';
 
 export default function Board() {
     const [DB, setDB] = useState(require('@/components/Board/data/DB.json'));
@@ -171,22 +172,49 @@ export default function Board() {
         function draw() {
             ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-            ctx.fillStyle = 'red';
-            ctx.beginPath();
-            ctx.arc(
-                canvas.width / 2 + dragOffsets.x,
-                canvas.height / 2 + dragOffsets.y,
-                10,
-                0,
-                2 * Math.PI,
-            );
-            ctx.fill();
+            let firstLast = [];
 
             for (let panel in panels) {
+                let pane = panels[panel].panel;
+
+                if (firstLast.length === 0) firstLast.push(pane);
+                else firstLast.pop();
+                firstLast.push(pane);
+
                 document.getElementById(panel).style.transform = `translate(${
-                    offSets.x + panels[panel].panel.ui_pos_x - 20
-                }px, ${offSets.y + panels[panel].panel.ui_pos_y - 20}px)`;
+                    offSets.x + pane.ui_pos_x - 20
+                }px, ${offSets.y + pane.ui_pos_y - 20}px)`;
+
+                for (let next of pane.next_panel_ids) {
+                    let nextId = next.panel_id;
+                    next = panels[nextId].panel;
+
+                    let nX = next.ui_pos_x;
+                    let nY = next.ui_pos_y;
+
+                    let c = connectingPts(
+                        {
+                            x: offSets.x + pane.ui_pos_x,
+                            y: offSets.y + pane.ui_pos_y,
+                            r: 20,
+                        },
+                        { x: offSets.x + nX, y: offSets.y + nY, r: 20 },
+                    );
+
+                    ctx.strokeStyle = '#A7A2A9';
+
+                    ctx.lineWidth = 2;
+                    ctx.beginPath();
+                    ctx.moveTo(c[0].x, c[0].y);
+                    ctx.lineTo(c[1].x, c[1].y);
+                    ctx.stroke();
+                }
             }
+            document.getElementById(firstLast[0].id).style.border =
+                '5px solid #CEEDC7';
+            document.getElementById(firstLast[1].id).style.border =
+                '5px solid #86C8BC';
+            console.log(firstLast);
         }
     }, [selectedBoard]);
 

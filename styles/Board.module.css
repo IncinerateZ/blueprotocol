@@ -40,14 +40,14 @@
 .questCanvas {
     width: 600px;
     height: 600px;
-    background-color: rgb(81,81,81,0.8);
+    /* background-color: rgb(81,81,81,0.8); */
 }
 
 .questOverlay {
     width: calc(min(100vw, 600px));
     height: 600px;
     border-radius: 5px;
-    background-color: wheat;
+    background-color: #032127;
     overflow: hidden;
     cursor: grab;
 
@@ -66,7 +66,7 @@
     position: fixed;
     width: 40px;
     height: 40px;
-    background-color: black;
+    border: 3px solid rgb(200, 200, 200);
     border-radius: 100%;
 
     cursor: pointer;

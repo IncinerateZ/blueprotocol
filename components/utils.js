@@ -289,4 +289,66 @@ function levenshtein(s, t) {
     return h;
 }
 
-export { levenshtein, coordTranslate, entitySummary };
+function connectingPts(t1, t2) {
+    let p1, p2;
+
+    if (t1.x < t2.x) {
+        p1 = { ...t1 };
+        p2 = { ...t2 };
+    } else {
+        p1 = { ...t2 };
+        p2 = { ...t1 };
+    }
+
+    let dx = Math.abs(p1.x - p2.x);
+    let dy = Math.abs(p1.y - p2.y);
+
+    let alpha = radToDeg(Math.atan(dy / dx));
+    let beta = 90 - alpha;
+
+    return [
+        rotatePt(
+            { ...p1, x: p1.x + p1.r },
+            p1,
+            (p2.y < p1.y ? 360 : alpha * 2) - alpha,
+        ),
+        rotatePt(
+            { ...p2, x: p2.x + p2.r },
+            p2,
+            (p2.y > p1.y ? 270 - 2 * beta : 90) + beta,
+        ),
+    ];
+}
+
+function rotatePt(p, o, deg) {
+    let res = { ...p };
+
+    let _x = res.x - o.x;
+    let _y = res.y - o.y;
+
+    res.x = _x * Math.cos(degToRad(deg)) - _y * Math.sin(degToRad(deg));
+    res.y = _x * Math.sin(degToRad(deg)) + _y * Math.cos(degToRad(deg));
+
+    res.x += o.x;
+    res.y += o.y;
+
+    return res;
+}
+
+function degToRad(deg) {
+    return (deg * Math.PI) / 180;
+}
+
+function radToDeg(rad) {
+    return (rad * 180) / Math.PI;
+}
+
+export {
+    levenshtein,
+    coordTranslate,
+    entitySummary,
+    connectingPts,
+    rotatePt,
+    degToRad,
+    radToDeg,
+};
