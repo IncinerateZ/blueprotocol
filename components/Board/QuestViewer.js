@@ -2,8 +2,15 @@ import styles from '@/styles/Board.module.css';
 import { useEffect, useRef, useState } from 'react';
 import { connectingPts } from '../utils';
 
-export default function QuestViewer({ DB, loc, panels, setSelectedBoard }) {
+export default function QuestViewer({
+    DB,
+    loc,
+    panels,
+    selectedBoard,
+    setSelectedBoard,
+}) {
     const canvasRef = useRef(null);
+    const overlayRef = useRef(null);
 
     useEffect(() => {
         var offSets = { x: 0, y: 0 };
@@ -66,17 +73,19 @@ export default function QuestViewer({ DB, loc, panels, setSelectedBoard }) {
 
         baseOffsets = { ...offSets };
 
-        canvas.onmousedown = (e) => {
+        overlayRef.current.onmousedown = (e) => {
             isDragging = true;
             lastMousePos = { x: e.clientX, y: e.clientY };
         };
 
-        canvas.onmouseup = () => {
+        overlayRef.current.onmouseup = () => {
             isDragging = false;
 
             if (
-                Math.floor(offSets.x) !== Math.floor(baseOffsets.x) ||
-                Math.floor(offSets.y) !== Math.floor(baseOffsets.y)
+                Math.abs(Math.floor(offSets.x) - Math.floor(baseOffsets.x)) >=
+                    250 ||
+                Math.abs(Math.floor(offSets.y) - Math.floor(baseOffsets.y)) >=
+                    250
             ) {
                 let dX = offSets.x > baseOffsets.x ? -3 : 3;
                 let dY = offSets.y > baseOffsets.y ? -3 : 3;
@@ -85,13 +94,13 @@ export default function QuestViewer({ DB, loc, panels, setSelectedBoard }) {
                     if (
                         Math.abs(
                             Math.floor(offSets.x) - Math.floor(baseOffsets.x),
-                        ) <= 10
+                        ) <= 250
                     )
                         dX = 0;
                     if (
                         Math.abs(
                             Math.floor(offSets.y) - Math.floor(baseOffsets.y),
-                        ) <= 10
+                        ) <= 250
                     )
                         dY = 0;
                     if (dX === 0 && dY === 0) clearInterval(intvl);
@@ -107,13 +116,13 @@ export default function QuestViewer({ DB, loc, panels, setSelectedBoard }) {
             }
         };
 
-        canvas.onmousemove = (e) => {
+        overlayRef.current.onmousemove = (e) => {
             if (isDragging) {
                 let oX = e.clientX - lastMousePos.x;
                 let oY = e.clientY - lastMousePos.y;
 
-                oX *= 1 / (Math.abs(oX / 5) + 1);
-                oY *= 1 / (Math.abs(oY / 5) + 1);
+                oX *= 1 / (Math.abs(oX / 8) + 1);
+                oY *= 1 / (Math.abs(oY / 8) + 1);
 
                 dragOffsets.x += oX;
                 dragOffsets.y += oY;
@@ -186,13 +195,23 @@ export default function QuestViewer({ DB, loc, panels, setSelectedBoard }) {
             className={styles.questOverlayContainer}
             onMouseDown={() => setSelectedBoard(null)}
         >
-            <div className={styles.questOverlay}>
+            <div className={styles.questOverlay} ref={overlayRef}>
                 <canvas
                     className={styles.questCanvas}
                     ref={canvasRef}
                     onMouseDown={(e) => e.stopPropagation()}
                 ></canvas>
                 {Object.keys(panels).map((pid) => panels[pid].element)}
+                <span className={styles.overlayTitle}>
+                    {
+                        DB.Loc[loc]['master_adventure_boards_text'].texts[
+                            selectedBoard.name
+                        ]?.text
+                    }
+                </span>
+                <div className={styles.brandDrop}>
+                    <span>Quest Viewer</span>
+                </div>
             </div>
         </div>
     );

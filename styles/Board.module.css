@@ -37,10 +37,50 @@
     z-index: 2;
 }
 
+.brandDrop {
+    position: absolute;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: calc(min(100vw, 600px));
+    height: 2rem;
+
+    pointer-events: none;
+
+    transform: translateY(-200%);
+
+    animation: brandDropPop 2s linear;
+}
+
+.brandDrop span {
+    background-color: var(--background);
+
+    padding: 0.7rem;
+    padding-top: 0.2rem;
+    padding-bottom: 0.2rem;
+
+    margin-top: 1rem;
+
+    border-radius: 5px;
+    border: 2px solid var(--light);
+}
+
 .questCanvas {
     width: 600px;
     height: 600px;
-    /* background-color: rgb(81,81,81,0.8); */
+    background-color: transparent;
+}
+
+.overlayTitle {
+    position: absolute;
+    text-align: center;
+    width: calc(min(100vw, 600px));;
+    font-size: 1.2rem;
+    margin-top: 0.5rem;
+    color: var(--light2);
+    pointer-events: none;
 }
 
 .questOverlay {
@@ -63,7 +103,7 @@
 }
 
 .panelNode {
-    position: fixed;
+    position: absolute;
     width: 40px;
     height: 40px;
     border: 3px solid rgb(200, 200, 200);
@@ -163,4 +203,19 @@
     background-clip: padding-box;
     border-radius: 99999px;
     background-color: #5e5e5e;
+}
+
+@keyframes brandDropPop {
+    0% {
+        transform: translateY(-200%);
+    }
+    10% {
+        transform: translateY(0%);
+    }
+    90% {
+        transform: translateY(0%);
+    }
+    100% {
+        transform: translateY(-200%);
+    }
 }

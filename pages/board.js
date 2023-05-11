@@ -2,10 +2,9 @@ import Nav from '@/components/Nav/Nav';
 import styles from '@/styles/Board.module.css';
 import Head from 'next/head';
 import Image from 'next/image';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
 import CommandQuest from '@/public/CommandQuest.png';
 import Quest from '@/components/Board/Quest';
-import { connectingPts } from '@/components/utils';
 import QuestViewer from '@/components/Board/QuestViewer';
 
 export default function Board() {
@@ -80,6 +79,7 @@ export default function Board() {
                         DB={DB}
                         loc={loc}
                         panels={panels}
+                        selectedBoard={selectedBoard}
                         setSelectedBoard={setSelectedBoard}
                     />
                 )}
