@@ -79,6 +79,7 @@ export default function QuestViewer({
         baseOffsets = { ...offSets };
 
         function mouseDown(e) {
+            if (e.target !== e.currentTarget) return;
             isDragging = true;
             lastMousePos = { x: e.clientX, y: e.clientY };
         }
@@ -141,7 +142,7 @@ export default function QuestViewer({
             }
         }
 
-        overlayRef.current.onpointerdown = (e) => {
+        canvasRef.current.onpointerdown = (e) => {
             mouseDown(e);
         };
 
