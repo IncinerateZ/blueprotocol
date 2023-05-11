@@ -1,0 +1,278 @@
+.pageBg {
+    position: fixed;
+    background-color: var(--background);
+    width: 100vw;
+    height: 100vh;
+    color: var(--text-color);
+    display: flex;
+}
+
+.content {
+    width: 100%;
+    height: 92%;
+    background-color: var(--dark1);
+
+    margin: 2rem;
+    margin-left: 5rem;
+
+    padding: 1rem;
+
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+.content h1 {
+    margin-top: 0;
+}
+
+.questOverlayContainer {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    margin-left: auto;
+    background-color: rgb(0,0,0,0.5);
+    
+    z-index: 2;
+}
+
+.questDetailsContainer {
+    position: absolute;
+    width: 600px;
+    height: 600px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgb(0,0,0,0.5);
+}
+
+.questDetails {
+    width: 250px;
+    height: fit-content;
+    padding: 0.5rem;
+    background-color: var(--dark1);
+    border-radius: 5px;
+
+    cursor: default;
+}
+
+.questDetails * {
+    margin: 0;
+}
+
+.brandDrop {
+    position: absolute;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 600px;
+    height: 2rem;
+
+    pointer-events: none;
+
+    transform: translateY(-200%);
+
+    animation: brandDropPop 2s linear;
+}
+
+.brandDrop span {
+    background-color: var(--background);
+
+    padding: 0.7rem;
+    padding-top: 0.2rem;
+    padding-bottom: 0.2rem;
+
+    margin-top: 1rem;
+
+    border-radius: 5px;
+    border: 2px solid var(--light);
+}
+
+.questCanvas {
+    width: 600px;
+    height: 600px;
+    background-color: transparent;
+}
+
+.overlayTitle {
+    position: absolute;
+    text-align: center;
+    width: 600px;
+    font-size: 1.2rem;
+    margin-top: 0.5rem;
+    color: var(--light2);
+    pointer-events: none;
+}
+
+.questOverlay {
+    width: 600px;
+    height: 600px;
+    border-radius: 5px;
+    background-color: #032127;
+    overflow: hidden;
+    cursor: grab;
+
+    clip-path: inset(0 0 0 0);
+
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+
+    margin-left: auto;
+    margin-right: auto;
+
+    transform: translateY(10%);
+}
+
+.questOverlay:active {
+    cursor: grabbing;
+}
+
+.panelNode {
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    border: 3px solid rgb(200, 200, 200);
+    border-radius: 100%;
+
+    cursor: pointer;
+}
+
+.panelNode:hover {
+    filter: brightness(150%);
+}
+
+.quests {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    overflow-y: auto;
+    height: 100%;
+
+    padding-bottom: 5rem;
+}
+
+.quest {
+    border: 1px solid var(--light);
+    width: 205px;
+    height: 270px;
+    border-radius: 5px;
+    margin: 0.5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    
+    cursor: pointer;
+}
+
+.quest:hover {
+    border: 1px solid var(--text-color);
+}
+
+.quest h5 {
+    margin-top: 0.5rem;
+    width: 90%;
+    text-align: start;
+    margin-bottom: 0;
+}
+
+.quest p {
+    width: 90%;
+    margin-top: 0.2rem;
+    font-size: 0.75rem;
+}
+
+.questId {
+    font-size: 0.7rem;
+    display: flex;
+    align-items: flex-end;
+    width: 90%;
+    color: var(--light);
+    margin-top: auto;
+    margin-bottom: 0.2rem;
+}
+
+.questThumbnail {
+    margin-left: 0.5rem;
+    margin-right: 0.5rem;
+    margin-bottom: 0;
+}
+
+.questTitleContainer {
+    width: 90%;
+    height: 3rem;
+    border-bottom: 1px solid var(--light);
+    text-align: center;
+    display: flex;
+    align-items: center;
+}
+
+.questTitle {
+    width: 100%;
+    margin-bottom: 0;
+    margin-left: 0.5rem;
+    margin-right: 0.5rem;
+}
+
+.quests::-webkit-scrollbar {
+    width: 15px;
+}
+  
+.quests::-webkit-scrollbar-track {
+}
+
+.quests::-webkit-scrollbar-thumb {
+    border: 5px solid transparent;
+    background-clip: padding-box;
+    border-radius: 99999px;
+    background-color: var(--dark2);
+}
+
+.quests::-webkit-scrollbar-thumb:hover {
+    border: 5px solid transparent;
+    background-clip: padding-box;
+    border-radius: 99999px;
+    background-color: #5e5e5e;
+}
+
+@keyframes brandDropPop {
+    0% {
+        transform: translateY(-200%);
+    }
+    10% {
+        transform: translateY(0%);
+    }
+    90% {
+        transform: translateY(0%);
+    }
+    100% {
+        transform: translateY(-200%);
+    }
+}
+
+@media (max-width: 372px) {
+    .content {
+        margin: 0;
+        width: 100%;
+        height: 95%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .quests {
+        width: 250px;
+    }
+
+    .pageBg {
+        justify-content: center;
+    }
+}
+
+@media (max-width: 600px) {
+    .questOverlay {
+        transform: translate(calc(-1 * (600px - 100vw) / 2), 10%);
+    }
+}

@@ -1,0 +1,91 @@
+.Nav {
+    position: absolute;
+    width: 50px;       
+    height: 100vh;
+
+    background-color: var(--dark2);
+
+    cursor: pointer;
+
+    transition: 0.1s;
+
+    overflow-x: hidden;
+    z-index: 1;
+}
+
+.Nav:hover {
+    width: 250px;
+}
+
+.Nav ul li{
+    list-style-type: none;
+    height: 30px;
+
+    overflow: hidden;
+}
+
+.Nav ul li:hover {
+     -webkit-text-stroke-width: calc(1 * 0.08ex);
+}
+
+.Nav ul {
+    margin-top: 1rem;
+    padding-left: 0.3rem;
+
+    height: 30px;
+
+    overflow: hidden;
+}
+
+.NavItem p {
+    margin: 0;
+    line-height: 35px;
+
+    transform: translateX(1rem);
+}
+
+.Logo {
+        display: flex;
+        width: 250px;
+        margin-top: 0.5rem;
+        margin-left: 0.2rem;
+}
+
+@media (max-width: 372px) {
+    .Nav {
+        width: 100vw;
+        height: 50px;
+        overflow: hidden;
+        bottom: 0;
+
+        display: flex;
+
+        flex-direction: row;
+        justify-content: space-around;
+    }
+
+    .Nav .Logo {
+        display: none;
+    }
+
+    .Nav p {
+        display: none;
+    }
+
+    .Nav:hover {
+        width: 100vw;
+    }
+
+    .Nav ul {
+        margin: 0;
+        height: 100%;
+        align-items: center;
+        display: flex;
+    }
+
+    .NavItem {
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+    }
+}

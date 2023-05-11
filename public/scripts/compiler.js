@@ -1,4 +1,4 @@
-//2023-04-20
+//2023-05-10
 
 const fs = require('fs');
 
@@ -13,25 +13,33 @@ const DB = {
     LocationNames: { en_US: {}, ja_JP: {} },
     POI: { cty: {}, fld: {}, dng: {} },
     Treasures: { fld: {}, dng: {} },
+    Boards: {},
 };
+
+for (let board of require('./apiext/master_adventure_board.json'))
+    DB.Boards[board.id] = board.name;
 
 const CQST = {};
 let t = require(`./apiext/masterchallengequest.json`);
 for (let quest of t) CQST[quest.quest_id] = quest;
 
 const raidNames = {};
-for (let raid of require('./apiext/master_raid_settings.json')) {
-    for (let gate of raid.entry_gate) {
-        raidNames[gate.name_text] = raid.map_id;
-    }
-}
+for (let raid of require('./apiext/master_raid_settings.json'))
+    for (let gate of raid.entry_gate) raidNames[gate.name_text] = raid.map_id;
 
 for (let loc in DB.Loc) {
     text = require(`./apiext/texts/${loc}.json`);
     if (loc !== 'ja_JP') DB.Loc[loc] = { ...DB.Loc.ja_JP };
 
     for (let cat of text) {
-        if (!['enemyparam_text', 'item_text'].includes(cat.name)) continue;
+        if (
+            ![
+                'enemyparam_text',
+                'item_text',
+                'master_adventure_boards_text',
+            ].includes(cat.name)
+        )
+            continue;
         DB.Loc[loc][cat.name] = {
             ...DB.Loc[loc][cat.name],
             name: cat.name,
@@ -40,10 +48,7 @@ for (let loc in DB.Loc) {
                 : {},
         };
 
-        for (let o of cat.texts) {
-            if (loc === 'en_US' && o.id === 793) console.log('hi');
-            DB.Loc[loc][cat.name].texts[o.id] = { ...o };
-        }
+        for (let o of cat.texts) DB.Loc[loc][cat.name].texts[o.id] = { ...o };
     }
 }
 
@@ -104,7 +109,7 @@ for (let mapType in DB.EnemySets) {
                             DB.EnemyHabitats[map][entry.Outer].type = 'elite';
                         }
                     }
-                    if (entry.Type === 'SBEnemyHabitat') {
+                    if (entry.Type === 'SBEnemyHabitat')
                         DB.EnemyHabitats[map][entry.Name] = {
                             ...DB.EnemyHabitats[map][entry.Name],
                             Enemies: [...entry.Properties.Enemies],
@@ -112,7 +117,6 @@ for (let mapType in DB.EnemySets) {
                             ...entry.Properties.RespawnTime,
                             type: 'enemy',
                         };
-                    }
                 }
             } catch (exception) {
                 exception.errno !== -4058 && console.log(exception);
@@ -248,8 +252,8 @@ for (let mapType in DB.POI) {
                     (err) => {},
                 );
                 data = JSON.parse(data);
-                for (let o of data) {
-                    if (o.Outer && o.Properties?.RelativeLocation) {
+                for (let o of data)
+                    if (o.Outer && o.Properties?.RelativeLocation)
                         DB.POI[map].temp[o.Outer] = {
                             ...DB.POI[map].temp[o.Outer],
                             title: 'Nappo',
@@ -257,8 +261,6 @@ for (let mapType in DB.POI) {
                             type: 'nappo',
                             ...o.Properties.RelativeLocation,
                         };
-                    }
-                }
             } catch (err) {}
             try {
                 data = fs.readFileSync(
@@ -317,10 +319,10 @@ for (let mapType in DB.POI) {
                             type: poiToType(o.Outer),
                             selector: poiToSelector(o.Outer),
                         };
-                        if (o.Outer.includes('Raid')) {
+                        if (o.Outer.includes('Raid'))
                             DB.POI[map].temp[o.Outer].title =
                                 raidNames[o.Outer] || 'Raid Gate';
-                        }
+
                         if (!DB.POI[map].temp[o.Outer].selector)
                             delete DB.POI[map].temp[o.Outer];
                     }
@@ -328,9 +330,9 @@ for (let mapType in DB.POI) {
             } catch (err) {
                 err.errno !== -4058 && console.log(err);
             }
-            for (let row in DB.POI[map].temp) {
+            for (let row in DB.POI[map].temp)
                 DB.POI[map].dat.push({ ...DB.POI[map].temp[row] });
-            }
+
             DB.POI[map].temp = {};
         }
         delete DB.POI[map].temp;
@@ -407,18 +409,88 @@ for (let map in DB.POI) {
     console.log(map);
 }
 
+//boards
+const boards = {
+    boards: require('./apiext/master_adventure_board.json'),
+    panels: require('./apiext/master_adventure_board_panel.json'),
+    quests: require('./apiext/master_adventure_board_quest.json'),
+    Loc: { ja_JP: {}, en_US: {} },
+    Sources: {},
+    srcQuests: {},
+};
+
+const srcQuests = require('./apiext/quests.json');
+let srcQ = {};
+
+for (let q of srcQuests) srcQ[q.long_id] = { name: q.name, desc: q.desc };
+
+for (let source of require('./apiext/rewards.json'))
+    if (source.reward_type === 28) {
+        let id = ('' + source.id).substring(0, '' + source.id.lastIndexOf('_'));
+        boards.Sources[source.item_id] =
+            (id.charAt(0) === id.charAt(0).toLowerCase()
+                ? 'D'
+                : id.charAt(0) === 'A'
+                ? 'A'
+                : 'Q') + id;
+        boards.srcQuests[id] = srcQ[id];
+    }
+
+for (let source of require('./apiext/treasures.json'))
+    for (let treasure of source.lot_rate)
+        if (treasure.reward_type === 28)
+            boards.Sources[treasure.reward_master_id] = 'T' + source.id;
+
+for (let loc in boards.Loc) {
+    text = require(`./apiext/texts/${loc}.json`);
+    if (loc !== 'ja_JP') boards.Loc[loc] = { ...boards.Loc.ja_JP };
+
+    for (let cat of text) {
+        if (
+            ![
+                'master_adventure_boards_text',
+                'master_adventure_board_quests_text',
+                'quest_main_chapter01_text',
+                'quest_main_chapter02_text',
+                'quest_main_chapter03_text',
+                'quest_sub_chapter01_text',
+                'quest_sub_chapter02_text',
+                'quest_sub_chapter03_text',
+            ].includes(cat.name)
+        )
+            continue;
+        boards.Loc[loc][cat.name] = {
+            ...boards.Loc[loc][cat.name],
+            name: cat.name,
+            texts: boards.Loc[loc][cat.name]?.texts
+                ? { ...boards.Loc[loc][cat.name].texts }
+                : {},
+        };
+
+        for (let o of cat.texts)
+            boards.Loc[loc][cat.name].texts[o.id] = { ...o };
+    }
+}
+
 save(`./_out`);
-save(`E:/Main Data/Project Files/next/bp/components/Maps/data`, true);
+save(`E:/Main Files/Projects/next/bp/components/Maps/data`, true);
 
 function save(dir, condense = false) {
-    if (condense)
+    if (condense) {
         fs.writeFileSync(
             dir + `/DB.json`,
             JSON.stringify(DB),
             'utf8',
             () => {},
         );
-    else
+
+        fs.writeFileSync(
+            dir + '/../../Board/data/DB.json',
+            JSON.stringify(boards),
+            'utf8',
+            () => {},
+        );
+    } else {
         for (let d in DB)
             fs.writeFileSync(
                 dir + `/${d}.json`,
@@ -426,4 +498,5 @@ function save(dir, condense = false) {
                 'utf8',
                 () => {},
             );
+    }
 }

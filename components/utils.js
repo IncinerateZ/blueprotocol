@@ -10,6 +10,7 @@ function coordTranslate(x, y, cfg) {
 function buildSummary(summaries) {
     if (Object.keys(summaries).length === 0)
         return <div style={{ textAlign: 'center' }}>No Data</div>;
+    let id = typeof summaries[0] === 'string' ? summaries.shift() : null;
     return (
         <div
             style={{
@@ -27,6 +28,11 @@ function buildSummary(summaries) {
                 }}
                 className={styles.Popup}
             >
+                {id && (
+                    <span style={{ color: '#5e5e5e', fontSize: '0.75rem' }}>
+                        ID: {id}
+                    </span>
+                )}
                 {summaries.map((summary, idx) => (
                     <div
                         style={{
@@ -51,6 +57,16 @@ function buildSummary(summaries) {
                         >
                             <b>{summary.name}</b>
                         </span>
+                        {summary.id && (
+                            <span
+                                style={{
+                                    color: '#5e5e5e',
+                                    fontSize: '0.75rem',
+                                }}
+                            >
+                                ID: {summary.id}
+                            </span>
+                        )}
                         {summary.desc &&
                             summary.desc.map((r) => (
                                 <span
@@ -80,6 +96,7 @@ function entitySummary(DB, entity, lang, showLeak) {
     let res = [];
     if (['enemy', 'elite'].includes(entity.type)) {
         let enemies = DB.EnemySets.field[entity.idf];
+        res.push(entity.idf);
         for (let enemy of enemies?.Members || []) {
             let page = { ...entity.metadata };
             let enemy_ = DB.Enemies[enemy.EnemyId];
@@ -127,15 +144,25 @@ function entitySummary(DB, entity, lang, showLeak) {
 
                 page.desc = [];
 
-                if (i++ === 1)
+                if (i++ === 1) {
+                    page.id = entity.metadata.title;
                     page.name = `Gathering: ${
                         entity.type.charAt(0).toUpperCase() +
                         entity.type.substring(1)
                     }`;
+                }
 
-                if (treasure_)
+                if (treasure_ || treasure.reward_type === 28)
                     page.desc.push(
-                        `${DB.Loc[lang].item_text.texts[treasure_.name].text} ${
+                        `${
+                            treasure_
+                                ? DB.Loc[lang].item_text.texts[treasure_.name]
+                                      .text
+                                : DB.Loc[lang].master_adventure_boards_text
+                                      .texts[
+                                      DB.Boards[treasure.reward_master_id]
+                                  ].text
+                        } ${
                             showLeak
                                 ? `x${treasure.reward_amount_min}-${
                                       treasure.reward_amount_max
@@ -143,7 +170,10 @@ function entitySummary(DB, entity, lang, showLeak) {
                                 : ''
                         }`,
                     );
-                else console.log(treasure);
+                else {
+                    console.log(entity.metadata.title);
+                    console.log(treasure);
+                }
 
                 res.push(page);
             }
@@ -259,4 +289,66 @@ function levenshtein(s, t) {
     return h;
 }
 
-export { levenshtein, coordTranslate, entitySummary };
+function connectingPts(t1, t2) {
+    let p1, p2;
+
+    if (t1.x < t2.x) {
+        p1 = { ...t1 };
+        p2 = { ...t2 };
+    } else {
+        p1 = { ...t2 };
+        p2 = { ...t1 };
+    }
+
+    let dx = Math.abs(p1.x - p2.x);
+    let dy = Math.abs(p1.y - p2.y);
+
+    let alpha = radToDeg(Math.atan(dy / dx));
+    let beta = 90 - alpha;
+
+    return [
+        rotatePt(
+            { ...p1, x: p1.x + p1.r },
+            p1,
+            (p2.y < p1.y ? 360 : alpha * 2) - alpha,
+        ),
+        rotatePt(
+            { ...p2, x: p2.x + p2.r },
+            p2,
+            (p2.y > p1.y ? 270 - 2 * beta : 90) + beta,
+        ),
+    ];
+}
+
+function rotatePt(p, o, deg) {
+    let res = { ...p };
+
+    let _x = res.x - o.x;
+    let _y = res.y - o.y;
+
+    res.x = _x * Math.cos(degToRad(deg)) - _y * Math.sin(degToRad(deg));
+    res.y = _x * Math.sin(degToRad(deg)) + _y * Math.cos(degToRad(deg));
+
+    res.x += o.x;
+    res.y += o.y;
+
+    return res;
+}
+
+function degToRad(deg) {
+    return (deg * Math.PI) / 180;
+}
+
+function radToDeg(rad) {
+    return (rad * 180) / Math.PI;
+}
+
+export {
+    levenshtein,
+    coordTranslate,
+    entitySummary,
+    connectingPts,
+    rotatePt,
+    degToRad,
+    radToDeg,
+};
