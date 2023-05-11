@@ -73,12 +73,12 @@ export default function QuestViewer({
 
         baseOffsets = { ...offSets };
 
-        overlayRef.current.onmousedown = (e) => {
+        function mouseDown(e) {
             isDragging = true;
             lastMousePos = { x: e.clientX, y: e.clientY };
-        };
+        }
 
-        overlayRef.current.onmouseup = () => {
+        function mouseUp() {
             isDragging = false;
 
             if (
@@ -114,12 +114,12 @@ export default function QuestViewer({
                     draw();
                 }, 1);
             }
-        };
+        }
 
-        overlayRef.current.onmousemove = (e) => {
+        function mouseMove(x, y) {
             if (isDragging) {
-                let oX = e.clientX - lastMousePos.x;
-                let oY = e.clientY - lastMousePos.y;
+                let oX = x - lastMousePos.x;
+                let oY = y - lastMousePos.y;
 
                 oX *= 1 / (Math.abs(oX / 10) + 1);
                 oY *= 1 / (Math.abs(oY / 10) + 1);
@@ -130,10 +130,31 @@ export default function QuestViewer({
                 offSets.x += oX;
                 offSets.y += oY;
 
-                lastMousePos = { x: e.clientX, y: e.clientY };
+                lastMousePos = { x: x, y: y };
 
                 draw();
             }
+        }
+
+        overlayRef.current.onpointerdown = (e) => {
+            mouseDown(e);
+        };
+
+        overlayRef.current.ontouchend = () => {
+            mouseUp();
+        };
+        overlayRef.current.onmouseup = () => {
+            mouseUp();
+        };
+
+        overlayRef.current.ontouchmove = (e) => {
+            var evt =
+                typeof e.originalEvent === 'undefined' ? e : e.originalEvent;
+            var touch = evt.touches[0] || evt.changedTouches[0];
+            mouseMove(touch.clientX, touch.clientY);
+        };
+        overlayRef.current.onmousemove = (e) => {
+            mouseMove(e.clientX, e.clientY);
         };
 
         draw();
