@@ -6,11 +6,11 @@ import { useEffect, useState } from 'react';
 import CommandQuest from '@/public/CommandQuest.png';
 import Quest from '@/components/Board/Quest';
 import QuestViewer from '@/components/Board/QuestViewer';
+import LangPicker from '@/components/Maps/MapControlLayer/LangPicker';
 
 export default function Board() {
     const [DB, setDB] = useState(require('@/components/Board/data/DB.json'));
-    // const [loc, setLoc] = useState('ja_JP');
-    const [loc, setLoc] = useState('en_US');
+    const [lang, setLang] = useState('ja_JP');
 
     const [panels, setPanels] = useState(null);
     const [selectedBoard, setSelectedBoard] = useState(null);
@@ -54,20 +54,25 @@ export default function Board() {
             <div className={styles.pageBg}>
                 <Nav></Nav>
                 <div className={styles.content}>
-                    <h1>
-                        <Image
-                            src={CommandQuest}
-                            alt='CommandQuest'
-                            width={40}
-                            height={40}
-                            style={{
-                                marginRight: '0.5rem',
-                                transform: 'translateY(20%)',
-                                zIndex: '0',
-                            }}
-                        ></Image>
-                        Adventure Board
-                    </h1>
+                    <div style={{ display: 'flex', alignItems: 'center' }}>
+                        <h1 style={{ marginRight: '1rem' }}>
+                            <Image
+                                src={CommandQuest}
+                                alt='CommandQuest'
+                                width={40}
+                                height={40}
+                                style={{
+                                    marginRight: '0.5rem',
+                                    transform: 'translateY(20%)',
+                                    zIndex: '0',
+                                }}
+                            ></Image>
+                            Adventure Board
+                        </h1>
+                        <div style={{ transform: 'translateY(-20%)' }}>
+                            <LangPicker DB={DB} lang={lang} setLang={setLang} />
+                        </div>
+                    </div>
                     <div className={styles.quests}>
                         {DB &&
                             Object.keys(DB.boards).map((e) => (
@@ -75,7 +80,7 @@ export default function Board() {
                                     key={e}
                                     e={DB.boards[e]}
                                     DB={DB}
-                                    loc={loc}
+                                    loc={lang}
                                     displayOverlay={displayOverlay}
                                 />
                             ))}
@@ -84,7 +89,7 @@ export default function Board() {
                 {selectedBoard && (
                     <QuestViewer
                         DB={DB}
-                        loc={loc}
+                        loc={lang}
                         panels={panels}
                         selectedBoard={selectedBoard}
                         setSelectedBoard={setSelectedBoard}
