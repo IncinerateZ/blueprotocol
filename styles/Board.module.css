@@ -38,26 +38,38 @@
 }
 
 .questCanvas {
-    width: 500px;
-    height: 500px;
+    width: 600px;
+    height: 600px;
     background-color: rgb(81,81,81,0.8);
 }
 
 .questOverlay {
-    width: calc(min(100vw, 500px));
-    height: 500px;
+    width: calc(min(100vw, 600px));
+    height: 600px;
     border-radius: 5px;
     background-color: wheat;
     overflow: hidden;
     cursor: grab;
 
+    clip-path: inset(0 0 0 0);
+
     display: flex;
-    align-items: center;
-    justify-content: center;
+    align-items: flex-start;
+    justify-content: flex-start;
 }
 
 .questOverlay:active {
     cursor: grabbing;
+}
+
+.panelNode {
+    position: fixed;
+    width: 40px;
+    height: 40px;
+    background-color: black;
+    border-radius: 100%;
+
+    cursor: pointer;
 }
 
 .quests {

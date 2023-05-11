@@ -1,18 +1,27 @@
 import styles from '@/styles/Board.module.css';
 import Image from 'next/image';
+import { useState } from 'react';
 
-export default function Quest({ e, i, DB, setDB, loc }) {
+export default function Quest({ e, DB, loc, displayOverlay }) {
+    const [fallbackImage, setFallbackImage] = useState(false);
+
     return (
-        <div className={styles.quest}>
+        <div
+            style={{ display: fallbackImage ? 'none' : 'flex' }}
+            className={styles.quest}
+            onClick={() => displayOverlay(e)}
+        >
             <Image
-                src={`/board/quests/UI_Adventureboard_${e.icon_id}.webp`}
+                src={
+                    fallbackImage
+                        ? '/board/quests/UI_Adventureboard_NoData.webp'
+                        : `/board/quests/UI_Adventureboard_${e.icon_id}.webp`
+                }
                 width={190}
                 height={123}
                 alt={e.icon_id}
                 onError={() => {
-                    let temp = DB;
-                    temp.boards[i].icon_id = 'NoData';
-                    setDB({ ...temp });
+                    setFallbackImage(true);
                 }}
                 className={styles.questThumbnail}
             ></Image>
