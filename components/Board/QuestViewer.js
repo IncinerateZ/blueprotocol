@@ -121,8 +121,8 @@ export default function QuestViewer({
                 let oX = e.clientX - lastMousePos.x;
                 let oY = e.clientY - lastMousePos.y;
 
-                oX *= 1 / (Math.abs(oX / 8) + 1);
-                oY *= 1 / (Math.abs(oY / 8) + 1);
+                oX *= 1 / (Math.abs(oX / 10) + 1);
+                oY *= 1 / (Math.abs(oY / 10) + 1);
 
                 dragOffsets.x += oX;
                 dragOffsets.y += oY;
@@ -182,10 +182,10 @@ export default function QuestViewer({
             const first = document.getElementById(firstLast[0].id);
             const last = document.getElementById(firstLast[1].id);
 
-            first.style.border = '5px solid #B4E4FF';
+            first.style.border = '4px solid #B4E4FF';
             first.style.backgroundColor = '#DFFFD8';
 
-            last.style.border = '5px solid #95BDFF';
+            last.style.border = '4px solid #95BDFF';
             last.style.backgroundColor = '#F7C8E0';
         }
     }, []);

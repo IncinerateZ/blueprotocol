@@ -43,3 +43,9 @@
 
     transform: translateX(1rem);
 }
+
+@media (max-width: 372px) {
+    .Nav {
+        display: none;
+    }
+}

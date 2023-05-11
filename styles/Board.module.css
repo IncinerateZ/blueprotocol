@@ -31,9 +31,7 @@
     height: 100%;
     margin-left: auto;
     background-color: rgb(0,0,0,0.5);
-    display: flex;
-    align-items: center;
-    justify-content: center;
+
     z-index: 2;
 }
 
@@ -44,7 +42,7 @@
     align-items: center;
     justify-content: center;
 
-    width: calc(min(100vw, 600px));
+    width: 600px;
     height: 2rem;
 
     pointer-events: none;
@@ -76,7 +74,7 @@
 .overlayTitle {
     position: absolute;
     text-align: center;
-    width: calc(min(100vw, 600px));;
+    width: 600px;
     font-size: 1.2rem;
     margin-top: 0.5rem;
     color: var(--light2);
@@ -84,7 +82,7 @@
 }
 
 .questOverlay {
-    width: calc(min(100vw, 600px));
+    width: 600px;
     height: 600px;
     border-radius: 5px;
     background-color: #032127;
@@ -96,6 +94,11 @@
     display: flex;
     align-items: flex-start;
     justify-content: flex-start;
+
+    margin-left: auto;
+    margin-right: auto;
+
+    transform: translateY(10%);
 }
 
 .questOverlay:active {
@@ -217,5 +220,30 @@
     }
     100% {
         transform: translateY(-200%);
+    }
+}
+
+@media (max-width: 372px) {
+    .content {
+        margin: 0;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .quests {
+        width: 250px;
+    }
+
+    .pageBg {
+        justify-content: center;
+    }
+}
+
+@media (max-width: 600px) {
+    .questOverlay {
+        transform: translate(calc(-1 * (600px - 100vw) / 2), 10%);
     }
 }
