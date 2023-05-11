@@ -44,8 +44,48 @@
     transform: translateX(1rem);
 }
 
+.Logo {
+        display: flex;
+        width: 250px;
+        margin-top: 0.5rem;
+        margin-left: 0.2rem;
+}
+
 @media (max-width: 372px) {
     .Nav {
+        width: 100vw;
+        height: 50px;
+        overflow: hidden;
+        bottom: 0;
+
+        display: flex;
+
+        flex-direction: row;
+        justify-content: space-around;
+    }
+
+    .Nav .Logo {
         display: none;
+    }
+
+    .Nav p {
+        display: none;
+    }
+
+    .Nav:hover {
+        width: 100vw;
+    }
+
+    .Nav ul {
+        margin: 0;
+        height: 100%;
+        align-items: center;
+        display: flex;
+    }
+
+    .NavItem {
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
     }
 }

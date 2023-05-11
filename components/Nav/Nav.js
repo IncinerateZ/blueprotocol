@@ -8,14 +8,7 @@ import Image from 'next/image';
 export default function Nav() {
     return (
         <nav className={styles.Nav}>
-            <div
-                style={{
-                    display: 'flex',
-                    width: '250px',
-                    marginTop: '0.5rem',
-                    marginLeft: '0.2rem',
-                }}
-            >
+            <div className={styles.Logo}>
                 <Image src={Logo} width={45} height={45} alt='Logo'></Image>
                 <div
                     style={{

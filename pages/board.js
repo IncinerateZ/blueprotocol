@@ -9,7 +9,8 @@ import QuestViewer from '@/components/Board/QuestViewer';
 
 export default function Board() {
     const [DB, setDB] = useState(require('@/components/Board/data/DB.json'));
-    const [loc, setLoc] = useState('ja_JP');
+    // const [loc, setLoc] = useState('ja_JP');
+    const [loc, setLoc] = useState('en_US');
 
     const [panels, setPanels] = useState(null);
     const [selectedBoard, setSelectedBoard] = useState(null);
@@ -43,7 +44,6 @@ export default function Board() {
 
     useEffect(() => {
         if (!DB) return;
-        console.log(DB);
     }, [DB]);
 
     return (

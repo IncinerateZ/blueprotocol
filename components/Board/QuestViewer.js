@@ -1,6 +1,7 @@
 import styles from '@/styles/Board.module.css';
 import { useEffect, useRef, useState } from 'react';
 import { connectingPts } from '../utils';
+import QuestDetails from './QuestDetails';
 
 export default function QuestViewer({
     DB,
@@ -13,6 +14,8 @@ export default function QuestViewer({
 }) {
     const canvasRef = useRef(null);
     const overlayRef = useRef(null);
+
+    useEffect(() => {}, [selectedQuest]);
 
     useEffect(() => {
         var offSets = { x: 0, y: 0 };
@@ -228,7 +231,6 @@ export default function QuestViewer({
                 2 * Math.PI,
             );
             ctx.fill();
-            // last.style.backgroundColor = '#F7C8E0';
         }
     }, []);
 
@@ -237,6 +239,7 @@ export default function QuestViewer({
             className={styles.questOverlayContainer}
             onMouseDown={(e) => {
                 setSelectedBoard(null);
+                setSelectedQuest(null);
             }}
         >
             <div className={styles.questOverlay} ref={overlayRef}>
@@ -259,20 +262,12 @@ export default function QuestViewer({
                     <span>Quest Viewer</span>
                 </div>
                 {selectedQuest && (
-                    <div
-                        className={styles.questDetailsContainer}
-                        onMouseDown={(e) => {
-                            e.stopPropagation();
-                            setSelectedQuest(null);
-                        }}
-                    >
-                        <div
-                            className={styles.questDetails}
-                            onMouseDown={(e) => {
-                                e.stopPropagation();
-                            }}
-                        ></div>
-                    </div>
+                    <QuestDetails
+                        DB={DB}
+                        loc={loc}
+                        selectedQuest={selectedQuest}
+                        setSelectedQuest={setSelectedQuest}
+                    />
                 )}
             </div>
         </div>
