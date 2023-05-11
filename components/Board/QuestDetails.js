@@ -1,5 +1,4 @@
 import styles from '@/styles/Board.module.css';
-import { useEffect } from 'react';
 
 export default function QuestDetails({
     DB,
