@@ -35,6 +35,23 @@
     z-index: 2;
 }
 
+.questDetailsContainer {
+    position: absolute;
+    width: 600px;
+    height: 600px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background-color: wheat;
+}
+
+.questDetails {
+    width: 10px;
+    height: 10px;
+    background-color: black;
+}
+
 .brandDrop {
     position: absolute;
 
@@ -113,6 +130,10 @@
     border-radius: 100%;
 
     cursor: pointer;
+}
+
+.panelNode:hover {
+    filter: brightness(150%);
 }
 
 .quests {

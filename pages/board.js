@@ -13,10 +13,10 @@ export default function Board() {
 
     const [panels, setPanels] = useState(null);
     const [selectedBoard, setSelectedBoard] = useState(null);
+    const [selectedQuest, setSelectedQuest] = useState(null);
 
     function displayOverlay(board) {
         setSelectedBoard(board);
-        console.log(board);
         let panels = {};
         for (let panel in board.panels) {
             panels[panel] = {
@@ -26,7 +26,14 @@ export default function Board() {
                         key={panel}
                         id={panel}
                         className={styles.panelNode}
-                        onMouseDown={(e) => e.stopPropagation()}
+                        onMouseDown={(e) => {
+                            e.stopPropagation();
+                            setTimeout(() => {
+                                setSelectedQuest(
+                                    board.panels[panel].mission_id,
+                                );
+                            }, 10);
+                        }}
                     ></div>
                 ),
             };
@@ -81,6 +88,8 @@ export default function Board() {
                         panels={panels}
                         selectedBoard={selectedBoard}
                         setSelectedBoard={setSelectedBoard}
+                        selectedQuest={selectedQuest}
+                        setSelectedQuest={setSelectedQuest}
                     />
                 )}
             </div>

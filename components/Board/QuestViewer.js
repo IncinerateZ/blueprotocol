@@ -8,6 +8,8 @@ export default function QuestViewer({
     panels,
     selectedBoard,
     setSelectedBoard,
+    selectedQuest,
+    setSelectedQuest,
 }) {
     const canvasRef = useRef(null);
     const overlayRef = useRef(null);
@@ -203,24 +205,47 @@ export default function QuestViewer({
             const first = document.getElementById(firstLast[0].id);
             const last = document.getElementById(firstLast[1].id);
 
+            ctx.fillStyle = '#DFFFD8';
             first.style.border = '4px solid #B4E4FF';
-            first.style.backgroundColor = '#DFFFD8';
+            ctx.beginPath();
+            ctx.arc(
+                firstLast[0].ui_pos_x + offSets.x,
+                firstLast[0].ui_pos_y + offSets.y,
+                20,
+                0,
+                2 * Math.PI,
+            );
+            ctx.fill();
 
+            ctx.fillStyle = '#F7C8E0';
             last.style.border = '4px solid #95BDFF';
-            last.style.backgroundColor = '#F7C8E0';
+            ctx.beginPath();
+            ctx.arc(
+                firstLast[1].ui_pos_x + offSets.x,
+                firstLast[1].ui_pos_y + offSets.y,
+                20,
+                0,
+                2 * Math.PI,
+            );
+            ctx.fill();
+            // last.style.backgroundColor = '#F7C8E0';
         }
     }, []);
 
     return (
         <div
             className={styles.questOverlayContainer}
-            onMouseDown={() => setSelectedBoard(null)}
+            onMouseDown={(e) => {
+                setSelectedBoard(null);
+            }}
         >
             <div className={styles.questOverlay} ref={overlayRef}>
                 <canvas
                     className={styles.questCanvas}
                     ref={canvasRef}
-                    onMouseDown={(e) => e.stopPropagation()}
+                    onMouseDown={(e) => {
+                        e.stopPropagation();
+                    }}
                 ></canvas>
                 {Object.keys(panels).map((pid) => panels[pid].element)}
                 <span className={styles.overlayTitle}>
@@ -233,6 +258,22 @@ export default function QuestViewer({
                 <div className={styles.brandDrop}>
                     <span>Quest Viewer</span>
                 </div>
+                {selectedQuest && (
+                    <div
+                        className={styles.questDetailsContainer}
+                        onMouseDown={(e) => {
+                            e.stopPropagation();
+                            setSelectedQuest(null);
+                        }}
+                    >
+                        <div
+                            className={styles.questDetails}
+                            onMouseDown={(e) => {
+                                e.stopPropagation();
+                            }}
+                        ></div>
+                    </div>
+                )}
             </div>
         </div>
     );
