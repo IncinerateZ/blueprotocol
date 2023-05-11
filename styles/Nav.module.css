@@ -10,6 +10,7 @@
     transition: 0.1s;
 
     overflow-x: hidden;
+    z-index: 1;
 }
 
 .Nav:hover {

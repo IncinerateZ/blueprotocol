@@ -38,6 +38,9 @@ export default function Nav() {
                         style={{
                             display: 'flex',
                         }}
+                        onClick={() => {
+                            window.location = '/map';
+                        }}
                     >
                         <Image
                             src={CommandMap}

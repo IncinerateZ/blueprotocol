@@ -44,7 +44,13 @@ export default function MapControlLayer({
                     style={{ display: 'flex', justifyContent: 'space-between' }}
                 >
                     <LangPicker DB={DB} lang={lang} setLang={setLang} />
-                    <Link href='/board' className={styles.tooltipParent}>
+                    <Link
+                        href='/board'
+                        className={styles.tooltipParent}
+                        onClick={() => {
+                            window.location = '/board';
+                        }}
+                    >
                         <Image
                             src={CommandQuest}
                             width={35}
