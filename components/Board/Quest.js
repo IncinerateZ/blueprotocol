@@ -1,15 +1,21 @@
 import styles from '@/styles/Board.module.css';
 import Image from 'next/image';
+import { useRouter } from 'next/router';
 import { useState } from 'react';
 
 export default function Quest({ e, DB, loc, displayOverlay }) {
     const [fallbackImage, setFallbackImage] = useState(false);
 
+    const router = useRouter();
+
     return (
         <div
             style={{ display: fallbackImage ? 'none' : 'flex' }}
             className={styles.quest}
-            onClick={() => displayOverlay(e)}
+            onClick={() => {
+                router.push(`/board/${e.id}`, undefined, { shallow: true });
+                displayOverlay(e);
+            }}
         >
             <Image
                 src={
