@@ -243,6 +243,7 @@ export default function QuestViewer({
                 setSelectedQuest(null);
             }}
         >
+            <span>Click anywhere to close</span>
             <div className={styles.questOverlay} ref={overlayRef}>
                 <canvas
                     className={styles.questCanvas}
@@ -259,6 +260,9 @@ export default function QuestViewer({
                         ]?.text
                     }
                 </span>
+                <div className={styles.overlayId}>
+                    <span>ID {selectedBoard.id}</span>
+                </div>
                 <div className={styles.brandDrop}>
                     <span>Quest Viewer</span>
                 </div>
@@ -266,6 +270,7 @@ export default function QuestViewer({
                     <QuestDetails
                         DB={DB}
                         loc={loc}
+                        panel={panels[selectedQuest]}
                         selectedQuest={selectedQuest}
                         setSelectedQuest={setSelectedQuest}
                     />

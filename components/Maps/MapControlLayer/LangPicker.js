@@ -55,6 +55,31 @@ export default function LangPicker({ DB, lang, setLang }) {
                         ))}
                 </div>
             )}
+            {lang === 'en_US' && (
+                <div
+                    style={{
+                        display: 'inline-flex',
+                        position: 'absolute',
+                        flexDirection: 'row',
+                        fontSize: '0.8rem',
+                        transform: 'translate(60%, -150%)',
+                        width: 'fit-content',
+                    }}
+                >
+                    <div
+                        style={{
+                            width: '5px',
+                            height: '5px',
+                            backgroundColor: '#9B1C31',
+                            borderRadius: '100%',
+                            transform: 'translateY(150%)',
+                            marginLeft: '0.2rem',
+                            marginRight: '0.2rem',
+                        }}
+                    ></div>
+                    <div style={{ width: '110px' }}>Machine Translated</div>
+                </div>
+            )}
         </div>
     );
 }

@@ -7,14 +7,47 @@ import CommandQuest from '@/public/CommandQuest.png';
 import Quest from '@/components/Board/Quest';
 import QuestViewer from '@/components/Board/QuestViewer';
 import LangPicker from '@/components/Maps/MapControlLayer/LangPicker';
+import { useRouter } from 'next/router';
 
 export default function Board() {
     const [DB, setDB] = useState(require('@/components/Board/data/DB.json'));
     const [lang, setLang] = useState('ja_JP');
 
     const [panels, setPanels] = useState(null);
+
     const [selectedBoard, setSelectedBoard] = useState(null);
     const [selectedQuest, setSelectedQuest] = useState(null);
+
+    const [firstLoad, setFirstLoad] = useState(true);
+
+    const router = useRouter();
+    useEffect(() => {
+        let slugs = router.query.boardId || [];
+
+        let bid = slugs.shift();
+        let qid = slugs.shift();
+
+        let board = DB.boards[bid] || null;
+        let mission = board?.panels[qid]?.mission_id || null;
+
+        if (!board) return;
+        displayOverlay(board);
+        setSelectedQuest(mission);
+
+        setFirstLoad(false);
+    }, [router]);
+
+    useEffect(() => {
+        if (firstLoad) return;
+        if (!selectedBoard)
+            router.push(`/board`, undefined, {
+                shallow: true,
+            });
+        else if (!selectedQuest)
+            router.push(`/board/${selectedBoard.id}`, undefined, {
+                shallow: true,
+            });
+    }, [selectedBoard, selectedQuest]);
 
     function displayOverlay(board) {
         setSelectedBoard(board);
@@ -30,8 +63,12 @@ export default function Board() {
                         onMouseDown={(e) => {
                             e.stopPropagation();
                             setTimeout(() => {
-                                setSelectedQuest(
-                                    board.panels[panel].mission_id,
+                                let mission = board.panels[panel].mission_id;
+                                setSelectedQuest(mission);
+                                router.push(
+                                    `/board/${board.id}/${mission}`,
+                                    undefined,
+                                    { shallow: true },
                                 );
                             }, 10);
                         }}

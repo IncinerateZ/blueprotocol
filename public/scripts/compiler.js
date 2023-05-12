@@ -1,4 +1,4 @@
-//2023-05-10
+//2023-05-12
 
 const fs = require('fs');
 
@@ -417,7 +417,22 @@ const boards = {
     Loc: { ja_JP: {}, en_US: {} },
     Sources: {},
     srcQuests: {},
+    LocationNames: { ...DB.LocationNames },
 };
+
+let _boards = {};
+let _quests = {};
+for (let board of boards.boards) _boards[board.id] = board;
+for (let panel of boards.panels) {
+    if (!_boards[panel.board_id].panels) _boards[panel.board_id].panels = {};
+    _boards[panel.board_id].panels[panel.id] = { ...panel };
+}
+for (let quest of boards.quests) _quests[quest.id] = quest;
+
+boards.boards = _boards;
+boards.quests = _quests;
+
+delete boards.panels;
 
 const srcQuests = require('./apiext/quests.json');
 let srcQ = {};

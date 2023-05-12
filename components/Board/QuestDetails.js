@@ -3,10 +3,28 @@ import styles from '@/styles/Board.module.css';
 export default function QuestDetails({
     DB,
     loc,
+    panel,
     selectedQuest,
     setSelectedQuest,
 }) {
+    // 0-3, 11, 17-19,: item / money
+    // 7: mount
+    // 9: emotion
+    // 10: clothing
+    // 14: achievement
+    // 15: memory
+    // 20: craft
+    // 27: craft set
+    // 28: board
+    // 30: warehouse ability recipe
+    // 33: pick reward
+
     const quest = DB.quests[selectedQuest];
+
+    panel = panel.panel;
+
+    let rewards = panel.reward_ids;
+    console.log(rewards);
 
     return (
         <div
@@ -32,6 +50,7 @@ export default function QuestDetails({
                     }
                 </h5>
                 <p>0 / {quest.quest_achievement_condition.complete_value}</p>
+                <span>ID {quest.id}</span>
             </div>
         </div>
     );
