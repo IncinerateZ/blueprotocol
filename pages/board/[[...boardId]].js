@@ -74,10 +74,11 @@ export default function Board() {
                                 );
 
                                 if (prevSelectedQuest) {
-                                    let prev =
-                                        document.getElementById(
-                                            prevSelectedQuest,
-                                        ).style;
+                                    let prev = document.getElementById(
+                                        prevSelectedQuest,
+                                    ) || { style: {} };
+
+                                    prev = prev.style;
 
                                     prev.filter = '';
                                     prev.borderWidth = '3px';
