@@ -1,18 +1,18 @@
-//2023-05-12
+//2023-05-13
 
 const fs = require('fs');
 
-const MapTypeMapping = { field: 'fld', dungeon: 'dng' };
+const MapTypeMapping = { field: 'fld', dungeon: 'dng', pat: 'pat' };
 
 const DB = {
-    EnemySets: { field: {}, dungeon: {} },
+    EnemySets: { field: {}, dungeon: {}, pat: {} },
     EnemyHabitats: {},
     Enemies: {},
     Items: {},
     Loc: { ja_JP: {}, en_US: {} },
     LocationNames: { en_US: {}, ja_JP: {} },
-    POI: { cty: {}, fld: {}, dng: {} },
-    Treasures: { fld: {}, dng: {} },
+    POI: { cty: {}, fld: {}, dng: {}, pat: {} },
+    Treasures: { fld: {}, dng: {}, pat: {} },
     Boards: {},
 };
 
@@ -68,8 +68,9 @@ for (let location of require('./Text/LocationName.json')[0].Properties
 DB.LocationNames.en_US = { ...require('./LocationNames_EN.json') };
 
 for (let mapType in DB.EnemySets) {
-    let t = require(`./Blueprints/Manager/EnemySet/EnemySet_${mapType}.json`)[0]
-        .Properties.EnemySets;
+    let t = require(`./Blueprints/Manager/EnemySet/EnemySet_${
+        mapType === 'pat' ? 'field' : mapType
+    }.json`)[0].Properties.EnemySets;
     for (let set of t) DB.EnemySets[mapType][set.EnemySetId] = set;
 
     let baseMapDir = `./Maps/${MapTypeMapping[mapType]}`;
@@ -78,10 +79,9 @@ for (let mapType in DB.EnemySets) {
             try {
                 const data = JSON.parse(
                     fs.readFileSync(
-                        `${baseMapDir}/${map}/sublevel/${map.replace(
-                            'dng',
-                            'pub',
-                        )}_${cardinal}EN.json`,
+                        `${baseMapDir}/${map}/sublevel/${map
+                            .replace('dng', 'pub')
+                            .replace('pat', 'pub')}_${cardinal}EN.json`,
                         'utf8',
                     ),
                 );
@@ -131,10 +131,9 @@ for (let mapType in DB.POI) {
         if (!DB.POI[map]) DB.POI[map] = { temp: {}, dat: [] };
         try {
             let data = fs.readFileSync(
-                `${baseMapDir}/${map}/sublevel/${map.replace(
-                    'dng',
-                    'pub',
-                )}_SC.json`,
+                `${baseMapDir}/${map}/sublevel/${map
+                    .replace('dng', 'pub')
+                    .replace('pat', 'pub')}_SC.json`,
                 'utf8',
                 (err) => {},
             );
@@ -170,16 +169,22 @@ for (let mapType in DB.POI) {
                 if (
                     (dat.Type === 'BP_DungeonActivator_C' ||
                         dat.Type === 'BP_DungeonEntrance_C' ||
-                        dat.Type === 'SBFieldTravelTrigger') &&
-                    dat.Properties.TravelFieldMapName
+                        dat.Type === 'SBFieldTravelTrigger' ||
+                        dat.Type.includes('FieldTravelInteraction_')) &&
+                    (dat.Properties.TravelFieldMapName ||
+                        dat.Properties.TravelFieldGameContentId)
                 ) {
                     DB.POI[map].temp[dat.Name] = {
                         ...DB.POI[map].temp[dat.Name],
-                        title: dat.Properties.TravelFieldMapName.split('_')[0],
+                        title: (
+                            dat.Properties.TravelFieldMapName ||
+                            dat.Properties.TravelFieldGameContentId
+                        ).split('_')[0],
                     };
                 }
                 if (
-                    dat.Name === 'CollisionComp' &&
+                    (dat.Name === 'CollisionComp' ||
+                        dat.Name === 'SceneComponent') &&
                     dat.Properties?.RelativeLocation &&
                     !dat.Outer.includes('Utillity') &&
                     !dat.Outer.includes('Blocking') &&
@@ -210,10 +215,9 @@ for (let mapType in DB.POI) {
         for (let cardinal of ['C_', 'N_', 'E_', 'S_', 'W_', '']) {
             try {
                 data = fs.readFileSync(
-                    `${baseMapDir}/${map}/sublevel/${map.replace(
-                        'dng',
-                        'pub',
-                    )}_${cardinal}PU.json`,
+                    `${baseMapDir}/${map}/sublevel/${map
+                        .replace('dng', 'pub')
+                        .replace('pat', 'pub')}_${cardinal}PU.json`,
                     'utf8',
                     (err) => {},
                 );
@@ -244,10 +248,9 @@ for (let mapType in DB.POI) {
             } catch (err) {}
             try {
                 data = fs.readFileSync(
-                    `${baseMapDir}/${map}/sublevel/${map.replace(
-                        'dng',
-                        'pub',
-                    )}_${cardinal}Nappo.json`,
+                    `${baseMapDir}/${map}/sublevel/${map
+                        .replace('dng', 'pub')
+                        .replace('pat', 'pub')}_${cardinal}Nappo.json`,
                     'utf8',
                     (err) => {},
                 );
@@ -264,10 +267,9 @@ for (let mapType in DB.POI) {
             } catch (err) {}
             try {
                 data = fs.readFileSync(
-                    `${baseMapDir}/${map}/sublevel/${map.replace(
-                        'dng',
-                        'pub',
-                    )}_${cardinal}SC.json`,
+                    `${baseMapDir}/${map}/sublevel/${map
+                        .replace('dng', 'pub')
+                        .replace('pat', 'pub')}_${cardinal}SC.json`,
                     'utf8',
                     (err) => {},
                 );
@@ -278,7 +280,8 @@ for (let mapType in DB.POI) {
                             o.Type.includes('_RaidGate') ||
                             o.Type.includes('FieldTravel')) &&
                         (o.Properties.TravelFieldMapName ||
-                            o.Properties.DungeonID)
+                            o.Properties.DungeonID ||
+                            o.Properties.TravelFieldGameContentId)
                     ) {
                         DB.POI[map].temp[o.Name] = {
                             ...DB.POI[map].temp[o.Name],
@@ -325,6 +328,19 @@ for (let mapType in DB.POI) {
 
                         if (!DB.POI[map].temp[o.Outer].selector)
                             delete DB.POI[map].temp[o.Outer];
+                    }
+                    if (
+                        (o.Type === 'BP_DungeonActivator_C' ||
+                            o.Type === 'BP_DungeonEntrance_C' ||
+                            o.Type === 'SBFieldTravelTrigger') &&
+                        o.Properties.TravelFieldMapName
+                    ) {
+                        DB.POI[map].temp[o.Name] = {
+                            ...DB.POI[map].temp[o.Name],
+                            title: o.Properties.TravelFieldMapName.split(
+                                '_',
+                            )[0],
+                        };
                     }
                 }
             } catch (err) {

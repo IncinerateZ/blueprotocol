@@ -171,8 +171,8 @@ function entitySummary(DB, entity, lang, showLeak) {
                         }`,
                     );
                 else {
-                    console.log(entity.metadata.title);
-                    console.log(treasure);
+                    // console.log(entity.metadata.title);
+                    // console.log(treasure);
                 }
 
                 res.push(page);

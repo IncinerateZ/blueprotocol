@@ -1,5 +1,5 @@
 const data = {
-    asterliese: {
+    cty01: {
         display_name: 'Asterliese',
         tags: ['city'],
         map_url: './UI_MapCty001.webp',
@@ -8,7 +8,7 @@ const data = {
             new: { display_name: 'New Marker', arr: [] },
         },
     },
-    skyquakefield: {
+    fld001: {
         display_name: 'Asteria Plains',
         map_url: './UI_MapFld001.webp',
         tags: [
@@ -24,7 +24,7 @@ const data = {
             new: { display_name: 'New Marker', arr: [] },
         },
     },
-    dragonclaw: {
+    dng009: {
         display_name: "Giant Dragon's Claw Marks",
         map_url: './UI_Mapdng009.webp',
         tags: ['dungeon'],
@@ -33,7 +33,7 @@ const data = {
             new: { display_name: 'New Marker', arr: [] },
         },
     },
-    bahamarhighlands: {
+    fld002: {
         display_name: 'Bahamar Highlands',
         map_url: './UI_MapFld002.webp',
         tags: [
@@ -49,7 +49,7 @@ const data = {
             new: { display_name: 'New Marker', arr: [] },
         },
     },
-    montegnorvalley: {
+    fld003: {
         display_name: 'Montegnor Valley',
         map_url: './UI_Map_Fld003.webp',
         tags: ['yamamoto', 'field'],
@@ -58,7 +58,7 @@ const data = {
             new: { display_name: 'New Marker', arr: [] },
         },
     },
-    erstgreensands: {
+    fld004: {
         display_name: 'Erstgreen Sands',
         map_url: './UI_Map_Fld004.webp',
         tags: ['shimooka', 'field'],
@@ -67,7 +67,7 @@ const data = {
             new: { display_name: 'New Marker', arr: [] },
         },
     },
-    salamzahd: {
+    cty02: {
         display_name: 'Salamzahd',
         map_url: './UI_MapCty002.webp',
         tags: ['suzuki', 'city'],
@@ -76,15 +76,51 @@ const data = {
             new: { display_name: 'New Marker', arr: [] },
         },
     },
-    // '007': {
-    //     display_name: '007',
-    //     map_url: './UI_Mapdng007.png',
-    //     tags: ['suzuki', 'city'],
-    //     map_id: 'dng007',
-    //     markers: {
-    //         new: { display_name: 'New Marker', arr: [] },
-    //     },
-    // },
+    dng007: {
+        display_name: "Chained One's Spawnery",
+        map_url: './UI_Mapdng007.webp',
+        tags: ['suzuki', 'dungeon'],
+        map_id: 'dng007',
+        markers: {
+            new: { display_name: 'New Marker', arr: [] },
+        },
+    },
+    pat0201: {
+        display_name: 'pat0201',
+        map_url: './UI_Mappat0201.webp',
+        tags: ['gpufry', 'dungeon'],
+        map_id: 'pat0201',
+        markers: {
+            new: { display_name: 'New Marker', arr: [] },
+        },
+    },
+    pat0801: {
+        display_name: 'pat0801',
+        map_url: './UI_Mappat0801.webp',
+        tags: ['dungeon'],
+        map_id: 'pat0801',
+        markers: {
+            new: { display_name: 'New Marker', arr: [] },
+        },
+    },
+    pat0802: {
+        display_name: 'pat0802',
+        map_url: './UI_Mappat0802.webp',
+        tags: ['dungeon'],
+        map_id: 'pat0802',
+        markers: {
+            new: { display_name: 'New Marker', arr: [] },
+        },
+    },
+    pat0803: {
+        display_name: 'pat0803',
+        map_url: './UI_Mappat0803.webp',
+        tags: ['dungeon'],
+        map_id: 'pat0803',
+        markers: {
+            new: { display_name: 'New Marker', arr: [] },
+        },
+    },
 };
 
 export default data;

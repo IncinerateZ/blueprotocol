@@ -86,7 +86,7 @@ export default function Board() {
     return (
         <>
             <Head>
-                <title>Adventure Board | Blue Protocol Resource</title>
+                <title>Adventure Boards | Blue Protocol Resource</title>
             </Head>
             <div className={styles.pageBg}>
                 <Nav></Nav>
