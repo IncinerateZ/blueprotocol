@@ -86,7 +86,7 @@ const data = {
         },
     },
     pat0201: {
-        display_name: 'pat0201',
+        display_name: 'Ruins of Borwam',
         map_url: './UI_Mappat0201.webp',
         tags: ['gpufry', 'dungeon'],
         map_id: 'pat0201',
@@ -95,7 +95,7 @@ const data = {
         },
     },
     pat0801: {
-        display_name: 'pat0801',
+        display_name: 'Sunlit Timberpath',
         map_url: './UI_Mappat0801.webp',
         tags: ['dungeon'],
         map_id: 'pat0801',
@@ -104,7 +104,7 @@ const data = {
         },
     },
     pat0802: {
-        display_name: 'pat0802',
+        display_name: 'Torchlight Thickets',
         map_url: './UI_Mappat0802.webp',
         tags: ['dungeon'],
         map_id: 'pat0802',
@@ -113,7 +113,7 @@ const data = {
         },
     },
     pat0803: {
-        display_name: 'pat0803',
+        display_name: 'Everfall Forest',
         map_url: './UI_Mappat0803.webp',
         tags: ['dungeon'],
         map_id: 'pat0803',
