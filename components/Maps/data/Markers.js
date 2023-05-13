@@ -78,7 +78,7 @@ const data = {
     },
     dng007: {
         display_name: "Chained One's Spawnery",
-        map_url: './UI_Mapdng007.png',
+        map_url: './UI_Mapdng007.webp',
         tags: ['suzuki', 'dungeon'],
         map_id: 'dng007',
         markers: {
@@ -87,7 +87,7 @@ const data = {
     },
     pat0201: {
         display_name: 'pat0201',
-        map_url: './UI_Mappat0201_F1.webp',
+        map_url: './UI_Mappat0201.webp',
         tags: ['gpufry', 'dungeon'],
         map_id: 'pat0201',
         markers: {
