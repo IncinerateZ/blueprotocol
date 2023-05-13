@@ -159,8 +159,6 @@ export default function MapPicker({
                                 }
                                 onClick={() => {
                                     searchRef.current.blur();
-                                    console.log(maps);
-                                    console.log(e);
                                     setChosenMap(maps[e][0]);
                                     resetSearch();
                                 }}
