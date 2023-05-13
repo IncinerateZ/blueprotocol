@@ -4,6 +4,7 @@ const fs = require('fs');
 
 const MapTypeMapping = { field: 'fld', dungeon: 'dng', pat: 'pat' };
 
+console.log('Defining DB...');
 const DB = {
     EnemySets: { field: {}, dungeon: {}, pat: {} },
     EnemyHabitats: {},
@@ -15,6 +16,20 @@ const DB = {
     Treasures: { fld: {}, dng: {}, pat: {} },
     Boards: {},
 };
+
+console.log('Importing defaults...');
+let _mapnames = require('./maps_extended.json');
+let markers = {};
+
+let mapnames = {};
+
+for (let mapname of _mapnames) {
+    if (mapname.id)
+        mapnames[mapname.map_id.toLowerCase()] = {
+            name: mapname.name_en || mapname.name_translated,
+            map_id: mapname.map_id,
+        };
+}
 
 for (let board of require('./apiext/master_adventure_board.json'))
     DB.Boards[board.id] = board.name;
@@ -67,6 +82,7 @@ for (let location of require('./Text/LocationName.json')[0].Properties
 
 DB.LocationNames.en_US = { ...require('./LocationNames_EN.json') };
 
+console.log('Compiling...');
 for (let mapType in DB.EnemySets) {
     let t = require(`./Blueprints/Manager/EnemySet/EnemySet_${
         mapType === 'pat' ? 'field' : mapType
@@ -137,6 +153,27 @@ for (let mapType in DB.POI) {
                 'utf8',
                 (err) => {},
             );
+
+            if (map.includes('cty')) {
+                let mn = map.replace('y', 'y0');
+
+                if (!markers[mn])
+                    markers[mn] = {
+                        display_name: mapnames[mn].name,
+                        map_url: `./UI_Map${mapnames[mn].map_id}.webp`,
+                        tags: ['city'],
+                        map_id: map.toLowerCase(),
+                        markers: {
+                            new: { display_name: 'New Marker', arr: [] },
+                        },
+                    };
+
+                markers[mn].tags = [
+                    ...markers[mn].tags,
+                    mapnames[smn.toLowerCase()].name || mn.toLowerCase(),
+                ];
+            }
+
             data = JSON.parse(data);
             for (let dat of data) {
                 if (
@@ -221,6 +258,36 @@ for (let mapType in DB.POI) {
                     'utf8',
                     (err) => {},
                 );
+
+                let smn = `${map}_${cardinal.substring(0, 1)}`;
+                smn = smn.substring(
+                    0,
+                    smn.charAt(smn.length - 1) === '_'
+                        ? smn.length - 1
+                        : smn.length,
+                );
+                let mn = smn.split('_')[0];
+
+                if (!markers[mn])
+                    markers[mn] = {
+                        display_name: mapnames[mn].name,
+                        map_url: `./UI_Map${mapnames[mn].map_id}.webp`,
+                        tags: [
+                            { fld: 'field', dng: 'dungeon', pat: 'dungeon' }[
+                                mn.substring(0, 3)
+                            ],
+                        ],
+                        map_id: mn.toLowerCase(),
+                        markers: {
+                            new: { display_name: 'New Marker', arr: [] },
+                        },
+                    };
+
+                markers[mn].tags = [
+                    ...markers[mn].tags,
+                    mapnames[smn.toLowerCase()].name || mn.toLowerCase(),
+                ];
+
                 data = JSON.parse(data);
                 for (let o of data) {
                     if (o.Outer && o.Properties?.RelativeLocation) {
@@ -422,9 +489,11 @@ for (let map in DB.POI) {
             last--;
         }
     }
-    console.log(map);
+    // console.log(map);
 }
 
+// console.log(JSON.stringify(markers, null, 4));
+console.log('Compiled. \nBuilding Boards...');
 //boards
 const boards = {
     boards: require('./apiext/master_adventure_board.json'),
@@ -503,8 +572,12 @@ for (let loc in boards.Loc) {
     }
 }
 
+console.log('Boards Built... \nWriting Files...');
+
 save(`./_out`);
 save(`E:/Main Files/Projects/next/bp/components/Maps/data`, true);
+
+console.log('Finished.');
 
 function save(dir, condense = false) {
     if (condense) {
@@ -520,6 +593,11 @@ function save(dir, condense = false) {
             JSON.stringify(boards),
             'utf8',
             () => {},
+        );
+
+        fs.writeFileSync(
+            'E:/Main Files/Projects/next/bp/components/Maps/data/Markers.json',
+            `${JSON.stringify(markers, null, 4)}`,
         );
     } else {
         for (let d in DB)

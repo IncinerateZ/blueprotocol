@@ -1,0 +1,191 @@
+{
+    "cty001": {
+        "display_name": "Asterliese",
+        "map_url": "./UI_MapCty001.webp",
+        "tags": [
+            "city"
+        ],
+        "map_id": "cty01",
+        "markers": {
+            "new": {
+                "display_name": "New Marker",
+                "arr": []
+            }
+        }
+    },
+    "cty002": {
+        "display_name": "Salamzahd Oasis",
+        "map_url": "./UI_MapCty002.webp",
+        "tags": [
+            "city"
+        ],
+        "map_id": "cty02",
+        "markers": {
+            "new": {
+                "display_name": "New Marker",
+                "arr": []
+            }
+        }
+    },
+    "fld001": {
+        "display_name": "Asteria Plains",
+        "map_url": "./UI_MapFld001.webp",
+        "tags": [
+            "field",
+            "Andra Basin",
+            "Minster Hills",
+            "Skyquake Fields",
+            "fld001"
+        ],
+        "map_id": "fld001",
+        "markers": {
+            "new": {
+                "display_name": "New Marker",
+                "arr": []
+            }
+        }
+    },
+    "fld002": {
+        "display_name": "Bahamar Highlands",
+        "map_url": "./UI_MapFld002.webp",
+        "tags": [
+            "field",
+            "Quellmount's Foot",
+            "Godswatch Rise",
+            "Fier Highwaters"
+        ],
+        "map_id": "fld002",
+        "markers": {
+            "new": {
+                "display_name": "New Marker",
+                "arr": []
+            }
+        }
+    },
+    "fld003": {
+        "display_name": "Montegnor Valley",
+        "map_url": "./UI_MapFld003.webp",
+        "tags": [
+            "field",
+            "Rietz Tradeway",
+            "Melisos River Basin",
+            "Abandoned Galley Ridge Road"
+        ],
+        "map_id": "fld003",
+        "markers": {
+            "new": {
+                "display_name": "New Marker",
+                "arr": []
+            }
+        }
+    },
+    "fld004": {
+        "display_name": "Evergreen Desert",
+        "map_url": "./UI_MapFld004.webp",
+        "tags": [
+            "field",
+            "Old Rainfall Road",
+            "Hollowed Tempest",
+            "Shimmering Valley",
+            "Breathless Wasteland",
+            "Olvid Plains"
+        ],
+        "map_id": "fld004",
+        "markers": {
+            "new": {
+                "display_name": "New Marker",
+                "arr": []
+            }
+        }
+    },
+    "dng007": {
+        "display_name": "Chained One's Spawnery",
+        "map_url": "./UI_Mapdng007.webp",
+        "tags": [
+            "dungeon",
+            "Chained One's Spawnery"
+        ],
+        "map_id": "dng007",
+        "markers": {
+            "new": {
+                "display_name": "New Marker",
+                "arr": []
+            }
+        }
+    },
+    "dng009": {
+        "display_name": "Dragon's Rive",
+        "map_url": "./UI_Mapdng009.webp",
+        "tags": [
+            "dungeon",
+            "Dragon's Rive"
+        ],
+        "map_id": "dng009",
+        "markers": {
+            "new": {
+                "display_name": "New Marker",
+                "arr": []
+            }
+        }
+    },
+    "pat0201": {
+        "display_name": "Ruins of Borwam",
+        "map_url": "./UI_Mappat0201.webp",
+        "tags": [
+            "dungeon",
+            "Ruins of Borwam"
+        ],
+        "map_id": "pat0201",
+        "markers": {
+            "new": {
+                "display_name": "New Marker",
+                "arr": []
+            }
+        }
+    },
+    "pat0801": {
+        "display_name": "Sunlit Timberpath",
+        "map_url": "./UI_Mappat0801.webp",
+        "tags": [
+            "dungeon",
+            "Sunlit Timberpath"
+        ],
+        "map_id": "pat0801",
+        "markers": {
+            "new": {
+                "display_name": "New Marker",
+                "arr": []
+            }
+        }
+    },
+    "pat0802": {
+        "display_name": "Torchlight Thickets",
+        "map_url": "./UI_Mappat0802.webp",
+        "tags": [
+            "dungeon",
+            "Torchlight Thickets"
+        ],
+        "map_id": "pat0802",
+        "markers": {
+            "new": {
+                "display_name": "New Marker",
+                "arr": []
+            }
+        }
+    },
+    "pat0803": {
+        "display_name": "Everfall Forest",
+        "map_url": "./UI_Mappat0803.webp",
+        "tags": [
+            "dungeon",
+            "Everfall Forest"
+        ],
+        "map_id": "pat0803",
+        "markers": {
+            "new": {
+                "display_name": "New Marker",
+                "arr": []
+            }
+        }
+    }
+}
