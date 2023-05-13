@@ -20,12 +20,12 @@ import { useRouter } from 'next/router';
 
 export default function Map() {
     const { asPath, push } = useRouter();
-    const data = require('./data/Markers').default;
+    const data = require('./data/Markers.json');
     const mapRef = useRef();
     const imgOvRef = useRef();
 
     const [chosenMap, setChosenMap] = useState(
-        asPath.split('#')[1] in data ? asPath.split('#')[1] : 'cty01',
+        asPath.split('#')[1] in data ? asPath.split('#')[1] : 'cty001',
     );
     const [markers, setMarkers] = useState({});
     const [mapLoaded, setMapLoaded] = useState(false);
