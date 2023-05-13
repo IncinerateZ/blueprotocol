@@ -25,7 +25,11 @@ export default function MapPicker({
         if (chosenMap === '') return;
         setMapSearch(
             lang === 'ja_JP' && DB
-                ? DB.LocationNames[lang][data[chosenMap].map_id]
+                ? DB.LocationNames[lang][
+                      data[chosenMap].map_id
+                          .replace('dng', 'pub')
+                          .replace('pat', 'pub')
+                  ]
                 : data[chosenMap].display_name,
         );
         setSSHighlight(0);
@@ -46,7 +50,11 @@ export default function MapPicker({
                 for (let t of maps[k]) {
                     let name =
                         lang === 'ja_JP'
-                            ? DB.LocationNames[lang][data[t].map_id]
+                            ? DB.LocationNames[lang][
+                                  data[t].map_id
+                                      .replace('dng', 'pub')
+                                      .replace('pat', 'pub')
+                              ]
                             : data[t].display_name;
 
                     res[name] = ks;
@@ -57,7 +65,11 @@ export default function MapPicker({
                     for (let t of maps[k]) {
                         let name =
                             lang === 'ja_JP'
-                                ? DB.LocationNames[lang][data[t].map_id]
+                                ? DB.LocationNames[lang][
+                                      data[t].map_id
+                                          .replace('dng', 'pub')
+                                          .replace('pat', 'pub')
+                                  ]
                                 : data[t].display_name;
 
                         if (res[name] >= 0) continue;
@@ -102,7 +114,11 @@ export default function MapPicker({
                     value={
                         doSearch || !DB || lang !== 'ja_JP'
                             ? mapSearch
-                            : DB?.LocationNames[lang]?.[data[chosenMap].map_id]
+                            : DB?.LocationNames[lang]?.[
+                                  data[chosenMap].map_id
+                                      .replace('dng', 'pub')
+                                      .replace('pat', 'pub')
+                              ]
                     }
                     onChange={(e) => {
                         handleMapSearch(e);
@@ -143,6 +159,8 @@ export default function MapPicker({
                                 }
                                 onClick={() => {
                                     searchRef.current.blur();
+                                    console.log(maps);
+                                    console.log(e);
                                     setChosenMap(maps[e][0]);
                                     resetSearch();
                                 }}

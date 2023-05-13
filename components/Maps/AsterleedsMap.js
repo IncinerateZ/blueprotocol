@@ -252,10 +252,11 @@ export default function Map() {
         //load map names and tags
         for (let k in data) {
             d[data[k].display_name] = [k];
-            d[DB_.LocationNames[lang][data[k].map_id]] = [
-                ...(d[DB_.LocationNames[lang][data[k].map_id]] || []),
-                k,
-            ];
+            let dblocname =
+                DB_.LocationNames[lang][
+                    data[k].map_id.replace('dng', 'pub').replace('pat', 'pub')
+                ];
+            d[dblocname] = [...(d[dblocname] || []), k];
             for (let _k of data[k].tags) d[_k] = [...(d[_k] || []), k];
         }
 
@@ -336,8 +337,11 @@ export default function Map() {
                 <title>
                     {!DB || lang !== 'ja_JP'
                         ? data[chosenMap]?.display_name
-                        : DB.LocationNames[lang][data[chosenMap].map_id] ||
-                          'Loading'}{' '}
+                        : DB.LocationNames[lang][
+                              data[chosenMap].map_id
+                                  .replace('dng', 'pub')
+                                  .replace('pat', 'pub')
+                          ] || 'Loading'}{' '}
                     Map | Blue Protocol Resource
                 </title>
             </Head>
