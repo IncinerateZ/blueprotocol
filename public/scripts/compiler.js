@@ -489,7 +489,7 @@ for (let map in DB.POI) {
             last--;
         }
     }
-    // console.log(map);
+    console.log(map);
 }
 
 // console.log(JSON.stringify(markers, null, 4));

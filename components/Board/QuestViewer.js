@@ -15,8 +15,6 @@ export default function QuestViewer({
     const canvasRef = useRef(null);
     const overlayRef = useRef(null);
 
-    useEffect(() => {}, [selectedQuest]);
-
     useEffect(() => {
         var offSets = { x: 0, y: 0 };
         var dragOffsets = { x: 0, y: 0 };

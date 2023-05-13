@@ -17,6 +17,7 @@ export default function Board() {
 
     const [selectedBoard, setSelectedBoard] = useState(null);
     const [selectedQuest, setSelectedQuest] = useState(null);
+    const [prevSelectedQuest, setPrevSelectedQuest] = useState(null);
 
     const [firstLoad, setFirstLoad] = useState(true);
 
@@ -65,11 +66,27 @@ export default function Board() {
                             setTimeout(() => {
                                 let mission = board.panels[panel].mission_id;
                                 setSelectedQuest(mission);
+                                setPrevSelectedQuest(mission);
                                 router.push(
                                     `/board/${board.id}/${mission}`,
                                     undefined,
                                     { shallow: true },
                                 );
+
+                                if (prevSelectedQuest) {
+                                    let prev =
+                                        document.getElementById(
+                                            prevSelectedQuest,
+                                        ).style;
+
+                                    prev.filter = '';
+                                    prev.borderWidth = '3px';
+                                }
+
+                                let curr =
+                                    document.getElementById(mission).style;
+                                curr.filter = 'brightness(120%)';
+                                curr.borderWidth = '4px';
                             }, 10);
                         }}
                     ></div>
