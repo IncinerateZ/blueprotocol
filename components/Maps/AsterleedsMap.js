@@ -25,7 +25,7 @@ export default function Map() {
     const imgOvRef = useRef();
 
     const [chosenMap, setChosenMap] = useState(
-        asPath.split('#')[1] in data ? asPath.split('#')[1] : 'asterliese',
+        asPath.split('#')[1] in data ? asPath.split('#')[1] : 'cty01',
     );
     const [markers, setMarkers] = useState({});
     const [mapLoaded, setMapLoaded] = useState(false);
