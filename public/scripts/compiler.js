@@ -168,9 +168,11 @@ for (let mapType in DB.POI) {
                         },
                     };
 
+                console.log(mn);
+
                 markers[mn].tags = [
                     ...markers[mn].tags,
-                    mapnames[smn.toLowerCase()].name || mn.toLowerCase(),
+                    mapnames[mn.toLowerCase()].name || mn.toLowerCase(),
                 ];
             }
 
@@ -248,7 +250,9 @@ for (let mapType in DB.POI) {
                     };
                 }
             }
-        } catch (err) {}
+        } catch (err) {
+            err.errno !== -4058 && console.log(err);
+        }
         for (let cardinal of ['C_', 'N_', 'E_', 'S_', 'W_', '']) {
             try {
                 data = fs.readFileSync(
