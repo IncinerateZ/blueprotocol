@@ -42,6 +42,25 @@ export default function Selector({
                         : selectors[e][s].display_name]: !temp[e][s].selected,
                 });
             }}
+            onKeyDown={(ev) => {
+                if (ev.code !== 'Enter' && ev.code !== 'Space') return;
+                let temp = { ...selectors };
+                temp[e][s].selected = !temp[e][s].selected;
+                setSelectors({ ...temp });
+                setSelectorsSource({
+                    ...selectorsSource,
+                    ...temp,
+                });
+                setExcludedSelectors({
+                    ...excludedSelectors,
+                    [['enemy', 'elite'].includes(selectors[e][s].type)
+                        ? DB.Loc.ja_JP.enemyparam_text.texts[
+                              selectors[e][s].display_name
+                          ].text
+                        : selectors[e][s].display_name]: !temp[e][s].selected,
+                });
+            }}
+            tabIndex={0}
         >
             {mapIcons && (
                 <img

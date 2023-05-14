@@ -26,11 +26,16 @@ export default function LangPicker({ DB, lang, setLang }) {
     return (
         <div className={`${styles.langPicker} ${styles.noSelect}`}>
             <div
+                tabIndex={0}
                 className={styles.langPicker_display}
                 style={{
                     borderBottomLeftRadius: doLangDrop ? '0' : '5px',
                 }}
                 onClick={() => {
+                    setDoLangDrop((p) => !p);
+                }}
+                onKeyDown={(ev) => {
+                    if (ev.code !== 'Enter' && ev.code !== 'Space') return;
                     setDoLangDrop((p) => !p);
                 }}
             >
@@ -62,6 +67,15 @@ export default function LangPicker({ DB, lang, setLang }) {
                                 onClick={() => {
                                     pickLang(lang_);
                                 }}
+                                onKeyDown={(ev) => {
+                                    if (
+                                        ev.code !== 'Enter' &&
+                                        ev.code !== 'Space'
+                                    )
+                                        return;
+                                    pickLang(lang_);
+                                }}
+                                tabIndex={0}
                             >
                                 {ReadableString[lang_]}
                             </div>
