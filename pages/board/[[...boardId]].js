@@ -51,57 +51,56 @@ export default function Board() {
             });
     }, [selectedBoard, selectedQuest]);
 
+    function handleSelect(board, panel) {
+        setTimeout(() => {
+            let mission = board.panels[panel].mission_id;
+
+            setSelectedQuest(mission);
+            setPrevSelectedQuest(mission);
+
+            setTimeout(() => {
+                document.getElementById('qdc').setAttribute('loading', 'auto');
+                document.getElementById('qdc').style.pointerEvents = 'auto';
+            }, 1);
+
+            router.push(`/board/${board.id}/${mission}`, undefined, {
+                shallow: true,
+            });
+
+            if (prevSelectedQuest) {
+                let prev = document.getElementById(prevSelectedQuest) || {
+                    style: {},
+                };
+
+                prev = prev.style;
+
+                prev.filter = '';
+                prev.borderWidth = '3px';
+            }
+
+            let curr = document.getElementById(mission).style;
+            curr.filter = 'brightness(120%)';
+            curr.borderWidth = '4px';
+        }, 1);
+    }
+
     function displayOverlay(board) {
         setSelectedBoard(board);
+        if (!board) return;
         let panels = {};
         for (let panel in board.panels) {
             panels[panel] = {
                 panel: board.panels[panel],
                 element: (
                     <div
+                        tabIndex={1}
                         key={panel}
                         id={panel}
                         className={styles.panelNode}
                         onMouseDown={(e) => {
                             e.stopPropagation();
 
-                            setTimeout(() => {
-                                let mission = board.panels[panel].mission_id;
-
-                                setSelectedQuest(mission);
-                                setPrevSelectedQuest(mission);
-
-                                setTimeout(() => {
-                                    document
-                                        .getElementById('qdc')
-                                        .setAttribute('loading', 'auto');
-                                    document.getElementById(
-                                        'qdc',
-                                    ).style.pointerEvents = 'auto';
-                                }, 1);
-
-                                router.push(
-                                    `/board/${board.id}/${mission}`,
-                                    undefined,
-                                    { shallow: true },
-                                );
-
-                                if (prevSelectedQuest) {
-                                    let prev = document.getElementById(
-                                        prevSelectedQuest,
-                                    ) || { style: {} };
-
-                                    prev = prev.style;
-
-                                    prev.filter = '';
-                                    prev.borderWidth = '3px';
-                                }
-
-                                let curr =
-                                    document.getElementById(mission).style;
-                                curr.filter = 'brightness(120%)';
-                                curr.borderWidth = '4px';
-                            }, 1);
+                            handleSelect(board, panel);
                         }}
                         onMouseEnter={() => {
                             let mission = board.panels[panel].mission_id;
@@ -130,6 +129,11 @@ export default function Board() {
                             let qdc = document.getElementById('qdc');
                             if (qdc && qdc.getAttribute('loading') !== 'auto')
                                 qdc.setAttribute('loading', false);
+                        }}
+                        onKeyDown={(ev) => {
+                            if (ev.code !== 'Enter' && ev.code !== 'Space')
+                                return;
+                            handleSelect(board, panel);
                         }}
                     ></div>
                 ),

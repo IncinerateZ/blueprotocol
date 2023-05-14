@@ -16,6 +16,15 @@ export default function Quest({ e, DB, loc, displayOverlay }) {
                 router.push(`/board/${e.id}`, undefined, { shallow: true });
                 displayOverlay(e);
             }}
+            onKeyDown={(ev) => {
+                if (ev.code !== 'Enter' && ev.code !== 'Space') return;
+                displayOverlay(null);
+                setTimeout(() => {
+                    router.push(`/board/${e.id}`, undefined, { shallow: true });
+                    displayOverlay(e);
+                }, 0);
+            }}
+            tabIndex={2}
         >
             <Image
                 src={

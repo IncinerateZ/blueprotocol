@@ -264,7 +264,7 @@ export default function QuestViewer({
                 <div className={styles.brandDrop}>
                     <span>Quest Viewer</span>
                 </div>
-                {selectedQuest && (
+                {selectedQuest && panels[selectedQuest] && (
                     <QuestDetails
                         DB={DB}
                         loc={loc}
