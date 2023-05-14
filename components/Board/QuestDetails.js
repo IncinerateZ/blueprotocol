@@ -29,8 +29,6 @@ export default function QuestDetails({
 
     let rewards = panel.reward_ids;
 
-    // getRewards(rewards);
-
     function rewardToItem(id, type, amount) {
         const reward =
             {
