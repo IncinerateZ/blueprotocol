@@ -2,8 +2,6 @@ import Script from 'next/script';
 import '@/styles/globals.css';
 import Head from 'next/head';
 
-import icon from '@/public/favicon-32x32.png';
-
 function MyApp({ Component, pageProps }) {
     return (
         <>
@@ -32,7 +30,11 @@ function MyApp({ Component, pageProps }) {
                     content={'https://bp.incin.net/'}
                     key='ogurl'
                 />
-                <meta property='og:image' content={icon} key='ogimage' />
+                <meta
+                    property='og:image'
+                    content={'https://bp.incin.net/favicon-32x32.png'}
+                    key='ogimage'
+                />
                 <meta
                     property='og:site_name'
                     content='Blue Protocol Resource, Interactive Map, Locations'
