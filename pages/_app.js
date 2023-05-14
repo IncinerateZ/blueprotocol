@@ -73,6 +73,7 @@ function MyApp({ Component, pageProps }) {
                 <meta name='twitter:creator' content='@The_IncinerateZ' />
                 <meta property='og:url' content={'https://bp.incin.net/'} />
                 <meta name='twitter:image' content={icon} />
+                <link rel='canonical' href='https://bp.incin.net/' />
             </Head>
             <Component {...pageProps} />
         </>

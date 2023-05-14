@@ -146,6 +146,7 @@ export default function Board() {
         <>
             <Head>
                 <title>Adventure Boards | Blue Protocol Resource</title>
+                <link rel='canonical' href='https://bp.incin.net/board' />
             </Head>
             <div className={styles.pageBg}>
                 <Nav></Nav>
