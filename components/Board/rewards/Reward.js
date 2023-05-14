@@ -17,7 +17,7 @@ export default class Reward {
 
     build() {
         return (
-            <div>
+            <div key={this.id}>
                 {this.name} x{this.amount}
             </div>
         );

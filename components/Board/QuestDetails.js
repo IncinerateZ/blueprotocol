@@ -74,6 +74,7 @@ export default function QuestDetails({
                 setSelectedQuest(null);
             }}
             onPointerDown={(e) => e.stopPropagation()}
+            id='qdc'
         >
             <div
                 className={styles.questDetails}

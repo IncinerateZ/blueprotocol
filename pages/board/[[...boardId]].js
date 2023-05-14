@@ -22,6 +22,7 @@ export default function Board() {
     const [firstLoad, setFirstLoad] = useState(true);
 
     const router = useRouter();
+
     useEffect(() => {
         let slugs = router.query.boardId || [];
 
@@ -63,10 +64,22 @@ export default function Board() {
                         className={styles.panelNode}
                         onMouseDown={(e) => {
                             e.stopPropagation();
+
                             setTimeout(() => {
                                 let mission = board.panels[panel].mission_id;
+
                                 setSelectedQuest(mission);
                                 setPrevSelectedQuest(mission);
+
+                                setTimeout(() => {
+                                    document
+                                        .getElementById('qdc')
+                                        .setAttribute('loading', 'auto');
+                                    document.getElementById(
+                                        'qdc',
+                                    ).style.pointerEvents = 'auto';
+                                }, 1);
+
                                 router.push(
                                     `/board/${board.id}/${mission}`,
                                     undefined,
@@ -88,7 +101,35 @@ export default function Board() {
                                     document.getElementById(mission).style;
                                 curr.filter = 'brightness(120%)';
                                 curr.borderWidth = '4px';
-                            }, 10);
+                            }, 1);
+                        }}
+                        onMouseEnter={() => {
+                            let mission = board.panels[panel].mission_id;
+
+                            setSelectedQuest(mission);
+                            setTimeout(() => {
+                                let qdc = document.getElementById('qdc') || {
+                                    style: {},
+                                    setAttribute: () => {},
+                                };
+                                if (qdc.getAttribute('loading') === 'auto')
+                                    return;
+                                qdc.style.pointerEvents = 'none';
+                                qdc.setAttribute('loading', true);
+                            }, 0);
+                        }}
+                        onMouseLeave={() => {
+                            setTimeout(() => {
+                                let qdc = document.getElementById('qdc');
+                                if (!qdc) return setSelectedQuest(null);
+                                if (qdc.getAttribute('loading') === 'false') {
+                                    qdc.style.pointerEvents = 'auto';
+                                    setSelectedQuest(null);
+                                }
+                            }, 2);
+                            let qdc = document.getElementById('qdc');
+                            if (qdc && qdc.getAttribute('loading') !== 'auto')
+                                qdc.setAttribute('loading', false);
                         }}
                     ></div>
                 ),
