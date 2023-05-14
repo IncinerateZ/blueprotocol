@@ -3,7 +3,8 @@
         "display_name": "Asterliese",
         "map_url": "./UI_MapCty001.webp",
         "tags": [
-            "city"
+            "city",
+            "Asterliese"
         ],
         "map_id": "cty01",
         "markers": {
@@ -17,7 +18,8 @@
         "display_name": "Salamzahd Oasis",
         "map_url": "./UI_MapCty002.webp",
         "tags": [
-            "city"
+            "city",
+            "Salamzahd Oasis"
         ],
         "map_id": "cty02",
         "markers": {

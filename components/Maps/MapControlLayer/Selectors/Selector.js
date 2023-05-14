@@ -14,6 +14,10 @@ export default function Selector({
     selectorsSource,
     setSelectorsSource,
 }) {
+    function capitalizeFirstLetter(string) {
+        return string.charAt(0).toUpperCase() + string.slice(1);
+    }
+
     return (
         <div
             style={{
@@ -42,7 +46,10 @@ export default function Selector({
             {mapIcons && (
                 <img
                     src={mapIcons[selectors[e][s].type || s]?.options?.iconUrl}
-                    alt={mapIcons[selectors[e][s].type || s]?.options?.iconUrl}
+                    alt={
+                        capitalizeFirstLetter(selectors[e][s].type || s) +
+                        ' Selector'
+                    }
                     width={32}
                     height={32}
                 />

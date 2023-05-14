@@ -344,6 +344,7 @@ export default function Map() {
                           ] || 'Loading'}{' '}
                     Map | Blue Protocol Resource
                 </title>
+                <link rel='canonical' href='https://bp.incin.net/map' />
             </Head>
             {mapLoading && (
                 <div

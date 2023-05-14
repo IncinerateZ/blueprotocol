@@ -1,4 +1,4 @@
-//2023-05-13
+//2023-05-14
 
 const fs = require('fs');
 
@@ -168,9 +168,11 @@ for (let mapType in DB.POI) {
                         },
                     };
 
+                console.log(mn);
+
                 markers[mn].tags = [
                     ...markers[mn].tags,
-                    mapnames[smn.toLowerCase()].name || mn.toLowerCase(),
+                    mapnames[mn.toLowerCase()].name || mn.toLowerCase(),
                 ];
             }
 
@@ -248,7 +250,9 @@ for (let mapType in DB.POI) {
                     };
                 }
             }
-        } catch (err) {}
+        } catch (err) {
+            err.errno !== -4058 && console.log(err);
+        }
         for (let cardinal of ['C_', 'N_', 'E_', 'S_', 'W_', '']) {
             try {
                 data = fs.readFileSync(
@@ -466,6 +470,7 @@ function poiToSelector(name) {
     return '';
 }
 
+console.log('FOUND MAPS: \n');
 for (let map in DB.POI) {
     if (!DB.POI[map].dat || DB.POI[map].dat.length === 0) {
         delete DB.POI[map];
@@ -489,9 +494,9 @@ for (let map in DB.POI) {
             last--;
         }
     }
-    // console.log(map);
+    console.log(map);
 }
-
+console.log();
 // console.log(JSON.stringify(markers, null, 4));
 console.log('Compiled. \nBuilding Boards...');
 //boards
@@ -502,7 +507,14 @@ const boards = {
     Loc: { ja_JP: {}, en_US: {} },
     Sources: {},
     srcQuests: {},
+    Rewards: {},
     LocationNames: { ...DB.LocationNames },
+    Items: { ...DB.Items },
+    Mounts: {},
+    Imagines: {},
+    WarehouseAbilities: {},
+    CraftRecipes: {},
+    Tokens: {},
 };
 
 let _boards = {};
@@ -519,10 +531,32 @@ boards.quests = _quests;
 
 delete boards.panels;
 
-const srcQuests = require('./apiext/quests.json');
 let srcQ = {};
+for (let q of require('./apiext/quests.json'))
+    srcQ[q.long_id] = { name: q.name, desc: q.desc };
 
-for (let q of srcQuests) srcQ[q.long_id] = { name: q.name, desc: q.desc };
+for (let reward of require('./apiext/rewards.json'))
+    boards.Rewards[reward.id] = reward;
+
+for (let mount of require('./apiext/mount.json'))
+    boards.Mounts[mount.id] = mount;
+
+for (let imagine of require('./apiext/imagine.json'))
+    boards.Imagines[imagine.id] = imagine;
+
+for (let ability of require('./apiext/master_warehouse_ability_recipes.json'))
+    boards.WarehouseAbilities[ability.id] = ability;
+
+for (let craft of require('./apiext/craft.json'))
+    boards.CraftRecipes[craft.id] = craft;
+
+for (let craft of require('./apiext/master_craft_recipe_sets.json'))
+    boards.CraftRecipes[craft.id] = craft;
+
+const tokens = require('./apiext/token.json');
+
+const { exec } = require('child_process');
+for (let token of tokens) boards.Tokens[token.id] = token;
 
 for (let source of require('./apiext/rewards.json'))
     if (source.reward_type === 28) {
@@ -556,6 +590,12 @@ for (let loc in boards.Loc) {
                 'quest_sub_chapter01_text',
                 'quest_sub_chapter02_text',
                 'quest_sub_chapter03_text',
+                'item_text',
+                'master_mount_imagine_text',
+                'master_imagine_text',
+                'master_warehouse_ability_recipes_text',
+                'master_token_text',
+                'master_craft_recipe_set_text',
             ].includes(cat.name)
         )
             continue;
@@ -573,6 +613,8 @@ for (let loc in boards.Loc) {
 }
 
 console.log('Boards Built... \nWriting Files...');
+
+exec('node rewardtype.js', (err, out, err2) => console.log(out));
 
 save(`./_out`);
 save(`E:/Main Files/Projects/next/bp/components/Maps/data`, true);
