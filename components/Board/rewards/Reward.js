@@ -16,7 +16,11 @@ export default class Reward {
     }
 
     build() {
-        return <div>Todo</div>;
+        return (
+            <div>
+                {this.name} x{this.amount}
+            </div>
+        );
     }
 
     exec() {}

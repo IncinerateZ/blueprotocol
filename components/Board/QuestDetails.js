@@ -14,6 +14,7 @@ import ImagineRecipeReward from './rewards/ImagineRecipeReward';
 import LunoReward from './rewards/LunoReward';
 import ExperienceReward from './rewards/ExperienceReward';
 import TokenReward from './rewards/TokenReward';
+import { useEffect } from 'react';
 
 export default function QuestDetails({
     DB,
@@ -27,10 +28,10 @@ export default function QuestDetails({
     panel = panel.panel;
 
     let rewards = panel.reward_ids;
-    getRewards(rewards);
+
+    // getRewards(rewards);
 
     function rewardToItem(id, type, amount) {
-        let res = {};
         const reward =
             {
                 0: new LunoReward('currency'),
@@ -50,15 +51,16 @@ export default function QuestDetails({
             }[type] || new ItemReward('item');
 
         reward.create(id, type, amount, loc);
-        console.log(reward);
-        return res;
+        return reward;
     }
 
     function getRewards(rewards) {
-        let res = {};
+        let res = [];
         for (let reward of rewards) {
             reward = DB.Rewards[reward.reward_id];
-            rewardToItem(reward.item_id, reward.reward_type, reward.amount);
+            res.push(
+                rewardToItem(reward.item_id, reward.reward_type, reward.amount),
+            );
         }
 
         return res;
@@ -88,6 +90,10 @@ export default function QuestDetails({
                     }
                 </h5>
                 <p>0 / {quest.quest_achievement_condition.complete_value}</p>
+                <h6 style={{ marginTop: '0.5rem' }}>Rewards</h6>
+                <div style={{ fontSize: '0.75rem' }}>
+                    {getRewards(rewards).map((e) => e.build())}
+                </div>
                 <span>ID {quest.id}</span>
             </div>
         </div>
