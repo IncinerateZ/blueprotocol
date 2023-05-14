@@ -72,7 +72,10 @@ function MyApp({ Component, pageProps }) {
                 />
                 <meta name='twitter:creator' content='@The_IncinerateZ' />
                 <meta property='og:url' content={'https://bp.incin.net/'} />
-                <meta name='twitter:image' content={icon} />
+                <meta
+                    name='twitter:image'
+                    content={'https://bp.incin.net/favicon-32x32.png'}
+                />
                 <link rel='canonical' href='https://bp.incin.net/' />
                 <meta
                     name='google-site-verification'
