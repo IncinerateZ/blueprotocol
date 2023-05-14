@@ -7,12 +7,13 @@ import LiquidMemoryReward from './rewards/LiquidMemoryReward';
 import CraftingRecipeReward from './rewards/CraftingRecipeReward';
 import CraftingRecipeSetReward from './rewards/CraftingRecipeSetReward';
 import AdventureBoardReward from './rewards/AdventureBoardReward';
-import WarehouseAbilityRecipeReward from './rewards/WarehouseAbilityRecipeReward';
+import WarehouseAbilityReward from './rewards/WarehouseAbilityReward';
 import ChoiceReward from './rewards/ChoiceReward';
 import StampReward from './rewards/StampReward';
 import ImagineRecipeReward from './rewards/ImagineRecipeReward';
 import LunoReward from './rewards/LunoReward';
 import ExperienceReward from './rewards/ExperienceReward';
+import TokenReward from './rewards/TokenReward';
 
 export default function QuestDetails({
     DB,
@@ -35,18 +36,17 @@ export default function QuestDetails({
                 0: new LunoReward('currency'),
                 2: new ExperienceReward('experience'),
                 7: new MountReward('mount'),
-                9: new EmoticonReward('emoticon'),
+                // 9: new EmoticonReward('emoticon'),
                 10: new StampReward('stamp'),
                 11: new ImagineRecipeReward('imagine_recipe'),
-                14: new AchievementReward('achievement'),
-                15: new LiquidMemoryReward('liquid_memory'),
+                // 14: new AchievementReward('achievement'),
+                // 15: new LiquidMemoryReward('liquid_memory'),
+                19: new TokenReward('token'),
                 20: new CraftingRecipeReward('crafting_recipe'),
                 27: new CraftingRecipeSetReward('crafting_recipe_set'),
                 28: new AdventureBoardReward('board'),
-                30: new WarehouseAbilityRecipeReward(
-                    'warehouse_ability_recipe',
-                ),
-                33: new ChoiceReward('choice'),
+                30: new WarehouseAbilityReward('warehouse_ability'),
+                // 33: new ChoiceReward('choice'),
             }[type] || new ItemReward('item');
 
         reward.create(id, type, amount, loc);

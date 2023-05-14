@@ -1,6 +1,6 @@
 import ChevronLeftDark from '@/public/map/chevron-left-black.svg';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import styles from '@/styles/Map.module.css';
 import Image from 'next/image';
@@ -8,6 +8,20 @@ import Image from 'next/image';
 export default function LangPicker({ DB, lang, setLang }) {
     const [doLangDrop, setDoLangDrop] = useState(false);
     const ReadableString = { en_US: 'EN', ja_JP: 'JP' };
+
+    useEffect(() => {
+        pickLang(localStorage.getItem('langPicker_lang') || 'ja_JP');
+    }, []);
+
+    function pickLang(lang_) {
+        setDoLangDrop(false);
+        setLang(lang_);
+        storeOption(lang_);
+    }
+
+    function storeOption(lang) {
+        localStorage.setItem('langPicker_lang', lang);
+    }
 
     return (
         <div className={`${styles.langPicker} ${styles.noSelect}`}>
@@ -46,8 +60,7 @@ export default function LangPicker({ DB, lang, setLang }) {
                             <div
                                 key={Math.random()}
                                 onClick={() => {
-                                    setDoLangDrop(false);
-                                    setLang(lang_);
+                                    pickLang(lang_);
                                 }}
                             >
                                 {ReadableString[lang_]}
