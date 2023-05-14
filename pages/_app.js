@@ -74,6 +74,10 @@ function MyApp({ Component, pageProps }) {
                 <meta property='og:url' content={'https://bp.incin.net/'} />
                 <meta name='twitter:image' content={icon} />
                 <link rel='canonical' href='https://bp.incin.net/' />
+                <meta
+                    name='google-site-verification'
+                    content='oWZPfYe9ZddW-ezHq4cMci74HM2jYMipKS-c0sUw4U4'
+                />
             </Head>
             <Component {...pageProps} />
         </>
