@@ -25,7 +25,7 @@ export default function Nav() {
                 </div>
             </div>
             <ul style={{ marginLeft: '0.1crem' }}>
-                <li className={styles.NavItem}>
+                <li className={styles.NavItem} tabIndex={0}>
                     <Link
                         href='/map'
                         style={{
