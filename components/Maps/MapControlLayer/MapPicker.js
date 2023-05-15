@@ -1,7 +1,7 @@
 import ChevronLight from '@/public/map/chevron-left-light.svg';
 
 import { levenshtein } from '@/components/utils';
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 import styles from '@/styles/Map.module.css';
 import Image from 'next/image';
@@ -14,12 +14,24 @@ export default function MapPicker({
     setChosenMap,
     lang,
 }) {
-    const [mapSearch, setMapSearch] = useState('');
+    const [mapSearch, setMapSearch] = useState(
+        DB
+            ? DB.LocationNames[lang][
+                  data[chosenMap].map_id
+                      .replace('dng', 'pub')
+                      .replace('pat', 'pub')
+              ]
+            : data[chosenMap].display_name,
+    );
     const [ssHighlight, setSSHighlight] = useState(0);
     const [searchSuggestions, setSearchSuggestions] = useState([]);
     const [doSearch, setDoSearch] = useState(false);
 
     const searchRef = useRef();
+
+    useEffect(() => {
+        resetSearch();
+    }, [chosenMap, lang]);
 
     function resetSearch() {
         if (chosenMap === '') return;
