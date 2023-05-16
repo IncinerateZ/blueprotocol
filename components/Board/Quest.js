@@ -9,22 +9,19 @@ export default function Quest({ e, DB, loc, displayOverlay }) {
     const router = useRouter();
 
     return (
-        <div
-            style={{ display: fallbackImage ? 'none' : 'flex' }}
+        <button
+            style={{
+                display: fallbackImage ? 'none' : 'flex',
+                backgroundColor: 'transparent',
+                color: 'var(--text-color)',
+                padding: '0',
+            }}
             className={styles.quest}
             onClick={() => {
                 router.push(`/board/${e.id}`, undefined, { shallow: true });
                 displayOverlay(e);
             }}
-            onKeyDown={(ev) => {
-                if (ev.code !== 'Enter' && ev.code !== 'Space') return;
-                displayOverlay(null);
-                setTimeout(() => {
-                    router.push(`/board/${e.id}`, undefined, { shallow: true });
-                    displayOverlay(e);
-                }, 0);
-            }}
-            tabIndex={2}
+            id={`Quest_${e.id}`}
         >
             <Image
                 src={
@@ -41,15 +38,15 @@ export default function Quest({ e, DB, loc, displayOverlay }) {
                 className={styles.questThumbnail}
             ></Image>
             <div className={styles.questTitleContainer}>
-                <span className={styles.questTitle}>
+                <label className={styles.questTitle} for={`Quest_${e.id}`}>
                     {
                         DB.Loc[loc]['master_adventure_boards_text'].texts[
                             e.name
                         ]?.text
                     }
-                </span>
+                </label>
             </div>
-            <h5>Unlocked From</h5>
+            <h1>Unlocked From</h1>
             <p>
                 {DB.Sources[e.id]
                     ? DB.Sources[e.id].charAt(0) === 'Q'
@@ -84,6 +81,6 @@ export default function Quest({ e, DB, loc, displayOverlay }) {
             <div className={styles.questId}>
                 <span>ID {e.id}</span>
             </div>
-        </div>
+        </button>
     );
 }

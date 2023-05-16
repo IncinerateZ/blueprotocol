@@ -25,7 +25,7 @@ export default function Nav() {
                 </div>
             </div>
             <ul style={{ marginLeft: '0.1crem' }}>
-                <li className={styles.NavItem} tabIndex={0}>
+                <li className={styles.NavItem}>
                     <Link
                         href='/map'
                         style={{
@@ -34,6 +34,7 @@ export default function Nav() {
                         onClick={() => {
                             window.location = '/map';
                         }}
+                        tabIndex={0}
                     >
                         <Image
                             src={CommandMap}

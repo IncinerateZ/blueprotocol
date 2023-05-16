@@ -117,6 +117,9 @@
     align-items: center;
     cursor: pointer;
 
+    padding: 0;
+    border: none;
+
     border-radius: 5px;
 }
 
@@ -182,15 +185,13 @@
 
     background-color: var(--light);
 
-    border: 3px solid transparent;
-
     width: 60px;
-    padding: 0.1rem;
-    padding-left: 0.4rem;
 
     font-weight: bold;
 
     filter: brightness(90%);
+
+    border: 3px solid transparent;
 }
 
 .langPicker_dropdown:hover {
@@ -262,6 +263,11 @@
 
 .selectors_toggle {
     cursor: pointer;
+    padding: 0;
+    background-color: transparent;
+    border: none;
+    color: lightblue;
+    font-size: 0.7rem;
 }
 
 .selectors_toggle:hover {

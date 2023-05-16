@@ -92,8 +92,7 @@ export default function Board() {
             panels[panel] = {
                 panel: board.panels[panel],
                 element: (
-                    <div
-                        tabIndex={1}
+                    <button
                         key={panel}
                         id={panel}
                         className={styles.panelNode}
@@ -110,6 +109,7 @@ export default function Board() {
                                 let qdc = document.getElementById('qdc') || {
                                     style: {},
                                     setAttribute: () => {},
+                                    getAttribute: () => {},
                                 };
                                 if (qdc.getAttribute('loading') === 'auto')
                                     return;
@@ -130,12 +130,7 @@ export default function Board() {
                             if (qdc && qdc.getAttribute('loading') !== 'auto')
                                 qdc.setAttribute('loading', false);
                         }}
-                        onKeyDown={(ev) => {
-                            if (ev.code !== 'Enter' && ev.code !== 'Space')
-                                return;
-                            handleSelect(board, panel);
-                        }}
-                    ></div>
+                    ></button>
                 ),
             };
         }
@@ -158,9 +153,14 @@ export default function Board() {
             </Head>
             <div className={styles.pageBg}>
                 <Nav></Nav>
-                <div className={styles.content}>
-                    <div style={{ display: 'flex', alignItems: 'center' }}>
-                        <h1 style={{ marginRight: '1rem' }}>
+                <main className={styles.content}>
+                    <div
+                        style={{ display: 'flex', alignItems: 'center' }}
+                        className={styles.contentHeader}
+                    >
+                        <h1
+                            style={{ marginRight: '1rem', textAlign: 'center' }}
+                        >
                             <Image
                                 src={CommandQuest}
                                 alt='CommandQuest'
@@ -190,7 +190,7 @@ export default function Board() {
                                 />
                             ))}
                     </div>
-                </div>
+                </main>
                 {selectedBoard && (
                     <QuestViewer
                         DB={DB}

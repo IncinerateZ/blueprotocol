@@ -241,7 +241,7 @@ export default function QuestViewer({
                 setSelectedQuest(null);
             }}
         >
-            <span>Click anywhere to close</span>
+            <p>Click anywhere to close</p>
             <div className={styles.questOverlay} ref={overlayRef}>
                 <canvas
                     className={styles.questCanvas}
@@ -251,13 +251,13 @@ export default function QuestViewer({
                     }}
                 ></canvas>
                 {Object.keys(panels).map((pid) => panels[pid].element)}
-                <span className={styles.overlayTitle}>
+                <p className={styles.overlayTitle}>
                     {
                         DB.Loc[loc]['master_adventure_boards_text'].texts[
                             selectedBoard.name
                         ]?.text
                     }
-                </span>
+                </p>
                 <div className={styles.overlayId}>
                     <span>ID {selectedBoard.id}</span>
                 </div>

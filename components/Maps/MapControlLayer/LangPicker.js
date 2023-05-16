@@ -25,22 +25,21 @@ export default function LangPicker({ DB, lang, setLang }) {
 
     return (
         <div className={`${styles.langPicker} ${styles.noSelect}`}>
-            <div
-                tabIndex={0}
+            <button
                 className={styles.langPicker_display}
                 style={{
                     borderBottomLeftRadius: doLangDrop ? '0' : '5px',
+                    textAlign: 'left',
+                    fontSize: '1rem',
+                    paddingTop: '0.2rem',
                 }}
                 onClick={() => {
                     setDoLangDrop((p) => !p);
                 }}
-                onKeyDown={(ev) => {
-                    if (ev.code !== 'Enter' && ev.code !== 'Space') return;
-                    setDoLangDrop((p) => !p);
-                }}
+                id='langpicker'
             >
-                {ReadableString[lang]}
-            </div>
+                <label for='langpicker'>{ReadableString[lang]}</label>
+            </button>
             <div style={{ position: 'relative' }}>
                 <Image
                     src={ChevronLeftDark.src}
@@ -62,23 +61,26 @@ export default function LangPicker({ DB, lang, setLang }) {
                     {Object.keys(DB.Loc)
                         .filter((lang_) => lang !== lang_)
                         .map((lang_) => (
-                            <div
+                            <button
                                 key={Math.random()}
                                 onClick={() => {
                                     pickLang(lang_);
                                 }}
-                                onKeyDown={(ev) => {
-                                    if (
-                                        ev.code !== 'Enter' &&
-                                        ev.code !== 'Space'
-                                    )
-                                        return;
-                                    pickLang(lang_);
+                                id={`langPicker_${lang_}`}
+                                style={{
+                                    width: '100%',
+                                    height: '100%',
+                                    backgroundColor: 'transparent',
+                                    border: '3px solid transparent',
+                                    textAlign: 'left',
+                                    fontSize: '0.9rem',
+                                    fontWeight: 'bold',
                                 }}
-                                tabIndex={0}
                             >
-                                {ReadableString[lang_]}
-                            </div>
+                                <label for={`langPicker_${lang_}`}>
+                                    {ReadableString[lang_]}
+                                </label>
+                            </button>
                         ))}
                 </div>
             )}
@@ -104,7 +106,7 @@ export default function LangPicker({ DB, lang, setLang }) {
                             marginRight: '0.2rem',
                         }}
                     ></div>
-                    <div style={{ width: '110px' }}>Machine Translated</div>
+                    <span style={{ width: '110px' }}>Machine Translated</span>
                 </div>
             )}
         </div>

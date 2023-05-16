@@ -35,11 +35,12 @@
     z-index: 2;
 }
 
-.questOverlayContainer > span {
+.questOverlayContainer > p {
     display: inline-block;
     width: 100vw;
     text-align: center;
     transform: translateY(250%);
+    margin: 0;
 }
 
 .questDetailsContainer {
@@ -70,6 +71,14 @@
 
 .questDetails * {
     margin: 0;
+}
+
+.questDetails h1 {
+    font-size: 1rem;
+}
+
+.questDetails h2 {
+    font-size: 0.8rem;
 }
 
 .brandDrop {
@@ -166,6 +175,8 @@
     border: 3px solid rgb(200, 200, 200);
     border-radius: 100%;
 
+    background-color: transparent;
+
     cursor: pointer;
 }
 
@@ -200,17 +211,19 @@
     border: 1px solid var(--text-color);
 }
 
-.quest h5 {
+.quest h1 {
     margin-top: 0.5rem;
     width: 90%;
     text-align: start;
     margin-bottom: 0;
+    font-size: 0.85rem;
 }
 
 .quest p {
     width: 90%;
     margin-top: 0.2rem;
     font-size: 0.75rem;
+    text-align: left;
 }
 
 .questId {
@@ -243,6 +256,7 @@
     margin-bottom: 0;
     margin-left: 0.5rem;
     margin-right: 0.5rem;
+    font-size: 1rem;
 }
 
 .quests::-webkit-scrollbar {
@@ -304,5 +318,11 @@
 @media (max-width: 600px) {
     .questOverlay {
         transform: translate(calc(-1 * (600px - 100vw) / 2), 10%);
+    }
+
+    .contentHeader {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
     }
 }

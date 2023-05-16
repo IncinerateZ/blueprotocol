@@ -50,61 +50,67 @@ export default function Selectors({
     }
     return (
         <div style={{ marginBottom: '4px' }}>
-            <span>
-                <b>{e}</b>
-                <div
-                    style={{
-                        fontSize: '0.7rem',
-                        color: 'lightblue',
-                    }}
-                >
-                    <span
-                        className={styles.selectors_toggle}
-                        onClick={() => {
-                            toggleVisibiltyAll(false);
+            <span style={{ display: 'flex' }}>
+                <div>
+                    <b>{e}</b>
+                    <div
+                        style={{
+                            fontSize: '0.7rem',
+                            color: 'lightblue',
                         }}
                     >
-                        Show
-                    </span>{' '}
-                    <span>/</span>{' '}
-                    <span
-                        className={styles.selectors_toggle}
-                        onClick={() => {
-                            toggleVisibiltyAll(true);
-                        }}
-                    >
-                        Hide
-                    </span>{' '}
-                    <span>All</span>
+                        <button
+                            className={styles.selectors_toggle}
+                            onClick={() => {
+                                toggleVisibiltyAll(false);
+                            }}
+                        >
+                            Show
+                        </button>{' '}
+                        <span>/</span>{' '}
+                        <button
+                            className={styles.selectors_toggle}
+                            onClick={() => {
+                                toggleVisibiltyAll(true);
+                            }}
+                        >
+                            Hide
+                        </button>{' '}
+                        <span>All</span>
+                    </div>
                 </div>
-                <div
+                <button
                     style={{
                         position: 'relative',
+                        backgroundColor: 'transparent',
+                        border: 'none',
+                        cursor: 'pointer',
+                        padding: '0',
+                        marginLeft: 'auto',
+                        marginRight: '0.5rem',
+                        marginTop: 'auto',
+                    }}
+                    onClick={() => {
+                        setCollapsedSelectors({
+                            ...collapsedSelectors,
+                            [e]: !collapsedSelectors[e],
+                        });
                     }}
                 >
                     <Image
                         src={ChevronLightWhite.src}
                         width={25}
                         height={25}
-                        alt={'Change Maps'}
+                        alt={'Collapse Selectors'}
                         style={{
-                            position: 'absolute',
-                            transform:
-                                'translate(285px, -100%) ' +
-                                `rotate(${
-                                    collapsedSelectors[e] ? '-270' : '-90'
-                                }deg)`,
-                            cursor: 'pointer',
+                            // position: 'absolute',
+                            transform: `rotate(${
+                                collapsedSelectors[e] ? '-270' : '-90'
+                            }deg)`,
                             transition: '0.1s',
                         }}
-                        onClick={() => {
-                            setCollapsedSelectors({
-                                ...collapsedSelectors,
-                                [e]: !collapsedSelectors[e],
-                            });
-                        }}
                     ></Image>
-                </div>
+                </button>
             </span>
             <div
                 className={styles.MCL_selectors}
