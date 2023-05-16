@@ -389,6 +389,10 @@ export default function Map() {
                     Map | Blue Protocol Resource
                 </title>
                 <link rel='canonical' href='https://bp.incin.net/map' />
+                <meta
+                    name='description'
+                    content='Blue Protocol Interactive Map. Quest, Enemy, Gathering Locations.'
+                ></meta>
             </Head>
             {mapLoading && (
                 <div
