@@ -179,6 +179,33 @@ function entitySummary(DB, entity, lang, showLeak) {
             }
             res.noMargin = true;
         }
+    } else if (entity.type.includes('quest')) {
+        let quests = entity.metadata.quests;
+
+        let pages = [];
+        for (let quest of quests) {
+            let chapter = quest.charAt(4);
+            quest = quest.substring(0, 9);
+            let cat = {
+                M: `quest_main_chapter${chapter.padStart(2, '0')}_text`,
+                E: `quest_main_chapter${chapter.padStart(2, '0')}_text`,
+                S: `quest_sub_chapter${chapter.padStart(2, '0')}_text`,
+                C: `quest_class_text`,
+            }[quest.charAt(0)];
+
+            quest =
+                DB.Loc[lang][cat]?.texts[DB.Quests.id_name[quest]]?.text ||
+                quest;
+            pages.push(`Quest "${quest}"`);
+        }
+
+        res = [
+            entity.idf,
+            {
+                name: entity.metadata.selectors[0] + 's',
+                desc: pages,
+            },
+        ];
     } else if (entity.idf) {
         res = [
             {

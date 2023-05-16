@@ -151,6 +151,10 @@ export default function Board() {
             <Head>
                 <title>Adventure Boards | Blue Protocol Resource</title>
                 <link rel='canonical' href='https://bp.incin.net/board' />
+                <meta
+                    name='description'
+                    content='Blue Protocol Adventure Board. Adventure Board Details & Rewards. How to obtain adventure boards in Blue Protocol.'
+                ></meta>
             </Head>
             <div className={styles.pageBg}>
                 <Nav></Nav>

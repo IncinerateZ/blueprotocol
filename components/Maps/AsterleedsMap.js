@@ -125,13 +125,12 @@ export default function Map() {
             if (Object.keys(markers).length === 0 || loadFlag) return;
             setLoadFlag(true);
 
-            let pts = require('./data/warppoints.json');
             let a = [];
 
             let _selectors = {};
 
             //adventure
-            pts = (DB.POI[data[chosenMap].map_id] || { dat: [] }).dat;
+            let pts = (DB.POI[data[chosenMap].map_id] || { dat: [] }).dat;
 
             for (let p of pts) {
                 if (!_selectors.Adventure) _selectors.Adventure = {};
@@ -169,6 +168,36 @@ export default function Map() {
                             raid: 'Raid',
                         }[pt.type] || title,
                 };
+            }
+
+            //quests
+            pts = DB.Quests[data[chosenMap].map_id] || {};
+            for (let p in pts) {
+                if (!_selectors.Quests) _selectors.Quests = {};
+
+                let pt = pts[p];
+                _selectors.Quests[pt.type] = {
+                    selected:
+                        pt.type in (selectorsSource.Quests || {})
+                            ? selectorsSource.Adventure[pt.type]?.selected
+                            : true,
+                    display_name: pt.selector,
+                };
+
+                let c = coordTranslate(
+                    pt.X,
+                    pt.Y,
+                    mapConfig[data[chosenMap].map_id],
+                );
+
+                a.push(
+                    newMarker(c.y, c.x, {
+                        type: pt.type,
+                        selectors: [pt.selector],
+                        title: p,
+                        quests: pt.quests,
+                    }),
+                );
             }
 
             //enemies
@@ -284,6 +313,21 @@ export default function Map() {
             travel: { img: './map/icons/UI_Map_99.png', iconSize: 32 },
             dungeon: { img: './map/icons/UI_Map_14.png', iconSize: 32 },
             raid: { img: './map/icons/UI_Map_73.png', iconSize: 32 },
+            main_quest: { img: './map/icons/UI_Map_05.png', iconSize: 32 },
+            sub_quest: { img: './map/icons/UI_Map_06.png', iconSize: 32 },
+            plus_sub_quest: { img: './map/icons/UI_Map_74.png', iconSize: 32 },
+            exploration_quest: {
+                img: './map/icons/UI_Map_57.png',
+                iconSize: 32,
+            },
+            tutorial_quest: {
+                img: './map/icons/UI_Map_06.png',
+                iconSize: 32,
+            },
+            class_quest: {
+                img: './map/icons/UI_Map_74.png',
+                iconSize: 32,
+            },
         };
 
         for (let label in mi)
@@ -345,6 +389,10 @@ export default function Map() {
                     Map | Blue Protocol Resource
                 </title>
                 <link rel='canonical' href='https://bp.incin.net/map' />
+                <meta
+                    name='description'
+                    content='Blue Protocol Interactive Map. Quest, Enemy, Gathering Locations.'
+                ></meta>
             </Head>
             {mapLoading && (
                 <div

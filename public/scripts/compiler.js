@@ -1,4 +1,4 @@
-//2023-05-14
+//2023-05-15
 
 const fs = require('fs');
 
@@ -15,6 +15,7 @@ const DB = {
     POI: { cty: {}, fld: {}, dng: {}, pat: {} },
     Treasures: { fld: {}, dng: {}, pat: {} },
     Boards: {},
+    Quests: {},
 };
 
 console.log('Importing defaults...');
@@ -52,6 +53,17 @@ for (let loc in DB.Loc) {
                 'enemyparam_text',
                 'item_text',
                 'master_adventure_boards_text',
+                'quest_class_text',
+                'quest_main_chapter01_text',
+                'quest_main_chapter02_text',
+                'quest_main_chapter03_text',
+                'quest_main_chapter04_text',
+                'quest_main_chapter05_text',
+                'quest_main_chapter06_text',
+                'quest_sub_chapter01_text',
+                'quest_sub_chapter02_text',
+                'quest_sub_chapter03_text',
+                'quest_sub_chapter04_text',
             ].includes(cat.name)
         )
             continue;
@@ -167,8 +179,6 @@ for (let mapType in DB.POI) {
                             new: { display_name: 'New Marker', arr: [] },
                         },
                     };
-
-                console.log(mn);
 
                 markers[mn].tags = [
                     ...markers[mn].tags,
@@ -425,6 +435,114 @@ for (let mapType in DB.POI) {
         delete DB.POI[map].temp;
     }
 }
+
+let Quests = { cty: {}, fld: {} };
+
+for (let mapType in Quests) {
+    let baseMapDir = `./Maps/${mapType}`;
+    for (let map of fs.readdirSync(baseMapDir)) {
+        let dir = `${baseMapDir}/${map}/sublevel/`;
+        if (dir.includes('json')) continue;
+
+        Quests[map] = {};
+
+        for (let file of fs.readdirSync(dir)) {
+            if (!file.includes('QST') || file.includes('TQ')) continue;
+
+            let temp = {};
+            for (let row of require(dir + file)) {
+                if (file.includes('MQ') || file.includes('SQ')) {
+                    if (
+                        row.Type === 'SBNpcSpawnPoint' &&
+                        row?.Properties?.ScriptInfo?.MainTriggers
+                    ) {
+                        let _quests = {};
+                        for (let quest of row.Properties.ScriptInfo
+                            .MainTriggers) {
+                            if (
+                                (!quest.includes('start') &&
+                                    !quest.includes('EX')) ||
+                                quest.includes('end') ||
+                                quest.includes('step') ||
+                                quest.includes('done')
+                            )
+                                continue;
+                            let q = quest.substring(0, 9);
+                            _quests[q] = true;
+                        }
+                        if (Object.keys(_quests).length > 0) {
+                            let t = file.includes('MQ') ? 'Main' : 'Sub';
+                            Quests[map][row.Name] = {
+                                ...Quests[map][row.Name],
+                                quests: Object.keys(_quests),
+                                type: `${
+                                    file.charAt(file.length - 6) === '2'
+                                        ? 'plus_'
+                                        : ''
+                                }${t.toLowerCase()}_quest`,
+                                selector: `${t} Quest`,
+                            };
+                        }
+                    }
+                    if (
+                        row.Type === 'SceneComponent' &&
+                        row.Properties?.RelativeLocation
+                    )
+                        Quests[map][row.Outer] = {
+                            ...Quests[map][row.Outer],
+                            ...row.Properties.RelativeLocation,
+                        };
+                } else {
+                    if (
+                        row.Type === 'SceneComponent' &&
+                        row.Properties?.RelativeLocation
+                    ) {
+                        let quest = row.Outer;
+                        if (
+                            (!quest.includes('start') &&
+                                !quest.includes('EX')) ||
+                            quest.includes('end') ||
+                            quest.includes('step') ||
+                            quest.includes('done')
+                        )
+                            continue;
+
+                        temp[row.Outer] = {
+                            ...row.Properties.RelativeLocation,
+                        };
+                    }
+                }
+            }
+            if (Object.keys(temp).length !== 0) {
+                for (let q in temp) {
+                    let li = file.lastIndexOf('_');
+                    let type = { E: 'Exploration', C: 'Class', T: 'Tutorial' }[
+                        file.substring(li + 1, li + 2)
+                    ];
+                    Quests[map][q] = {
+                        ...temp[q],
+                        quests: [q],
+                        type: `${type.toLowerCase()}_quest`,
+                        selector: `${type} Quest`,
+                    };
+                }
+            }
+        }
+        for (let q in Quests[map])
+            if (!('quests' in Quests[map][q]) || !('X' in Quests[map][q]))
+                delete Quests[map][q];
+    }
+}
+
+for (let map in Quests)
+    if (Object.keys(Quests[map]).length === 0) delete Quests[map];
+
+Quests.id_name = {};
+
+for (let row of require('./apiext/quests.json'))
+    Quests.id_name[row.long_id] = row.name;
+
+DB.Quests = { ...Quests };
 
 function poiToType(name) {
     name = name.toLowerCase();
