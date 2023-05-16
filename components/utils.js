@@ -48,15 +48,17 @@ function buildSummary(summaries) {
                         }}
                         key={Math.random()}
                     >
-                        <span
+                        <h1
                             style={{
                                 fontSize: '1rem',
                                 textAlign: summary.desc ? 'left' : 'center',
                                 display: summary.name ? 'block' : 'none',
+                                padding: 0,
+                                margin: 0,
                             }}
                         >
                             <b>{summary.name}</b>
-                        </span>
+                        </h1>
                         {summary.id && (
                             <span
                                 style={{
@@ -67,24 +69,28 @@ function buildSummary(summaries) {
                                 ID: {summary.id}
                             </span>
                         )}
-                        {summary.desc &&
-                            summary.desc.map((r) => (
-                                <span
-                                    key={Math.random()}
-                                    style={{
-                                        fontSize:
-                                            r.includes('%') ||
-                                            r.includes('Level')
-                                                ? '0.8rem'
-                                                : '0.9rem',
-                                        color: r.includes('Level')
-                                            ? 'darkslategray'
-                                            : 'black',
-                                    }}
-                                >
-                                    {r}
-                                </span>
-                            ))}
+                        {summary.desc && (
+                            <ul style={{ padding: 0, margin: 0 }}>
+                                {summary.desc.map((r) => (
+                                    <li
+                                        key={Math.random()}
+                                        style={{
+                                            fontSize:
+                                                r.includes('%') ||
+                                                r.includes('Level')
+                                                    ? '0.8rem'
+                                                    : '0.9rem',
+                                            color: r.includes('Level')
+                                                ? 'darkslategray'
+                                                : 'black',
+                                            listStyleType: 'none',
+                                        }}
+                                    >
+                                        {r}
+                                    </li>
+                                ))}
+                            </ul>
+                        )}
                     </div>
                 ))}
             </div>

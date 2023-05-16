@@ -1,20 +1,5 @@
 import styles from '@/styles/Board.module.css';
-import ItemReward from './rewards/ItemReward';
-import MountReward from './rewards/MountReward';
-import EmoticonReward from './rewards/EmoticonReward';
-import AchievementReward from './rewards/AchievementReward';
-import LiquidMemoryReward from './rewards/LiquidMemoryReward';
-import CraftingRecipeReward from './rewards/CraftingRecipeReward';
-import CraftingRecipeSetReward from './rewards/CraftingRecipeSetReward';
-import AdventureBoardReward from './rewards/AdventureBoardReward';
-import WarehouseAbilityReward from './rewards/WarehouseAbilityReward';
-import ChoiceReward from './rewards/ChoiceReward';
-import StampReward from './rewards/StampReward';
-import ImagineRecipeReward from './rewards/ImagineRecipeReward';
-import LunoReward from './rewards/LunoReward';
-import ExperienceReward from './rewards/ExperienceReward';
-import TokenReward from './rewards/TokenReward';
-import { useEffect } from 'react';
+import BoardReward from './rewards/BoardReward';
 
 export default function QuestDetails({
     DB,
@@ -30,26 +15,8 @@ export default function QuestDetails({
     let rewards = panel.reward_ids;
 
     function rewardToItem(id, type, amount) {
-        const reward =
-            {
-                0: new LunoReward('currency'),
-                2: new ExperienceReward('experience'),
-                7: new MountReward('mount'),
-                // 9: new EmoticonReward('emoticon'),
-                10: new StampReward('stamp'),
-                11: new ImagineRecipeReward('imagine_recipe'),
-                // 14: new AchievementReward('achievement'),
-                // 15: new LiquidMemoryReward('liquid_memory'),
-                19: new TokenReward('token'),
-                20: new CraftingRecipeReward('crafting_recipe'),
-                27: new CraftingRecipeSetReward('crafting_recipe_set'),
-                28: new AdventureBoardReward('board'),
-                30: new WarehouseAbilityReward('warehouse_ability'),
-                // 33: new ChoiceReward('choice'),
-            }[type] || new ItemReward('item');
-
-        reward.create(id, type, amount, loc);
-        return reward;
+        const reward = new BoardReward(id, type, amount, loc);
+        return reward.reward;
     }
 
     function getRewards(rewards) {
@@ -81,15 +48,15 @@ export default function QuestDetails({
                 }}
                 onPointerDown={(e) => e.stopPropagation()}
             >
-                <h5>
+                <h1>
                     {
                         DB.Loc[loc].master_adventure_board_quests_text.texts[
                             quest.quest_name
                         ].text
                     }
-                </h5>
+                </h1>
                 <p>0 / {quest.quest_achievement_condition.complete_value}</p>
-                <h6 style={{ marginTop: '0.5rem' }}>Rewards</h6>
+                <h2 style={{ marginTop: '0.5rem' }}>Rewards</h2>
                 <div style={{ fontSize: '0.75rem' }}>
                     {getRewards(rewards).map((e) => e.build())}
                 </div>

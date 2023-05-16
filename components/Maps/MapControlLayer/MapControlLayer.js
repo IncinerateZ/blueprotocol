@@ -94,18 +94,29 @@ export default function MapControlLayer({
                         Contact
                     </span>
                     <div style={{ cursor: 'pointer' }}>
-                        <Image
-                            src={SettingIcon}
-                            width={20}
-                            height={20}
+                        <button
                             onClick={() => setShowSettings(!showSettings)}
-                            alt={'settings'}
-                        ></Image>
+                            style={{
+                                backgroundColor: 'transparent',
+                                border: 'none',
+                                padding: '0',
+                                cursor: 'pointer',
+                            }}
+                        >
+                            <Image
+                                src={SettingIcon}
+                                width={20}
+                                height={20}
+                                alt={'settings'}
+                            ></Image>
+                        </button>
                         {showSettings && (
                             <div className={styles.settings}>
                                 <h1>Settings</h1>
                                 <div>
-                                    <span>Display detailed info?</span>
+                                    <label for='Map_showLeak'>
+                                        Display detailed info?
+                                    </label>
                                     <input
                                         type='checkbox'
                                         checked={showLeak}
@@ -116,6 +127,7 @@ export default function MapControlLayer({
                                                 !showLeak,
                                             );
                                         }}
+                                        id='Map_showLeak'
                                     ></input>
                                 </div>
                             </div>
@@ -124,7 +136,7 @@ export default function MapControlLayer({
                 </div>
             </div>
             <div className={styles.MCL_chevron}>
-                <div
+                <button
                     className={styles.MCL_chevron_container}
                     onClick={() => {
                         setChevron((s) => !s);
@@ -139,7 +151,7 @@ export default function MapControlLayer({
                             transform: chevron ? '' : 'rotate(180deg)',
                         }}
                     ></Image>
-                </div>
+                </button>
             </div>
         </div>
     );
