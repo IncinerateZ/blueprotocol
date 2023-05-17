@@ -76,7 +76,6 @@ function MyApp({ Component, pageProps }) {
                     name='twitter:image'
                     content={'https://bp.incin.net/favicon-32x32.png'}
                 />
-                <link rel='canonical' href='https://bp.incin.net/' />
                 <meta
                     name='google-site-verification'
                     content='oWZPfYe9ZddW-ezHq4cMci74HM2jYMipKS-c0sUw4U4'
