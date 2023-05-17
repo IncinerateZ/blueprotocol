@@ -38,7 +38,7 @@ export default function Quest({ e, DB, loc, displayOverlay }) {
                 className={styles.questThumbnail}
             ></Image>
             <div className={styles.questTitleContainer}>
-                <label className={styles.questTitle} for={`Quest_${e.id}`}>
+                <label className={styles.questTitle} htmlFor={`Quest_${e.id}`}>
                     {
                         DB.Loc[loc]['master_adventure_boards_text'].texts[
                             e.name

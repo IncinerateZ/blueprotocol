@@ -38,7 +38,7 @@ export default function LangPicker({ DB, lang, setLang }) {
                 }}
                 id='langpicker'
             >
-                <label for='langpicker'>{ReadableString[lang]}</label>
+                <label htmlFor='langpicker'>{ReadableString[lang]}</label>
             </button>
             <div style={{ position: 'relative' }}>
                 <Image
@@ -77,7 +77,7 @@ export default function LangPicker({ DB, lang, setLang }) {
                                     fontWeight: 'bold',
                                 }}
                             >
-                                <label for={`langPicker_${lang_}`}>
+                                <label htmlFor={`langPicker_${lang_}`}>
                                     {ReadableString[lang_]}
                                 </label>
                             </button>
