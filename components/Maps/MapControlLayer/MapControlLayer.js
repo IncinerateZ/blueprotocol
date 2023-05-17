@@ -114,7 +114,7 @@ export default function MapControlLayer({
                             <div className={styles.settings}>
                                 <h1>Settings</h1>
                                 <div>
-                                    <label for='Map_showLeak'>
+                                    <label htmlFor='Map_showLeak'>
                                         Display detailed info?
                                     </label>
                                     <input

@@ -61,7 +61,7 @@ export default function Selector({
                 />
             )}
             <label
-                for={currentSelector.type || s}
+                htmlFor={currentSelector.type || s}
                 style={{ textAlign: 'left' }}
             >
                 {currentSelector.type

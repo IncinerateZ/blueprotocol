@@ -96,12 +96,20 @@ export default function Board() {
                         key={panel}
                         id={panel}
                         className={styles.panelNode}
-                        onMouseDown={(e) => {
+                        onClick={(e) => {
                             e.stopPropagation();
 
                             handleSelect(board, panel);
                         }}
+                        onMouseDown={(ev) => ev.stopPropagation()}
                         onMouseEnter={() => {
+                            if (
+                                document
+                                    .getElementById('QuestViewer')
+                                    .getAttribute('isDragging') === 'true'
+                            )
+                                return;
+
                             let mission = board.panels[panel].mission_id;
 
                             setSelectedQuest(mission);
