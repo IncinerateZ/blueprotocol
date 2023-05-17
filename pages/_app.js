@@ -81,6 +81,7 @@ function MyApp({ Component, pageProps }) {
                     name='google-site-verification'
                     content='oWZPfYe9ZddW-ezHq4cMci74HM2jYMipKS-c0sUw4U4'
                 />
+                <title>Blue Protocol Interactive Map & Resource</title>
             </Head>
             <Component {...pageProps} />
         </>
