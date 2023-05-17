@@ -103,6 +103,13 @@ export default function Board() {
                         }}
                         onMouseDown={(ev) => ev.stopPropagation()}
                         onMouseEnter={() => {
+                            if (
+                                document
+                                    .getElementById('QuestViewer')
+                                    .getAttribute('isDragging') === 'true'
+                            )
+                                return;
+
                             let mission = board.panels[panel].mission_id;
 
                             setSelectedQuest(mission);

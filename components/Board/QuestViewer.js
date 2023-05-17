@@ -80,6 +80,9 @@ export default function QuestViewer({
             if (e.target !== e.currentTarget) return;
             isDragging = true;
             lastMousePos = { x: e.clientX, y: e.clientY };
+            document
+                .getElementById('QuestViewer')
+                .setAttribute('isDragging', true);
         }
 
         function mouseUp() {
@@ -118,6 +121,10 @@ export default function QuestViewer({
                     draw();
                 }, 1);
             }
+
+            document
+                .getElementById('QuestViewer')
+                .setAttribute('isDragging', false);
         }
 
         function mouseMove(x, y) {
@@ -125,8 +132,8 @@ export default function QuestViewer({
                 let oX = x - lastMousePos.x;
                 let oY = y - lastMousePos.y;
 
-                oX *= 1 / (Math.abs(oX / 10) + 1);
-                oY *= 1 / (Math.abs(oY / 10) + 1);
+                oX *= 1 / (Math.abs(oX / 15) + 1);
+                oY *= 1 / (Math.abs(oY / 15) + 1);
 
                 dragOffsets.x += oX;
                 dragOffsets.y += oY;
@@ -249,6 +256,7 @@ export default function QuestViewer({
                     onMouseDown={(e) => {
                         e.stopPropagation();
                     }}
+                    id='QuestViewer'
                 ></canvas>
                 {Object.keys(panels).map((pid) => panels[pid].element)}
                 <p className={styles.overlayTitle}>
