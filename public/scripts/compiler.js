@@ -1,4 +1,4 @@
-//2023-05-15
+//2023-05-16
 
 const fs = require('fs');
 
@@ -480,7 +480,11 @@ for (let mapType in Quests) {
                                         ? 'plus_'
                                         : ''
                                 }${t.toLowerCase()}_quest`,
-                                selector: `${t} Quest`,
+                                selector: `${
+                                    file.charAt(file.length - 6) === '2'
+                                        ? 'Plus '
+                                        : ''
+                                }${t} Quest`,
                             };
                         }
                     }
