@@ -61,7 +61,11 @@ export default function Selector({
                 />
             )}
             <label
-                htmlFor={currentSelector.type || s}
+                htmlFor={
+                    currentSelector.type
+                        ? DB.Loc[lang].enemyparam_text.texts[s].text
+                        : currentSelector.display_name
+                }
                 style={{ textAlign: 'left' }}
             >
                 {currentSelector.type
