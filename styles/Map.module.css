@@ -135,6 +135,17 @@
 
 .Popup {
     scrollbar-width: thin;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.Popup button {
+    margin: 0 auto;
+    border: 0;
+    background-color: transparent;
+    color: blue;
+    cursor: pointer;
 }
 
 .Popup::-webkit-scrollbar {

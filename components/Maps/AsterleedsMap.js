@@ -55,6 +55,9 @@ export default function Map() {
     const [selectorsSource, setSelectorsSource] = useState(
         JSON.parse(localStorage.getItem('Map_selectorsSource')) || {},
     );
+    const [hiddenMarkers, setHiddenMarkers] = useState(
+        JSON.parse(localStorage.getItem('Map_hiddenMarkers')) || {},
+    );
 
     const makeMakerMode = true;
 
@@ -478,36 +481,53 @@ export default function Map() {
                         />
                         {mapIcons &&
                             Object.keys(markers).map((e) =>
-                                markers[e].arr.map((v, i) => (
-                                    <div key={i}>
-                                        {(v.selectors || []).reduce(
-                                            (s, c) =>
-                                                s + (excludedSelectors[c] || 0),
-                                            0,
-                                        ) !== (v.selectors || []).length &&
-                                            mapIcons[v.type] && (
-                                                <Marker
-                                                    position={[v.lat, v.lng]}
-                                                    icon={mapIcons[v.type]}
-                                                >
-                                                    <Popup>
-                                                        {entitySummary(
-                                                            DB,
-                                                            {
-                                                                type: v.type,
-                                                                idf: v.title,
-                                                                metadata: {
-                                                                    ...v,
+                                markers[e].arr.map((v, i) => {
+                                    return (
+                                        <div key={i}>
+                                            {(v.selectors || []).reduce(
+                                                (s, c) =>
+                                                    s +
+                                                    (excludedSelectors[c] || 0),
+                                                0,
+                                            ) !== (v.selectors || []).length &&
+                                                mapIcons[v.type] && (
+                                                    <Marker
+                                                        position={[
+                                                            v.lat,
+                                                            v.lng,
+                                                        ]}
+                                                        icon={mapIcons[v.type]}
+                                                        opacity={
+                                                            v.selectors[0] ===
+                                                                'Treasure Box' &&
+                                                            hiddenMarkers[
+                                                                v.title
+                                                            ]
+                                                                ? '0.5'
+                                                                : '1'
+                                                        }
+                                                    >
+                                                        <Popup>
+                                                            {entitySummary(
+                                                                DB,
+                                                                {
+                                                                    type: v.type,
+                                                                    idf: v.title,
+                                                                    metadata: {
+                                                                        ...v,
+                                                                    },
                                                                 },
-                                                            },
-                                                            lang,
-                                                            showLeak,
-                                                        )}
-                                                    </Popup>
-                                                </Marker>
-                                            )}
-                                    </div>
-                                )),
+                                                                lang,
+                                                                showLeak,
+                                                                hiddenMarkers,
+                                                                setHiddenMarkers,
+                                                            )}
+                                                        </Popup>
+                                                    </Marker>
+                                                )}
+                                        </div>
+                                    );
+                                }),
                             )}
                         <ClickHandler />
                         <ZoomControl position='topright' />
