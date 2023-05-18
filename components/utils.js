@@ -7,7 +7,7 @@ function coordTranslate(x, y, cfg) {
     };
 }
 
-function buildSummary(summaries) {
+function buildSummary(summaries, hiddenMarkers, setHiddenMarkers) {
     if (Object.keys(summaries).length === 0)
         return <div style={{ textAlign: 'center' }}>No Data</div>;
     let id = typeof summaries[0] === 'string' ? summaries.shift() : null;
@@ -93,12 +93,38 @@ function buildSummary(summaries) {
                         )}
                     </div>
                 ))}
+                {summaries[0].name.includes('Treasure') && (
+                    <button
+                        onClick={() => {
+                            let _hiddenMarkers = {
+                                ...hiddenMarkers,
+                                [summaries[0].id]:
+                                    !hiddenMarkers[summaries[0].id],
+                            };
+                            setHiddenMarkers(_hiddenMarkers);
+
+                            localStorage.setItem(
+                                'Map_hiddenMarkers',
+                                JSON.stringify(_hiddenMarkers),
+                            );
+                        }}
+                    >
+                        [{hiddenMarkers[summaries[0].id] ? 'Unmark' : 'Mark'}]
+                    </button>
+                )}
             </div>
         </div>
     );
 }
 
-function entitySummary(DB, entity, lang, showLeak) {
+function entitySummary(
+    DB,
+    entity,
+    lang,
+    showLeak,
+    hiddenMarkers,
+    setHiddenMarkers,
+) {
     let res = [];
     if (['enemy', 'elite'].includes(entity.type)) {
         let enemies = DB.EnemySets.field[entity.idf];
@@ -220,7 +246,7 @@ function entitySummary(DB, entity, lang, showLeak) {
             },
         ];
     }
-    return buildSummary(res);
+    return buildSummary(res, hiddenMarkers, setHiddenMarkers);
 }
 
 function levenshtein(s, t) {
