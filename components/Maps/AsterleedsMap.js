@@ -162,7 +162,8 @@ export default function Map() {
                     selected:
                         pt.type in (selectorsSource.Quests || {}) &&
                         'selected' in selectorsSource.Quests[pt.type]
-                            ? selectorsSource.Adventure[pt.type].selected
+                            ? selectorsSource.Adventure[pt.type].selected &&
+                              !excludedSelectors[pt.selector]
                             : true,
                     display_name:
                         {
@@ -185,7 +186,8 @@ export default function Map() {
                     selected:
                         pt.type in (selectorsSource.Quests || {}) &&
                         'selected' in selectorsSource.Quests[pt.type]
-                            ? selectorsSource.Quests[pt.type]?.selected
+                            ? selectorsSource.Quests[pt.type]?.selected &&
+                              !excludedSelectors[pt.selector]
                             : true,
                     display_name: pt.selector,
                 };
@@ -245,7 +247,11 @@ export default function Map() {
                                     'selected' in
                                         selectorsSource.Enemies[enemyNameId]
                                         ? selectorsSource.Enemies[enemyNameId]
-                                              .selected
+                                              .selected &&
+                                          !excludedSelectors[
+                                              DB.Loc.ja_JP.enemyparam_text
+                                                  .texts[enemyNameId].text
+                                          ]
                                         : true,
                                 display_name: enemyNameId,
                                 type: pt.type,
