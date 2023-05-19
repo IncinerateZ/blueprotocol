@@ -2,6 +2,7 @@ import styles from '@/styles/Board.module.css';
 import { useEffect, useRef, useState } from 'react';
 import { connectingPts } from '../utils';
 import QuestDetails from './QuestDetails';
+import BoardCompleteRewards from './BoardCompleteRewards';
 
 export default function QuestViewer({
     DB,
@@ -259,6 +260,11 @@ export default function QuestViewer({
                     id='QuestViewer'
                 ></canvas>
                 {Object.keys(panels).map((pid) => panels[pid].element)}
+                <BoardCompleteRewards
+                    DB={DB}
+                    loc={loc}
+                    selectedBoard={selectedBoard}
+                />
                 <p className={styles.overlayTitle}>
                     {
                         DB.Loc[loc]['master_adventure_boards_text'].texts[

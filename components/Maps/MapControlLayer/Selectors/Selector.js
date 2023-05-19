@@ -66,7 +66,13 @@ export default function Selector({
                         ? DB.Loc[lang].enemyparam_text.texts[s].text
                         : currentSelector.display_name
                 }
-                style={{ textAlign: 'left' }}
+                style={{
+                    textAlign: 'left',
+                    lineHeight: '0.9rem',
+                    height: 'fit-content',
+                    marginTop: 'auto',
+                    marginBottom: 'auto',
+                }}
             >
                 {currentSelector.type
                     ? DB.Loc[lang].enemyparam_text.texts[s].text
