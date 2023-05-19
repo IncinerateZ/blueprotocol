@@ -182,7 +182,7 @@ export default function Map() {
                 _selectors.Quests[pt.type] = {
                     selected:
                         pt.type in (selectorsSource.Quests || {})
-                            ? selectorsSource.Adventure[pt.type]?.selected
+                            ? selectorsSource.Quests[pt.type]?.selected
                             : true,
                     display_name: pt.selector,
                 };
