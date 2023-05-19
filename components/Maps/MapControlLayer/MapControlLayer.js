@@ -113,7 +113,7 @@ export default function MapControlLayer({
                         {showSettings && (
                             <div className={styles.settings}>
                                 <h1>Settings</h1>
-                                <div>
+                                <div style={{ marginBottom: '1rem' }}>
                                     <label htmlFor='Map_showLeak'>
                                         Display detailed info?
                                     </label>
@@ -130,6 +130,29 @@ export default function MapControlLayer({
                                         id='Map_showLeak'
                                     ></input>
                                 </div>
+                                <button
+                                    onClick={() => {
+                                        localStorage.removeItem(
+                                            'Map_selectorsSource',
+                                        );
+                                        localStorage.removeItem(
+                                            'Map_excludedSelectors',
+                                        );
+                                        window.location.reload();
+                                    }}
+                                >
+                                    Reset All Selectors
+                                </button>
+                                <button
+                                    onClick={() => {
+                                        localStorage.removeItem(
+                                            'Map_hiddenMarkers',
+                                        );
+                                        window.location.reload();
+                                    }}
+                                >
+                                    Reset All Markers
+                                </button>
                             </div>
                         )}
                     </div>
