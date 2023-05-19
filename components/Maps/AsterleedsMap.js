@@ -160,7 +160,8 @@ export default function Map() {
 
                 _selectors.Adventure[pt.type] = {
                     selected:
-                        pt.type in (selectorsSource.Adventure || {})
+                        pt.type in (selectorsSource.Quests || {}) &&
+                        'selected' in selectorsSource.Quests[pt.type]
                             ? selectorsSource.Adventure[pt.type].selected
                             : true,
                     display_name:
@@ -179,9 +180,11 @@ export default function Map() {
                 if (!_selectors.Quests) _selectors.Quests = {};
 
                 let pt = pts[p];
+
                 _selectors.Quests[pt.type] = {
                     selected:
-                        pt.type in (selectorsSource.Quests || {})
+                        pt.type in (selectorsSource.Quests || {}) &&
+                        'selected' in selectorsSource.Quests[pt.type]
                             ? selectorsSource.Quests[pt.type]?.selected
                             : true,
                     display_name: pt.selector,
@@ -238,7 +241,9 @@ export default function Map() {
                             [enemyNameId]: {
                                 selected:
                                     enemyNameId in
-                                    (selectorsSource.Enemies || {})
+                                        (selectorsSource.Enemies || {}) &&
+                                    'selected' in
+                                        selectorsSource.Enemies[enemyNameId]
                                         ? selectorsSource.Enemies[enemyNameId]
                                               .selected
                                         : true,
