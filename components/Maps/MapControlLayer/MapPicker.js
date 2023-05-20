@@ -164,11 +164,12 @@ export default function MapPicker({
                 <div className={styles.mapsearch_suggestions}>
                     {doSearch &&
                         searchSuggestions.map((e, i) => (
-                            <div
+                            <button
                                 key={Math.random()}
                                 className={
                                     ssHighlight === i ? styles.highlight : ''
                                 }
+                                style={{backgroundColor: ssHighlight === i ? 'var(--dark2)' : 'var(--background)'}}
                                 onClick={() => {
                                     searchRef.current.blur();
                                     setChosenMap(maps[e][0]);
@@ -176,7 +177,7 @@ export default function MapPicker({
                                 }}
                             >
                                 {e}
-                            </div>
+                            </button>
                         ))}
                 </div>
             </div>
