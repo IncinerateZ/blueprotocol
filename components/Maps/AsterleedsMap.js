@@ -390,7 +390,7 @@ export default function Map() {
     }, [selectorsSource]);
 
     return (
-        <div>
+        <div style={{ overflow: 'hidden' }}>
             <Head>
                 <title>
                     {!DB || lang !== 'ja_JP'
