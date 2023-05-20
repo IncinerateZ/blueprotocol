@@ -77,6 +77,7 @@ export default function Selector({
                 type='checkbox'
                 id={currentSelector.type || s}
                 className='visually-hidden'
+                checked={currentSelector.selected}
             ></input>
         </label>
     );
