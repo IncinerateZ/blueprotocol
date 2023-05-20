@@ -21,15 +21,18 @@ export default function Selector({
     const currentSelector = selectors[e][s];
 
     return (
-        <button
+        <label
+            className={styles.MCL_selector}
             style={{
                 fontSize: '0.9rem',
                 filter: currentSelector.selected ? '' : 'brightness(50%)',
                 color: 'var(--text-color)',
                 padding: '0',
+                textAlign: 'left',
+                lineHeight: '0.9rem',
+                height: 'fit-content',
             }}
-            className={styles.MCL_selector}
-            onClick={() => {
+            onChange={() => {
                 let temp = { ...selectors };
                 temp[e][s].selected = !temp[e][s].selected;
 
@@ -38,16 +41,22 @@ export default function Selector({
                     ...selectorsSource,
                     ...temp,
                 });
-                setExcludedSelectors({
-                    ...excludedSelectors,
-                    [['enemy', 'elite'].includes(currentSelector.type)
-                        ? DB.Loc.ja_JP.enemyparam_text.texts[
-                              currentSelector.display_name
-                          ].text
-                        : currentSelector.display_name]: !temp[e][s].selected,
-                });
+
+                let _excludedSelectors = { ...excludedSelectors };
+                let excludedTarget = ['enemy', 'elite'].includes(
+                    currentSelector.type,
+                )
+                    ? DB.Loc.ja_JP.enemyparam_text.texts[
+                          currentSelector.display_name
+                      ].text
+                    : currentSelector.display_name;
+
+                if (temp[e][s].selected)
+                    delete _excludedSelectors[excludedTarget];
+                else _excludedSelectors[excludedTarget] = !temp[e][s].selected;
+
+                setExcludedSelectors(_excludedSelectors);
             }}
-            id={currentSelector.type || s}
         >
             {mapIcons && (
                 <img
@@ -60,24 +69,15 @@ export default function Selector({
                     height={32}
                 />
             )}
-            <label
-                htmlFor={
-                    currentSelector.type
-                        ? DB.Loc[lang].enemyparam_text.texts[s].text
-                        : currentSelector.display_name
-                }
-                style={{
-                    textAlign: 'left',
-                    lineHeight: '0.9rem',
-                    height: 'fit-content',
-                    marginTop: 'auto',
-                    marginBottom: 'auto',
-                }}
-            >
-                {currentSelector.type
-                    ? DB.Loc[lang].enemyparam_text.texts[s].text
-                    : currentSelector.display_name}
-            </label>
-        </button>
+            {currentSelector.type
+                ? DB.Loc[lang].enemyparam_text.texts[s].text
+                : currentSelector.display_name}
+
+            <input
+                type='checkbox'
+                id={currentSelector.type || s}
+                className='visually-hidden'
+            ></input>
+        </label>
     );
 }

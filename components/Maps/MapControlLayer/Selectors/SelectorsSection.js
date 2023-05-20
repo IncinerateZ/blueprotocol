@@ -14,8 +14,6 @@ export default function SelectorsSection({
     selectorsSource,
     setSelectorsSource,
 }) {
-    const [collapsedSelectors, setCollapsedSelectors] = useState({});
-
     return (
         <div
             style={{ marginTop: '16px', height: '100%' }}
@@ -35,8 +33,6 @@ export default function SelectorsSection({
                         setExcludedSelectors={setExcludedSelectors}
                         selectorsSource={selectorsSource}
                         setSelectorsSource={setSelectorsSource}
-                        collapsedSelectors={collapsedSelectors}
-                        setCollapsedSelectors={setCollapsedSelectors}
                     />
                 ))}
         </div>
