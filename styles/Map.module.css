@@ -12,6 +12,8 @@
     z-index: 999;
 
     transition: 0.2s;
+
+    overflow: hidden;
 }
 
 .MCL_content {
@@ -95,12 +97,16 @@
 }
 
 .MCL_chevron {
-    width: 4%;
+    position: absolute;
+    width: 25px;
     height: 100%;
 
     display: flex;
 
     align-items: center;
+    z-index: 999;
+    left: 335px;
+    transition: 0.2s;
 }
 
 .MCL_chevron_container {
@@ -119,8 +125,12 @@
     border-radius: 5px;
 }
 
-.MapControlLayer:has(.MCL_chevron > .MCL_chevron_container input:checked) {
+.MCL_container:has(.MCL_chevron > .MCL_chevron_container input:checked) > .MapControlLayer{
     transform: translateX(-95%);
+}
+
+.MCL_chevron:has(.MCL_chevron_container input:checked) {
+    transform: translateX(-330px);
 }
 
 .MCL_chevron_container:hover {
