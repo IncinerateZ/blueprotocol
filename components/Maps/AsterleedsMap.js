@@ -160,8 +160,8 @@ export default function Map() {
 
                 _selectors.Adventure[pt.type] = {
                     selected:
-                        pt.type in (selectorsSource.Quests || {}) &&
-                        'selected' in selectorsSource.Quests[pt.type]
+                        pt.type in (selectorsSource.Adventure || {}) &&
+                        'selected' in selectorsSource.Adventure[pt.type]
                             ? selectorsSource.Adventure[pt.type].selected &&
                               !excludedSelectors[pt.selector]
                             : true,

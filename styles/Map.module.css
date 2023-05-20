@@ -14,10 +14,6 @@
     transition: 0.2s;
 }
 
-.MCL_in {
-    transform: translateX(-95%);
-}
-
 .MCL_content {
     width: 100%;
     height: 100vh;
@@ -123,6 +119,10 @@
     border-radius: 5px;
 }
 
+.MapControlLayer:has(.MCL_chevron > .MCL_chevron_container input:checked) {
+    transform: translateX(-95%);
+}
+
 .MCL_chevron_container:hover {
     filter: brightness(120%);
 }
@@ -131,6 +131,10 @@
     height: 30px;
 
     transition: 0.3s;
+}
+
+.MCL_chevron_container:has(input:checked) > .chevronIcon {
+    transform: rotate(180deg);
 }
 
 .Popup {
@@ -231,11 +235,26 @@
     background: #555;
 } 
 
+.selectorsHeader img {
+    transform: rotate(270deg);
+    transition: 0.1s;
+}
+
+.selectorsHeader:has(label input:checked) > label > img {
+    transform: rotate(90deg);
+}
+
+.selectorsHeader:has(label input:checked) + .MCL_selectors{
+    max-height: 0px;
+}
+
 .MCL_selectors {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-
+    
+    max-height: 200vw;
+    overflow-y: hidden;
     transition: 0.2s ease-in-out;
 }
 
@@ -302,6 +321,10 @@
     opacity: 0;
 }
 
+.settingsToggle:has(input:checked) + .settings {
+    opacity: 1;
+}
+
 .settings {
     position: fixed;
 
@@ -311,6 +334,9 @@
     padding: 0.5rem;
 
     border-radius: 5px;
+
+    opacity: 0;
+    transition: opacity 0.1s;
 }
 
 .settings h1 {

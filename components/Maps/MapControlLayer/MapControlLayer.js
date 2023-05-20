@@ -30,15 +30,8 @@ export default function MapControlLayer({
     showLeak,
     setShowLeak,
 }) {
-    const [chevron, setChevron] = useState(true);
-    const [showSettings, setShowSettings] = useState(false);
-
     return (
-        <div
-            className={`${styles.MapControlLayer} ${
-                chevron ? '' : styles.MCL_in
-            }`}
-        >
+        <div className={styles.MapControlLayer}>
             <div className={styles.MCL_content}>
                 <div
                     style={{ display: 'flex', justifyContent: 'space-between' }}
@@ -94,87 +87,85 @@ export default function MapControlLayer({
                         Contact
                     </span>
                     <div style={{ cursor: 'pointer' }}>
-                        <button
-                            onClick={() => setShowSettings(!showSettings)}
-                            style={{
-                                backgroundColor: 'transparent',
-                                border: 'none',
-                                padding: '0',
-                                cursor: 'pointer',
-                            }}
-                        >
+                        <label className={styles.settingsToggle}>
                             <Image
                                 src={SettingIcon}
                                 width={20}
                                 height={20}
                                 alt={'settings'}
+                                style={{ cursor: 'pointer' }}
                             ></Image>
-                        </button>
-                        {showSettings && (
-                            <div className={styles.settings}>
-                                <h1>Settings</h1>
-                                <div style={{ marginBottom: '1rem' }}>
-                                    <label htmlFor='Map_showLeak'>
-                                        Display detailed info?
-                                    </label>
-                                    <input
-                                        type='checkbox'
-                                        checked={showLeak}
-                                        onChange={() => {
-                                            setShowLeak(!showLeak);
-                                            localStorage.setItem(
-                                                'Map_showLeak',
-                                                !showLeak,
-                                            );
-                                        }}
-                                        id='Map_showLeak'
-                                    ></input>
-                                </div>
-                                <button
-                                    onClick={() => {
-                                        localStorage.removeItem(
-                                            'Map_selectorsSource',
+                            <span className='visually-hidden'>
+                                Show / Hide Settings
+                            </span>
+                            <input
+                                type='checkbox'
+                                className={'visually-hidden'}
+                            ></input>
+                        </label>
+                        <div className={styles.settings}>
+                            <h1>Settings</h1>
+                            <div style={{ marginBottom: '1rem' }}>
+                                <label htmlFor='Map_showLeak'>
+                                    Display detailed info?
+                                </label>
+                                <input
+                                    type='checkbox'
+                                    checked={showLeak}
+                                    onChange={() => {
+                                        setShowLeak(!showLeak);
+                                        localStorage.setItem(
+                                            'Map_showLeak',
+                                            !showLeak,
                                         );
-                                        localStorage.removeItem(
-                                            'Map_excludedSelectors',
-                                        );
-                                        window.location.reload();
                                     }}
-                                >
-                                    Reset All Selectors
-                                </button>
-                                <button
-                                    onClick={() => {
-                                        localStorage.removeItem(
-                                            'Map_hiddenMarkers',
-                                        );
-                                        window.location.reload();
-                                    }}
-                                >
-                                    Reset All Markers
-                                </button>
+                                    id='Map_showLeak'
+                                ></input>
                             </div>
-                        )}
+                            <button
+                                onClick={() => {
+                                    localStorage.removeItem(
+                                        'Map_selectorsSource',
+                                    );
+                                    localStorage.removeItem(
+                                        'Map_excludedSelectors',
+                                    );
+                                    window.location.reload();
+                                }}
+                            >
+                                Reset All Selectors
+                            </button>
+                            <button
+                                onClick={() => {
+                                    localStorage.removeItem(
+                                        'Map_hiddenMarkers',
+                                    );
+                                    window.location.reload();
+                                }}
+                            >
+                                Reset All Markers
+                            </button>
+                        </div>
                     </div>
                 </div>
             </div>
             <div className={styles.MCL_chevron}>
-                <button
-                    className={styles.MCL_chevron_container}
-                    onClick={() => {
-                        setChevron((s) => !s);
-                    }}
-                >
+                <label className={styles.MCL_chevron_container}>
                     <Image
                         src={ChevronLeft.src}
                         width={25}
                         height={25}
                         alt={'Toggle Drawer'}
-                        style={{
-                            transform: chevron ? '' : 'rotate(180deg)',
-                        }}
+                        className={styles.chevronIcon}
                     ></Image>
-                </button>
+                    <span className={'visually-hidden'}>
+                        Show / Hide Drawer
+                    </span>
+                    <input
+                        type='checkbox'
+                        className={'visually-hidden'}
+                    ></input>
+                </label>
             </div>
         </div>
     );

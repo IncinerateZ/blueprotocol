@@ -16,8 +16,6 @@ export default function Selectors({
     setExcludedSelectors,
     selectorsSource,
     setSelectorsSource,
-    collapsedSelectors,
-    setCollapsedSelectors,
 }) {
     function toggleVisibiltyAll(state) {
         let temp = { ...selectors };
@@ -34,6 +32,14 @@ export default function Selectors({
                       ].text
                     : selectors[e][s].display_name]: state,
             };
+            if (!state)
+                delete _excludedSelectors[
+                    ['enemy', 'elite'].includes(selectors[e][s].type)
+                        ? DB.Loc.ja_JP.enemyparam_text.texts[
+                              selectors[e][s].display_name
+                          ].text
+                        : selectors[e][s].display_name
+                ];
         }
         setSelectors({ ...temp });
         let _selectorsSource = {
@@ -50,7 +56,10 @@ export default function Selectors({
     }
     return (
         <div style={{ marginBottom: '4px' }}>
-            <span style={{ display: 'flex' }}>
+            <span
+                style={{ display: 'flex' }}
+                className={styles.selectorsHeader}
+            >
                 <div>
                     <b>{e}</b>
                     <div
@@ -79,22 +88,13 @@ export default function Selectors({
                         <span>All</span>
                     </div>
                 </div>
-                <button
+                <label
                     style={{
-                        position: 'relative',
-                        backgroundColor: 'transparent',
-                        border: 'none',
                         cursor: 'pointer',
-                        padding: '0',
+                        marginTop: 'auto',
+                        marginBottom: 'auto',
                         marginLeft: 'auto',
                         marginRight: '0.5rem',
-                        marginTop: 'auto',
-                    }}
-                    onClick={() => {
-                        setCollapsedSelectors({
-                            ...collapsedSelectors,
-                            [e]: !collapsedSelectors[e],
-                        });
                     }}
                 >
                     <Image
@@ -102,23 +102,14 @@ export default function Selectors({
                         width={25}
                         height={25}
                         alt={'Collapse Selectors'}
-                        style={{
-                            // position: 'absolute',
-                            transform: `rotate(${
-                                collapsedSelectors[e] ? '-270' : '-90'
-                            }deg)`,
-                            transition: '0.1s',
-                        }}
                     ></Image>
-                </button>
+                    <span className='visually-hidden'>
+                        Collapse / Expand Selectors
+                    </span>
+                    <input type='checkbox' className='visually-hidden'></input>
+                </label>
             </span>
-            <div
-                className={styles.MCL_selectors}
-                style={{
-                    maxHeight: collapsedSelectors[e] ? '0' : '200vw',
-                    overflowY: 'hidden',
-                }}
-            >
+            <div className={styles.MCL_selectors}>
                 {Object.keys(selectors[e]).map((s, si) => (
                     <Selector
                         key={si}
