@@ -81,6 +81,17 @@
     cursor: pointer;
 
     z-index: 999;
+
+    display: flex;
+    flex-direction: column;
+}
+
+.mapsearch_suggestions button {
+    padding: 0.5rem;
+    text-align: left;
+    font-size: 1.2rem;
+    color: var(--text-color);
+    border: none;
 }
 
 .mapsearch_suggestions div {
@@ -90,10 +101,6 @@
 .mapsearch_suggestions div:hover {
     background-color: var(--dark2);
     filter: brightness(90%);
-}
-
-.highlight {
-    background-color: var(--dark2);
 }
 
 .MCL_chevron {
@@ -125,14 +132,6 @@
     border-radius: 5px;
 }
 
-.MCL_container:has(.MCL_chevron > .MCL_chevron_container input:checked) > .MapControlLayer{
-    transform: translateX(-95%);
-}
-
-.MCL_chevron:has(.MCL_chevron_container input:checked) {
-    transform: translateX(-330px);
-}
-
 .MCL_chevron_container:hover {
     filter: brightness(120%);
 }
@@ -141,10 +140,6 @@
     height: 30px;
 
     transition: 0.3s;
-}
-
-.MCL_chevron_container:has(input:checked) > .chevronIcon {
-    transform: rotate(180deg);
 }
 
 .Popup {

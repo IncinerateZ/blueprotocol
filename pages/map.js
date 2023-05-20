@@ -1,3 +1,4 @@
+import FakeLoader from '@/components/Maps/FakeLoader';
 import dynamic from 'next/dynamic';
 import Head from 'next/head';
 import { useEffect, useState } from 'react';
@@ -23,7 +24,7 @@ export default function Map() {
                         color: 'white',
                     }}
                 >
-                    <span>Loading...</span>
+                    <FakeLoader />
                 </div>
             </>
         ),

@@ -1,5 +1,6 @@
 import Head from 'next/head';
 import dynamic from 'next/dynamic';
+import FakeLoader from '@/components/Maps/FakeLoader';
 export default function Home() {
     const Map = dynamic(() => import('@/components/Maps/AsterleedsMap'), {
         loading: () => (
@@ -21,7 +22,7 @@ export default function Home() {
                         color: 'white',
                     }}
                 >
-                    <span>Loading...</span>
+                    <FakeLoader />
                 </div>
             </>
         ),
