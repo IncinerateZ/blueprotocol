@@ -132,14 +132,6 @@
     border-radius: 5px;
 }
 
-.MCL_container:has(.MCL_chevron > .MCL_chevron_container input:checked) > .MapControlLayer{
-    transform: translateX(-95%);
-}
-
-.MCL_chevron:has(.MCL_chevron_container input:checked) {
-    transform: translateX(-330px);
-}
-
 .MCL_chevron_container:hover {
     filter: brightness(120%);
 }
@@ -148,10 +140,6 @@
     height: 30px;
 
     transition: 0.3s;
-}
-
-.MCL_chevron_container:has(input:checked) > .chevronIcon {
-    transform: rotate(180deg);
 }
 
 .Popup {

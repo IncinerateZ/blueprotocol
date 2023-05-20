@@ -30,9 +30,13 @@ export default function MapControlLayer({
     showLeak,
     setShowLeak,
 }) {
+    const [drawn, setDrawn] = useState(true);
     return (
         <div className={styles.MCL_container}>
-            <div className={styles.MapControlLayer}>
+            <div
+                className={styles.MapControlLayer}
+                style={{ transform: drawn ? '' : 'translateX(-95%)' }}
+            >
                 <div className={styles.MCL_content}>
                     <div
                         style={{
@@ -156,14 +160,20 @@ export default function MapControlLayer({
                     </div>
                 </div>
             </div>
-            <div className={styles.MCL_chevron}>
+            <div
+                className={styles.MCL_chevron}
+                style={{ transform: drawn ? '' : 'translateX(-330px)' }}
+            >
                 <label className={styles.MCL_chevron_container}>
                     <Image
                         src={ChevronLeft.src}
                         width={25}
                         height={25}
                         alt={'Toggle Drawer'}
-                        className={styles.chevronIcon}
+                        style={{
+                            userSelect: 'none',
+                            transform: `rotate(${180 * !drawn}deg)`,
+                        }}
                     ></Image>
                     <span className={'visually-hidden'}>
                         Show / Hide Drawer
@@ -171,6 +181,9 @@ export default function MapControlLayer({
                     <input
                         type='checkbox'
                         className={'visually-hidden'}
+                        onClick={() => {
+                            setDrawn(!drawn);
+                        }}
                     ></input>
                 </label>
             </div>
