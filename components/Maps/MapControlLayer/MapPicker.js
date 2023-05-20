@@ -73,7 +73,7 @@ export default function MapPicker({
                 }
             } else {
                 let d = levenshtein(k.toLowerCase(), q);
-                if (d <= 5)
+                if (d <= k.length - 3)
                     for (let t of maps[k]) {
                         let name =
                             lang === 'ja_JP'
