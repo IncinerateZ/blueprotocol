@@ -1,5 +1,5 @@
 export default class Reward {
-    constructor(type_string) {
+    constructor(type_string, db_path = '../data/DB.json') {
         this.type_string = type_string;
         this.DB = require('../data/DB.json');
     }

@@ -1,4 +1,5 @@
 import styles from '@/styles/Map.module.css';
+import BoardReward from './Board/rewards/BoardReward';
 
 function coordTranslate(x, y, cfg) {
     return {
@@ -184,16 +185,18 @@ function entitySummary(
                     }`;
                 }
 
-                if (treasure_ || treasure.reward_type === 28)
+                if (treasure_ || 'reward_type' in treasure)
                     page.desc.push(
                         `${
                             treasure_
                                 ? DB.Loc[lang].item_text.texts[treasure_.name]
                                       .text
-                                : DB.Loc[lang].master_adventure_boards_text
-                                      .texts[
-                                      DB.Boards[treasure.reward_master_id]
-                                  ].text
+                                : new BoardReward(
+                                      treasure.reward_master_id,
+                                      treasure.reward_type,
+                                      `${treasure.reward_amount_min}-${treasure.reward_amount_max}`,
+                                      lang,
+                                  ).reward.name
                         } ${
                             showLeak
                                 ? `x${treasure.reward_amount_min}-${

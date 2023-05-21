@@ -637,6 +637,7 @@ const boards = {
     WarehouseAbilities: {},
     CraftRecipes: {},
     Tokens: {},
+    LiquidMemories: {},
 };
 
 let _boards = {};
@@ -652,6 +653,9 @@ boards.boards = _boards;
 boards.quests = _quests;
 
 delete boards.panels;
+
+for (let lm of require('./apiext/liquid_memory.json'))
+    boards.LiquidMemories[lm.id] = lm.efficacy_name;
 
 let srcQ = {};
 for (let q of require('./apiext/quests.json'))
@@ -718,6 +722,7 @@ for (let loc in boards.Loc) {
                 'master_warehouse_ability_recipes_text',
                 'master_token_text',
                 'master_craft_recipe_set_text',
+                'master_liquid_memory_text',
             ].includes(cat.name)
         )
             continue;
