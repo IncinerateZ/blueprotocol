@@ -87,20 +87,16 @@
 }
 
 .mapsearch_suggestions button {
-    padding: 0.5rem;
+    padding: 0.3rem;
     text-align: left;
     font-size: 1.2rem;
     color: var(--text-color);
     border: none;
 }
 
-.mapsearch_suggestions div {
-    padding: 0.3rem;
-}
-
-.mapsearch_suggestions div:hover {
+.mapsearch_suggestions button:hover {
     background-color: var(--dark2);
-    filter: brightness(90%);
+    filter: brightness(150%);
 }
 
 .MCL_chevron {
