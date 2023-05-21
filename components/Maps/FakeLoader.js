@@ -69,6 +69,7 @@ export default function FakeLoader() {
                     padding: 0,
                     margin: 0,
                     width: '320px',
+                    height: '2rem',
                     textAlign: 'center',
                     color: 'var(--text-color)',
                     fontWeight: 'bold',

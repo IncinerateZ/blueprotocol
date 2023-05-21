@@ -1,3 +1,4 @@
+import FakeLoader from '@/components/Maps/FakeLoader';
 import Head from 'next/head';
 
 export default function contact() {
