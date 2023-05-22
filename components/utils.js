@@ -405,6 +405,41 @@ function radToDeg(rad) {
     return (rad * 180) / Math.PI;
 }
 
+function termSearch(index, query) {
+    let res = {};
+
+    query = query.replace('・', ' ').replace("_", ' ').replace('　', ' ');
+    for (let map in index) {
+        if (!res[map]) res[map] = [];
+        let locs = {};
+        for (let word of query.split(' ')) {
+            if (word.length <= 1) continue;
+            word = word.toLowerCase();
+
+            let results = index[map][word]?.tfs || [];
+            for (let i = 0; i < results.length; i++) {
+                let result = results[i];
+                let lnglat = result.loc.lng + ' ' + result.loc.lat;
+                if (locs[lnglat]) {
+                    for (let r of res[map])
+                        if (r.loc.lng + ' ' + r.loc.lat === lnglat) {
+                            r.tfidf += result.tfidf;
+                            break;
+                        }
+                    results.splice(i--, 1);
+                } else {
+                    locs[lnglat] = true;
+                }
+            }
+
+            res[map] = [...res[map], ...results];
+        }
+        res[map].sort((a, b) => b.tfidf - a.tfidf);
+    }
+
+    return res;
+}
+
 export {
     levenshtein,
     coordTranslate,
@@ -413,4 +448,5 @@ export {
     rotatePt,
     degToRad,
     radToDeg,
+    termSearch,
 };

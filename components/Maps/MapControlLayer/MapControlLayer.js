@@ -11,6 +11,7 @@ import LangPicker from './LangPicker';
 import MapPicker from './MapPicker';
 import SelectorsSection from './Selectors/SelectorsSection';
 import Link from 'next/link';
+import TermSearch from '../TermSearch/TermSearch';
 
 export default function MapControlLayer({
     data,
@@ -29,6 +30,8 @@ export default function MapControlLayer({
     setSelectorsSource,
     showLeak,
     setShowLeak,
+    mapRef,
+    imgOvRef,
 }) {
     const [drawn, setDrawn] = useState(true);
     return (
@@ -186,6 +189,19 @@ export default function MapControlLayer({
                         }}
                     ></input>
                 </label>
+            </div>
+            <div
+                className={styles.TermSearchContainer}
+                style={{ transform: drawn ? '' : 'translateX(-330px)' }}
+            >
+                <TermSearch
+                    mapIcons={mapIcons}
+                    mapRef={mapRef}
+                    LocationNames={DB?.LocationNames}
+                    lang={lang}
+                    data={data}
+                    setChosenMap={setChosenMap}
+                />
             </div>
         </div>
     );

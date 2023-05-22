@@ -348,3 +348,137 @@
 .settings input {
     transform: translateY(2.5px);
 }
+
+.TermSearchContainer {
+    position: absolute;
+    width: fit-content;
+    z-index: 999;
+    height: fit-content;
+    left: 360px;
+    padding-top: 0.5rem;
+    transition: 0.2s;
+}
+
+.TermSearch {
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+    overflow: hidden;
+    transition: 0.2s;
+}
+
+.TermSearch:focus-within {
+    width: 200px;
+    height: fit-content;
+}
+
+.TermSearch_head {
+    height: 30px;
+    padding-left: 5px;
+    display: flex;
+    align-items: center;
+    background-color: var(--dark1); 
+    border-radius: 7px;
+    overflow: hidden;
+}
+
+.TermSearch_head > img {
+    margin-right: 5px;
+    user-select: none;
+}
+
+.TermSearch_head input {
+    top: 0;
+    height: 30px;
+    font-size: 1rem;
+    background-color: var(--dark2);
+    color: var(--text-color);
+    border: none;
+    padding-left: 0.2rem;
+}
+
+.TermSearch_head input:focus {
+    outline: none;    
+}
+
+.TermSearch_results {
+    margin-top: 0.5rem;
+    border-radius: 7px;
+    overflow: hidden;
+    overflow-y: auto;
+    height: 20rem;
+    transition: 0.2s;
+}
+
+.TermSearch_results::-webkit-scrollbar {
+    width: 5px;
+}
+ 
+.TermSearch_results::-webkit-scrollbar-track {
+    background: var(--dark2);
+}
+ 
+.TermSearch_results::-webkit-scrollbar-thumb {
+    background: var(--dark1);
+}
+ 
+.TermSearch_results::-webkit-scrollbar-thumb:hover {
+    background: #555;
+} 
+.TermSearchResultsList::-webkit-scrollbar {
+    width: 5px;
+}
+ 
+.TermSearchResultsList::-webkit-scrollbar-track {
+    background: var(--dark2);
+}
+ 
+.TermSearchResultsList::-webkit-scrollbar-thumb {
+    background: var(--dark1);
+}
+ 
+.TermSearchResultsList::-webkit-scrollbar-thumb:hover {
+    background: #555;
+} 
+
+.TermSearchResults {
+    display: flex;
+    flex-direction: column;
+}
+
+.TermSearchResults span {
+    font-size: 0.8rem;
+    background-color: var(--background);
+    color: var(--text-color);
+    padding-left: 0.5rem;
+}
+
+.TermSearchResults > span {
+    border-bottom: 1px solid var(--light);
+}
+
+.TermSearchResultsList button {
+    background-color: var(--background);
+    width: 100%;
+    height: 2rem;
+    border: none;
+    text-align: left;
+    color: var(--light);
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+
+.TermSearchResultsList {
+    max-height: 250px;
+    overflow: hidden;
+    overflow-y: auto;
+}
+
+.TermSearchResultsList button span {
+    background-color: transparent;
+}
+
+.TermSearchResultsList button:hover {
+    background-color: var(--dark2);
+}

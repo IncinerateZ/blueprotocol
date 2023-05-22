@@ -20,6 +20,8 @@ import { useRouter } from 'next/router';
 
 export default function Map() {
     const { asPath, push } = useRouter();
+    const router = useRouter();
+
     const data = require('./data/Markers.json');
     const mapRef = useRef();
     const imgOvRef = useRef();
@@ -443,10 +445,12 @@ export default function Map() {
                 setSelectorsSource={setSelectorsSource}
                 showLeak={showLeak}
                 setShowLeak={setShowLeak}
+                mapRef={mapRef}
+                imgOvRef={imgOvRef}
             />
             <MapContainer
-                center={[540, 960]}
-                zoom={0}
+                center={[router.query.lat || 540, router.query.lng || 960]}
+                zoom={router.query.lat ? 3.5 : 0}
                 maxBounds={[
                     [1080 * (mapConfig?.ResolutionMultiplier || 1), 0],
                     [0, 1920 * (mapConfig?.ResolutionMultiplier || 1)],
