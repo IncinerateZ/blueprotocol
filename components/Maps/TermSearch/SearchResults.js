@@ -17,7 +17,10 @@ export default function SearchResults({
             {Object.keys(results).map((map) => {
                 if (results[map].length <= 0) return <></>;
                 return (
-                    <div className={styles.TermSearchResults}>
+                    <div
+                        className={styles.TermSearchResults}
+                        key={data[map].map_id}
+                    >
                         <span>
                             {
                                 LocationNames[lang][
@@ -30,6 +33,7 @@ export default function SearchResults({
                         <div className={styles.TermSearchResultsList}>
                             {results[map].map((r) => (
                                 <button
+                                    key={r.loc.lng + ' ' + r.loc.lat}
                                     onClick={() => {
                                         router.push(
                                             {
