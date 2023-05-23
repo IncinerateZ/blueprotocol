@@ -166,6 +166,7 @@ export default function Board() {
                         marginTop: 'auto',
                         marginBottom: 'auto',
                     }}
+                    className='left-right-ad'
                 >
                     <div
                         id='board-left-widescreen'
@@ -217,6 +218,7 @@ export default function Board() {
                         marginTop: 'auto',
                         marginBottom: 'auto',
                     }}
+                    className='left-right-ad'
                 >
                     <div
                         id='board-right-widescreen'
@@ -236,6 +238,9 @@ export default function Board() {
                         setSelectedQuest={setSelectedQuest}
                     />
                 )}
+                <div style={{ position: 'absolute', bottom: '3.5rem' }}>
+                    <div id='board-bottom-mobile'></div>
+                </div>
             </div>
         </>
     );
