@@ -13,9 +13,11 @@
     background-color: var(--dark1);
 
     margin: 2rem;
-    margin-left: 5rem;
+    margin-left: 0.5rem;
+    margin-right: 0.5rem;
 
     padding: 1rem;
+    padding-right: 0rem;
 
     border-radius: 5px;
     overflow: hidden;
