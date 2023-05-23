@@ -448,6 +448,25 @@ export default function Map() {
                 mapRef={mapRef}
                 imgOvRef={imgOvRef}
             />
+
+            <div
+                style={{
+                    width: 'fit-content',
+                    height: 'fit-content',
+                    position: 'absolute',
+                    right: '0',
+                    bottom: '1.1rem',
+                }}
+            >
+                <div
+                    id='map-bottom-right'
+                    style={{
+                        zIndex: '999',
+                        position: 'relative',
+                    }}
+                ></div>
+            </div>
+
             <MapContainer
                 center={[router.query.lat || 540, router.query.lng || 960]}
                 zoom={router.query.lat ? 3.5 : 0}
