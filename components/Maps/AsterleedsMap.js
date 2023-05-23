@@ -465,6 +465,16 @@ export default function Map() {
                         position: 'relative',
                     }}
                 ></div>
+                <div
+                    id='map-bottom-mobile'
+                    style={{
+                        width: '320px',
+                        height: '50px',
+                        backgroundColor: 'black',
+                        position: 'relative',
+                        zIndex: '998',
+                    }}
+                ></div>
             </div>
 
             <MapContainer
