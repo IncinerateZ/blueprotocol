@@ -99,6 +99,10 @@ export default function MapControlLayer({
                         >
                             Contact
                         </span>
+                        <Link href={'https://incin.net/privacypolicy'}>
+                            Privacy Policy
+                        </Link>
+                        <span data-ccpa-link='1'></span>
                         <div style={{ cursor: 'pointer' }}>
                             <label className={styles.settingsToggle}>
                                 <Image
