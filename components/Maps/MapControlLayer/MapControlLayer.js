@@ -86,6 +86,17 @@ export default function MapControlLayer({
                     />
                     <div
                         style={{
+                            zIndex: '998',
+                            position: 'relative',
+                            marginLeft: 'auto',
+                            marginRight: 'auto',
+                            marginBottom: '0.2rem',
+                        }}
+                    >
+                        <div id='map-control-layer'></div>
+                    </div>
+                    <div
+                        style={{
                             fontSize: '0.8rem',
                             display: 'flex',
                             justifyContent: 'space-between',
