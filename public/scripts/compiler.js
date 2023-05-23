@@ -1,7 +1,6 @@
-//2023-05-16
+//2023-05-23
 
 const fs = require('fs');
-
 const MapTypeMapping = { field: 'fld', dungeon: 'dng', pat: 'pat' };
 
 console.log('Defining DB...');
@@ -748,6 +747,14 @@ save(`E:/Main Files/Projects/next/bp/components/Maps/data`, true);
 
 console.log('Finished.');
 
+index();
+
+function index() {
+    exec('node MapIndex', { cwd: './Index' }, (err, out, err2) => {
+        console.log(out);
+    });
+}
+
 function save(dir, condense = false) {
     if (condense) {
         fs.writeFileSync(
@@ -765,7 +772,7 @@ function save(dir, condense = false) {
         );
 
         fs.writeFileSync(
-            'E:/Main Files/Projects/next/bp/components/Maps/data/Markers.json',
+            dir + '/Markers.json',
             `${JSON.stringify(markers, null, 4)}`,
         );
     } else {
@@ -776,5 +783,11 @@ function save(dir, condense = false) {
                 'utf8',
                 () => {},
             );
+        const IndexPath = 'E:/bpdump/Exports/BLUEPROTOCOL/Content/Index/';
+        fs.writeFileSync(`${IndexPath}data/DB.json`, `${JSON.stringify(DB)}`);
+        fs.writeFileSync(
+            `${IndexPath}data/Markers.json`,
+            `${JSON.stringify(markers, null, 4)}`,
+        );
     }
 }

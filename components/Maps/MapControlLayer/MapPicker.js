@@ -5,6 +5,7 @@ import { useEffect, useRef, useState } from 'react';
 
 import styles from '@/styles/Map.module.css';
 import Image from 'next/image';
+import { useRouter } from 'next/router';
 
 export default function MapPicker({
     DB,
@@ -28,6 +29,8 @@ export default function MapPicker({
     const [doSearch, setDoSearch] = useState(false);
 
     const searchRef = useRef();
+
+    const router = useRouter();
 
     useEffect(() => {
         resetSearch();
@@ -108,6 +111,7 @@ export default function MapPicker({
                 Math.min(searchSuggestions.length - 1, e + 1),
             );
         if (code === 'Enter') {
+            router.push(router.pathname, undefined, { shallow: true });
             searchRef.current.blur();
             let c = searchSuggestions[ssHighlight];
             setChosenMap(maps[c][0]);
@@ -169,8 +173,24 @@ export default function MapPicker({
                                 className={
                                     ssHighlight === i ? styles.highlight : ''
                                 }
-                                style={{backgroundColor: ssHighlight === i ? 'var(--dark2)' : 'var(--background)'}}
+                                style={{
+                                    backgroundColor:
+                                        ssHighlight === i
+                                            ? 'var(--dark2)'
+                                            : 'var(--background)',
+                                }}
                                 onClick={() => {
+                                    router.push(
+                                        {
+                                            pathname: '/map',
+                                            query: {},
+                                            hash: maps[e][0],
+                                        },
+                                        undefined,
+                                        {
+                                            shallow: true,
+                                        },
+                                    );
                                     searchRef.current.blur();
                                     setChosenMap(maps[e][0]);
                                     resetSearch();

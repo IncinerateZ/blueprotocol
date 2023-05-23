@@ -19,6 +19,16 @@ function MyApp({ Component, pageProps }) {
                 gtag('config', 'G-Y0TV09WSZE');
                 `}
             </Script>
+            <Script
+                strategy='lazyOnload'
+                id='np-1'
+            >{`window.nitroAds=window.nitroAds||{createAd:function(){return new Promise(e=>{window.nitroAds.queue.push(["createAd",arguments,e])})},addUserToken:function(){window.nitroAds.queue.push(["addUserToken",arguments])},queue:[]};`}</Script>
+            <Script
+                strategy='lazyOnload'
+                data-cfasync='false'
+                async
+                src='https://s.nitropay.com/ads-1253.js'
+            ></Script>
             <Head>
                 <meta
                     name='viewport'
