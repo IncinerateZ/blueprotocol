@@ -376,17 +376,20 @@
 
 .TermSearch_head {
     height: 30px;
-    padding-left: 5px;
     display: flex;
     align-items: center;
-    background-color: var(--dark1); 
     border-radius: 7px;
     overflow: hidden;
 }
 
 .TermSearch_head > img {
+    width: 30px;
+    height: 30px;
     margin-right: 5px;
     user-select: none;
+    padding: 5px;
+    background-color: var(--dark1); 
+    border-radius: 7px;
 }
 
 .TermSearch_head input {
@@ -397,6 +400,9 @@
     color: var(--text-color);
     border: none;
     padding-left: 0.2rem;
+    padding-right: 0.2rem;
+    margin-left: 0.2rem;
+    border-radius: 7px;
 }
 
 .TermSearch_head input:focus {
