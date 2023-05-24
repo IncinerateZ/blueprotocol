@@ -149,6 +149,62 @@ export default function Board() {
         if (!DB) return;
     }, [DB]);
 
+    useEffect(() => {
+        loadAds();
+    }, []);
+
+    function loadAds() {
+        if (!window.nitroAds)
+            return setTimeout(() => {
+                loadAds();
+            }, 3000);
+
+        window['nitroAds'].createAd('board-left-widescreen', {
+            refreshLimit: 20,
+            refreshTime: 60,
+            renderVisibleOnly: false,
+            refreshVisibleOnly: true,
+            sizes: [['160', '600']],
+            report: {
+                enabled: true,
+                icon: true,
+                wording: 'Report Ad',
+                position: 'top-right',
+            },
+            mediaQuery: '(min-width: 1024px)',
+        });
+
+        window['nitroAds'].createAd('board-right-widescreen', {
+            refreshLimit: 20,
+            refreshTime: 60,
+            renderVisibleOnly: false,
+            refreshVisibleOnly: true,
+            sizes: [['160', '600']],
+            report: {
+                enabled: true,
+                icon: true,
+                wording: 'Report Ad',
+                position: 'top-right',
+            },
+            mediaQuery: '(min-width: 980px)',
+        });
+
+        window['nitroAds'].createAd('board-bottom-mobile', {
+            refreshLimit: 20,
+            refreshTime: 60,
+            renderVisibleOnly: false,
+            refreshVisibleOnly: true,
+            sizes: [['320', '50']],
+            report: {
+                enabled: true,
+                icon: true,
+                wording: 'Report Ad',
+                position: 'top-right',
+            },
+            mediaQuery: '(max-width: 979px)',
+        });
+    }
+
     return (
         <>
             <Head>

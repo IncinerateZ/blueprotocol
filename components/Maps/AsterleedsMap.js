@@ -403,7 +403,47 @@ export default function Map() {
         setMaps(d);
         setMapIcons(mi);
         setDB(DB_);
+
+        //ads
+        loadAds();
     }, []);
+
+    function loadAds() {
+        if (!window.nitroAds)
+            return setTimeout(() => {
+                loadAds();
+            }, 3000);
+
+        window['nitroAds'].createAd('map-bottom-right', {
+            refreshLimit: 20,
+            refreshTime: 60,
+            renderVisibleOnly: false,
+            refreshVisibleOnly: true,
+            sizes: [['300', '250']],
+            report: {
+                enabled: true,
+                icon: true,
+                wording: 'Report Ad',
+                position: 'top-right',
+            },
+            mediaQuery: '(min-width: 500px)',
+        });
+
+        window['nitroAds'].createAd('map-bottom-mobile', {
+            refreshLimit: 20,
+            refreshTime: 60,
+            renderVisibleOnly: false,
+            refreshVisibleOnly: true,
+            sizes: [['320', '50']],
+            report: {
+                enabled: true,
+                icon: true,
+                wording: 'Report Ad',
+                position: 'top-right',
+            },
+            mediaQuery: '(max-width: 499px)',
+        });
+    }
 
     useEffect(() => {
         localStorage.setItem(
