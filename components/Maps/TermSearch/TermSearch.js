@@ -12,6 +12,7 @@ export default function TermSearch({
     data,
     lang,
     setChosenMap,
+    toggleSelector,
 }) {
     const router = useRouter();
     const Index = require('../data/MapIndex.json');
@@ -44,6 +45,7 @@ export default function TermSearch({
                     lang={lang}
                     setChosenMap={setChosenMap}
                     query={query}
+                    toggleSelector={toggleSelector}
                 />
             </div>
         </div>

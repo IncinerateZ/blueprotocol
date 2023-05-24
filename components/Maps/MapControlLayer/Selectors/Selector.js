@@ -8,11 +8,7 @@ export default function Selector({
     DB,
     mapIcons,
     selectors,
-    setSelectors,
-    excludedSelectors,
-    setExcludedSelectors,
-    selectorsSource,
-    setSelectorsSource,
+    toggleSelector,
 }) {
     function capitalizeFirstLetter(string) {
         return string.charAt(0).toUpperCase() + string.slice(1);
@@ -33,29 +29,7 @@ export default function Selector({
                 height: 'fit-content',
             }}
             onChange={() => {
-                let temp = { ...selectors };
-                temp[e][s].selected = !temp[e][s].selected;
-
-                setSelectors({ ...temp });
-                setSelectorsSource({
-                    ...selectorsSource,
-                    ...temp,
-                });
-
-                let _excludedSelectors = { ...excludedSelectors };
-                let excludedTarget = ['enemy', 'elite'].includes(
-                    currentSelector.type,
-                )
-                    ? DB.Loc.ja_JP.enemyparam_text.texts[
-                          currentSelector.display_name
-                      ].text
-                    : currentSelector.display_name;
-
-                if (temp[e][s].selected)
-                    delete _excludedSelectors[excludedTarget];
-                else _excludedSelectors[excludedTarget] = !temp[e][s].selected;
-
-                setExcludedSelectors(_excludedSelectors);
+                toggleSelector(e, s);
             }}
         >
             {mapIcons && (
