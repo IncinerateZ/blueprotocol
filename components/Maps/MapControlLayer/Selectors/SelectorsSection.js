@@ -13,6 +13,7 @@ export default function SelectorsSection({
     setExcludedSelectors,
     selectorsSource,
     setSelectorsSource,
+    toggleSelector,
 }) {
     return (
         <div
@@ -33,6 +34,7 @@ export default function SelectorsSection({
                         setExcludedSelectors={setExcludedSelectors}
                         selectorsSource={selectorsSource}
                         setSelectorsSource={setSelectorsSource}
+                        toggleSelector={toggleSelector}
                     />
                 ))}
         </div>

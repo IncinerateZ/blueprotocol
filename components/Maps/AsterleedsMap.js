@@ -99,6 +99,31 @@ export default function Map() {
         }
     }
 
+    function toggleSelector(e, s, forceState = null) {
+        const currentSelector = selectors[e][s];
+
+        let temp = { ...selectors };
+        temp[e][s].selected =
+            forceState !== null ? forceState : !temp[e][s].selected;
+
+        setSelectors({ ...temp });
+        setSelectorsSource({
+            ...selectorsSource,
+            ...temp,
+        });
+
+        let _excludedSelectors = { ...excludedSelectors };
+        let excludedTarget = ['enemy', 'elite'].includes(currentSelector.type)
+            ? DB.Loc.ja_JP.enemyparam_text.texts[currentSelector.display_name]
+                  .text
+            : currentSelector.display_name;
+
+        if (temp[e][s].selected) delete _excludedSelectors[excludedTarget];
+        else _excludedSelectors[excludedTarget] = !temp[e][s].selected;
+
+        setExcludedSelectors(_excludedSelectors);
+    }
+
     const ClickHandler = () => {
         useMapEvents({
             click(e) {
@@ -446,7 +471,7 @@ export default function Map() {
                 showLeak={showLeak}
                 setShowLeak={setShowLeak}
                 mapRef={mapRef}
-                imgOvRef={imgOvRef}
+                toggleSelector={toggleSelector}
             />
 
             <div
