@@ -9,6 +9,7 @@ export default function SearchResults({
     LocationNames,
     lang,
     setChosenMap,
+    toggleSelector,
 }) {
     const router = useRouter();
 
@@ -35,6 +36,11 @@ export default function SearchResults({
                                 <button
                                     key={r.loc.lng + ' ' + r.loc.lat}
                                     onClick={() => {
+                                        toggleSelector(
+                                            r.loc.section,
+                                            r.loc.type,
+                                            true,
+                                        );
                                         router.push(
                                             {
                                                 pathname: '/map',

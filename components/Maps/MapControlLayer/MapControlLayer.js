@@ -30,8 +30,7 @@ export default function MapControlLayer({
     setSelectorsSource,
     showLeak,
     setShowLeak,
-    mapRef,
-    imgOvRef,
+    toggleSelector,
 }) {
     const [drawn, setDrawn] = useState(true);
     return (
@@ -83,6 +82,7 @@ export default function MapControlLayer({
                         setExcludedSelectors={setExcludedSelectors}
                         selectorsSource={selectorsSource}
                         setSelectorsSource={setSelectorsSource}
+                        toggleSelector={toggleSelector}
                     />
                     <div
                         style={{
@@ -200,11 +200,11 @@ export default function MapControlLayer({
             >
                 <TermSearch
                     mapIcons={mapIcons}
-                    mapRef={mapRef}
                     LocationNames={DB?.LocationNames}
                     lang={lang}
                     data={data}
                     setChosenMap={setChosenMap}
+                    toggleSelector={toggleSelector}
                 />
             </div>
         </div>

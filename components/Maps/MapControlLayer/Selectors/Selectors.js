@@ -16,6 +16,7 @@ export default function Selectors({
     setExcludedSelectors,
     selectorsSource,
     setSelectorsSource,
+    toggleSelector,
 }) {
     function toggleVisibiltyAll(state) {
         let temp = { ...selectors };
@@ -119,11 +120,7 @@ export default function Selectors({
                         lang={lang}
                         mapIcons={mapIcons}
                         selectors={selectors}
-                        setSelectors={setSelectors}
-                        excludedSelectors={excludedSelectors}
-                        setExcludedSelectors={setExcludedSelectors}
-                        selectorsSource={selectorsSource}
-                        setSelectorsSource={setSelectorsSource}
+                        toggleSelector={toggleSelector}
                     />
                 ))}
             </div>
