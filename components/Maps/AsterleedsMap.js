@@ -106,7 +106,7 @@ export default function Map() {
         display_name = '',
         name = '-',
     ) {
-        let currentSelector = selectors[e][s];
+        let currentSelector = selectors[e]?.[s];
         let temp = { ...selectors };
 
         if (forceState !== null && !currentSelector) {
@@ -115,6 +115,7 @@ export default function Map() {
                 display_name: display_name,
             };
             if (name !== '-') currentSelector.type === s;
+            if (!temp[e]) temp[e] = {};
             temp[e][s] = currentSelector;
         }
 
