@@ -1,7 +1,8 @@
 import styles from '@/styles/Map.module.css';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Selectors from './Selectors';
+import { useRouter } from 'next/router';
 
 export default function SelectorsSection({
     lang,

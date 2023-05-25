@@ -52,6 +52,7 @@ export default function Selector({
                 id={currentSelector.type || s}
                 className='visually-hidden'
                 checked={currentSelector.selected}
+                onChange={() => {}}
             ></input>
         </label>
     );

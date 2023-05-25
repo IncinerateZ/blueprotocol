@@ -99,10 +99,25 @@ export default function Map() {
         }
     }
 
-    function toggleSelector(e, s, forceState = null) {
-        const currentSelector = selectors[e][s];
-
+    function toggleSelector(
+        e,
+        s,
+        forceState = null,
+        display_name = '',
+        name = '-',
+    ) {
+        let currentSelector = selectors[e][s];
         let temp = { ...selectors };
+
+        if (forceState !== null && !currentSelector) {
+            currentSelector = {
+                selected: forceState,
+                display_name: display_name,
+            };
+            if (name !== '-') currentSelector.type === s;
+            temp[e][s] = currentSelector;
+        }
+
         temp[e][s].selected =
             forceState !== null ? forceState : !temp[e][s].selected;
 

@@ -16,7 +16,8 @@ export default function SearchResults({
     return (
         <div>
             {Object.keys(results).map((map) => {
-                if (results[map].length <= 0) return <></>;
+                if (results[map].length <= 0)
+                    return <div key={Math.random()}></div>;
                 return (
                     <div
                         className={styles.TermSearchResults}
@@ -40,6 +41,8 @@ export default function SearchResults({
                                             r.loc.section,
                                             r.loc.type,
                                             true,
+                                            r.loc.display_name,
+                                            r.loc.Enemy?.name || '-',
                                         );
                                         router.push(
                                             {

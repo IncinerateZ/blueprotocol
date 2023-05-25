@@ -28,7 +28,12 @@ export default function TermSearch({
     return (
         <div className={styles.TermSearch} tabIndex={0}>
             <div className={styles.TermSearch_head}>
-                <Image src='/map/search.svg' width={20} height={20}></Image>
+                <Image
+                    src='/map/search.svg'
+                    width={20}
+                    height={20}
+                    alt='search icon'
+                ></Image>
                 <input
                     type='text'
                     onChange={(e) => setQuery(e.target.value)}
