@@ -6,6 +6,7 @@ import Image from 'next/image';
 import Selector from './Selector';
 
 export default function Selectors({
+    key_,
     e,
     lang,
     DB,
