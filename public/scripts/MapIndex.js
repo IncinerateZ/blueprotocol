@@ -6,8 +6,6 @@ const {
 } = require('./utils/utils');
 const fs = require('fs');
 
-let index = {};
-
 init();
 
 function init() {
