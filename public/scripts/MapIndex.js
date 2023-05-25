@@ -1,5 +1,3 @@
-//2023-05-23
-
 const {
     coordTranslate,
     entitySummary,
@@ -62,6 +60,7 @@ function init() {
                     type: pt.type,
                     selectors: [pt.selector],
                     title: pt.treasureId || title,
+                    section: 'Adventure',
                 }),
             );
         }
@@ -83,6 +82,7 @@ function init() {
                     selectors: [pt.selector],
                     title: p,
                     quests: pt.quests,
+                    section: 'Quests',
                 }),
             );
         }
@@ -121,6 +121,7 @@ function init() {
                     type: pt.type,
                     title: pt.Enemies[0].EnemySetId,
                     selectors: selectors_,
+                    section: 'Enemies',
                 }),
             );
         }
