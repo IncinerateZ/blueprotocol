@@ -405,17 +405,97 @@ function radToDeg(rad) {
     return (rad * 180) / Math.PI;
 }
 
+class Tokenizer {
+    constructor(doc) {
+        doc = doc.replace('・', ' ').replace('_', ' ').replace('　', ' ');
+        this.doc = doc.toLowerCase();
+        this.tokens = {};
+
+        this.tokenize();
+    }
+
+    tokenize() {
+        let window = '';
+
+        function isAlphaNumeric(c) {
+            return (
+                {
+                    0: true,
+                    1: true,
+                    2: true,
+                    3: true,
+                    4: true,
+                    5: true,
+                    6: true,
+                    7: true,
+                    8: true,
+                    9: true,
+                }[c] || c.toUpperCase() !== c.toLowerCase()
+            );
+        }
+
+        function isSymbol(c) {
+            return {
+                '`': true,
+                '~': true,
+                '!': true,
+                '@': true,
+                '#': true,
+                $: true,
+                '%': true,
+                '^': true,
+                '&': true,
+                '*': true,
+                '(': true,
+                ')': true,
+                '-': true,
+                _: true,
+                '=': true,
+                '+': true,
+                '{': true,
+                '}': true,
+                '[': true,
+                ']': true,
+                '|': true,
+                ';': true,
+                ':': true,
+                '': true,
+                '"': true,
+                '<': true,
+                ',': true,
+                '>': true,
+                '.': true,
+                '?': true,
+                '/': true,
+            }[c];
+        }
+
+        for (let c of this.doc) {
+            if (c === ' ') {
+                if (window.length > 0) this.tokens[window] = true;
+                window = '';
+                continue;
+            }
+
+            if (isSymbol(c)) {
+                if (window.length > 0) this.tokens[window] = true;
+                window = '';
+            } else {
+                window += c;
+            }
+        }
+        if (window.length > 0) this.tokens[window] = true;
+    }
+}
+
 function termSearch(index, query) {
     let res = {};
 
-    query = query.replace('・', ' ').replace("_", ' ').replace('　', ' ');
+    let tokenizer = new Tokenizer(query);
     for (let map in index) {
         if (!res[map]) res[map] = [];
         let locs = {};
-        for (let word of query.split(' ')) {
-            if (word.length <= 1) continue;
-            word = word.toLowerCase();
-
+        for (let word in tokenizer.tokens) {
             let results = index[map][word]?.tfs || [];
             for (let i = 0; i < results.length; i++) {
                 let result = results[i];
