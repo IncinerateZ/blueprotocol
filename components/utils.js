@@ -77,6 +77,7 @@ function buildSummary(summaries, hiddenMarkers, setHiddenMarkers) {
                                         key={Math.random()}
                                         style={{
                                             fontSize:
+                                                r.includes(' x') ||
                                                 r.includes('%') ||
                                                 r.includes('Level')
                                                     ? '0.8rem'
@@ -221,6 +222,9 @@ function entitySummary(
         for (let quest of quests) {
             let chapter = quest.charAt(4);
             quest = quest.substring(0, 9);
+
+            let page = { name: ``, desc: [] };
+
             let cat = {
                 M: `quest_main_chapter${chapter.padStart(2, '0')}_text`,
                 E: `quest_main_chapter${chapter.padStart(2, '0')}_text`,
@@ -228,18 +232,29 @@ function entitySummary(
                 C: `quest_class_text`,
             }[quest.charAt(0)];
 
+            for (let reward of DB.QuestRewards[quest] || []) {
+                reward = new BoardReward(
+                    reward.item_id,
+                    reward.reward_type,
+                    reward.amount,
+                    lang,
+                ).reward;
+                page.desc.push(`${reward.name} x${reward.amount} `);
+            }
+
             quest =
                 DB.Loc[lang][cat]?.texts[DB.Quests.id_name[quest]]?.text ||
                 quest;
-            pages.push(`Quest "${quest}"`);
+
+            page.name = `Quest "${quest}"`;
+
+            pages.push(page);
         }
 
         res = [
             entity.idf,
-            {
-                name: entity.metadata.selectors[0] + 's',
-                desc: pages,
-            },
+            { name: entity.metadata.selectors[0] + 's' },
+            ...pages,
         ];
     } else if (entity.idf) {
         res = [
