@@ -23,7 +23,7 @@ export default function SearchResults({
                         className={styles.TermSearchResults}
                         key={data[map].map_id}
                     >
-                        <span>
+                        <label>
                             {
                                 LocationNames[lang][
                                     data[map].map_id
@@ -31,7 +31,11 @@ export default function SearchResults({
                                         .replace('pat', 'pub')
                                 ]
                             }
-                        </span>
+                            <input
+                                type='checkbox'
+                                className='visually-hidden'
+                            ></input>
+                        </label>
                         <div className={styles.TermSearchResultsList}>
                             {results[map].map((r) => (
                                 <button
