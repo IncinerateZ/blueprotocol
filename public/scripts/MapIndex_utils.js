@@ -143,10 +143,24 @@ function entitySummary(DB, entity, lang, showLeak) {
                 C: `quest_class_text`,
             }[quest.charAt(0)];
 
+            let page = `${quest} `;
+            for (let reward of DB.QuestRewards[quest] || []) {
+                reward = new BoardReward(
+                    reward.item_id,
+                    reward.reward_type,
+                    reward.amount,
+                    lang,
+                ).reward;
+                page += `${reward.name} x${reward.amount} `;
+            }
+
             quest =
                 DB.Loc[lang][cat]?.texts[DB.Quests.id_name[quest]]?.text ||
                 quest;
-            pages.push(`${quest}`);
+
+            page += `${quest}`;
+
+            pages.push(page);
         }
 
         res = [

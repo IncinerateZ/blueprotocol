@@ -1,5 +1,3 @@
-//2023-05-23
-
 const fs = require('fs');
 const MapTypeMapping = { field: 'fld', dungeon: 'dng', pat: 'pat' };
 
@@ -15,11 +13,32 @@ const DB = {
     Treasures: { fld: {}, dng: {}, pat: {} },
     Boards: {},
     Quests: {},
+    QuestRewards: {},
 };
 
 console.log('Importing defaults...');
 let _mapnames = require('./maps_extended.json');
 let markers = {};
+
+let _QuestRewards = {};
+for (let reward of require('./apiext/rewards.json')) {
+    _QuestRewards[reward.id] = {
+        reward_type: reward.reward_type,
+        item_id: reward.item_id,
+        amount: reward.amount,
+    };
+}
+
+for (let quest of require('./apiext/quests.json')) {
+    let questName = quest.long_id;
+
+    for (let _reward of quest.quest_rewards) {
+        if (!DB.QuestRewards[questName]) DB.QuestRewards[questName] = [];
+        DB.QuestRewards[questName].push(
+            _QuestRewards[_reward.master_rewards_id],
+        );
+    }
+}
 
 let mapnames = {};
 
