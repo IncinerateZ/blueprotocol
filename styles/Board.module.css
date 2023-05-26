@@ -308,6 +308,7 @@
     width: 220px;
     padding-bottom: 1rem;
     border-radius: 5px;
+    color: var(--text-color);
 }
 
 .tooltip_arrow {

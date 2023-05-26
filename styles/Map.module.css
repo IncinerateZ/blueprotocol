@@ -370,7 +370,7 @@
 }
 
 .TermSearch:focus-within {
-    width: 200px;
+    width: 250px;
     height: fit-content;
 }
 
@@ -395,6 +395,7 @@
 .TermSearch_head input {
     top: 0;
     height: 30px;
+    width: 200px;
     font-size: 1rem;
     background-color: var(--dark2);
     color: var(--text-color);
@@ -454,15 +455,33 @@
     flex-direction: column;
 }
 
-.TermSearchResults span {
+.TermSearchResults span, .TermSearchResults label {
     font-size: 0.8rem;
     background-color: var(--background);
     color: var(--text-color);
     padding-left: 0.5rem;
 }
 
-.TermSearchResults > span {
+.TermSearchResults > label {
     border-bottom: 1px solid var(--light);
+    cursor: pointer;
+    padding-top: 0.2rem;
+    padding-bottom: 0.2rem;
+    display: flex;
+}
+
+.TermSearchResults > label::after {
+    content: "-";
+    margin-left: auto;
+    display: inline-block;
+    margin-right: 1rem;
+}
+.TermSearchResults > label:has(input:checked)::after {
+    content: "+";
+}
+
+.TermSearchResults > label:has(input:checked) + .TermSearchResultsList {
+    height: 0;
 }
 
 .TermSearchResultsList button {
@@ -478,9 +497,11 @@
 }
 
 .TermSearchResultsList {
+    height: 100vw;
     max-height: 250px;
     overflow: hidden;
     overflow-y: auto;
+    transition: 0.3s height;
 }
 
 .TermSearchResultsList button span {
