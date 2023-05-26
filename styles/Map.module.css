@@ -481,7 +481,7 @@
 }
 
 .TermSearchResults > label:has(input:checked) + .TermSearchResultsList {
-    height: 0;
+    max-height: 0;
 }
 
 .TermSearchResultsList button {
@@ -497,11 +497,11 @@
 }
 
 .TermSearchResultsList {
-    height: 100vw;
+    height: fit-content;
     max-height: 250px;
     overflow: hidden;
     overflow-y: auto;
-    transition: 0.3s height;
+    transition: 0.3s max-height;
 }
 
 .TermSearchResultsList button span {
