@@ -362,8 +362,8 @@
 }
 
 .TermSearch {
-    width: 30px;
-    height: 30px;
+    width: 35px;
+    height: 35px;
     cursor: pointer;
     overflow: hidden;
     transition: 0.2s;
@@ -375,7 +375,7 @@
 }
 
 .TermSearch_head {
-    height: 30px;
+    height: 35px;
     display: flex;
     align-items: center;
     border-radius: 7px;
@@ -383,19 +383,23 @@
 }
 
 .TermSearch_head > img {
-    width: 30px;
-    height: 30px;
-    margin-right: 5px;
+    width: 35px;
+    height: 35px;
     user-select: none;
     padding: 5px;
     background-color: var(--dark1); 
     border-radius: 7px;
+    border: 2px solid transparent;
+}
+
+.TermSearch_head > img:hover {
+    border: 2px solid #ABAFD1;
 }
 
 .TermSearch_head input {
     top: 0;
-    height: 30px;
-    width: 200px;
+    height: 35px;
+    width: 220px;
     font-size: 1rem;
     background-color: var(--dark2);
     color: var(--text-color);
