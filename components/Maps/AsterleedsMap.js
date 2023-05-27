@@ -419,7 +419,47 @@ export default function Map() {
         setMaps(d);
         setMapIcons(mi);
         setDB(DB_);
+
+        //ads
+        loadAds();
     }, []);
+
+    function loadAds() {
+        if (!window.nitroAds)
+            return setTimeout(() => {
+                loadAds();
+            }, 3000);
+
+        window['nitroAds'].createAd('map-bottom-right', {
+            refreshLimit: 20,
+            refreshTime: 60,
+            renderVisibleOnly: false,
+            refreshVisibleOnly: true,
+            sizes: [['300', '250']],
+            report: {
+                enabled: true,
+                icon: true,
+                wording: 'Report Ad',
+                position: 'top-right',
+            },
+            mediaQuery: '(min-width: 500px)',
+        });
+
+        window['nitroAds'].createAd('map-bottom-mobile', {
+            refreshLimit: 20,
+            refreshTime: 60,
+            renderVisibleOnly: false,
+            refreshVisibleOnly: true,
+            sizes: [['320', '50']],
+            report: {
+                enabled: true,
+                icon: true,
+                wording: 'Report Ad',
+                position: 'top-right',
+            },
+            mediaQuery: '(max-width: 499px)',
+        });
+    }
 
     useEffect(() => {
         localStorage.setItem(
@@ -489,6 +529,32 @@ export default function Map() {
                 mapRef={mapRef}
                 toggleSelector={toggleSelector}
             />
+
+            <div
+                style={{
+                    width: 'fit-content',
+                    height: 'fit-content',
+                    position: 'absolute',
+                    right: '0',
+                    bottom: '1.1rem',
+                }}
+            >
+                <div
+                    id='map-bottom-right'
+                    style={{
+                        zIndex: '999',
+                        position: 'relative',
+                    }}
+                ></div>
+                <div
+                    id='map-bottom-mobile'
+                    style={{
+                        position: 'relative',
+                        zIndex: '998',
+                    }}
+                ></div>
+            </div>
+
             <MapContainer
                 center={[router.query.lat || 540, router.query.lng || 960]}
                 zoom={router.query.lat ? 3.5 : 0}

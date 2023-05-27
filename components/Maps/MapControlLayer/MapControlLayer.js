@@ -4,7 +4,7 @@ import ChevronLeft from '@/public/map/chevron-left.svg';
 import SettingIcon from '@/public/Setting.svg';
 import CommandQuest from '@/public/CommandQuest.png';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import styles from '@/styles/Map.module.css';
 import LangPicker from './LangPicker';
@@ -33,6 +33,32 @@ export default function MapControlLayer({
     toggleSelector,
 }) {
     const [drawn, setDrawn] = useState(true);
+
+    useEffect(() => {
+        loadAds();
+    }, []);
+
+    function loadAds() {
+        if (!window.nitroAds)
+            return setTimeout(() => {
+                loadAds();
+            }, 3000);
+
+        window['nitroAds'].createAd('map-control-layer', {
+            refreshLimit: 20,
+            refreshTime: 60,
+            renderVisibleOnly: false,
+            refreshVisibleOnly: true,
+            sizes: [['320', '100']],
+            report: {
+                enabled: true,
+                icon: true,
+                wording: 'Report Ad',
+                position: 'top-right',
+            },
+        });
+    }
+
     return (
         <div className={styles.MCL_container}>
             <div
@@ -84,6 +110,17 @@ export default function MapControlLayer({
                         setSelectorsSource={setSelectorsSource}
                         toggleSelector={toggleSelector}
                     />
+                    <div
+                        style={{
+                            zIndex: '998',
+                            position: 'relative',
+                            marginLeft: 'auto',
+                            marginRight: 'auto',
+                            marginBottom: '0.2rem',
+                        }}
+                    >
+                        <div id='map-control-layer'></div>
+                    </div>
                     <div
                         style={{
                             fontSize: '0.8rem',

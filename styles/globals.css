@@ -42,3 +42,9 @@ a {
 label:has(input.visually-hidden:focus-visible) {
   outline: auto;
 }
+
+@media (max-width: 372px) {
+  .left-right-ad {
+    display: none;
+  }
+}
