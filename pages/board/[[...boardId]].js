@@ -149,6 +149,62 @@ export default function Board() {
         if (!DB) return;
     }, [DB]);
 
+    useEffect(() => {
+        loadAds();
+    }, []);
+
+    function loadAds() {
+        if (!window.nitroAds)
+            return setTimeout(() => {
+                loadAds();
+            }, 3000);
+
+        window['nitroAds'].createAd('board-left-widescreen', {
+            refreshLimit: 20,
+            refreshTime: 60,
+            renderVisibleOnly: false,
+            refreshVisibleOnly: true,
+            sizes: [['160', '600']],
+            report: {
+                enabled: true,
+                icon: true,
+                wording: 'Report Ad',
+                position: 'top-right',
+            },
+            mediaQuery: '(min-width: 1024px)',
+        });
+
+        window['nitroAds'].createAd('board-right-widescreen', {
+            refreshLimit: 20,
+            refreshTime: 60,
+            renderVisibleOnly: false,
+            refreshVisibleOnly: true,
+            sizes: [['160', '600']],
+            report: {
+                enabled: true,
+                icon: true,
+                wording: 'Report Ad',
+                position: 'top-right',
+            },
+            mediaQuery: '(min-width: 980px)',
+        });
+
+        window['nitroAds'].createAd('board-bottom-mobile', {
+            refreshLimit: 20,
+            refreshTime: 60,
+            renderVisibleOnly: false,
+            refreshVisibleOnly: true,
+            sizes: [['320', '50']],
+            report: {
+                enabled: true,
+                icon: true,
+                wording: 'Report Ad',
+                position: 'top-right',
+            },
+            mediaQuery: '(max-width: 979px)',
+        });
+    }
+
     return (
         <>
             <Head>
@@ -161,6 +217,20 @@ export default function Board() {
             </Head>
             <div className={styles.pageBg}>
                 <Nav></Nav>
+                <div
+                    style={{
+                        marginTop: 'auto',
+                        marginBottom: 'auto',
+                    }}
+                    className='left-right-ad'
+                >
+                    <div
+                        id='board-left-widescreen'
+                        style={{
+                            marginLeft: '3.5rem',
+                        }}
+                    ></div>
+                </div>
                 <main className={styles.content}>
                     <div
                         style={{ display: 'flex', alignItems: 'center' }}
@@ -199,6 +269,20 @@ export default function Board() {
                             ))}
                     </div>
                 </main>
+                <div
+                    style={{
+                        marginTop: 'auto',
+                        marginBottom: 'auto',
+                    }}
+                    className='left-right-ad'
+                >
+                    <div
+                        id='board-right-widescreen'
+                        style={{
+                            marginRight: '0.5rem',
+                        }}
+                    ></div>
+                </div>
                 {selectedBoard && (
                     <QuestViewer
                         DB={DB}
@@ -210,6 +294,9 @@ export default function Board() {
                         setSelectedQuest={setSelectedQuest}
                     />
                 )}
+                <div style={{ position: 'absolute', bottom: '3.5rem' }}>
+                    <div id='board-bottom-mobile'></div>
+                </div>
             </div>
         </>
     );
