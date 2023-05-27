@@ -21,7 +21,6 @@ export default function contact() {
                 >
                     Back to Homepage
                 </div>
-                <FakeLoader />
             </div>
         </>
     );
