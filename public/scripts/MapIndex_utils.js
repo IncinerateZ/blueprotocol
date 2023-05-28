@@ -100,19 +100,22 @@ function entitySummary(DB, entity, lang, showLeak) {
                     }`;
                 }
 
-                if (treasure_ || 'reward_type' in treasure)
+                if (treasure_ || 'reward_type' in treasure) {
+                    let item = null;
+                    if (treasure_)
+                        item =
+                            DB.Loc[lang].item_text.texts[treasure_.name].text;
+                    else {
+                        item = new BoardReward(
+                            treasure.reward_master_id,
+                            treasure.reward_type,
+                            `${treasure.reward_amount_min}-${treasure.reward_amount_max}`,
+                            lang,
+                        ).reward;
+                        item = item.name + ' ' + item.id;
+                    }
                     page.desc.push(
-                        `${
-                            treasure_
-                                ? DB.Loc[lang].item_text.texts[treasure_.name]
-                                      .text
-                                : new BoardReward(
-                                      treasure.reward_master_id,
-                                      treasure.reward_type,
-                                      `${treasure.reward_amount_min}-${treasure.reward_amount_max}`,
-                                      lang,
-                                  ).reward.name
-                        } ${
+                        `${item} ${
                             showLeak
                                 ? `x${treasure.reward_amount_min}-${
                                       treasure.reward_amount_max
@@ -120,7 +123,7 @@ function entitySummary(DB, entity, lang, showLeak) {
                                 : ''
                         }`,
                     );
-                else {
+                } else {
                     // console.log(entity.metadata.title);
                     // console.log(treasure);
                 }
@@ -151,7 +154,7 @@ function entitySummary(DB, entity, lang, showLeak) {
                     reward.amount,
                     lang,
                 ).reward;
-                page += `${reward.name} x${reward.amount} `;
+                page += `${reward.id} ${reward.name} x${reward.amount} `;
             }
 
             quest =
