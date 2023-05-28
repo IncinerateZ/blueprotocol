@@ -228,6 +228,10 @@
     text-align: left;
 }
 
+.quest p a:hover {
+    text-decoration: underline;
+}
+
 .questId {
     font-size: 0.7rem;
     display: flex;
@@ -236,6 +240,14 @@
     color: var(--light);
     margin-top: auto;
     margin-bottom: 0.2rem;
+}
+
+.questId span {
+    -moz-user-select: text;
+    -khtml-user-select: text;
+    -webkit-user-select: text;
+    -ms-user-select: text;
+    user-select: text;
 }
 
 .questThumbnail {
@@ -259,6 +271,7 @@
     margin-left: 0.5rem;
     margin-right: 0.5rem;
     font-size: 1rem;
+    user-select: text;
 }
 
 .quests::-webkit-scrollbar {

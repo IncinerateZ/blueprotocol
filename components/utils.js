@@ -1,5 +1,6 @@
 import styles from '@/styles/Map.module.css';
 import BoardReward from './Board/rewards/BoardReward';
+import Link from 'next/link';
 
 function coordTranslate(x, y, cfg) {
     return {
@@ -88,7 +89,25 @@ function buildSummary(summaries, hiddenMarkers, setHiddenMarkers) {
                                             listStyleType: 'none',
                                         }}
                                     >
-                                        {r}
+                                        {r.includes('{') ? (
+                                            <Link
+                                                href={`/${r.substring(
+                                                    r.indexOf('{') + 1,
+                                                    r.indexOf('}'),
+                                                )}`}
+                                                target='_blank'
+                                            >
+                                                {r.substring(
+                                                    0,
+                                                    r.indexOf('{'),
+                                                ) +
+                                                    r.substring(
+                                                        r.indexOf('}') + 1,
+                                                    )}
+                                            </Link>
+                                        ) : (
+                                            r
+                                        )}
                                     </li>
                                 ))}
                             </ul>
@@ -186,19 +205,28 @@ function entitySummary(
                     }`;
                 }
 
-                if (treasure_ || 'reward_type' in treasure)
+                if (treasure_ || 'reward_type' in treasure) {
+                    let item = null;
+                    if (treasure_)
+                        item =
+                            DB.Loc[lang].item_text.texts[treasure_.name].text;
+                    else {
+                        item = new BoardReward(
+                            treasure.reward_master_id,
+                            treasure.reward_type,
+                            `${treasure.reward_amount_min}-${treasure.reward_amount_max}`,
+                            lang,
+                        ).reward;
+                        item =
+                            item.name +
+                            `${
+                                item.type_string === 'board'
+                                    ? `{board/${item.id}}`
+                                    : ''
+                            }`;
+                    }
                     page.desc.push(
-                        `${
-                            treasure_
-                                ? DB.Loc[lang].item_text.texts[treasure_.name]
-                                      .text
-                                : new BoardReward(
-                                      treasure.reward_master_id,
-                                      treasure.reward_type,
-                                      `${treasure.reward_amount_min}-${treasure.reward_amount_max}`,
-                                      lang,
-                                  ).reward.name
-                        } ${
+                        `${item} ${
                             showLeak
                                 ? `x${treasure.reward_amount_min}-${
                                       treasure.reward_amount_max
@@ -206,8 +234,8 @@ function entitySummary(
                                 : ''
                         }`,
                     );
-                else {
-                    // console.log(entity.metadata.title);
+                } else {
+                    //  .log(entity.metadata.title);
                     // console.log(treasure);
                 }
 
@@ -239,7 +267,13 @@ function entitySummary(
                     reward.amount,
                     lang,
                 ).reward;
-                page.desc.push(`${reward.name} x${reward.amount} `);
+                page.desc.push(
+                    `${reward.name}${
+                        reward.type_string === 'board'
+                            ? `{board/${reward.id}}`
+                            : ''
+                    } x${reward.amount} `,
+                );
             }
 
             quest =

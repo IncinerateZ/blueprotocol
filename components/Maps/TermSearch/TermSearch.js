@@ -1,5 +1,5 @@
 import { termSearch } from '@/components/utils';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 import styles from '@/styles/Map.module.css';
 import Image from 'next/image';
@@ -16,14 +16,50 @@ export default function TermSearch({
 }) {
     const router = useRouter();
     const Index = require('../data/MapIndex.json');
+    const headRef = useRef(null);
 
     const [query, setQuery] = useState(router.query.query || '');
     const [results, setResults] = useState([]);
 
     useEffect(() => {
         if (query.length <= 1) return;
-        setResults(termSearch(Index, query));
+
+        let searchResults = termSearch(Index, query);
+        setResults(searchResults);
+        headRef.current.focus();
+        if (router.query.auto) {
+            findOne: for (let map in searchResults) {
+                for (let r of searchResults[map]) {
+                    handleSelectResult(map, r);
+                    break findOne;
+                }
+            }
+        }
     }, [query]);
+
+    function handleSelectResult(map, r) {
+        toggleSelector(
+            r.loc.section,
+            r.loc.type,
+            true,
+            r.loc.display_name,
+            r.loc.Enemy?.name || '-',
+        );
+        router.push(
+            {
+                pathname: '/map',
+                query: {
+                    lng: r.loc.lng,
+                    lat: r.loc.lat,
+                    query: query,
+                },
+                hash: map,
+            },
+            undefined,
+            { shallow: true },
+        );
+        setChosenMap(map);
+    }
 
     return (
         <div className={styles.TermSearch} tabIndex={0}>
@@ -39,6 +75,7 @@ export default function TermSearch({
                     onChange={(e) => setQuery(e.target.value)}
                     placeholder='Search IDs, Items, etc..'
                     value={query}
+                    ref={headRef}
                 ></input>
             </div>
             <div className={styles.TermSearch_results}>
@@ -51,6 +88,7 @@ export default function TermSearch({
                     setChosenMap={setChosenMap}
                     query={query}
                     toggleSelector={toggleSelector}
+                    handleSelectResult={handleSelectResult}
                 />
             </div>
         </div>

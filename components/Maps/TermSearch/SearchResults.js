@@ -10,6 +10,7 @@ export default function SearchResults({
     lang,
     setChosenMap,
     toggleSelector,
+    handleSelectResult,
 }) {
     const router = useRouter();
 
@@ -41,27 +42,7 @@ export default function SearchResults({
                                 <button
                                     key={r.loc.lng + ' ' + r.loc.lat}
                                     onClick={() => {
-                                        toggleSelector(
-                                            r.loc.section,
-                                            r.loc.type,
-                                            true,
-                                            r.loc.display_name,
-                                            r.loc.Enemy?.name || '-',
-                                        );
-                                        router.push(
-                                            {
-                                                pathname: '/map',
-                                                query: {
-                                                    lng: r.loc.lng,
-                                                    lat: r.loc.lat,
-                                                    query: query,
-                                                },
-                                                hash: map,
-                                            },
-                                            undefined,
-                                            { shallow: true },
-                                        );
-                                        setChosenMap(map);
+                                        handleSelectResult(map, r);
                                     }}
                                 >
                                     <img
