@@ -1,5 +1,6 @@
 import styles from '@/styles/Board.module.css';
 import Image from 'next/image';
+import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
 
@@ -50,8 +51,12 @@ export default function Quest({ e, DB, loc, displayOverlay }) {
             <p>
                 {DB.Sources[e.id] ? (
                     DB.Sources[e.id].charAt(0) === 'Q' ? (
-                        <>
-                            `Completing{' '}
+                        <Link
+                            href={`/map?query=${e.id}`}
+                            style={{ color: '#3366CC' }}
+                            target='_blank'
+                        >
+                            Completing{' '}
                             {DB.Loc[loc][
                                 `quest_${
                                     {
@@ -67,37 +72,39 @@ export default function Quest({ e, DB, loc, displayOverlay }) {
                                 DB.srcQuests[DB.Sources[e.id]?.substring(1)]
                                     ?.name
                             ]?.text || DB.Sources[e.id]?.substring(1)}
-                            `
-                            {console.log(
-                                (DB.Loc[loc][
-                                    `quest_${
-                                        {
-                                            M: 'main',
-                                            S: 'sub',
-                                            E: 'main',
-                                        }[DB.Sources[e.id].charAt(1)]
-                                    }_chapter${DB.Sources[e.id].substring(
-                                        4,
-                                        6,
-                                    )}_text`
-                                ]?.texts[
-                                    DB.srcQuests[DB.Sources[e.id]?.substring(1)]
-                                        ?.name
-                                ]?.text || DB.Sources[e.id]?.substring(1)) +
-                                    ' ' +
-                                    e.id,
-                            )}
-                        </>
+                        </Link>
                     ) : DB.Sources[e.id].charAt(0) === 'A' ? (
-                        `Adventure Board ${DB.Sources[e.id].substring(4)}`
+                        <Link
+                            href={
+                                DB.Sources[e.id].substring(
+                                    4,
+                                    DB.Sources[e.id].length - 3,
+                                ) +
+                                '000/' +
+                                DB.Sources[e.id].substring(4)
+                            }
+                            style={{ color: '#3366CC' }}
+                            target='_blank'
+                        >
+                            Adventure Board {DB.Sources[e.id].substring(4)}
+                        </Link>
                     ) : DB.Sources[e.id].charAt(0) === 'D' ? (
-                        `Clearing ${
-                            DB.LocationNames[loc][
-                                DB.Sources[e.id].substring(1)
-                            ] || DB.Sources[e.id].substring(1)
-                        }`
+                        `Clearing 
+                            ${
+                                DB.LocationNames[loc][
+                                    DB.Sources[e.id].substring(1)
+                                ] || DB.Sources[e.id].substring(1)
+                            }`
                     ) : (
-                        `Treasure Box ${DB.Sources[e.id]?.substring(1)}`
+                        <Link
+                            href={`/map?query=${DB.Sources[e.id]?.substring(
+                                1,
+                            )}`}
+                            style={{ color: '#3366CC' }}
+                            target='_blank'
+                        >
+                            Treasure Box {DB.Sources[e.id]?.substring(1)}
+                        </Link>
                     )
                 ) : (
                     'Adventure Rankup'
