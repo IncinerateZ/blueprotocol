@@ -238,6 +238,14 @@
     margin-bottom: 0.2rem;
 }
 
+.questId span {
+    -moz-user-select: text;
+    -khtml-user-select: text;
+    -webkit-user-select: text;
+    -ms-user-select: text;
+    user-select: text;
+}
+
 .questThumbnail {
     margin-left: 0.5rem;
     margin-right: 0.5rem;
