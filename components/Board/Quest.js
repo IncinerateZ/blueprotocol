@@ -52,7 +52,7 @@ export default function Quest({ e, DB, loc, displayOverlay }) {
                 {DB.Sources[e.id] ? (
                     DB.Sources[e.id].charAt(0) === 'Q' ? (
                         <Link
-                            href={`/map?query=${e.id}`}
+                            href={`/map?query=${e.id}&auto=true`}
                             style={{ color: '#3366CC' }}
                             target='_blank'
                         >
@@ -99,7 +99,7 @@ export default function Quest({ e, DB, loc, displayOverlay }) {
                         <Link
                             href={`/map?query=${DB.Sources[e.id]?.substring(
                                 1,
-                            )}`}
+                            )}&auto=true`}
                             style={{ color: '#3366CC' }}
                             target='_blank'
                         >

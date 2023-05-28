@@ -23,9 +23,43 @@ export default function TermSearch({
 
     useEffect(() => {
         if (query.length <= 1) return;
-        setResults(termSearch(Index, query));
+
+        let searchResults = termSearch(Index, query);
+        setResults(searchResults);
         headRef.current.focus();
+        if (router.query.auto) {
+            findOne: for (let map in searchResults) {
+                for (let r of searchResults[map]) {
+                    handleSelectResult(map, r);
+                    break findOne;
+                }
+            }
+        }
     }, [query]);
+
+    function handleSelectResult(map, r) {
+        toggleSelector(
+            r.loc.section,
+            r.loc.type,
+            true,
+            r.loc.display_name,
+            r.loc.Enemy?.name || '-',
+        );
+        router.push(
+            {
+                pathname: '/map',
+                query: {
+                    lng: r.loc.lng,
+                    lat: r.loc.lat,
+                    query: query,
+                },
+                hash: map,
+            },
+            undefined,
+            { shallow: true },
+        );
+        setChosenMap(map);
+    }
 
     return (
         <div className={styles.TermSearch} tabIndex={0}>
@@ -54,6 +88,7 @@ export default function TermSearch({
                     setChosenMap={setChosenMap}
                     query={query}
                     toggleSelector={toggleSelector}
+                    handleSelectResult={handleSelectResult}
                 />
             </div>
         </div>
