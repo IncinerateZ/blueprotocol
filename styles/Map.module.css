@@ -152,6 +152,10 @@
     cursor: pointer;
 }
 
+.Popup a:hover {
+    text-decoration: underline;
+}
+
 .Popup::-webkit-scrollbar {
     width: 2px;
 }

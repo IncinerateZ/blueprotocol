@@ -228,6 +228,10 @@
     text-align: left;
 }
 
+.quest p a:hover {
+    text-decoration: underline;
+}
+
 .questId {
     font-size: 0.7rem;
     display: flex;
@@ -267,6 +271,7 @@
     margin-left: 0.5rem;
     margin-right: 0.5rem;
     font-size: 1rem;
+    user-select: text;
 }
 
 .quests::-webkit-scrollbar {
