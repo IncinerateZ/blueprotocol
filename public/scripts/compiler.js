@@ -27,13 +27,17 @@ for (let reward of require('./apiext/rewards.json')) {
         item_id: reward.item_id,
         amount: reward.amount,
     };
+
+    let questName = reward.id.substring(0, reward.id.lastIndexOf('_'));
+    if (!DB.QuestRewards[questName]) DB.QuestRewards[questName] = [];
+    DB.QuestRewards[questName].push(_QuestRewards[reward.id]);
 }
 
 for (let quest of require('./apiext/quests.json')) {
     let questName = quest.long_id;
 
+    DB.QuestRewards[questName] = [];
     for (let _reward of quest.quest_rewards) {
-        if (!DB.QuestRewards[questName]) DB.QuestRewards[questName] = [];
         DB.QuestRewards[questName].push(
             _QuestRewards[_reward.master_rewards_id],
         );
@@ -464,6 +468,8 @@ for (let mapType in Quests) {
 
         Quests[map] = {};
 
+        console.log(map);
+
         for (let file of fs.readdirSync(dir)) {
             if (!file.includes('QST') || file.includes('TQ')) continue;
 
@@ -541,6 +547,7 @@ for (let mapType in Quests) {
                     let type = { E: 'Exploration', C: 'Class', T: 'Tutorial' }[
                         file.substring(li + 1, li + 2)
                     ];
+                    console.log(q);
                     Quests[map][q] = {
                         ...temp[q],
                         quests: [q],

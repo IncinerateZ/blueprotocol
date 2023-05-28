@@ -1,5 +1,5 @@
 import { termSearch } from '@/components/utils';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 import styles from '@/styles/Map.module.css';
 import Image from 'next/image';
@@ -16,6 +16,7 @@ export default function TermSearch({
 }) {
     const router = useRouter();
     const Index = require('../data/MapIndex.json');
+    const headRef = useRef(null);
 
     const [query, setQuery] = useState(router.query.query || '');
     const [results, setResults] = useState([]);
@@ -23,6 +24,7 @@ export default function TermSearch({
     useEffect(() => {
         if (query.length <= 1) return;
         setResults(termSearch(Index, query));
+        headRef.current.focus();
     }, [query]);
 
     return (
@@ -39,6 +41,7 @@ export default function TermSearch({
                     onChange={(e) => setQuery(e.target.value)}
                     placeholder='Search IDs, Items, etc..'
                     value={query}
+                    ref={headRef}
                 ></input>
             </div>
             <div className={styles.TermSearch_results}>
