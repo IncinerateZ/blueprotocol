@@ -149,6 +149,8 @@ for (let mapType in DB.EnemySets) {
                             ...entry.Properties.RelativeLocation,
                         };
 
+                        delete DB.EnemyHabitats[map][entry.Outer].Z;
+
                         if (CQST[entry.Outer]) {
                             DB.EnemyHabitats[map][entry.Outer].Enemies = [
                                 {
@@ -230,6 +232,8 @@ for (let mapType in DB.POI) {
                         type: poiToType(dat.Outer),
                         selector: poiToSelector(dat.Outer),
                     };
+
+                    delete DB.POI[map].temp[dat.Outer].Z;
                 }
                 if (dat.Type === 'BP_UtillityAreaActor_C') {
                     DB.POI[map].temp[dat.Name] = {
@@ -280,6 +284,8 @@ for (let mapType in DB.POI) {
                         type: poiToType(dat.Outer),
                         selector: poiToSelector(dat.Outer),
                     };
+
+                    delete DB.POI[map].temp[dat.Outer].Z;
                 }
             }
         } catch (err) {
@@ -334,6 +340,7 @@ for (let mapType in DB.POI) {
                             type: poiToType(o.Outer),
                             ...o.Properties.RelativeLocation,
                         };
+                        delete DB.POI[map].temp[o.Outer].Z;
                     }
                     if (
                         o.Properties &&
@@ -359,7 +366,7 @@ for (let mapType in DB.POI) {
                 );
                 data = JSON.parse(data);
                 for (let o of data)
-                    if (o.Outer && o.Properties?.RelativeLocation)
+                    if (o.Outer && o.Properties?.RelativeLocation) {
                         DB.POI[map].temp[o.Outer] = {
                             ...DB.POI[map].temp[o.Outer],
                             title: 'Nappo',
@@ -367,6 +374,8 @@ for (let mapType in DB.POI) {
                             type: 'nappo',
                             ...o.Properties.RelativeLocation,
                         };
+                        delete DB.POI[map].temp[o.Outer].Z;
+                    }
             } catch (err) {}
             try {
                 data = fs.readFileSync(
@@ -425,6 +434,7 @@ for (let mapType in DB.POI) {
                             type: poiToType(o.Outer),
                             selector: poiToSelector(o.Outer),
                         };
+                        delete DB.POI[map].temp[o.Outer].Z;
                         if (o.Outer.includes('Raid'))
                             DB.POI[map].temp[o.Outer].title =
                                 raidNames[o.Outer] || 'Raid Gate';
@@ -515,11 +525,13 @@ for (let mapType in Quests) {
                     if (
                         row.Type === 'SceneComponent' &&
                         row.Properties?.RelativeLocation
-                    )
+                    ) {
                         Quests[map][row.Outer] = {
                             ...Quests[map][row.Outer],
                             ...row.Properties.RelativeLocation,
                         };
+                        delete Quests[map][row.Outer].Z;
+                    }
                 } else {
                     if (
                         row.Type === 'SceneComponent' &&
@@ -538,6 +550,7 @@ for (let mapType in Quests) {
                         temp[row.Outer] = {
                             ...row.Properties.RelativeLocation,
                         };
+                        delete temp[row.Outer].Z;
                     }
                 }
             }
