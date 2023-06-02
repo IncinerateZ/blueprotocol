@@ -43,7 +43,7 @@ label:has(input.visually-hidden:focus-visible) {
   outline: auto;
 }
 
-@media (max-width: 372px) {
+@media (max-width: 553px) {
   .left-right-ad {
     display: none;
   }

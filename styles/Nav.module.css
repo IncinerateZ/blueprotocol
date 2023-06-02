@@ -51,7 +51,7 @@
         margin-left: 0.2rem;
 }
 
-@media (max-width: 372px) {
+@media (max-width: 553px) {
     .Nav {
         width: 100vw;
         height: 50px;

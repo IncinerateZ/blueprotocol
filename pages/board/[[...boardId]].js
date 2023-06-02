@@ -294,7 +294,14 @@ export default function Board() {
                         setSelectedQuest={setSelectedQuest}
                     />
                 )}
-                <div style={{ position: 'absolute', bottom: '3.5rem' }}>
+                <div
+                    style={{
+                        position: 'absolute',
+                        bottom: '3.5rem',
+                        left: '50%',
+                        transform: 'translateX(-50%)',
+                    }}
+                >
                     <div id='board-bottom-mobile'></div>
                 </div>
             </div>
