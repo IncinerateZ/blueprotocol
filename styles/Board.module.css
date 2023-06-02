@@ -363,7 +363,7 @@
     }
 }
 
-@media (max-width: 372px) {
+@media (max-width: 553px) {
     .content {
         margin: 0;
         width: 100%;
@@ -372,17 +372,31 @@
         flex-direction: column;
         justify-content: center;
         align-items: center;
+        padding-left: 0;
     }
 
     .quests {
-        width: 250px;
+        width: 460px;
     }
 
     .pageBg {
         justify-content: center;
     }
+
+    .left-right-ad {
+        display: none;
+    }
+
+    .left-right-ad div {
+        margin-left: 0;
+    }
 }
 
+@media (max-width: 455px) {
+    .quests {
+        width: 230px;
+    }
+}
 @media (max-width: 600px) {
     .questOverlay {
         transform: translate(calc(-1 * (600px - 100vw) / 2), 10%);
