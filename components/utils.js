@@ -161,6 +161,20 @@ function entitySummary(
             page.desc.push('Drops');
 
             let drops = enemy_.drop_items;
+
+            for (let drop of drops) {
+                if (drop.type === 2) {
+                    let treasures = DB.Treasures[drop.item_index];
+                    for (let treasure of treasures.lot_rate) {
+                        drops.push({
+                            content_id: '',
+                            item_index: treasure.reward_master_id,
+                            drop_rate: treasure.rate,
+                        });
+                    }
+                }
+            }
+
             drops.sort((a, b) => {
                 return b.drop_rate - a.drop_rate;
             });
