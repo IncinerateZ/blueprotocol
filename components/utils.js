@@ -152,7 +152,8 @@ function entitySummary(
         res.push(entity.idf);
         for (let enemy of enemies?.Members || []) {
             let page = { ...entity.metadata };
-            let enemy_ = DB.Enemies[enemy.EnemyId];
+            let enemy_ = DB.Enemies[enemy.EnemyId] || {};
+            if (Object.keys(enemy_).length === 0) continue;
             page.name = DB.Loc[lang].enemyparam_text.texts[enemy_.name_id].text;
 
             page.desc = [];
