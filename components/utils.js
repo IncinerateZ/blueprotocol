@@ -164,6 +164,7 @@ function entitySummary(
             for (let drop of drops) {
                 if (drop.type === 2) {
                     let treasures = DB.Treasures[drop.item_index];
+                    if (!treasures) continue;
                     for (let treasure of treasures.lot_rate) {
                         drops.push({
                             content_id: '',
