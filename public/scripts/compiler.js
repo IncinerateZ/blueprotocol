@@ -238,7 +238,7 @@ for (let mapType in DB.POI) {
                 if (dat.Type === 'BP_UtillityAreaActor_C') {
                     DB.POI[map].temp[dat.Name] = {
                         ...DB.POI[map].temp[dat.Name],
-                        title: dat.Properties.LocationId.RowName,
+                        title: dat.Properties.LocationId?.RowName || '',
                     };
                 }
                 if (
@@ -470,6 +470,9 @@ for (let mapType in DB.POI) {
 
 let Quests = { cty: {}, fld: {} };
 
+const MAXCHAPTER = 3;
+const MAXVOLUME = 1;
+
 for (let mapType in Quests) {
     let baseMapDir = `./Maps/${mapType}`;
     for (let map of fs.readdirSync(baseMapDir)) {
@@ -506,6 +509,27 @@ for (let mapType in Quests) {
                         }
                         if (Object.keys(_quests).length > 0) {
                             let t = file.includes('MQ') ? 'Main' : 'Sub';
+
+                            for (let q in _quests) {
+                                let NOSHOW = true;
+                                for (let vol = 1; vol <= MAXVOLUME; vol++) {
+                                    if (!NOSHOW) break;
+                                    for (let ch = 1; ch <= MAXCHAPTER; ch++) {
+                                        let play = `Q${vol}${(ch + '').padStart(
+                                            2,
+                                            '0',
+                                        )}_`;
+
+                                        if (q.includes(play)) {
+                                            NOSHOW = false;
+                                            break;
+                                        }
+                                    }
+                                }
+
+                                if (NOSHOW) delete _quests[q];
+                            }
+
                             Quests[map][row.Name] = {
                                 ...Quests[map][row.Name],
                                 quests: Object.keys(_quests),
@@ -556,11 +580,25 @@ for (let mapType in Quests) {
             }
             if (Object.keys(temp).length !== 0) {
                 for (let q in temp) {
+                    let NOSHOW = true;
+
+                    for (let vol = 1; vol <= MAXVOLUME; vol++) {
+                        if (!NOSHOW) break;
+                        for (let ch = 1; ch <= MAXCHAPTER; ch++) {
+                            let play = `Q${vol}${(ch + '').padStart(2, '0')}_`;
+
+                            if (q.includes(play)) {
+                                NOSHOW = false;
+                                break;
+                            }
+                        }
+                    }
+
+                    if (NOSHOW) continue;
                     let li = file.lastIndexOf('_');
                     let type = { E: 'Exploration', C: 'Class', T: 'Tutorial' }[
                         file.substring(li + 1, li + 2)
                     ];
-                    console.log(q);
                     Quests[map][q] = {
                         ...temp[q],
                         quests: [q],
