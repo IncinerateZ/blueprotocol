@@ -43,8 +43,11 @@ function entitySummary(DB, entity, lang, showLeak) {
         res.push(entity.idf);
         for (let enemy of enemies?.Members || []) {
             let page = { ...entity.metadata };
-            let enemy_ = DB.Enemies[enemy.EnemyId];
-            page.name = DB.Loc[lang].enemyparam_text.texts[enemy_.name_id].text;
+            let enemy_ = DB.Enemies[enemy.EnemyId] || {};
+            if (Object.keys(enemy_).length === 0) continue;
+            page.name =
+                DB.Loc[lang].enemyparam_text.texts[enemy_?.name_id || 0]
+                    ?.text || 'No Data';
             if (!entity.Enemy) {
                 entity.Enemy = {};
                 entity.Enemy.name_id = enemy_.name_id;
@@ -54,7 +57,21 @@ function entitySummary(DB, entity, lang, showLeak) {
             page.desc.push(`Levels ${enemy.MinLv} - ${enemy.MaxLv}`);
             page.desc.push('Drops');
 
-            let drops = enemy_.drop_items;
+            let drops = [...enemy_.drop_items];
+
+            for (let drop of drops) {
+                if (drop.type === 2) {
+                    let treasures = DB.Treasures[drop.item_index];
+                    for (let treasure of treasures.lot_rate) {
+                        drops.push({
+                            content_id: '',
+                            item_index: treasure.reward_master_id,
+                            drop_rate: treasure.rate,
+                        });
+                    }
+                }
+            }
+
             drops.sort((a, b) => {
                 return b.drop_rate - a.drop_rate;
             });
