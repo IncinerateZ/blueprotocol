@@ -159,7 +159,7 @@ function entitySummary(
             page.desc.push(`Levels ${enemy.MinLv} - ${enemy.MaxLv}`);
             page.desc.push('Drops');
 
-            let drops = enemy_.drop_items;
+            let drops = [...enemy_.drop_items];
 
             for (let drop of drops) {
                 if (drop.type === 2) {
