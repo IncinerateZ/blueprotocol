@@ -31,7 +31,7 @@ export default class BoardReward {
                 27: new CraftingRecipeSetReward('crafting_recipe_set', db_path),
                 28: new AdventureBoardReward('board', db_path),
                 30: new WarehouseAbilityReward('warehouse_ability', db_path),
-                // 33: new ChoiceReward('choice', db_path),
+                // 33: new ChoiceReward('choice', db_path), //Lottery
             }[type] || new ItemReward('item', db_path);
 
         this.reward.create(id, type, amount, loc);
