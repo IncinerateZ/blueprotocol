@@ -99,7 +99,7 @@ const cats = [
     'weapon_text',
 ];
 
-let res = require('../apiext/texts/en_US.json');
+let res = require('../apiext/texts/temp/en_US.json');
 
 for (let cat of res) {
     let texts = cat.texts;
@@ -109,9 +109,10 @@ for (let cat of res) {
 
     let idx = 0;
 
-    for (let i = 0; i < Object.keys(chunks[cat]).length; i++) {
+    for (let i = 0; i < Object.keys(chunks[cat] || []).length; i++) {
         console.log(i);
         for (let e of chunks[cat][`${cat}-${i}.json`]) {
+            if (texts.length < idx + 1) break;
             texts[idx++].text = e;
             // console.log(texts[idx++].text + ' -> ' + e);
         }

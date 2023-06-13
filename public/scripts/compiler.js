@@ -101,11 +101,53 @@ for (let loc in DB.Loc) {
     }
 }
 
-for (let enemy of require('./apiext/enemyparams.json'))
+for (let enemy of require('./apiext/enemyparams.json')) {
     DB.Enemies[enemy.enemy_id] = enemy;
+    delete DB.Enemies[enemy.enemy_id].id;
+    delete DB.Enemies[enemy.enemy_id].level_params;
+    delete DB.Enemies[enemy.enemy_id].created_at;
+    delete DB.Enemies[enemy.enemy_id].updated_at;
+    delete DB.Enemies[enemy.enemy_id].appearance;
+    delete DB.Enemies[enemy.enemy_id].skill_params;
+    delete DB.Enemies[enemy.enemy_id].durability_scale;
+    delete DB.Enemies[enemy.enemy_id].battle_bgm;
+    delete DB.Enemies[enemy.enemy_id].elemdmg_bias;
+    delete DB.Enemies[enemy.enemy_id].resist_rate;
+    delete DB.Enemies[enemy.enemy_id].resist_dot;
+    delete DB.Enemies[enemy.enemy_id].enemylib_activetime;
+}
 
-for (let item of require('./apiext/items.json'))
+for (let item of require('./apiext/items.json')) {
     DB.Items[item.id] = { ...item };
+    delete DB.Items[item.id].item_effect_desc_text;
+    delete DB.Items[item.id].can_use;
+    delete DB.Items[item.id].dungeon_only;
+    delete DB.Items[item.id].price_player_sells;
+    delete DB.Items[item.id].price_player_buys;
+    delete DB.Items[item.id].stack_inventory_num;
+    delete DB.Items[item.id].stack_storage_num;
+    delete DB.Items[item.id].item_recast_time;
+    delete DB.Items[item.id].active;
+    delete DB.Items[item.id].efficacies;
+    delete DB.Items[item.id].weapon_sticker;
+    delete DB.Items[item.id].obtaining_route;
+    delete DB.Items[item.id].obtaining_route_detail_id;
+    delete DB.Items[item.id].item_level;
+    delete DB.Items[item.id].item_xp;
+    delete DB.Items[item.id].is_accounting;
+    delete DB.Items[item.id].no_sale_flag;
+    delete DB.Items[item.id].is_no_dissolution;
+    delete DB.Items[item.id].adventurer_rank;
+    delete DB.Items[item.id].identified_by_default;
+    delete DB.Items[item.id].unidentified_icon_name;
+    delete DB.Items[item.id].unidentified_name;
+    delete DB.Items[item.id].unidentified_desc;
+    delete DB.Items[item.id].supply_flag;
+    delete DB.Items[item.id].created_at;
+    delete DB.Items[item.id].updated_at;
+    delete DB.Items[item.id].event_term_id;
+    delete DB.Items[item.id].rare_production;
+}
 
 for (let treasure of require('./apiext/treasures.json'))
     DB.Treasures[treasure.id] = { ...treasure };
@@ -742,28 +784,60 @@ let srcQ = {};
 for (let q of require('./apiext/quests.json'))
     srcQ[q.long_id] = { name: q.name, desc: q.desc };
 
-for (let reward of require('./apiext/rewards.json'))
+for (let reward of require('./apiext/rewards.json')) {
     boards.Rewards[reward.id] = reward;
+    delete boards.Rewards[reward.id].extra_attributes_id;
+    delete boards.Rewards[reward.id].created_at;
+    delete boards.Rewards[reward.id].updated_at;
+}
 
 for (let mount of require('./apiext/mount.json'))
-    boards.Mounts[mount.id] = mount;
+    boards.Mounts[mount.id] = {
+        id: mount.id,
+        mount_id: mount.mount_id,
+        mount_name_text_id: mount.mount_name_text_id,
+        mount_description_text_id: mount.mount_description_text_id,
+        sort_id: mount.sort_id,
+        name: mount.name,
+        description: mount.description,
+    };
 
 for (let imagine of require('./apiext/imagine.json'))
-    boards.Imagines[imagine.id] = imagine;
+    boards.Imagines[imagine.id] = {
+        id: imagine.id,
+        imagine_name: imagine.imagine_name,
+        imagine_desc: imagine.imagine_desc,
+        param_type: imagine.param_type,
+    };
 
 for (let ability of require('./apiext/master_warehouse_ability_recipes.json'))
     boards.WarehouseAbilities[ability.id] = ability;
 
 for (let craft of require('./apiext/craft.json'))
-    boards.CraftRecipes[craft.id] = craft;
+    boards.CraftRecipes[craft.id] = {
+        id: craft.id,
+        out_item_type: craft.out_item_type,
+        out_item_id: craft.out_item_id,
+        out_item_num: craft.out_item_num,
+    };
 
-for (let craft of require('./apiext/master_craft_recipe_sets.json'))
+for (let craft of require('./apiext/master_craft_recipe_sets.json')) {
     boards.CraftRecipes[craft.id] = craft;
+    delete boards.CraftRecipes[craft.id].created_at;
+    delete boards.CraftRecipes[craft.id].updated_at;
+}
 
 const tokens = require('./apiext/token.json');
 
 const { exec } = require('child_process');
-for (let token of tokens) boards.Tokens[token.id] = token;
+for (let token of tokens)
+    boards.Tokens[token.id] = {
+        id: token.id,
+        name: token.name,
+        desc: token.desc,
+        category: token.category,
+        sort_id: token.sort_id,
+    };
 
 for (let source of require('./apiext/rewards.json'))
     if (source.reward_type === 28) {

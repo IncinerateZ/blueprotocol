@@ -11,7 +11,11 @@ async function run() {
 
         let data = require(`../target/${files[idx]}`);
         try {
-            const res = await translate(data, { from: 'ja', to: 'en' });
+            const res = await translate(data, {
+                from: 'ja',
+                to: 'en',
+                forceBatch: false,
+            });
             console.log('Done! Saving...');
             fs.writeFileSync(
                 `./out/${files[idx]}`,
