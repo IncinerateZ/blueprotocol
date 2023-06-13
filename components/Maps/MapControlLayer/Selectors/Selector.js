@@ -44,7 +44,7 @@ export default function Selector({
                 />
             )}
             {currentSelector.type
-                ? DB.Loc[lang].enemyparam_text.texts[s].text
+                ? DB.Loc[lang].enemyparam_text.texts[s]?.text || 'No Data'
                 : currentSelector.display_name}
 
             <input

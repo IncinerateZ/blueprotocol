@@ -131,7 +131,7 @@ export default function Map() {
         let _excludedSelectors = { ...excludedSelectors };
         let excludedTarget = ['enemy', 'elite'].includes(currentSelector.type)
             ? DB.Loc.ja_JP.enemyparam_text.texts[currentSelector.display_name]
-                  .text
+                  ?.text || 'No Data'
             : currentSelector.display_name;
 
         if (temp[e][s].selected) delete _excludedSelectors[excludedTarget];
@@ -274,9 +274,10 @@ export default function Map() {
                 ).Members;
 
                 for (let enemy of enemies) {
-                    let enemyNameId = DB.Enemies[enemy.EnemyId].name_id;
+                    let enemyNameId = DB.Enemies[enemy.EnemyId]?.name_id || 0;
                     selectors_.push(
-                        DB.Loc.ja_JP.enemyparam_text.texts[enemyNameId].text,
+                        DB.Loc.ja_JP.enemyparam_text.texts[enemyNameId]?.text ||
+                            'No Data',
                     );
 
                     _selectors = {
@@ -293,7 +294,8 @@ export default function Map() {
                                               .selected &&
                                           !excludedSelectors[
                                               DB.Loc.ja_JP.enemyparam_text
-                                                  .texts[enemyNameId].text
+                                                  .texts[enemyNameId]?.text ||
+                                                  'No Data'
                                           ]
                                         : true,
                                 display_name: enemyNameId,
@@ -308,6 +310,7 @@ export default function Map() {
                         type: pt.type,
                         title: pt.Enemies[0].EnemySetId,
                         selectors: selectors_,
+                        cardinal: pt.cardinal,
                     }),
                 );
             }
@@ -643,6 +646,7 @@ export default function Map() {
                                                                 showLeak,
                                                                 hiddenMarkers,
                                                                 setHiddenMarkers,
+                                                                chosenMap,
                                                             )}
                                                         </Popup>
                                                     </Marker>

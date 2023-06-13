@@ -59,7 +59,27 @@ function buildSummary(summaries, hiddenMarkers, setHiddenMarkers) {
                                 margin: 0,
                             }}
                         >
-                            <b>{summary.name}</b>
+                            {summary.name?.includes('{') ? (
+                                <Link
+                                    href={`${summary.name.substring(
+                                        summary.name.indexOf('{') + 1,
+                                        summary.name.indexOf('}'),
+                                    )}`}
+                                    target='_blank'
+                                >
+                                    <b>
+                                        {summary.name.substring(
+                                            0,
+                                            summary.name.indexOf('{'),
+                                        ) +
+                                            summary.name.substring(
+                                                summary.name.indexOf('}') + 1,
+                                            )}
+                                    </b>
+                                </Link>
+                            ) : (
+                                <b>{summary.name}</b>
+                            )}
                         </h1>
                         {summary.id && (
                             <span
@@ -91,7 +111,7 @@ function buildSummary(summaries, hiddenMarkers, setHiddenMarkers) {
                                     >
                                         {r.includes('{') ? (
                                             <Link
-                                                href={`/${r.substring(
+                                                href={`${r.substring(
                                                     r.indexOf('{') + 1,
                                                     r.indexOf('}'),
                                                 )}`}
@@ -145,6 +165,7 @@ function entitySummary(
     showLeak,
     hiddenMarkers,
     setHiddenMarkers,
+    chosenMap,
 ) {
     let res = [];
     if (['enemy', 'elite'].includes(entity.type)) {
@@ -152,8 +173,11 @@ function entitySummary(
         res.push(entity.idf);
         for (let enemy of enemies?.Members || []) {
             let page = { ...entity.metadata };
-            let enemy_ = DB.Enemies[enemy.EnemyId];
-            page.name = DB.Loc[lang].enemyparam_text.texts[enemy_.name_id].text;
+            let enemy_ = DB.Enemies[enemy.EnemyId] || {};
+            if (Object.keys(enemy_).length === 0) continue;
+            page.name =
+                DB.Loc[lang].enemyparam_text.texts[enemy_.name_id].text +
+                `{https://bapharia.com/db?result=Enemy${enemy_.enemy_id}}`;
 
             page.desc = [];
             page.desc.push(`Levels ${enemy.MinLv} - ${enemy.MaxLv}`);
@@ -163,6 +187,8 @@ function entitySummary(
 
             for (let drop of drops) {
                 if (drop.type === 2) {
+                    if (!drop.content_id.includes(chosenMap + enemy.cardinal))
+                        continue;
                     let treasures = DB.Treasures[drop.item_index];
                     if (!treasures) continue;
                     for (let treasure of treasures.lot_rate) {
@@ -187,7 +213,13 @@ function entitySummary(
 
                 page.desc.push(
                     `${DB.Loc[lang].item_text.texts[item.name].text} ${
-                        showLeak ? `${drop.drop_rate / 100}%` : ''
+                        showLeak
+                            ? `${
+                                  drop.drop_rate / 100
+                              }% {https://bapharia.com/db?result=Item${
+                                  item.id
+                              }}`
+                            : ''
                     }`,
                 );
             }
@@ -222,10 +254,11 @@ function entitySummary(
 
                 if (treasure_ || 'reward_type' in treasure) {
                     let item = null;
-                    if (treasure_)
+                    if (treasure_) {
                         item =
-                            DB.Loc[lang].item_text.texts[treasure_.name].text;
-                    else {
+                            DB.Loc[lang].item_text.texts[treasure_.name].text +
+                            `{https://bapharia.com/db?result=Item${treasure_.id}}`;
+                    } else {
                         item = new BoardReward(
                             treasure.reward_master_id,
                             treasure.reward_type,
@@ -236,7 +269,7 @@ function entitySummary(
                             item.name +
                             `${
                                 item.type_string === 'board'
-                                    ? `{board/${item.id}}`
+                                    ? `{/board/${item.id}}`
                                     : ''
                             }`;
                     }
@@ -285,9 +318,11 @@ function entitySummary(
                 page.desc.push(
                     `${reward.name}${
                         reward.type_string === 'board'
-                            ? `{board/${reward.id}}`
+                            ? `{/board/${reward.id}}`
+                            : reward.type_string === 'item'
+                            ? `{https://bapharia.com/db?result=Item${reward.id}}`
                             : ''
-                    } x${reward.amount} `,
+                    } x${reward.amount}`,
                 );
             }
 
