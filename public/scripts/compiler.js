@@ -161,14 +161,19 @@ for (let mapType in DB.EnemySets) {
                             DB.EnemyHabitats[map][entry.Outer].type = 'elite';
                         }
                     }
-                    if (entry.Type === 'SBEnemyHabitat')
+                    if (entry.Type === 'SBEnemyHabitat') {
                         DB.EnemyHabitats[map][entry.Name] = {
                             ...DB.EnemyHabitats[map][entry.Name],
                             Enemies: [...entry.Properties.Enemies],
                             ...entry.Properties.Density,
                             ...entry.Properties.RespawnTime,
                             type: 'enemy',
+                            cardinal:
+                                cardinal.length > 0
+                                    ? `_${cardinal.charAt(0)}`
+                                    : '',
                         };
+                    }
                 }
             } catch (exception) {
                 exception.errno !== -4058 && console.log(exception);

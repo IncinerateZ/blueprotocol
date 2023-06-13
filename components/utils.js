@@ -165,6 +165,7 @@ function entitySummary(
     showLeak,
     hiddenMarkers,
     setHiddenMarkers,
+    chosenMap,
 ) {
     let res = [];
     if (['enemy', 'elite'].includes(entity.type)) {
@@ -174,7 +175,6 @@ function entitySummary(
             let page = { ...entity.metadata };
             let enemy_ = DB.Enemies[enemy.EnemyId] || {};
             if (Object.keys(enemy_).length === 0) continue;
-            console.log(enemy_);
             page.name =
                 DB.Loc[lang].enemyparam_text.texts[enemy_.name_id].text +
                 `{https://bapharia.com/db?result=Enemy${enemy_.enemy_id}}`;
@@ -187,6 +187,8 @@ function entitySummary(
 
             for (let drop of drops) {
                 if (drop.type === 2) {
+                    if (!drop.content_id.includes(chosenMap + enemy.cardinal))
+                        continue;
                     let treasures = DB.Treasures[drop.item_index];
                     for (let treasure of treasures.lot_rate) {
                         drops.push({

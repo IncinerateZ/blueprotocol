@@ -310,6 +310,7 @@ export default function Map() {
                         type: pt.type,
                         title: pt.Enemies[0].EnemySetId,
                         selectors: selectors_,
+                        cardinal: pt.cardinal,
                     }),
                 );
             }
@@ -645,6 +646,7 @@ export default function Map() {
                                                                 showLeak,
                                                                 hiddenMarkers,
                                                                 setHiddenMarkers,
+                                                                chosenMap,
                                                             )}
                                                         </Popup>
                                                     </Marker>
