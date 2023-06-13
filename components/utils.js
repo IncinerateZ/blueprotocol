@@ -315,12 +315,17 @@ function entitySummary(
                     reward.amount,
                     lang,
                 ).reward;
+                reward.type_string === 'liquid_memory' && console.log(reward);
                 page.desc.push(
                     `${reward.name}${
                         reward.type_string === 'board'
                             ? `{/board/${reward.id}}`
                             : reward.type_string === 'item'
                             ? `{https://bapharia.com/db?result=Item${reward.id}}`
+                            : reward.type_string === 'liquid_memory'
+                            ? `{https://bapharia.com/db?result=LiquidMemory${reward.id}}`
+                            : reward.type_string === 'token'
+                            ? `{https://bapharia.com/db?result=Token${reward.id}}`
                             : ''
                     } x${reward.amount}`,
                 );
