@@ -270,6 +270,12 @@ function entitySummary(
                             `${
                                 item.type_string === 'board'
                                     ? `{/board/${item.id}}`
+                                    : item.type_string === 'item'
+                                    ? `{https://bapharia.com/db?result=Item${item.id}}`
+                                    : item.type_string === 'liquid_memory'
+                                    ? `{https://bapharia.com/db?result=LiquidMemory${item.id}}`
+                                    : item.type_string === 'token'
+                                    ? `{https://bapharia.com/db?result=Token${item.id}}`
                                     : ''
                             }`;
                     }
