@@ -270,6 +270,12 @@ function entitySummary(
                             `${
                                 item.type_string === 'board'
                                     ? `{/board/${item.id}}`
+                                    : item.type_string === 'item'
+                                    ? `{https://bapharia.com/db?result=Item${item.id}}`
+                                    : item.type_string === 'liquid_memory'
+                                    ? `{https://bapharia.com/db?result=LiquidMemory${item.id}}`
+                                    : item.type_string === 'token'
+                                    ? `{https://bapharia.com/db?result=Token${item.id}}`
                                     : ''
                             }`;
                     }
@@ -315,12 +321,17 @@ function entitySummary(
                     reward.amount,
                     lang,
                 ).reward;
+                reward.type_string === 'liquid_memory' && console.log(reward);
                 page.desc.push(
                     `${reward.name}${
                         reward.type_string === 'board'
                             ? `{/board/${reward.id}}`
                             : reward.type_string === 'item'
                             ? `{https://bapharia.com/db?result=Item${reward.id}}`
+                            : reward.type_string === 'liquid_memory'
+                            ? `{https://bapharia.com/db?result=LiquidMemory${reward.id}}`
+                            : reward.type_string === 'token'
+                            ? `{https://bapharia.com/db?result=Token${reward.id}}`
                             : ''
                     } x${reward.amount}`,
                 );

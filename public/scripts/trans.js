@@ -1,4 +1,4 @@
-const data = require('./apiext/texts/en_US.json');
+const data = require('./apiext/texts/temp/en_US.json');
 
 const fs = require('fs');
 
