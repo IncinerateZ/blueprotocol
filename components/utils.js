@@ -212,14 +212,10 @@ function entitySummary(
                 if (!item) continue;
 
                 page.desc.push(
-                    `${DB.Loc[lang].item_text.texts[item.name].text} ${
-                        showLeak
-                            ? `${
-                                  drop.drop_rate / 100
-                              }% {https://bapharia.com/db?result=Item${
-                                  item.id
-                              }}`
-                            : ''
+                    `${
+                        DB.Loc[lang].item_text.texts[item.name].text
+                    }{https://bapharia.com/db?result=Item${item.id}} ${
+                        showLeak ? `${drop.drop_rate / 100}%` : ''
                     }`,
                 );
             }
