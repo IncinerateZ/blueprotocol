@@ -11,7 +11,7 @@ export default function contact() {
                 <h1>
                     ONLY IMPORTANT AND RELEVANT MATTERS WILL BE RESPONDED TO
                 </h1>
-                <p>Discord: IncinerateZ#4038</p>
+                <p>Discord: incineratez</p>
                 <p>Email: admin@incin.net</p>
                 <div
                     style={{ cursor: 'pointer', color: 'blue' }}
