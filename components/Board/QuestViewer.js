@@ -174,14 +174,27 @@ export default function QuestViewer({
         function draw() {
             ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-            let firstLast = [];
+            let firstLast = [{ id: '999999999999' }, { id: '-999999999999' }];
 
             for (let panel in panels) {
                 let pane = panels[panel].panel;
 
-                if (firstLast.length === 0) firstLast.push(pane);
-                else firstLast.pop();
-                firstLast.push(pane);
+                if (pane.next_panel_ids.length > 0) {
+                    firstLast[0] =
+                        parseInt(pane.id) < parseInt(firstLast[0].id)
+                            ? pane
+                            : firstLast[0];
+                    for (let p of pane.next_panel_ids) {
+                        firstLast[0] =
+                            parseInt(p.panel_id) < parseInt(firstLast[0].id)
+                                ? panels[p.panel_id].panel
+                                : firstLast[0];
+                        firstLast[1] =
+                            parseInt(p.panel_id) > parseInt(firstLast[1].id)
+                                ? panels[p.panel_id].panel
+                                : firstLast[1];
+                    }
+                }
 
                 document.getElementById(panel).style.transform = `translate(${
                     offSets.x + pane.ui_pos_x - 20
