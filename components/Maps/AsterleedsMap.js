@@ -331,7 +331,7 @@ export default function Map() {
     useEffect(() => {
         markers?.new?.arr.length > 0 &&
             console.log(JSON.stringify(markers.new));
-        if (router.query.lat) {
+        if (router.query.lat && window.innerWidth > 500) {
             setTimeout(() => {
                 document
                     .elementFromPoint(
