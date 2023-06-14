@@ -331,6 +331,16 @@ export default function Map() {
     useEffect(() => {
         markers?.new?.arr.length > 0 &&
             console.log(JSON.stringify(markers.new));
+        if (router.query.lat && window.innerWidth > 500) {
+            setTimeout(() => {
+                document
+                    .elementFromPoint(
+                        window.innerWidth / 2,
+                        window.innerHeight / 2,
+                    )
+                    .click();
+            }, 0);
+        }
     }, [markers]);
 
     useEffect(() => {
@@ -655,7 +665,7 @@ export default function Map() {
                                     );
                                 }),
                             )}
-                        <ClickHandler />
+                        {/* <ClickHandler /> */}
                         <ZoomControl position='topright' />
                     </>
                 )}

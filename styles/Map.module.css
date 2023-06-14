@@ -386,7 +386,7 @@
     height: 35px;
     cursor: pointer;
     overflow: hidden;
-    transition: 0.2s;
+    transition: 0.45s;
 }
 
 .TermSearch:focus-within {
