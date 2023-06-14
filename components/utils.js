@@ -317,7 +317,6 @@ function entitySummary(
                     reward.amount,
                     lang,
                 ).reward;
-                reward.type_string === 'liquid_memory' && console.log(reward);
                 page.desc.push(
                     `${reward.name}${
                         reward.type_string === 'board'
