@@ -183,9 +183,20 @@ for (let mapType in DB.EnemySets) {
                 for (let entry of data) {
                     if (
                         (entry.Type === 'SceneComponent' &&
-                            CQST[entry.Outer]) ||
+                            (CQST[entry.Outer] ||
+                                CQST[
+                                    entry.Outer.substring(
+                                        0,
+                                        entry.Outer.length - 2,
+                                    )
+                                ])) ||
                         entry.Type === 'BrushComponent'
                     ) {
+                        let e1 = entry.Outer;
+                        let e2 = entry.Outer.substring(
+                            0,
+                            entry.Outer.length - 2,
+                        );
                         DB.EnemyHabitats[map][entry.Outer] = {
                             ...DB.EnemyHabitats[map][entry.Outer],
                             ...entry.Properties.RelativeLocation,
@@ -193,11 +204,13 @@ for (let mapType in DB.EnemySets) {
 
                         delete DB.EnemyHabitats[map][entry.Outer].Z;
 
-                        if (CQST[entry.Outer]) {
+                        if (CQST[e1] || CQST[e2]) {
+                            let _entry = e1;
+                            if (!CQST[e1]) _entry = e2;
+
                             DB.EnemyHabitats[map][entry.Outer].Enemies = [
                                 {
-                                    EnemySetId:
-                                        CQST[entry.Outer]?.event_param_1_1,
+                                    EnemySetId: CQST[_entry]?.event_param_1_1,
                                 },
                             ];
                             DB.EnemyHabitats[map][entry.Outer].type = 'elite';
@@ -348,6 +361,7 @@ for (let mapType in DB.POI) {
                     (err) => {},
                 );
 
+                //maps details
                 let smn = `${map}_${cardinal.substring(0, 1)}`;
                 smn = smn.substring(
                     0,
@@ -388,6 +402,9 @@ for (let mapType in DB.POI) {
                             ...o.Properties.RelativeLocation,
                         };
                         delete DB.POI[map].temp[o.Outer].Z;
+                        map.includes('0802') && console.log(o.Outer);
+                        map.includes('0802') &&
+                            console.log(DB.POI[map].temp[o.Outer]);
                     }
                     if (
                         o.Properties &&
@@ -687,6 +704,9 @@ function poiToType(name) {
         dungeon: null,
         raid: null,
         nappo: null,
+        gatherpoint_m: 'mineral',
+        gatherpoint_p: 'plant',
+        gatherpoint_a: 'aquatic',
     };
     for (let m in mapping) if (name.includes(m)) return mapping[m] || m;
 
@@ -709,6 +729,9 @@ function poiToSelector(name) {
         raid: 'Raid',
         travel: 'Travel Point',
         nappo: 'Nappo',
+        gatherpoint_m: 'Gathering - Minerals',
+        gatherpoint_p: 'Gathering - Plants',
+        gatherpoint_a: 'Gathering - Aquatic',
     };
     for (let m in mapping) if (name.includes(m)) return mapping[m] || m;
 
