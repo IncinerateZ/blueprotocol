@@ -81,7 +81,7 @@ function buildSummary(summaries, hiddenMarkers, setHiddenMarkers) {
                                 <b>{summary.name}</b>
                             )}
                         </h1>
-                        {summary.id && (
+                        {summary.id && !(summary.id + '').includes('Nappo') && (
                             <span
                                 style={{
                                     color: '#5e5e5e',
@@ -134,13 +134,17 @@ function buildSummary(summaries, hiddenMarkers, setHiddenMarkers) {
                         )}
                     </div>
                 ))}
-                {summaries[0].name.includes('Treasure') && (
+                {(summaries[0].name.includes('Treasure') ||
+                    summaries[0].name.includes('Nappo')) && (
                     <button
                         onClick={() => {
                             let _hiddenMarkers = {
                                 ...hiddenMarkers,
-                                [summaries[0].id]:
-                                    !hiddenMarkers[summaries[0].id],
+                                [summaries[0].id]: !(
+                                    summaries[0].id in hiddenMarkers
+                                )
+                                    ? true
+                                    : !hiddenMarkers[summaries[0].id],
                             };
                             setHiddenMarkers(_hiddenMarkers);
 
@@ -345,6 +349,16 @@ function entitySummary(
             entity.idf,
             { name: entity.metadata.selectors[0] + 's' },
             ...pages,
+        ];
+    } else if (entity.type === 'nappo') {
+        let lat = Math.floor(entity.metadata.lat);
+        let lng = Math.floor(entity.metadata.lng);
+        res = [
+            {
+                name: DB.LocationNames[lang][entity.idf] || entity.idf,
+                pages: [],
+                id: `Nappo_${chosenMap}_${lat}_${lng}`,
+            },
         ];
     } else if (entity.idf) {
         res = [

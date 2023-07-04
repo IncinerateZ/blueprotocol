@@ -287,6 +287,7 @@ export default function Board() {
                     <QuestViewer
                         DB={DB}
                         loc={lang}
+                        setLang={setLang}
                         panels={panels}
                         selectedBoard={selectedBoard}
                         setSelectedBoard={setSelectedBoard}

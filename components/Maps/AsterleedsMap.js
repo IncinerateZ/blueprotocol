@@ -664,10 +664,20 @@ export default function Map() {
                                                         ]}
                                                         icon={mapIcons[v.type]}
                                                         opacity={
-                                                            v.selectors[0] ===
-                                                                'Treasure Box' &&
                                                             hiddenMarkers[
-                                                                v.title
+                                                                v
+                                                                    .selectors[0] ===
+                                                                'Treasure Box'
+                                                                    ? v.title
+                                                                    : v
+                                                                          .selectors[0] ===
+                                                                      'Nappo'
+                                                                    ? `Nappo_${chosenMap}_${Math.floor(
+                                                                          v.lat,
+                                                                      )}_${Math.floor(
+                                                                          v.lng,
+                                                                      )}`
+                                                                    : 'jsadonhjasodaj'
                                                             ]
                                                                 ? '0.5'
                                                                 : '1'
