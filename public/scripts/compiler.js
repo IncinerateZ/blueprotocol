@@ -531,6 +531,9 @@ for (let mapType in DB.POI) {
                             selector: poiToSelector(o.Outer),
                         };
                         delete DB.POI[map].temp[o.Outer].Z;
+                        if (o.Outer.includes('Nappo'))
+                            DB.POI[map].temp[o.Outer].title = 'Nappo';
+
                         if (o.Outer.includes('Raid'))
                             DB.POI[map].temp[o.Outer].title =
                                 raidNames[o.Outer] || 'Raid Gate';
