@@ -14,6 +14,7 @@ const DB = {
     Boards: {},
     Quests: {},
     QuestRewards: {},
+    MapNameLoc: {},
 };
 
 console.log('Importing defaults...');
@@ -158,6 +159,8 @@ for (let location of require('./Text/LocationName.json')[0].Properties
 
 DB.LocationNames.en_US = { ...require('./LocationNames_EN.json') };
 
+let mapPoints = {};
+
 console.log('Compiling...');
 for (let mapType in DB.EnemySets) {
     let t = require(`./Blueprints/Manager/EnemySet/EnemySet_${
@@ -177,6 +180,12 @@ for (let mapType in DB.EnemySets) {
                         'utf8',
                     ),
                 );
+
+                if (cardinal !== '') {
+                    if (!mapPoints[map]) mapPoints[map] = {};
+                    mapPoints[map][cardinal.substring(0, cardinal.length - 1)] =
+                        { x: 0, y: 0, c: 0 };
+                }
 
                 if (!DB.EnemyHabitats[map]) DB.EnemyHabitats[map] = {};
 
@@ -201,6 +210,20 @@ for (let mapType in DB.EnemySets) {
                             ...DB.EnemyHabitats[map][entry.Outer],
                             ...entry.Properties.RelativeLocation,
                         };
+
+                        if (cardinal !== '') {
+                            mapPoints[map][
+                                cardinal.substring(0, cardinal.length - 1)
+                            ].x += entry.Properties.RelativeLocation.X;
+
+                            mapPoints[map][
+                                cardinal.substring(0, cardinal.length - 1)
+                            ].y += entry.Properties.RelativeLocation.Y;
+
+                            mapPoints[map][
+                                cardinal.substring(0, cardinal.length - 1)
+                            ].c += 1;
+                        }
 
                         delete DB.EnemyHabitats[map][entry.Outer].Z;
 
@@ -236,6 +259,18 @@ for (let mapType in DB.EnemySets) {
         }
     }
 }
+
+for (let map in mapPoints) {
+    for (let cardinal in mapPoints[map]) {
+        mapPoints[map][cardinal].x /= mapPoints[map][cardinal].c;
+        mapPoints[map][cardinal].y /= mapPoints[map][cardinal].c;
+        mapPoints[map][cardinal].c = cardinal;
+    }
+}
+
+console.log(mapPoints);
+
+DB.MapNameLoc = mapPoints;
 
 for (let mapType in DB.POI) {
     let baseMapDir = `./Maps/${mapType}`;
@@ -402,9 +437,6 @@ for (let mapType in DB.POI) {
                             ...o.Properties.RelativeLocation,
                         };
                         delete DB.POI[map].temp[o.Outer].Z;
-                        map.includes('0802') && console.log(o.Outer);
-                        map.includes('0802') &&
-                            console.log(DB.POI[map].temp[o.Outer]);
                     }
                     if (
                         o.Properties &&

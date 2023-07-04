@@ -6,6 +6,7 @@ import {
     useMapEvents,
     ZoomControl,
     ImageOverlay,
+    Tooltip,
 } from 'react-leaflet';
 
 import 'leaflet/dist/leaflet.css';
@@ -31,6 +32,8 @@ export default function Map() {
     );
     const [markers, setMarkers] = useState({});
     const [mapLoaded, setMapLoaded] = useState(false);
+    const [mapNameLocs, setMapNameLocs] = useState({});
+    const [mnlCopy, setMnlCopy] = useState(null);
 
     const [maps, setMaps] = useState({});
 
@@ -428,6 +431,7 @@ export default function Map() {
             };
         }
 
+        setMapNameLocs({ ...DB_.MapNameLoc[chosenMap] } || {});
         setMapConfig(cfg);
         setMaps(d);
         setMapIcons(mi);
@@ -614,6 +618,33 @@ export default function Map() {
                             ref={imgOvRef}
                             attribution='&copy; Bandai Namco Online Inc., &copy; Bandai Namco Studios Inc.'
                         />
+                        {Object.keys(mapNameLocs).map((cardinal) => {
+                            let _loc = coordTranslate(
+                                mapNameLocs[cardinal].x,
+                                mapNameLocs[cardinal].y,
+                                mapConfig[data[chosenMap].map_id],
+                            );
+                            return (
+                                <div key={Math.random() * 19231}>
+                                    <Marker
+                                        position={[_loc.y, _loc.x]}
+                                        opacity={0}
+                                    >
+                                        <Tooltip
+                                            permanent={true}
+                                            direction='center'
+                                            className={styles.mapNameLoc}
+                                        >
+                                            {
+                                                DB.LocationNames[lang][
+                                                    `${chosenMap}_${mapNameLocs[cardinal].c}`
+                                                ]
+                                            }
+                                        </Tooltip>
+                                    </Marker>
+                                </div>
+                            );
+                        })}
                         {mapIcons &&
                             Object.keys(markers).map((e) =>
                                 markers[e].arr.map((v, i) => {
