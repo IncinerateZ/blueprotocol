@@ -389,6 +389,15 @@
     transition: 0.45s;
 }
 
+.mapNameLoc {
+    background-color: transparent;
+    border: none;
+    box-shadow: none;
+    color: rgb(219, 210, 154);
+    font-weight: bold;
+    text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
+}
+
 .TermSearch:focus-within {
     width: 250px;
     height: fit-content;
