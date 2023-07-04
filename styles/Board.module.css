@@ -394,7 +394,11 @@
 
 @media (max-width: 455px) {
     .quests {
-        width: 230px;
+        width: 100%;
+    }
+    .quest {
+        margin-left: auto;
+        margin-right: auto;
     }
 }
 @media (max-width: 600px) {

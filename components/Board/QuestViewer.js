@@ -3,10 +3,12 @@ import { useEffect, useRef, useState } from 'react';
 import { connectingPts } from '../utils';
 import QuestDetails from './QuestDetails';
 import BoardCompleteRewards from './BoardCompleteRewards';
+import LangPicker from '../Maps/MapControlLayer/LangPicker';
 
 export default function QuestViewer({
     DB,
     loc,
+    setLang,
     panels,
     selectedBoard,
     setSelectedBoard,
@@ -285,6 +287,13 @@ export default function QuestViewer({
                         ]?.text
                     }
                 </p>
+                <div
+                    style={{ transform: 'translate(-110%, 20%)' }}
+                    onMouseDown={(e) => e.stopPropagation()}
+                >
+                    <LangPicker DB={DB} lang={loc} setLang={setLang} />
+                </div>
+
                 <div className={styles.overlayId}>
                     <span>ID {selectedBoard.id}</span>
                 </div>

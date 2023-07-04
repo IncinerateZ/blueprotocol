@@ -33,7 +33,7 @@ export default function LangPicker({ DB, lang, setLang }) {
                     fontSize: '1rem',
                     paddingTop: '0.2rem',
                 }}
-                onClick={() => {
+                onClick={(e) => {
                     setDoLangDrop((p) => !p);
                 }}
                 id='langpicker'
