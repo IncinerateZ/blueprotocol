@@ -238,6 +238,7 @@ export default function MapControlLayer({
                     LocationNames={DB?.LocationNames}
                     lang={lang}
                     data={data}
+                    chosenMap={chosenMap}
                     setChosenMap={setChosenMap}
                     toggleSelector={toggleSelector}
                 />

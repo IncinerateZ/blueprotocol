@@ -11,6 +11,7 @@ export default function TermSearch({
     LocationNames,
     data,
     lang,
+    chosenMap,
     setChosenMap,
     toggleSelector,
 }) {
@@ -24,7 +25,7 @@ export default function TermSearch({
     useEffect(() => {
         if (query.length <= 1) return;
 
-        let searchResults = termSearch(Index, query);
+        let searchResults = termSearch(Index, query, chosenMap);
         setResults(searchResults);
         headRef.current.focus();
         if (router.query.auto) {
