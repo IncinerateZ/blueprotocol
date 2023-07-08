@@ -607,7 +607,7 @@ class Tokenizer {
     }
 }
 
-function termSearch(index, query) {
+function termSearch(index, query, chosenMap) {
     let res = {};
 
     let tokenizer = new Tokenizer(query);
@@ -636,7 +636,10 @@ function termSearch(index, query) {
         res[map].sort((a, b) => b.tfidf - a.tfidf);
     }
 
-    return res;
+    let cmr = [...res[chosenMap]];
+    delete res[chosenMap];
+
+    return { [chosenMap]: cmr, ...res };
 }
 
 export {
