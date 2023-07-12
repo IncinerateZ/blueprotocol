@@ -363,7 +363,13 @@ function entitySummary(
     } else if (entity.idf) {
         res = [
             {
-                name: DB.LocationNames[lang][entity.idf] || entity.idf,
+                name:
+                    DB.LocationNames[lang][entity.idf] ||
+                    DB.LocationNames[lang][entity.idf.replace('pub', 'pat')] ||
+                    DB.LocationNames[lang][entity.idf.replace('pat', 'pub')] ||
+                    DB.LocationNames[lang][entity.idf.replace('pat', 'name')] ||
+                    DB.LocationNames[lang][entity.idf.replace('pub', 'name')] ||
+                    entity.idf,
                 pages: [],
             },
         ];
