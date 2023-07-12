@@ -386,6 +386,96 @@ for (let mapType in DB.POI) {
         } catch (err) {
             err.errno !== -4058 && console.log(err);
         }
+        if (map.includes('pat')) {
+            try {
+                let data = fs.readFileSync(
+                    `${baseMapDir}/${map}/sublevel/${map}_SCBase.json`,
+                    'utf8',
+                    (err) => {},
+                );
+
+                data = JSON.parse(data);
+                for (let dat of data) {
+                    if (
+                        dat.Type === 'SceneComponent' &&
+                        dat.Name.includes('Root') &&
+                        !dat.Outer.includes('Sit') &&
+                        !dat.Outer.includes('Return') &&
+                        !dat.Outer.includes('Replicated') &&
+                        !dat.Outer.includes('Coin') &&
+                        !dat.Outer.includes('FieldTravel') &&
+                        !dat.Outer.includes('Temple') &&
+                        !dat.Outer.includes('Dungeon') &&
+                        !dat.Outer.includes('Water') &&
+                        !dat.Outer.includes('Spline') &&
+                        dat.Properties?.RelativeLocation
+                    ) {
+                        DB.POI[map].temp[dat.Outer] = {
+                            ...DB.POI[map].temp[dat.Outer],
+                            ...dat.Properties.RelativeLocation,
+                            type: poiToType(dat.Outer),
+                            selector: poiToSelector(dat.Outer),
+                        };
+
+                        delete DB.POI[map].temp[dat.Outer].Z;
+                    }
+                    if (dat.Type === 'BP_UtillityAreaActor_C') {
+                        DB.POI[map].temp[dat.Name] = {
+                            ...DB.POI[map].temp[dat.Name],
+                            title: dat.Properties.LocationId?.RowName || '',
+                        };
+                    }
+                    if (
+                        (dat.Type === 'BP_DungeonActivator_C' ||
+                            dat.Type === 'BP_DungeonEntrance_C' ||
+                            dat.Type === 'SBFieldTravelTrigger' ||
+                            dat.Type.includes('FieldTravelInteraction_')) &&
+                        (dat.Properties.TravelFieldMapName ||
+                            dat.Properties.TravelFieldGameContentId)
+                    ) {
+                        DB.POI[map].temp[dat.Name] = {
+                            ...DB.POI[map].temp[dat.Name],
+                            title: (
+                                dat.Properties.TravelFieldMapName ||
+                                dat.Properties.TravelFieldGameContentId
+                            ).split('_')[0],
+                        };
+                    }
+                    if (
+                        (dat.Name === 'CollisionComp' ||
+                            dat.Name === 'SceneComponent') &&
+                        dat.Properties?.RelativeLocation &&
+                        !dat.Outer.includes('Utillity') &&
+                        !dat.Outer.includes('Blocking') &&
+                        !dat.Outer.includes('Landscape') &&
+                        !dat.Outer.includes('PlayerStart') &&
+                        !dat.Outer.includes('Spline') &&
+                        !dat.Outer.includes('Fld') &&
+                        !dat.Outer.includes('exq003') &&
+                        !dat.Outer.includes('Tutorial') &&
+                        !dat.Outer.includes('Sit') &&
+                        !dat.Outer.includes('Return') &&
+                        !dat.Outer.includes('Replicated') &&
+                        !dat.Outer.includes('Coin') &&
+                        !dat.Outer.includes('Temple') &&
+                        !dat.Outer.includes('Water') &&
+                        !dat.Outer.includes('FallDead') &&
+                        !dat.Outer.includes('Spline')
+                    ) {
+                        DB.POI[map].temp[dat.Outer] = {
+                            ...DB.POI[map].temp[dat.Outer],
+                            ...dat.Properties.RelativeLocation,
+                            type: poiToType(dat.Outer),
+                            selector: poiToSelector(dat.Outer),
+                        };
+
+                        delete DB.POI[map].temp[dat.Outer].Z;
+                    }
+                }
+            } catch (err) {
+                err.errno !== -4058 && console.log(err);
+            }
+        }
         for (let cardinal of ['C_', 'N_', 'E_', 'S_', 'W_', '']) {
             try {
                 data = fs.readFileSync(
