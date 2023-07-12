@@ -6,6 +6,10 @@ import { useEffect, useState } from 'react';
 function MyApp({ Component, pageProps }) {
     useEffect(async () => {
         let version = null;
+        const res = await fetch('./api/version');
+        const _version = (await res.json()).version;
+
+        if (!version) version = _version;
         let versionCheck = setInterval(async () => {
             const res = await fetch('./api/version');
             const _version = (await res.json()).version;
