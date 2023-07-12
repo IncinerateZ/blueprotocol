@@ -814,7 +814,7 @@ for (let row of require('./apiext/quests.json'))
 DB.Quests = { ...Quests };
 
 function poiToType(name) {
-    name = name.toLowerCase();
+    name = name.toLowerCase().replace('author', '');
     let mapping = {
         warp: null,
         fishing: null,
@@ -839,7 +839,7 @@ function poiToType(name) {
 }
 
 function poiToSelector(name) {
-    name = name.toLowerCase();
+    name = name.toLowerCase().replace('author', '');
     let mapping = {
         warp: 'Warp Gate',
         fishing: 'Fishing',
