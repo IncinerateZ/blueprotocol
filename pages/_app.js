@@ -1,8 +1,26 @@
 import Script from 'next/script';
 import '@/styles/globals.css';
 import Head from 'next/head';
+import { useEffect, useState } from 'react';
 
 function MyApp({ Component, pageProps }) {
+    useEffect(async () => {
+        let version = null;
+        let versionCheck = setInterval(async () => {
+            const res = await fetch('./api/version');
+            const _version = (await res.json()).version;
+
+            if (!version) version = _version;
+            console.log(`LTS: ${_version}. Current: ${version}`);
+
+            if (version !== _version) {
+                clearInterval(versionCheck);
+                alert('The site has been updated, refresh to get the update.');
+                return console.log(`Version Mismatch.`);
+            }
+        }, 1000 * 60 * 10);
+    }, []);
+
     return (
         <>
             <Script
