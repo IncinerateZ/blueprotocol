@@ -1,7 +1,7 @@
 import Script from 'next/script';
 import '@/styles/globals.css';
 import Head from 'next/head';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 
 function MyApp({ Component, pageProps }) {
     useEffect(async () => {
@@ -19,7 +19,7 @@ function MyApp({ Component, pageProps }) {
 
             if (version !== _version) {
                 clearInterval(versionCheck);
-                alert('The site has been updated, refresh to get the update.');
+                window.location.reload();
                 return console.log(`Version Mismatch.`);
             }
         }, 1000 * 60 * 10);
