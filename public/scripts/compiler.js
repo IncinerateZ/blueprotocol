@@ -1090,6 +1090,12 @@ function save(dir, condense = false) {
         const IndexPath = 'E:/bpdump/Exports/BLUEPROTOCOL/Content/Index/';
         fs.writeFileSync(`${IndexPath}data/DB.json`, `${JSON.stringify(DB)}`);
         fs.writeFileSync(
+            `${IndexPath}board/data/DB.json`,
+            JSON.stringify(boards),
+            'utf8',
+            () => {},
+        );
+        fs.writeFileSync(
             `${IndexPath}data/Markers.json`,
             `${JSON.stringify(markers, null, 4)}`,
         );
