@@ -15,9 +15,10 @@ function MyApp({ Component, pageProps }) {
 
             if (version !== _version) {
                 clearInterval(versionCheck);
-                return console.log(`Version Mismatch. Recommend Update.`);
+                alert('The site has been updated, refresh to get the update.');
+                return console.log(`Version Mismatch.`);
             }
-        }, 1000 * 60);
+        }, 1000 * 60 * 10);
     }, []);
 
     return (
