@@ -10,6 +10,14 @@ function coordTranslate(x, y, cfg) {
 }
 
 function buildSummary(summaries, hiddenMarkers, setHiddenMarkers) {
+    function isMarkable(name) {
+        return (
+            name.includes('Treasure') ||
+            name.includes('Nappo') ||
+            name.includes('宝箱') ||
+            name.includes('ハッピーナッポ')
+        );
+    }
     if (Object.keys(summaries).length === 0)
         return <div style={{ textAlign: 'center' }}>No Data</div>;
     let id = typeof summaries[0] === 'string' ? summaries.shift() : null;
@@ -100,12 +108,15 @@ function buildSummary(summaries, hiddenMarkers, setHiddenMarkers) {
                                             fontSize:
                                                 r.includes(' x') ||
                                                 r.includes('%') ||
-                                                r.includes('Level')
+                                                r.includes('Level') ||
+                                                r.includes('レベル')
                                                     ? '0.8rem'
                                                     : '0.9rem',
-                                            color: r.includes('Level')
-                                                ? 'darkslategray'
-                                                : 'black',
+                                            color:
+                                                r.includes('Level') ||
+                                                r.includes('レベル')
+                                                    ? 'darkslategray'
+                                                    : 'black',
                                             listStyleType: 'none',
                                         }}
                                     >
@@ -134,8 +145,7 @@ function buildSummary(summaries, hiddenMarkers, setHiddenMarkers) {
                         )}
                     </div>
                 ))}
-                {(summaries[0].name.includes('Treasure') ||
-                    summaries[0].name.includes('Nappo')) && (
+                {isMarkable(summaries[0].name) && (
                     <button
                         onClick={() => {
                             let _hiddenMarkers = {
@@ -171,6 +181,36 @@ function entitySummary(
     setHiddenMarkers,
     chosenMap,
 ) {
+    function toLocale(string) {
+        if (lang === 'en_US') return string;
+        let mapping = {
+            'Travel Point': 'マップ移動',
+            Utility: '武器改造師',
+            Fishing: '釣りスポット',
+            'Warp Gate': '転移ポータル',
+
+            'Class Quest': 'クラスクエスト',
+            'Exploration Quest': 'キーキャラクタークエスト',
+            'Main Quest': 'メインクエスト',
+            'Sub Quest': 'サブクエスト',
+            'Plus Sub Quest': 'チュートリアルクエスト',
+
+            'Camp Fire': 'キャンプ',
+            'Gathering - Minerals': '採集 - 鉱物',
+            'Gathering - Plants': '採集 - 植物',
+            'Gathering - Aquatics': '採集 - 水棲',
+            'Gathering - Treasures': '宝箱',
+            'Treasure Box': '宝箱',
+            Buff: '放浪の美食屋',
+            Nappo: 'ハッピーナッポ',
+            Dungeon: '自由探索',
+            Raid: 'レイド',
+        };
+        string = string.replace('Quests', 'Quest');
+        return string in mapping
+            ? mapping[string]
+            : string.replace('Quest', 'クエスト').replace('Levels', 'レベル');
+    }
     let res = [];
     if (['enemy', 'elite'].includes(entity.type)) {
         let enemies = DB.EnemySets.field[entity.idf];
@@ -184,8 +224,7 @@ function entitySummary(
                 `{https://bapharia.com/db?result=Enemy${enemy_.enemy_id}}`;
 
             page.desc = [];
-            page.desc.push(`Levels ${enemy.MinLv} - ${enemy.MaxLv}`);
-            page.desc.push('Drops');
+            page.desc.push(toLocale(`Levels ${enemy.MinLv} - ${enemy.MaxLv}`));
 
             let drops = [...enemy_.drop_items];
 
@@ -246,10 +285,12 @@ function entitySummary(
 
                 if (i++ === 1) {
                     page.id = entity.metadata.title;
-                    page.name = `Gathering: ${
-                        entity.type.charAt(0).toUpperCase() +
-                        entity.type.substring(1)
-                    }`;
+                    page.name = toLocale(
+                        `Gathering - ${
+                            entity.type.charAt(0).toUpperCase() +
+                            entity.type.substring(1)
+                        }s`,
+                    );
                 }
 
                 if (treasure_ || 'reward_type' in treasure) {
@@ -340,14 +381,14 @@ function entitySummary(
                 DB.Loc[lang][cat]?.texts[DB.Quests.id_name[quest]]?.text ||
                 quest;
 
-            page.name = `Quest "${quest}"`;
+            page.name = toLocale(`Quest "${quest}"`);
 
             pages.push(page);
         }
 
         res = [
             entity.idf,
-            { name: entity.metadata.selectors[0] + 's' },
+            { name: toLocale(entity.metadata.selectors[0] + 's') },
             ...pages,
         ];
     } else if (entity.type === 'nappo') {
@@ -355,7 +396,9 @@ function entitySummary(
         let lng = Math.floor(entity.metadata.lng);
         res = [
             {
-                name: DB.LocationNames[lang][entity.idf] || entity.idf,
+                name: toLocale(
+                    DB.LocationNames[lang][entity.idf] || entity.idf,
+                ),
                 pages: [],
                 id: `Nappo_${chosenMap}_${lat}_${lng}`,
             },
@@ -363,13 +406,22 @@ function entitySummary(
     } else if (entity.idf) {
         res = [
             {
-                name:
+                name: toLocale(
                     DB.LocationNames[lang][entity.idf] ||
-                    DB.LocationNames[lang][entity.idf.replace('pub', 'pat')] ||
-                    DB.LocationNames[lang][entity.idf.replace('pat', 'pub')] ||
-                    DB.LocationNames[lang][entity.idf.replace('pat', 'name')] ||
-                    DB.LocationNames[lang][entity.idf.replace('pub', 'name')] ||
-                    entity.idf,
+                        DB.LocationNames[lang][
+                            entity.idf.replace('pub', 'pat')
+                        ] ||
+                        DB.LocationNames[lang][
+                            entity.idf.replace('pat', 'pub')
+                        ] ||
+                        DB.LocationNames[lang][
+                            entity.idf.replace('pat', 'name')
+                        ] ||
+                        DB.LocationNames[lang][
+                            entity.idf.replace('pub', 'name')
+                        ] ||
+                        entity.idf,
+                ),
                 pages: [],
             },
         ];

@@ -119,10 +119,16 @@ export default function MapPicker({
         }
     }
 
+    function toLocale(string) {
+        if (lang === 'en_US') return string;
+        let mapping = { Map: 'マップ' };
+        return string in mapping ? mapping[string] : string;
+    }
+
     return (
         <>
             <span style={{ marginTop: '4px' }}>
-                <b>Map</b>
+                <b>{toLocale('Map')}</b>
             </span>
             <div className={styles.MCL_mapsearch}>
                 <input

@@ -14,6 +14,33 @@ export default function Selector({
         return string.charAt(0).toUpperCase() + string.slice(1);
     }
 
+    function toLocale(string) {
+        if (lang === 'en_US') return string;
+        let mapping = {
+            'Travel Point': 'マップ移動',
+            Utility: '武器改造師',
+            Fishing: '釣りスポット',
+            'Warp Gate': '転移ポータル',
+
+            'Class Quest': 'クラスクエスト',
+            'Exploration Quest': 'キーキャラクタークエスト',
+            'Main Quest': 'メインクエスト',
+            'Sub Quest': 'サブクエスト',
+            'Plus Sub Quest': 'チュートリアルクエスト',
+
+            'Camp Fire': 'キャンプ',
+            'Gathering - Minerals': '採集 - 鉱物',
+            'Gathering - Plants': '採集 - 植物',
+            'Gathering - Aquatic': '採集 - 水棲',
+            'Treasure Box': '宝箱',
+            Buff: '放浪の美食屋',
+            Nappo: 'ハッピーナッポ',
+            Dungeon: '自由探索',
+            Raid: 'レイド',
+        };
+        return string in mapping ? mapping[string] : string;
+    }
+
     const currentSelector = selectors[e][s];
 
     return (
@@ -43,9 +70,11 @@ export default function Selector({
                     height={32}
                 />
             )}
-            {currentSelector.type
-                ? DB.Loc[lang].enemyparam_text.texts[s]?.text || 'No Data'
-                : currentSelector.display_name}
+            {toLocale(
+                currentSelector.type
+                    ? DB.Loc[lang].enemyparam_text.texts[s]?.text || 'No Data'
+                    : currentSelector.display_name,
+            )}
 
             <input
                 type='checkbox'

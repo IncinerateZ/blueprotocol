@@ -56,6 +56,15 @@ export default function Selectors({
         setSelectorsSource(_selectorsSource);
         setExcludedSelectors(_excludedSelectors);
     }
+    function toLocale(string) {
+        if (lang === 'en_US') return string;
+        let mapping = {
+            Quests: 'クエスト',
+            Adventure: 'アドベンチャー',
+            Enemies: 'エネミー',
+        };
+        return string in mapping ? mapping[string] : string;
+    }
     return (
         <div style={{ marginBottom: '4px' }}>
             <span
@@ -63,7 +72,7 @@ export default function Selectors({
                 className={styles.selectorsHeader}
             >
                 <div>
-                    <b>{e}</b>
+                    <b>{toLocale(e)}</b>
                     <div
                         style={{
                             fontSize: '0.7rem',
