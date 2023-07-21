@@ -150,9 +150,28 @@ for (let item of require('./apiext/items.json')) {
     delete DB.Items[item.id].rare_production;
 }
 
-for (let treasure of require('./apiext/treasures.json'))
+for (let treasure of require('./apiext/treasures.json')) {
     DB.Treasures[treasure.id] = { ...treasure };
+    const delfields = [
+        'rarity_rate',
+        'respawn_rate',
+        'respawn_time',
+        'respawn_interval',
+        'respawn_warranty',
+        'enable_flag',
+        'created_at',
+        'updated_at',
+        'monday',
+        'tuesday',
+        'wednesday',
+        'thursday',
+        'friday',
+        'saturday',
+        'sunday',
+    ];
 
+    for (let field of delfields) delete DB.Treasures[treasure.id][field];
+}
 for (let location of require('./Text/LocationName.json')[0].Properties
     .TextTable)
     DB.LocationNames.ja_JP[location.Id.IdString] = location.Text;
