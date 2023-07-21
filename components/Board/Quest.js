@@ -9,6 +9,9 @@ export default function Quest({ e, DB, loc, displayOverlay }) {
 
     const router = useRouter();
 
+    const jpName =
+        DB.Loc['ja_JP']['master_adventure_boards_text'].texts[e.name]?.text;
+
     return (
         <button
             style={{
@@ -111,7 +114,33 @@ export default function Quest({ e, DB, loc, displayOverlay }) {
                 )}
             </p>
             <div className={styles.questId}>
-                <span>ID {e.id}</span>
+                {jpName.includes('E-') ? (
+                    <Link
+                        href={`https://bapharia.com/db?search=${jpName.substring(
+                            0,
+                            jpName.indexOf('ボード'),
+                        )}`}
+                        style={{ color: '#3366CC' }}
+                        target='_blank'
+                    >
+                        ID {e.id}
+                    </Link>
+                ) : jpName.includes('武器') ? (
+                    <Link
+                        href={`https://bapharia.com/db?search=${jpName.substring(
+                            0,
+                            jpName.indexOf('武器'),
+                        )}`}
+                        style={{
+                            color: '#3366CC',
+                        }}
+                        target='_blank'
+                    >
+                        ID {e.id}
+                    </Link>
+                ) : (
+                    <span>ID {e.id}</span>
+                )}
             </div>
         </button>
     );

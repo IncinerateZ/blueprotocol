@@ -242,6 +242,10 @@
     margin-bottom: 0.2rem;
 }
 
+.questId a:hover {
+    text-decoration: underline;
+}
+
 .questId span {
     -moz-user-select: text;
     -khtml-user-select: text;
