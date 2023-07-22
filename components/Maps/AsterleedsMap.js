@@ -389,7 +389,7 @@ export default function Map() {
             main_quest: { img: './map/icons/UI_Map_05.png', iconSize: 32 },
             sub_quest: { img: './map/icons/UI_Map_06.png', iconSize: 32 },
             plus_sub_quest: { img: './map/icons/UI_Map_74.png', iconSize: 32 },
-            exploration_quest: {
+            key_character_quest: {
                 img: './map/icons/UI_Map_57.png',
                 iconSize: 32,
             },

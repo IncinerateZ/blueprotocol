@@ -748,9 +748,9 @@ for (let mapType in Quests) {
                                 }${t.toLowerCase()}_quest`,
                                 selector: `${
                                     file.charAt(file.length - 6) === '2'
-                                        ? 'Plus '
-                                        : ''
-                                }${t} Quest`,
+                                        ? 'Tutorial '
+                                        : t
+                                } Quest`,
                             };
                         }
                     }
@@ -804,13 +804,15 @@ for (let mapType in Quests) {
 
                     if (NOSHOW) continue;
                     let li = file.lastIndexOf('_');
-                    let type = { E: 'Exploration', C: 'Class', T: 'Tutorial' }[
-                        file.substring(li + 1, li + 2)
-                    ];
+                    let type = {
+                        E: 'Key Character',
+                        C: 'Class',
+                        T: 'Tutorial',
+                    }[file.substring(li + 1, li + 2)];
                     Quests[map][q] = {
                         ...temp[q],
                         quests: [q],
-                        type: `${type.toLowerCase()}_quest`,
+                        type: `${type.toLowerCase().replace(' ', '_')}_quest`,
                         selector: `${type} Quest`,
                     };
                 }
