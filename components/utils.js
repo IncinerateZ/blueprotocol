@@ -193,7 +193,7 @@ function entitySummary(
             'Key Character Quest': 'キーキャラクタークエスト',
             'Main Quest': 'メインクエスト',
             'Sub Quest': 'サブクエスト',
-            'Plus Sub Quest': 'チュートリアルクエスト',
+            'Tutorial Quest': 'チュートリアルクエスト',
 
             'Camp Fire': 'キャンプ',
             'Gathering - Minerals': '採集 - 鉱物',

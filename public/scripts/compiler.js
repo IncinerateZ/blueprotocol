@@ -748,7 +748,7 @@ for (let mapType in Quests) {
                                 }${t.toLowerCase()}_quest`,
                                 selector: `${
                                     file.charAt(file.length - 6) === '2'
-                                        ? 'Tutorial '
+                                        ? 'Tutorial'
                                         : t
                                 } Quest`,
                             };
