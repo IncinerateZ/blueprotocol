@@ -190,7 +190,7 @@ function entitySummary(
             'Warp Gate': '転移ポータル',
 
             'Class Quest': 'クラスクエスト',
-            'Exploration Quest': 'キーキャラクタークエスト',
+            'Key Character Quest': 'キーキャラクタークエスト',
             'Main Quest': 'メインクエスト',
             'Sub Quest': 'サブクエスト',
             'Plus Sub Quest': 'チュートリアルクエスト',
