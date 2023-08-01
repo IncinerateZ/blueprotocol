@@ -84,7 +84,7 @@ export default function LangPicker({ DB, lang, setLang }) {
                         ))}
                 </div>
             )}
-            {lang === 'en_US' && (
+            {/* {lang === 'en_US' && (
                 <div
                     style={{
                         display: 'inline-flex',
@@ -108,7 +108,7 @@ export default function LangPicker({ DB, lang, setLang }) {
                     ></div>
                     <span style={{ width: '110px' }}>Machine Translated</span>
                 </div>
-            )}
+            )} */}
         </div>
     );
 }

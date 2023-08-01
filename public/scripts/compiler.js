@@ -672,9 +672,21 @@ for (let mapType in DB.POI) {
 
             DB.POI[map].temp = {};
         }
+
         delete DB.POI[map].temp;
     }
 }
+
+for (let map in mapPoints)
+    for (let cardinal in mapPoints[map])
+        markers[map].tags.push(DB.LocationNames['ja_JP'][`${map}_${cardinal}`]);
+
+for (let map in markers)
+    markers[map].tags.push(
+        DB.LocationNames['ja_JP'][
+            map.replace('cty0', 'cty').replace('pat', 'pub')
+        ],
+    );
 
 let Quests = { cty: {}, fld: {} };
 
@@ -930,7 +942,21 @@ const boards = {
     CraftRecipes: {},
     Tokens: {},
     LiquidMemories: {},
+    MapSections: [],
 };
+
+for (let map in mapPoints)
+    for (let cardinal in mapPoints[map])
+        boards.MapSections.push(
+            DB.LocationNames['ja_JP'][`${map}_${cardinal}`],
+        );
+
+for (let map in markers)
+    boards.MapSections.push(
+        DB.LocationNames['ja_JP'][
+            map.replace('cty0', 'cty').replace('pat', 'pub')
+        ],
+    );
 
 let _boards = {};
 let _quests = {};

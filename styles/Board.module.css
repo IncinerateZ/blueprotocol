@@ -34,7 +34,9 @@
     margin-left: auto;
     background-color: rgb(0,0,0,0.5);
     
-    z-index: 2;
+    z-index: 99999;
+
+    transform: translate(-6.2%, -104%);
 }
 
 .questOverlayContainer > p {
@@ -321,7 +323,7 @@
 
 .CompleteRewards_tooltip {
     position: absolute;
-    transform: translate(-102%, -100%);
+    transform: translate(-102%, -110%);
     background-color: var(--dark2);
     opacity: 0.9;
     width: 220px;
@@ -346,10 +348,295 @@
 
 .CompleteRewards_tooltip h1 {
     font-size: 1rem;
+    margin-top: 1rem;
 }
 
 .CompleteRewards_tooltip p {
     margin: 0;
+}
+
+.ViewToggleContainer {
+    width: 65px;
+    height: 35px;
+}
+
+.ViewToggle {
+    display: flex;
+
+    border: 3px solid #A7A2A9;
+    border-radius: 10px;
+    
+    height: 35px;
+
+    transform: translateY(-15%);
+    cursor: pointer;
+    
+}
+
+.ViewToggle .state {
+    width: 30px;
+    height: 30px;
+    
+    display: flex;
+    
+    align-items: center;
+    justify-content: center;
+
+    user-select: none;
+}
+
+.ViewToggle ~ .stateFrame {
+    position: absolute;
+    width: 35px;
+    height: 35px;
+    border: 3px solid #E7EEEA;
+    border-radius: 10px;
+    cursor: pointer;
+
+    transition: 0.1s;
+
+    background-color: rgba(160, 119, 119, 0.05);
+}
+
+.AdvancedView {
+    display: flex;
+
+    justify-content: center;
+    flex-wrap: wrap;
+
+    overflow-y: auto;
+}
+
+.AdvancedView, .AdvancedView > div {
+    height: 95%;
+}
+
+.AdvancedView > div:first-of-type {
+    display: flex;
+    flex-direction: column;
+}
+
+.AdvancedView .BoardList {
+    display: flex;
+    flex-direction: column;
+    
+    border: 2px solid var(--background);
+    border-radius: 5px;
+    
+    width: 345px;
+    flex-grow: 9;
+
+    overflow-x: hidden;
+    overflow-y: auto;
+
+    scrollbar-width: thin;
+
+    text-decoration: none;
+    list-style: none;
+
+    padding-left: 0;
+}
+
+.BoardList li:hover {
+    background-color: rgba(150,150,150,0.5);
+}
+
+.ActiveQuests {
+    display: flex;
+    flex-direction: column;
+    border: 2px solid var(--background);
+
+    flex-grow: 4;
+    margin-left: 1rem;
+    border-radius: 5px;
+    list-style-type: none;
+    padding-left: 0;
+
+    min-width: 300px;
+    max-width: 300px;
+    min-height: 85%;
+    max-height: 85%;
+
+    overflow-y: auto;
+}
+
+.PassiveQuests {
+    width: fit-content;
+
+    margin-left: 1rem;
+    margin-right: 1rem;
+    border-radius: 5px;
+
+    display: flex;
+    flex-direction: row;
+
+    flex-wrap: wrap;
+
+    justify-content: center;
+}
+
+.APanel h1 {
+    font-size: 0.85rem;
+    text-align: left;
+
+    width: 95%;
+}
+
+.APanel div {
+    margin-top: 0.5rem;
+}
+
+.APanel div:first-child {
+    width: 280px;
+}
+
+.APanelCheckbox {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 70px;
+
+    border-left: 2px dashed var(--background);
+
+    cursor: pointer;
+}
+
+.APanelCheckbox:hover {
+    background-color: #525252;
+}
+
+.APanelCheckbox input {
+    width: 15px;
+    height: 15px;
+    border: 2px solid black;
+
+    accent-color: green;
+
+    cursor: pointer;
+}
+
+.APanel {
+    width: 100%;
+    min-height: 70px;
+    padding-left: 0.2rem;
+
+    display: flex;
+
+    border-bottom: 2px solid var(--background);
+}
+
+.APanel p {
+    margin: 0;
+    margin-left: 1rem;
+    font-size: 0.8rem;
+}
+
+.APanel:hover {
+    background-color: rgba(150,150,150,0.5);
+}
+
+.UpcomingQuests {
+    margin-right: 0.5rem;
+    flex-grow: 1;
+    border: 2px solid var(--background);
+    border-radius: 5px;
+    list-style-type: none;
+    padding-left: 0;
+
+    overflow-y: auto;
+
+    min-width: 300px;
+    max-width: 300px;
+    height: 85%;
+}
+
+.CompletedQuests {
+    margin-left: 0.5rem;
+    flex-grow: 1;
+    border: 2px solid var(--background);
+    border-radius: 5px;
+    list-style-type: none;
+    padding-left: 0;
+
+    overflow-y: auto;
+    min-width: 300px;
+    max-width: 300px;
+    height: 85%;
+}
+
+.BoardList::-webkit-scrollbar {
+    width: 15px;
+}
+  
+.BoardList::-webkit-scrollbar-track {
+}
+
+.BoardList::-webkit-scrollbar-thumb {
+    border: 5px solid transparent;
+    background-clip: padding-box;
+    border-radius: 99999px;
+    background-color: var(--dark2);
+}
+
+.BoardList::-webkit-scrollbar-thumb:hover {
+    border: 5px solid transparent;
+    background-clip: padding-box;
+    border-radius: 99999px;
+    background-color: #5e5e5e;
+}
+
+.AQuest {
+    cursor: pointer;
+    position: relative;
+
+    height: 4rem;
+
+    margin-bottom: 0.2rem;
+}
+
+.AProgressLabel {
+    position: absolute;
+    left: 100px;
+
+    font-size: 0.8rem;
+    font-weight: 400;
+
+    padding-bottom: 0.2rem;
+}
+
+.AQuest h2 {
+    font-size: 1rem;
+    text-align: left;
+    line-height: 1rem;
+}
+
+.AQuest span {
+    position: absolute;
+    right: 1rem;
+    bottom: 0;
+
+    font-size: 0.8rem;
+    font-weight: 400;
+
+    padding-bottom: 0.2rem;
+}
+
+.AFilters {
+    display: flex;
+    width: 350px;
+    flex-wrap: wrap;
+    user-select: none;
+}
+
+.AFilter {
+    border: 1px solid var(--light2);
+    border-radius: 5px;
+    padding: 0.25rem;
+
+    font-size: 0.8rem;
+    cursor: pointer;
+
+    margin-top: 0.3rem;
 }
 
 @keyframes brandDropPop {
@@ -418,5 +705,36 @@
 
     .BoardCompleteRewards button {
         transform: translate(-150px, -150%);
+    }
+
+    .ViewToggleContainer {
+        margin-top: 0.5rem;
+        transform: translate(-9px, 0.2rem);
+        margin-bottom: 0.5rem;
+    }
+
+    .UpcomingQuests {
+        margin-bottom: 1rem;
+        height: 28rem;
+        margin-right: 0;
+    }
+
+    .ActiveQuests {
+        margin: 0;
+    }
+
+    .CompletedQuests {
+        height: 28rem;
+        margin: 0;
+    }
+
+    .PassiveQuests {
+        height: 56rem;
+        margin: 0;
+    }
+
+    .content {
+        min-height: fit-content;
+        padding-bottom: 10rem;
     }
 }

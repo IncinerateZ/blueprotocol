@@ -4,7 +4,8 @@
         "map_url": "./UI_MapCty001.webp",
         "tags": [
             "city",
-            "Asterliese"
+            "Asterliese",
+            "アステルリーズ"
         ],
         "map_id": "cty01",
         "markers": {
@@ -19,7 +20,8 @@
         "map_url": "./UI_MapCty002.webp",
         "tags": [
             "city",
-            "Salamzahd Oasis"
+            "Salamzahd Oasis",
+            "サラムザート・オアシス"
         ],
         "map_id": "cty02",
         "markers": {
@@ -37,7 +39,12 @@
             "Andra Basin",
             "Minster Hills",
             "Skyquake Fields",
-            "fld001"
+            "fld001",
+            "アンドラ盆地",
+            "ミンスター丘陵",
+            "海鳴りの草原",
+            "夕凪の段丘",
+            "アステリア平原"
         ],
         "map_id": "fld001",
         "markers": {
@@ -54,7 +61,11 @@
             "field",
             "Quellmount's Foot",
             "Godswatch Rise",
-            "Fier Highwaters"
+            "Fier Highwaters",
+            "鎮まりの山麓",
+            "神の見守る丘",
+            "フィエル嶺水池",
+            "バハマール高原"
         ],
         "map_id": "fld002",
         "markers": {
@@ -71,7 +82,11 @@
             "field",
             "Rietz Tradeway",
             "Melisos River Basin",
-            "Abandoned Galley Ridge Road"
+            "Abandoned Galley Ridge Road",
+            "リッツェ交易街道",
+            "メリソス川流域",
+            "ガレィリッジ廃道",
+            "モンテノール渓谷"
         ],
         "map_id": "fld003",
         "markers": {
@@ -90,7 +105,13 @@
             "Hollowed Tempest",
             "Shimmering Valley",
             "Breathless Wasteland",
-            "Olvid Plains"
+            "Olvid Plains",
+            "レインフォール旧街道",
+            "帰らずの砂塵",
+            "陽炎の谷",
+            "風止みの荒地",
+            "オルビド平野",
+            "エバーグリーン砂漠"
         ],
         "map_id": "fld004",
         "markers": {
@@ -105,7 +126,8 @@
         "map_url": "./UI_Mapdng007.webp",
         "tags": [
             "dungeon",
-            "Chained One's Spawnery"
+            "Chained One's Spawnery",
+            "枷神の産屋・追加調査"
         ],
         "map_id": "dng007",
         "markers": {
@@ -120,7 +142,8 @@
         "map_url": "./UI_Mapdng009.webp",
         "tags": [
             "dungeon",
-            "Dragon's Rive"
+            "Dragon's Rive",
+            "巨竜の爪痕・追加調査"
         ],
         "map_id": "dng009",
         "markers": {
@@ -135,7 +158,8 @@
         "map_url": "./UI_Mappat0201.webp",
         "tags": [
             "dungeon",
-            "Ruins of Borwam"
+            "Ruins of Borwam",
+            "ボルオム遺跡・自由探索"
         ],
         "map_id": "pat0201",
         "markers": {
@@ -150,7 +174,8 @@
         "map_url": "./UI_Mappat0801.webp",
         "tags": [
             "dungeon",
-            "Sunlit Timberpath"
+            "Sunlit Timberpath",
+            "木漏れ日射す林道・自由探索"
         ],
         "map_id": "pat0801",
         "markers": {
@@ -165,7 +190,8 @@
         "map_url": "./UI_Mappat0802.webp",
         "tags": [
             "dungeon",
-            "Torchlight Thickets"
+            "Torchlight Thickets",
+            "ともし火の森・自由探索"
         ],
         "map_id": "pat0802",
         "markers": {
@@ -180,7 +206,8 @@
         "map_url": "./UI_Mappat0803.webp",
         "tags": [
             "dungeon",
-            "Everfall Forest"
+            "Everfall Forest",
+            "雨止まぬ森・自由探索"
         ],
         "map_id": "pat0803",
         "markers": {
