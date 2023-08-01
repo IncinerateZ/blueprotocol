@@ -69,6 +69,7 @@ export default function AQuestList({
         };
     }
 
+    if (!DB) return <></>;
     return (
         <div>
             <div className={styles.AFilters}>
