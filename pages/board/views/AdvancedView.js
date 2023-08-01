@@ -14,14 +14,14 @@ export default function AdvancedView({ DB, lang, setLang }) {
     const [allPanels, setAllPanels] = useState({});
 
     const colors = {
-        1: '#F0B8D9AA',
-        2: '#B6E1E8AA',
+        1: '#d81b60AA',
+        2: '#f88c87aa',
         3: '#F9D1B7AA',
-        4: '#D8C2E2AA',
-        5: '#C8E6C9AA',
-        6: '#F2D4EBAA',
-        7: '#FFE0B2AA',
-        8: '#C9E7F6AA',
+        4: '#F0B8D9AA',
+        5: '#B6E1E8AA',
+        6: '#a2fd80aa',
+        7: '#a099fbaa',
+        8: '#f8a3faaa',
     };
 
     function groupQuests(quests) {
