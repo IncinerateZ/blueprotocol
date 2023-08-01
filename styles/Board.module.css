@@ -407,6 +407,27 @@
     overflow-y: auto;
 }
 
+.AdvancedView::-webkit-scrollbar {
+    width: 15px;
+}
+  
+.AdvancedView::-webkit-scrollbar-track {
+}
+
+.AdvancedView::-webkit-scrollbar-thumb {
+    border: 5px solid transparent;
+    background-clip: padding-box;
+    border-radius: 99999px;
+    background-color: var(--dark2);
+}
+
+.AdvancedView::-webkit-scrollbar-thumb:hover {
+    border: 5px solid transparent;
+    background-clip: padding-box;
+    border-radius: 99999px;
+    background-color: #5e5e5e;
+}
+
 .AdvancedView, .AdvancedView > div {
     height: 95%;
 }
@@ -458,6 +479,29 @@
     max-height: 85%;
 
     overflow-y: auto;
+
+    scrollbar-width: thin;
+}
+
+.ActiveQuests::-webkit-scrollbar {
+    width: 15px;
+}
+  
+.ActiveQuests::-webkit-scrollbar-track {
+}
+
+.ActiveQuests::-webkit-scrollbar-thumb {
+    border: 5px solid transparent;
+    background-clip: padding-box;
+    border-radius: 99999px;
+    background-color: var(--dark2);
+}
+
+.ActiveQuests::-webkit-scrollbar-thumb:hover {
+    border: 5px solid transparent;
+    background-clip: padding-box;
+    border-radius: 99999px;
+    background-color: #5e5e5e;
 }
 
 .PassiveQuests {
@@ -547,7 +591,31 @@
 
     min-width: 300px;
     max-width: 300px;
+    max-height: 480px;
     height: 85%;
+
+    scrollbar-width: thin;
+}
+
+.UpcomingQuests::-webkit-scrollbar {
+    width: 15px;
+}
+  
+.UpcomingQuests::-webkit-scrollbar-track {
+}
+
+.UpcomingQuests::-webkit-scrollbar-thumb {
+    border: 5px solid transparent;
+    background-clip: padding-box;
+    border-radius: 99999px;
+    background-color: var(--dark2);
+}
+
+.UpcomingQuests::-webkit-scrollbar-thumb:hover {
+    border: 5px solid transparent;
+    background-clip: padding-box;
+    border-radius: 99999px;
+    background-color: #5e5e5e;
 }
 
 .CompletedQuests {
@@ -561,7 +629,31 @@
     overflow-y: auto;
     min-width: 300px;
     max-width: 300px;
+    max-height: 480px;
     height: 85%;
+
+    scrollbar-width: thin;
+}
+
+.CompletedQuests::-webkit-scrollbar {
+    width: 15px;
+}
+  
+.CompletedQuests::-webkit-scrollbar-track {
+}
+
+.CompletedQuests::-webkit-scrollbar-thumb {
+    border: 5px solid transparent;
+    background-clip: padding-box;
+    border-radius: 99999px;
+    background-color: var(--dark2);
+}
+
+.CompletedQuests::-webkit-scrollbar-thumb:hover {
+    border: 5px solid transparent;
+    background-clip: padding-box;
+    border-radius: 99999px;
+    background-color: #5e5e5e;
 }
 
 .BoardList::-webkit-scrollbar {
