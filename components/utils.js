@@ -223,11 +223,11 @@ function entitySummary(
                 'Spawning Info',
                 `[sc]Spawns ${
                     {
-                        1: 'at any time of the day.',
-                        2: 'only during the day.',
+                        1: 'at any time of the day ',
+                        2: 'only during the day ',
                         3: 'only during the night',
                     }[spawnConditions.timing]
-                }`,
+                } at most once every ${spawnConditions.cooldown} minutes.`,
             ];
 
             for (let condition of spawnConditions.conditions) {
