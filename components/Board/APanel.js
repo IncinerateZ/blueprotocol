@@ -10,6 +10,7 @@ export default function APanel({
     onChange,
     activeBoards,
     colors,
+    isPath,
 }) {
     const quest = DB.quests[panel.mission_id];
     const rewards = panel.reward_ids;
@@ -32,8 +33,21 @@ export default function APanel({
     }
 
     return (
-        <div className={styles.APanel}>
-            <div>
+        <div
+            className={styles.APanel}
+            style={{
+                backgroundColor:
+                    (activeBoards && colors[activeBoards[panel.board_id]]) ||
+                    '',
+            }}
+        >
+            <div
+                style={{
+                    margin: 0,
+                    paddingTop: '0.5rem',
+                    paddingLeft: '0.2rem',
+                }}
+            >
                 <h1 className={styles.questTitle}>
                     {
                         DB.Loc[lang].master_adventure_board_quests_text.texts[
@@ -63,6 +77,14 @@ export default function APanel({
                     onChange={() => onChange(panel)}
                 />
             </label>
+            {isPath ? (
+                <>
+                    <div className={styles.APanelTagLeft}></div>
+                    <div className={styles.APanelTagRight}></div>
+                </>
+            ) : (
+                <></>
+            )}
         </div>
     );
 }

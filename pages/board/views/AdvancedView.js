@@ -12,6 +12,7 @@ export default function AdvancedView({ DB, lang, setLang }) {
     const [upcomingQuests, setUpcomingQuests] = useState({});
     const [completedQuests, setCompletedQuests] = useState({});
     const [allPanels, setAllPanels] = useState({});
+    const [pathQuests, setPathQuests] = useState({});
 
     const colors = {
         1: '#d81b60AA',
@@ -93,6 +94,7 @@ export default function AdvancedView({ DB, lang, setLang }) {
         const _activeQuests = {};
         const _upcomingQuests = {};
         let _completedQuests = {};
+        let _pathQuests = {};
         let panels = {};
 
         for (let boardId in activeBoards) {
@@ -114,6 +116,9 @@ export default function AdvancedView({ DB, lang, setLang }) {
                     _activeQuests[panel.id] = panel;
                 for (let upcomingPanel of panel.next_panel_ids) {
                     let upcomingId = upcomingPanel.panel_id;
+
+                    _pathQuests[panelId] = true;
+                    _pathQuests[upcomingId] = true;
 
                     _activeQuests[upcomingId] = false;
                     tempDelete.push(upcomingId);
@@ -139,6 +144,7 @@ export default function AdvancedView({ DB, lang, setLang }) {
         setUpcomingQuests(groupQuests(_upcomingQuests));
         setCompletedQuests(_completedQuests);
         setAllPanels(panels);
+        setPathQuests(_pathQuests);
     }, [activeBoards, boardStatuses]);
 
     useEffect(() => {
@@ -169,6 +175,7 @@ export default function AdvancedView({ DB, lang, setLang }) {
                 allPanels={allPanels}
                 activeBoards={activeBoards}
                 colors={colors}
+                pathQuests={pathQuests}
             />
             <APassiveQuests
                 DB={DB}
@@ -181,6 +188,7 @@ export default function AdvancedView({ DB, lang, setLang }) {
                 setCompletedQuests={setCompletedQuests}
                 activeBoards={activeBoards}
                 colors={colors}
+                pathQuests={pathQuests}
             />
         </div>
     );
