@@ -592,8 +592,7 @@
     right: 3.1rem;
     width: 12px;
     height: 12px;
-    transform: translate(-80%, -80%);
-    rotate: 45deg;
+    transform: translateY(-120%) rotate(45deg);
 }
 
 .APanel p {
