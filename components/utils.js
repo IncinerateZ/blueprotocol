@@ -186,6 +186,16 @@ function entitySummary(
     setHiddenMarkers,
     chosenMap,
 ) {
+    function capitalizeFirstLetterOfEveryWord(string) {
+        let res = '';
+        for (let word of string.split(' ')) {
+            res += `${word.charAt(0).toUpperCase()}${word
+                .substring(1)
+                .toLowerCase()} `;
+        }
+        return res;
+    }
+
     function toLocale(string) {
         if (lang === 'en_US') return string;
         let mapping = {
@@ -223,23 +233,29 @@ function entitySummary(
                 'Spawning Info',
                 `[sc]Spawns ${
                     {
-                        1: 'at any time of the day ',
-                        2: 'only during the day ',
+                        1: 'at any time of the day',
+                        2: 'only during the day',
                         3: 'only during the night',
                     }[spawnConditions.timing]
-                } at most once every ${spawnConditions.cooldown} minutes.`,
+                }${
+                    spawnConditions.cooldown > 0
+                        ? ` at most once every ${spawnConditions.cooldown} minutes`
+                        : ''
+                }`,
             ];
 
             for (let condition of spawnConditions.conditions) {
                 desc.push(
                     {
-                        1: `[sc]Kill ${condition.params[1]} ${
+                        1: `[sc]Kill ${
+                            condition.params[1]
+                        } ${capitalizeFirstLetterOfEveryWord(
                             DB.Loc[lang].enemyparam_text.texts[
                                 DB.Enemies[condition.params[0]]?.name_id
-                            ]?.text || '[UNKNOWN]'
-                        } nearby.`,
+                            ]?.text || '[UNKNOWN]',
+                        )} nearby.`,
                         2: `[sc]Be nearby for ${condition.params[0]} minute(s).`,
-                        3: `[sc]Get close to a ${condition.params[0]}.`,
+                        3: `[sc]Get close to a False Chest.`,
                         8: `[sc]Be mounted nearby.`,
                         9: `[sc]Have ${condition.params[0]} players nearby.`,
                         11: `[sc]Be inflicted with a debuff nearby.`,
@@ -259,8 +275,9 @@ function entitySummary(
             let enemy_ = DB.Enemies[enemy.EnemyId] || {};
             if (Object.keys(enemy_).length === 0) continue;
             page.name =
-                DB.Loc[lang].enemyparam_text.texts[enemy_.name_id].text +
-                `{https://bapharia.com/db?result=Enemy${enemy_.enemy_id}}`;
+                capitalizeFirstLetterOfEveryWord(
+                    DB.Loc[lang].enemyparam_text.texts[enemy_.name_id].text,
+                ) + `{https://bapharia.com/db?result=Enemy${enemy_.enemy_id}}`;
 
             page.desc = [];
             page.desc.push(toLocale(`Levels ${enemy.MinLv} - ${enemy.MaxLv}`));

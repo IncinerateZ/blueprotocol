@@ -14,6 +14,16 @@ export default function Selector({
         return string.charAt(0).toUpperCase() + string.slice(1);
     }
 
+    function capitalizeFirstLetterOfEveryWord(string) {
+        let res = '';
+        for (let word of string.split(' ')) {
+            res += `${word.charAt(0).toUpperCase()}${word
+                .substring(1)
+                .toLowerCase()} `;
+        }
+        return res;
+    }
+
     function toLocale(string) {
         if (lang === 'en_US') return string;
         let mapping = {
@@ -70,10 +80,13 @@ export default function Selector({
                     height={32}
                 />
             )}
-            {toLocale(
-                currentSelector.type
-                    ? DB.Loc[lang].enemyparam_text.texts[s]?.text || 'No Data'
-                    : currentSelector.display_name,
+            {capitalizeFirstLetterOfEveryWord(
+                toLocale(
+                    currentSelector.type
+                        ? DB.Loc[lang].enemyparam_text.texts[s]?.text ||
+                              'No Data'
+                        : currentSelector.display_name,
+                ),
             )}
 
             <input
