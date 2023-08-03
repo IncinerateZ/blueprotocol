@@ -526,6 +526,20 @@
     width: 95%;
 }
 
+.APanel h2 {
+    font-size: 0.75rem;
+    width: 95%;
+    text-align: right;
+    
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+.APanel span:last-of-type{
+    display: block;
+    margin-bottom: 0.3rem;
+}
+
 .APanel div {
     margin-top: 0.5rem;
 }
@@ -543,6 +557,7 @@
     border-left: 2px dashed var(--background);
 
     cursor: pointer;
+
 }
 
 .APanelCheckbox:hover {
@@ -571,7 +586,7 @@
 
 .APanel p {
     margin: 0;
-    margin-left: 1rem;
+    margin-left: 0.5rem;
     font-size: 0.8rem;
 }
 

@@ -41,6 +41,7 @@ export default function APanel({
                         ].text
                     }
                 </h1>
+                <h2>0 / {quest.quest_achievement_condition.complete_value}</h2>
                 {getRewards(rewards).map((e, idx) => (
                     <span key={idx}>{e.build()}</span>
                 ))}
