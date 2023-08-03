@@ -186,6 +186,16 @@ function entitySummary(
     setHiddenMarkers,
     chosenMap,
 ) {
+    function capitalizeFirstLetterOfEveryWord(string) {
+        let res = '';
+        for (let word of string.split(' ')) {
+            res += `${word.charAt(0).toUpperCase()}${word
+                .substring(1)
+                .toLowerCase()} `;
+        }
+        return res;
+    }
+
     function toLocale(string) {
         if (lang === 'en_US') return string;
         let mapping = {
@@ -237,11 +247,13 @@ function entitySummary(
             for (let condition of spawnConditions.conditions) {
                 desc.push(
                     {
-                        1: `[sc]Kill ${condition.params[1]} ${
+                        1: `[sc]Kill ${
+                            condition.params[1]
+                        } ${capitalizeFirstLetterOfEveryWord(
                             DB.Loc[lang].enemyparam_text.texts[
                                 DB.Enemies[condition.params[0]]?.name_id
-                            ]?.text || '[UNKNOWN]'
-                        } nearby.`,
+                            ]?.text || '[UNKNOWN]',
+                        )} nearby.`,
                         2: `[sc]Be nearby for ${condition.params[0]} minute(s).`,
                         3: `[sc]Get close to a False Chest.`,
                         8: `[sc]Be mounted nearby.`,
@@ -263,8 +275,9 @@ function entitySummary(
             let enemy_ = DB.Enemies[enemy.EnemyId] || {};
             if (Object.keys(enemy_).length === 0) continue;
             page.name =
-                DB.Loc[lang].enemyparam_text.texts[enemy_.name_id].text +
-                `{https://bapharia.com/db?result=Enemy${enemy_.enemy_id}}`;
+                capitalizeFirstLetterOfEveryWord(
+                    DB.Loc[lang].enemyparam_text.texts[enemy_.name_id].text,
+                ) + `{https://bapharia.com/db?result=Enemy${enemy_.enemy_id}}`;
 
             page.desc = [];
             page.desc.push(toLocale(`Levels ${enemy.MinLv} - ${enemy.MaxLv}`));
