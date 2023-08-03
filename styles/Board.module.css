@@ -746,6 +746,10 @@
     margin-top: 0.3rem;
 }
 
+.AFilter:hover {
+    background-color: rgba(170,170,170,0.5);
+}
+
 @keyframes brandDropPop {
     0% {
         transform: translateY(-200%);
