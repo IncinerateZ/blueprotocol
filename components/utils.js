@@ -223,11 +223,15 @@ function entitySummary(
                 'Spawning Info',
                 `[sc]Spawns ${
                     {
-                        1: 'at any time of the day ',
-                        2: 'only during the day ',
+                        1: 'at any time of the day',
+                        2: 'only during the day',
                         3: 'only during the night',
                     }[spawnConditions.timing]
-                } at most once every ${spawnConditions.cooldown} minutes.`,
+                }${
+                    spawnConditions.cooldown > 0
+                        ? ` at most once every ${spawnConditions.cooldown} minutes`
+                        : ''
+                }`,
             ];
 
             for (let condition of spawnConditions.conditions) {
@@ -239,7 +243,7 @@ function entitySummary(
                             ]?.text || '[UNKNOWN]'
                         } nearby.`,
                         2: `[sc]Be nearby for ${condition.params[0]} minute(s).`,
-                        3: `[sc]Get close to a ${condition.params[0]}.`,
+                        3: `[sc]Get close to a False Chest.`,
                         8: `[sc]Be mounted nearby.`,
                         9: `[sc]Have ${condition.params[0]} players nearby.`,
                         11: `[sc]Be inflicted with a debuff nearby.`,
