@@ -11,6 +11,7 @@ export default function APassiveQuests({
     allPanels,
     activeBoards,
     colors,
+    pathQuests,
 }) {
     function handleUncomplete(panel) {
         const board = DB.boards[panel.board_id];
@@ -42,6 +43,14 @@ export default function APassiveQuests({
                                     disabled={true}
                                     activeBoards={activeBoards}
                                     colors={colors}
+                                    isPath={
+                                        pathQuests[
+                                            panelId.substring(
+                                                0,
+                                                panelId.length - 1,
+                                            )
+                                        ]
+                                    }
                                 />
                             </li>
                         ))
@@ -71,6 +80,7 @@ export default function APassiveQuests({
                                     onChange={handleUncomplete}
                                     activeBoards={activeBoards}
                                     colors={colors}
+                                    isPath={pathQuests[panelId]}
                                 />
                             </li>
                         ))

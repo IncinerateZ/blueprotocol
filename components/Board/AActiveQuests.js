@@ -11,6 +11,7 @@ export default function AActiveQuests({
     allPanels,
     activeBoards,
     colors,
+    pathQuests,
 }) {
     function handleComplete(panel) {
         const board = DB.boards[panel.board_id];
@@ -40,6 +41,11 @@ export default function AActiveQuests({
                                 onChange={handleComplete}
                                 activeBoards={activeBoards}
                                 colors={colors}
+                                isPath={
+                                    pathQuests[
+                                        panelId.substring(0, panelId.length - 1)
+                                    ]
+                                }
                             />
                         </li>
                     ))

@@ -577,11 +577,23 @@
 .APanel {
     width: 100%;
     min-height: 70px;
-    padding-left: 0.2rem;
 
     display: flex;
 
     border-bottom: 2px solid var(--background);
+    position: relative;
+}
+
+.APanelTagLeft {
+    position: absolute;
+    background-color: rgb(134, 194, 203);
+    border: 2px solid rgb(110, 159, 166);
+    top: 50%;
+    right: 3.1rem;
+    width: 12px;
+    height: 12px;
+    transform: translate(-80%, -80%);
+    rotate: 45deg;
 }
 
 .APanel p {
