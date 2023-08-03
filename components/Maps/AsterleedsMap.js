@@ -314,6 +314,8 @@ export default function Map() {
                         title: pt.Enemies[0].EnemySetId,
                         selectors: selectors_,
                         cardinal: pt.cardinal,
+                        spawnConditions:
+                            pt.type === 'elite' ? pt.SpawnConditions : null,
                     }),
                 );
             }

@@ -109,7 +109,9 @@ function buildSummary(summaries, hiddenMarkers, setHiddenMarkers) {
                                                 r.includes(' x') ||
                                                 r.includes('%') ||
                                                 r.includes('Level') ||
-                                                r.includes('レベル')
+                                                r.includes('レベル') ||
+                                                r.includes('Spawning') ||
+                                                r.includes('[sc]')
                                                     ? '0.8rem'
                                                     : '0.9rem',
                                             color:
@@ -118,6 +120,9 @@ function buildSummary(summaries, hiddenMarkers, setHiddenMarkers) {
                                                     ? 'darkslategray'
                                                     : 'black',
                                             listStyleType: 'none',
+                                            fontWeight: r.includes('Spawning')
+                                                ? 'bold'
+                                                : '',
                                         }}
                                     >
                                         {r.includes('{') ? (
@@ -137,7 +142,7 @@ function buildSummary(summaries, hiddenMarkers, setHiddenMarkers) {
                                                     )}
                                             </Link>
                                         ) : (
-                                            r
+                                            r.replace('[sc]', ' - ')
                                         )}
                                     </li>
                                 ))}
@@ -213,6 +218,38 @@ function entitySummary(
     }
     let res = [];
     if (['enemy', 'elite'].includes(entity.type)) {
+        function eliteSpawnCondition(spawnConditions) {
+            let desc = [
+                'Spawning Info',
+                `[sc]Spawns ${
+                    {
+                        1: 'at any time of the day.',
+                        2: 'only during the day.',
+                        3: 'only during the night',
+                    }[spawnConditions.timing]
+                }`,
+            ];
+
+            for (let condition of spawnConditions.conditions) {
+                desc.push(
+                    {
+                        1: `[sc]Kill ${condition.params[1]} ${
+                            DB.Loc[lang].enemyparam_text.texts[
+                                DB.Enemies[condition.params[0]]?.name_id
+                            ]?.text || '[UNKNOWN]'
+                        } nearby.`,
+                        2: `[sc]Be nearby for ${condition.params[0]} minute(s).`,
+                        3: `[sc]Get close to a ${condition.params[0]}.`,
+                        8: `[sc]Be mounted nearby.`,
+                        9: `[sc]Have ${condition.params[0]} players nearby.`,
+                        11: `[sc]Be inflicted with a debuff nearby.`,
+                    }[condition.type] || 'Unknown',
+                );
+            }
+
+            return desc;
+        }
+
         let enemies = DB.EnemySets.field[entity.idf];
         res.push(entity.idf);
         for (let enemy of enemies?.Members || []) {
@@ -262,6 +299,12 @@ function entitySummary(
                     }`,
                 );
             }
+
+            if (entity.type === 'elite')
+                page.desc.push(
+                    ...eliteSpawnCondition(entity.metadata.spawnConditions),
+                );
+
             res.push(page);
         }
     } else if (
