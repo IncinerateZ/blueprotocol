@@ -256,6 +256,53 @@ for (let mapType in DB.EnemySets) {
                                 },
                             ];
                             DB.EnemyHabitats[map][entry.Outer].type = 'elite';
+                            DB.EnemyHabitats[map][entry.Outer].SpawnConditions =
+                                {
+                                    timing: CQST[_entry]
+                                        ?.challenge_quest_occurrence_condition_1,
+                                    conditions: [],
+                                };
+                            for (let condition in CQST[_entry]) {
+                                if (
+                                    condition.includes(
+                                        'challenge_quest_occurrence_condition_2_',
+                                    )
+                                ) {
+                                    if (CQST[_entry][condition] === 0) continue;
+                                    DB.EnemyHabitats[map][
+                                        entry.Outer
+                                    ].SpawnConditions.conditions.push({
+                                        type: CQST[_entry][condition],
+                                        params: [],
+                                    });
+                                }
+                                if (
+                                    condition.includes(
+                                        'occurrence_condition_param_2_',
+                                    )
+                                ) {
+                                    let value = CQST[_entry][condition];
+                                    if (value.length === 0) continue;
+                                    condition = condition.substring(
+                                        'occurrence_condition_param_2_'.length,
+                                    );
+                                    let indexes = condition.split('_');
+                                    let idx = indexes[0] - 1;
+
+                                    if (
+                                        DB.EnemyHabitats[map][entry.Outer]
+                                            .SpawnConditions.conditions
+                                            .length <= idx
+                                    )
+                                        continue;
+
+                                    DB.EnemyHabitats[map][
+                                        entry.Outer
+                                    ].SpawnConditions.conditions[
+                                        idx
+                                    ].params.push(value);
+                                }
+                            }
                         }
                     }
                     if (entry.Type === 'SBEnemyHabitat') {
