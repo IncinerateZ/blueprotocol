@@ -247,6 +247,8 @@ function entitySummary(
                 );
             }
 
+            desc.push(`[sc]Defeat within ${spawnConditions.timer} minutes.`);
+
             return desc;
         }
 
