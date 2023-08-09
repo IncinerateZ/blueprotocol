@@ -582,17 +582,27 @@
 
     border-bottom: 2px solid var(--background);
     position: relative;
+
+    overflow: hidden;
 }
 
 .APanelTagLeft {
     position: absolute;
-    background-color: rgb(134, 194, 203);
-    border: 2px solid rgb(110, 159, 166);
     top: 50%;
     left: 74.5%;
     width: 12px;
     height: 12px;
     transform: translate(95%, -120%) rotate(45deg);
+    cursor: pointer;
+}
+
+.APanelTagLeft p {
+    display: none;
+    position: absolute;
+}
+
+.APanelTagLeft:hover p{
+    display: block;
 }
 
 .APanel p {
@@ -613,6 +623,7 @@
     list-style-type: none;
     padding-left: 0;
 
+    overflow-x: hidden;
     overflow-y: auto;
 
     min-width: 300px;
