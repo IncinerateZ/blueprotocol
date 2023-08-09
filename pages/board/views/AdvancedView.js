@@ -61,6 +61,7 @@ export default function AdvancedView({ DB, lang, setLang }) {
     }
 
     function handleToggleBoard(boardId) {
+        const MAX_ACTIVE_BOARDS = 10;
         function delegateColor(boards) {
             let availableColors = { ...colors };
             for (let board in boards)
@@ -73,7 +74,8 @@ export default function AdvancedView({ DB, lang, setLang }) {
         if (boardId in activeBoards) {
             delete temp[boardId];
         } else {
-            if (Object.keys(activeBoards).length >= 8) return false;
+            if (Object.keys(activeBoards).length >= MAX_ACTIVE_BOARDS)
+                return false;
             temp[boardId] = delegateColor(activeBoards);
         }
         setActiveBoards(temp);
