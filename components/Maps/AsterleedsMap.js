@@ -485,11 +485,14 @@ export default function Map() {
             'Map_selectorsSource',
             JSON.stringify(selectorsSource),
         );
+    }, [selectorsSource]);
+
+    useEffect(() => {
         localStorage.setItem(
             'Map_excludedSelectors',
             JSON.stringify(excludedSelectors),
         );
-    }, [selectorsSource]);
+    }, [excludedSelectors]);
 
     return (
         <div style={{ overflow: 'hidden' }}>
