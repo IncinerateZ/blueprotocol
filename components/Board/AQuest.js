@@ -75,7 +75,11 @@ export default function AQuest({
             }}
         >
             <Image
-                src={`/board/quests/UI_Adventureboard_${board.icon_id}.webp`}
+                src={
+                    errored
+                        ? '/board/quests/UI_Adventureboard_NoData.webp'
+                        : `/board/quests/UI_Adventureboard_${board.icon_id}.webp`
+                }
                 width={100}
                 height={63}
                 alt={`Board ${boardId}`}

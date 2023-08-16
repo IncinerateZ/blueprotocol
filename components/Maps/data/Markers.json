@@ -121,6 +121,22 @@
             }
         }
     },
+    "dng004": {
+        "display_name": "Soundless City",
+        "map_url": "./UI_Mapdng004.webp",
+        "tags": [
+            "dungeon",
+            "Soundless City",
+            "音無き都・追加調査"
+        ],
+        "map_id": "dng004",
+        "markers": {
+            "new": {
+                "display_name": "New Marker",
+                "arr": []
+            }
+        }
+    },
     "dng007": {
         "display_name": "Chained One's Spawnery",
         "map_url": "./UI_Mapdng007.webp",
@@ -146,6 +162,22 @@
             "巨竜の爪痕・追加調査"
         ],
         "map_id": "dng009",
+        "markers": {
+            "new": {
+                "display_name": "New Marker",
+                "arr": []
+            }
+        }
+    },
+    "pat0102": {
+        "display_name": "Steelwalker Ravine",
+        "map_url": "./UI_Mappat0102.webp",
+        "tags": [
+            "dungeon",
+            "Steelwalker Ravine",
+            null
+        ],
+        "map_id": "pat0102",
         "markers": {
             "new": {
                 "display_name": "New Marker",

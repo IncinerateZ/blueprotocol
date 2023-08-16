@@ -50,8 +50,8 @@ export default function AdvancedView({ DB, lang, setLang }) {
 
             if (!grouped)
                 groups['misc'] = {
-                    ...groups['misc'],
                     [_quest]: quests[_quest],
+                    ...groups['misc'],
                 };
         }
 
