@@ -78,10 +78,31 @@ export default function APanel({
                 />
             </label>
             {isPath ? (
-                <>
-                    <div className={styles.APanelTagLeft}></div>
-                    <div className={styles.APanelTagRight}></div>
-                </>
+                <div
+                    className={styles.APanelTagLeft}
+                    style={{
+                        backgroundColor: isPath[0],
+                        border: `2px solid ${isPath[1]}`,
+                    }}
+                >
+                    <p
+                        style={{
+                            backgroundColor: 'var(--dark2)',
+                            transform:
+                                'rotate(-45deg) translate(-32%, -4.3rem)',
+                            width: '6.2rem',
+                            padding: '0.5rem',
+                            paddingTop: '0.2rem',
+                            paddingBottom: '0.2rem',
+                            textAlign: 'center',
+                            border: '2px solid var(--dark1)',
+                            lineHeight: '1rem',
+                            borderRadius: '5px',
+                        }}
+                    >
+                        {isPath[0] === '#F6F078' ? 'Final ' : ''}Core Quest
+                    </p>
+                </div>
             ) : (
                 <></>
             )}

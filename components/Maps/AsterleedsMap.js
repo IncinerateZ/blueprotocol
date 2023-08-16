@@ -485,11 +485,14 @@ export default function Map() {
             'Map_selectorsSource',
             JSON.stringify(selectorsSource),
         );
+    }, [selectorsSource]);
+
+    useEffect(() => {
         localStorage.setItem(
             'Map_excludedSelectors',
             JSON.stringify(excludedSelectors),
         );
-    }, [selectorsSource]);
+    }, [excludedSelectors]);
 
     return (
         <div style={{ overflow: 'hidden' }}>
@@ -502,7 +505,7 @@ export default function Map() {
                                   .replace('dng', 'pub')
                                   .replace('pat', 'pub')
                           ] || 'Loading'}{' '}
-                    Map | Blue Protocol Resource
+                    Interactive Map | Blue Protocol Resource
                 </title>
                 <link rel='canonical' href='https://bp.incin.net/map' />
                 <meta
@@ -650,15 +653,16 @@ export default function Map() {
                         {mapIcons &&
                             Object.keys(markers).map((e) =>
                                 markers[e].arr.map((v, i) => {
-                                    return (
-                                        <div key={i}>
-                                            {(v.selectors || []).reduce(
-                                                (s, c) =>
-                                                    s +
-                                                    (excludedSelectors[c] || 0),
-                                                0,
-                                            ) !== (v.selectors || []).length &&
-                                                mapIcons[v.type] && (
+                                    let showMarker =
+                                        (v.selectors || []).reduce(
+                                            (s, c) =>
+                                                s + (excludedSelectors[c] || 0),
+                                            0,
+                                        ) !== (v.selectors || []).length;
+                                    if (showMarker)
+                                        return (
+                                            <div key={i}>
+                                                {mapIcons[v.type] && (
                                                     <Marker
                                                         position={[
                                                             v.lat,
@@ -704,8 +708,8 @@ export default function Map() {
                                                         </Popup>
                                                     </Marker>
                                                 )}
-                                        </div>
-                                    );
+                                            </div>
+                                        );
                                 }),
                             )}
                         {/* <ClickHandler /> */}

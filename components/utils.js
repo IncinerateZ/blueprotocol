@@ -399,6 +399,8 @@ function entitySummary(
                 res.push(page);
             }
             res.noMargin = true;
+        } else {
+            // if (entity.type === 'treasure') console.log(entity.metadata.title);
         }
     } else if (entity.type.includes('quest')) {
         let quests = entity.metadata.quests;

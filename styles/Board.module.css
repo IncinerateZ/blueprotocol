@@ -582,17 +582,27 @@
 
     border-bottom: 2px solid var(--background);
     position: relative;
+
+    overflow: hidden;
 }
 
 .APanelTagLeft {
     position: absolute;
-    background-color: rgb(134, 194, 203);
-    border: 2px solid rgb(110, 159, 166);
     top: 50%;
-    right: 3.1rem;
+    left: 74.5%;
     width: 12px;
     height: 12px;
-    transform: translateY(-120%) rotate(45deg);
+    transform: translate(95%, -120%) rotate(45deg);
+    cursor: pointer;
+}
+
+.APanelTagLeft p {
+    display: none;
+    position: absolute;
+}
+
+.APanelTagLeft:hover p{
+    display: block;
 }
 
 .APanel p {
@@ -613,6 +623,7 @@
     list-style-type: none;
     padding-left: 0;
 
+    overflow-x: hidden;
     overflow-y: auto;
 
     min-width: 300px;
@@ -838,6 +849,7 @@
     .UpcomingQuests {
         margin-bottom: 1rem;
         height: 28rem;
+        max-height: 28rem;
         margin-right: 0;
     }
 
@@ -847,16 +859,25 @@
 
     .CompletedQuests {
         height: 28rem;
+        max-height: 28rem;
         margin: 0;
     }
 
     .PassiveQuests {
         height: 56rem;
+        max-height: 56rem;
         margin: 0;
     }
 
     .content {
         min-height: fit-content;
-        padding-bottom: 10rem;
+        /* margin-bottom: 10rem; */
+    }
+
+}
+
+@media (max-width: 758px) {
+    .AdvancedView {
+        padding-bottom: 5rem;
     }
 }

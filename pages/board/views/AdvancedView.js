@@ -16,13 +16,15 @@ export default function AdvancedView({ DB, lang, setLang }) {
 
     const colors = {
         1: '#d81b60AA',
-        2: '#f88c87aa',
-        3: '#F9D1B7AA',
-        4: '#F0B8D9AA',
-        5: '#B6E1E8AA',
-        6: '#a2fd80aa',
-        7: '#a099fbaa',
-        8: '#f8a3faaa',
+        2: '#F2A51Aaa',
+        3: '#FF6363aa',
+        4: '#f88c87aa',
+        5: '#F9D1B7AA',
+        6: '#F0B8D9AA',
+        7: '#B6E1E8AA',
+        8: '#a2fd80aa',
+        9: '#a099fbaa',
+        10: '#7900FFaa',
     };
 
     function groupQuests(quests) {
@@ -48,8 +50,8 @@ export default function AdvancedView({ DB, lang, setLang }) {
 
             if (!grouped)
                 groups['misc'] = {
-                    ...groups['misc'],
                     [_quest]: quests[_quest],
+                    ...groups['misc'],
                 };
         }
 
@@ -61,6 +63,7 @@ export default function AdvancedView({ DB, lang, setLang }) {
     }
 
     function handleToggleBoard(boardId) {
+        const MAX_ACTIVE_BOARDS = 10;
         function delegateColor(boards) {
             let availableColors = { ...colors };
             for (let board in boards)
@@ -73,7 +76,8 @@ export default function AdvancedView({ DB, lang, setLang }) {
         if (boardId in activeBoards) {
             delete temp[boardId];
         } else {
-            if (Object.keys(activeBoards).length >= 8) return false;
+            if (Object.keys(activeBoards).length >= MAX_ACTIVE_BOARDS)
+                return false;
             temp[boardId] = delegateColor(activeBoards);
         }
         setActiveBoards(temp);
@@ -107,6 +111,8 @@ export default function AdvancedView({ DB, lang, setLang }) {
 
             panels = { ...panels, ...board.panels };
 
+            let lastPathQuest = '-999999999999';
+
             for (let panelId in board.panels) {
                 const panel = board.panels[panelId];
                 if (
@@ -117,8 +123,20 @@ export default function AdvancedView({ DB, lang, setLang }) {
                 for (let upcomingPanel of panel.next_panel_ids) {
                     let upcomingId = upcomingPanel.panel_id;
 
-                    _pathQuests[panelId] = true;
-                    _pathQuests[upcomingId] = true;
+                    _pathQuests[panelId] = [
+                        'rgb(134, 194, 203)',
+                        'rgb(110, 159, 166)',
+                    ];
+                    _pathQuests[upcomingId] = [
+                        'rgb(134, 194, 203)',
+                        'rgb(110, 159, 166)',
+                    ];
+
+                    if (
+                        board.panels[upcomingId].next_panel_ids.length === 0 &&
+                        parseInt(lastPathQuest) < parseInt(upcomingId)
+                    )
+                        lastPathQuest = upcomingId;
 
                     _activeQuests[upcomingId] = false;
                     tempDelete.push(upcomingId);
@@ -136,6 +154,8 @@ export default function AdvancedView({ DB, lang, setLang }) {
                         };
                 }
             }
+
+            _pathQuests[lastPathQuest] = ['#F6F078', '#FFAB76'];
 
             for (let id of tempDelete) delete _activeQuests[id];
         }
