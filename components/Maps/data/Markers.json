@@ -1,7 +1,7 @@
 {
     "cty001": {
         "display_name": "Asterliese",
-        "map_url": "./UI_MapCty001.webp",
+        "map_url": "./UI_Mapcty001.webp",
         "tags": [
             "city",
             "Asterliese",
@@ -17,7 +17,7 @@
     },
     "cty002": {
         "display_name": "Salamzahd Oasis",
-        "map_url": "./UI_MapCty002.webp",
+        "map_url": "./UI_Mapcty002.webp",
         "tags": [
             "city",
             "Salamzahd Oasis",
@@ -33,13 +33,13 @@
     },
     "fld001": {
         "display_name": "Asteria Plains",
-        "map_url": "./UI_MapFld001.webp",
+        "map_url": "./UI_Mapfld001.webp",
         "tags": [
             "field",
             "Andra Basin",
             "Minster Hills",
             "Skyquake Fields",
-            "fld001",
+            "Asteria Plains",
             "アンドラ盆地",
             "ミンスター丘陵",
             "海鳴りの草原",
@@ -56,7 +56,7 @@
     },
     "fld002": {
         "display_name": "Bahamar Highlands",
-        "map_url": "./UI_MapFld002.webp",
+        "map_url": "./UI_Mapfld002.webp",
         "tags": [
             "field",
             "Quellmount's Foot",
@@ -77,7 +77,7 @@
     },
     "fld003": {
         "display_name": "Montegnor Valley",
-        "map_url": "./UI_MapFld003.webp",
+        "map_url": "./UI_Mapfld003.webp",
         "tags": [
             "field",
             "Rietz Tradeway",
@@ -98,7 +98,7 @@
     },
     "fld004": {
         "display_name": "Evergreen Desert",
-        "map_url": "./UI_MapFld004.webp",
+        "map_url": "./UI_Mapfld004.webp",
         "tags": [
             "field",
             "Old Rainfall Road",
@@ -242,6 +242,38 @@
             "雨止まぬ森・自由探索"
         ],
         "map_id": "pat0803",
+        "markers": {
+            "new": {
+                "display_name": "New Marker",
+                "arr": []
+            }
+        }
+    },
+    "pat0804": {
+        "display_name": "Roseblush Woods",
+        "map_url": "./UI_Mappat0804.webp",
+        "tags": [
+            "dungeon",
+            "Roseblush Woods",
+            "緋染めの樹林・自由探索"
+        ],
+        "map_id": "pat0804",
+        "markers": {
+            "new": {
+                "display_name": "New Marker",
+                "arr": []
+            }
+        }
+    },
+    "pat0901": {
+        "display_name": "Windsprite's Rostrum",
+        "map_url": "./UI_Mappat0901.webp",
+        "tags": [
+            "dungeon",
+            "Windsprite's Rostrum",
+            "風精の舞台・自由探索"
+        ],
+        "map_id": "pat0901",
         "markers": {
             "new": {
                 "display_name": "New Marker",
