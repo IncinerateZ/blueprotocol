@@ -277,7 +277,11 @@ function entitySummary(
             page.name =
                 capitalizeFirstLetterOfEveryWord(
                     DB.Loc[lang].enemyparam_text.texts[enemy_.name_id].text,
-                ) + `{https://bapharia.com/db?result=Enemy${enemy_.enemy_id}}`;
+                ) +
+                `{https://bapharia.com/db?search=${enemy_.enemy_id.substring(
+                    0,
+                    enemy_.enemy_id.lastIndexOf('_'),
+                )}}`;
 
             page.desc = [];
             page.desc.push(toLocale(`Levels ${enemy.MinLv} - ${enemy.MaxLv}`));
@@ -313,7 +317,7 @@ function entitySummary(
                 page.desc.push(
                     `${
                         DB.Loc[lang].item_text.texts[item.name].text
-                    }{https://bapharia.com/db?result=Item${item.id}} ${
+                    }{https://bapharia.com/db?search=${item.id}} ${
                         showLeak ? `${drop.drop_rate / 100}%` : ''
                     }`,
                 );
@@ -360,7 +364,7 @@ function entitySummary(
                     if (treasure_) {
                         item =
                             DB.Loc[lang].item_text.texts[treasure_.name].text +
-                            `{https://bapharia.com/db?result=Item${treasure_.id}}`;
+                            `{https://bapharia.com/db?search=${treasure_.id}}`;
                     } else {
                         item = new BoardReward(
                             treasure.reward_master_id,
@@ -373,13 +377,7 @@ function entitySummary(
                             `${
                                 item.type_string === 'board'
                                     ? `{/board/${item.id}}`
-                                    : item.type_string === 'item'
-                                    ? `{https://bapharia.com/db?result=Item${item.id}}`
-                                    : item.type_string === 'liquid_memory'
-                                    ? `{https://bapharia.com/db?result=LiquidMemory${item.id}}`
-                                    : item.type_string === 'token'
-                                    ? `{https://bapharia.com/db?result=Token${item.id}}`
-                                    : ''
+                                    : `{https://bapharia.com/db?search=${item.id}}`
                             }`;
                     }
                     page.desc.push(
@@ -430,13 +428,7 @@ function entitySummary(
                     `${reward.name}${
                         reward.type_string === 'board'
                             ? `{/board/${reward.id}}`
-                            : reward.type_string === 'item'
-                            ? `{https://bapharia.com/db?result=Item${reward.id}}`
-                            : reward.type_string === 'liquid_memory'
-                            ? `{https://bapharia.com/db?result=LiquidMemory${reward.id}}`
-                            : reward.type_string === 'token'
-                            ? `{https://bapharia.com/db?result=Token${reward.id}}`
-                            : ''
+                            : `{https://bapharia.com/db?search=${reward.id}}`
                     } x${reward.amount}`,
                 );
             }
