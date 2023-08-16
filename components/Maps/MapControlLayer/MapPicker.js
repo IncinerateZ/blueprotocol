@@ -84,6 +84,12 @@ export default function MapPicker({
                                       data[t].map_id
                                           .replace('dng', 'pub')
                                           .replace('pat', 'pub')
+                                  ] ||
+                                  DB.LocationNames[lang][
+                                      data[t].map_id.replace(
+                                          '追加調査',
+                                          '自由探索',
+                                      )
                                   ]
                                 : data[t].display_name;
 
