@@ -48,11 +48,15 @@ for (let quest of require('./apiext/quests.json')) {
 let mapnames = {};
 
 for (let mapname of _mapnames) {
-    if (mapname.id)
-        mapnames[mapname.map_id.toLowerCase()] = {
+    if (mapname.id) {
+        let mapid = mapname.map_id;
+        if (mapid.length === 0) mapid = mapname.free_exploration_id || '';
+
+        mapnames[mapid.toLowerCase()] = {
             name: mapname.name_en || mapname.name_translated,
-            map_id: mapname.map_id,
+            map_id: mapid,
         };
+    }
 }
 
 for (let board of require('./apiext/master_adventure_board.json'))
@@ -261,6 +265,8 @@ for (let mapType in DB.EnemySets) {
                                     timing: CQST[_entry]
                                         ?.challenge_quest_occurrence_condition_1,
                                     conditions: [],
+                                    cooldown: CQST[_entry]?.cool_time,
+                                    timer: CQST[_entry]?.quest_time_limit,
                                 };
                             for (let condition in CQST[_entry]) {
                                 if (
@@ -562,10 +568,16 @@ for (let mapType in DB.POI) {
                 );
                 let mn = smn.split('_')[0];
 
-                if (!markers[mn])
+                let mapname =
+                    mapnames[mn] || mapnames[mn.replace('pat', 'pub')];
+
+                if (!markers[mn]) {
                     markers[mn] = {
-                        display_name: mapnames[mn].name,
-                        map_url: `./UI_Map${mapnames[mn].map_id}.webp`,
+                        display_name: mapname?.name,
+                        map_url: `./UI_Map${mapname?.map_id.replace(
+                            'pub',
+                            'pat',
+                        )}.webp`,
                         tags: [
                             { fld: 'field', dng: 'dungeon', pat: 'dungeon' }[
                                 mn.substring(0, 3)
@@ -576,10 +588,13 @@ for (let mapType in DB.POI) {
                             new: { display_name: 'New Marker', arr: [] },
                         },
                     };
+                }
 
                 markers[mn].tags = [
-                    ...markers[mn].tags,
-                    mapnames[smn.toLowerCase()].name || mn.toLowerCase(),
+                    ...markers[mn]?.tags,
+                    mapnames[smn.toLowerCase()]?.name ||
+                        mapname?.name ||
+                        mn.toLowerCase(),
                 ];
 
                 data = JSON.parse(data);
@@ -725,8 +740,10 @@ for (let mapType in DB.POI) {
 }
 
 for (let map in mapPoints)
-    for (let cardinal in mapPoints[map])
+    for (let cardinal in mapPoints[map]) {
+        if (!markers[map]) console.log(markers);
         markers[map].tags.push(DB.LocationNames['ja_JP'][`${map}_${cardinal}`]);
+    }
 
 for (let map in markers)
     markers[map].tags.push(
