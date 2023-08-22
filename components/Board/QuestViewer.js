@@ -14,6 +14,7 @@ export default function QuestViewer({
     setSelectedBoard,
     selectedQuest,
     setSelectedQuest,
+    boardStatuses,
 }) {
     const canvasRef = useRef(null);
     const overlayRef = useRef(null);
@@ -202,6 +203,11 @@ export default function QuestViewer({
                     offSets.x + pane.ui_pos_x - 20
                 }px, ${offSets.y + pane.ui_pos_y - 20}px)`;
 
+                document.getElementById(panel).style.borderColor =
+                    boardStatuses[selectedBoard.id]?.completed[panel]
+                        ? 'darkgreen'
+                        : '';
+
                 for (let next of pane.next_panel_ids) {
                     let nextId = next.panel_id;
                     next = panels[nextId].panel;
@@ -218,7 +224,10 @@ export default function QuestViewer({
                         { x: offSets.x + nX, y: offSets.y + nY, r: 20 },
                     );
 
-                    ctx.strokeStyle = '#A7A2A9';
+                    ctx.strokeStyle = boardStatuses[selectedBoard.id]
+                        ?.completed[panel]
+                        ? 'green'
+                        : '#A7A2A9';
 
                     ctx.lineWidth = 2;
                     ctx.beginPath();
@@ -231,7 +240,11 @@ export default function QuestViewer({
             const last = document.getElementById(firstLast[1].id);
 
             ctx.fillStyle = '#DFFFD8';
-            first.style.border = '4px solid #B4E4FF';
+            first.style.border = `4px solid ${
+                boardStatuses[selectedBoard.id]?.completed[firstLast[0].id]
+                    ? 'green'
+                    : '#A7A2A9'
+            }`;
             ctx.beginPath();
             ctx.arc(
                 firstLast[0].ui_pos_x + offSets.x,
@@ -243,7 +256,11 @@ export default function QuestViewer({
             ctx.fill();
 
             ctx.fillStyle = '#F7C8E0';
-            last.style.border = '4px solid #95BDFF';
+            last.style.border = `4px solid ${
+                boardStatuses[selectedBoard.id]?.completed[firstLast[1].id]
+                    ? 'green'
+                    : '#A7A2A9'
+            }`;
             ctx.beginPath();
             ctx.arc(
                 firstLast[1].ui_pos_x + offSets.x,

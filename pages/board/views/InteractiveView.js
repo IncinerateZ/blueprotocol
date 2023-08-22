@@ -5,7 +5,7 @@ import QuestViewer from '@/components/Board/QuestViewer';
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 
-function InteractiveView({ DB, lang, setLang }) {
+function InteractiveView({ DB, lang, setLang, colors }) {
     const [panels, setPanels] = useState(null);
 
     const [selectedBoard, setSelectedBoard] = useState(null);
@@ -15,6 +15,103 @@ function InteractiveView({ DB, lang, setLang }) {
     const [firstLoad, setFirstLoad] = useState(true);
 
     const router = useRouter();
+
+    const [activeBoards, setActiveBoards] = useState({});
+    const [boardStatuses, setBoardStatuses] = useState({});
+    const [activeQuests, setActiveQuests] = useState({});
+    const [upcomingQuests, setUpcomingQuests] = useState({});
+    const [completedQuests, setCompletedQuests] = useState({});
+    const [allPanels, setAllPanels] = useState({});
+    const [pathQuests, setPathQuests] = useState({});
+
+    useEffect(() => {
+        setActiveBoards(
+            JSON.parse(localStorage.getItem('Board_activeBoards')) || {},
+        );
+        setBoardStatuses(
+            JSON.parse(localStorage.getItem('Board_boardStatuses')) || {},
+        );
+    }, []);
+
+    useEffect(() => {
+        const _activeQuests = {};
+        const _upcomingQuests = {};
+        let _completedQuests = {};
+        let _pathQuests = {};
+        let panels = {};
+
+        for (let boardId in activeBoards) {
+            const board = DB.boards[boardId];
+            const tempDelete = [];
+            _completedQuests = {
+                ..._completedQuests,
+                ...boardStatuses[boardId]?.completed,
+            };
+
+            panels = { ...panels, ...board.panels };
+
+            let lastPathQuest = '-999999999999';
+
+            for (let panelId in board.panels) {
+                const panel = board.panels[panelId];
+                if (
+                    !(panel.id in _activeQuests) &&
+                    !(panel.id in _completedQuests)
+                )
+                    _activeQuests[panel.id] = panel;
+                for (let upcomingPanel of panel.next_panel_ids) {
+                    let upcomingId = upcomingPanel.panel_id;
+
+                    _pathQuests[panelId] = [
+                        'rgb(134, 194, 203)',
+                        'rgb(110, 159, 166)',
+                    ];
+                    _pathQuests[upcomingId] = [
+                        'rgb(134, 194, 203)',
+                        'rgb(110, 159, 166)',
+                    ];
+
+                    if (
+                        board.panels[upcomingId].next_panel_ids.length === 0 &&
+                        parseInt(lastPathQuest) < parseInt(upcomingId)
+                    )
+                        lastPathQuest = upcomingId;
+
+                    _activeQuests[upcomingId] = false;
+                    tempDelete.push(upcomingId);
+                    if (
+                        panel.id in _completedQuests &&
+                        !(upcomingId in _completedQuests)
+                    ) {
+                        _activeQuests[upcomingId] = {
+                            ...board.panels[upcomingId],
+                        };
+                        tempDelete.pop();
+                    } else if (!(upcomingId in _completedQuests))
+                        _upcomingQuests[upcomingId] = {
+                            ...board.panels[upcomingId],
+                        };
+                }
+            }
+
+            _pathQuests[lastPathQuest] = ['#F6F078', '#FFAB76'];
+
+            for (let id of tempDelete) delete _activeQuests[id];
+        }
+
+        setActiveQuests(_activeQuests);
+        setUpcomingQuests(_upcomingQuests);
+        setCompletedQuests(_completedQuests);
+        setAllPanels(panels);
+        setPathQuests(_pathQuests);
+    }, [activeBoards, boardStatuses]);
+
+    useEffect(() => {
+        localStorage.setItem(
+            'Board_boardStatuses',
+            JSON.stringify(boardStatuses),
+        );
+    }, [boardStatuses]);
 
     useEffect(() => {
         let slugs = router.query.boardId || [];
@@ -148,6 +245,9 @@ function InteractiveView({ DB, lang, setLang }) {
                             DB={DB}
                             loc={lang}
                             displayOverlay={displayOverlay}
+                            colors={colors}
+                            activeBoards={activeBoards}
+                            boardStatuses={boardStatuses}
                         />
                     ))}
             </div>
@@ -161,6 +261,7 @@ function InteractiveView({ DB, lang, setLang }) {
                     setSelectedBoard={setSelectedBoard}
                     selectedQuest={selectedQuest}
                     setSelectedQuest={setSelectedQuest}
+                    boardStatuses={boardStatuses}
                 />
             )}
         </>

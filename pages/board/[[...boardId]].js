@@ -15,6 +15,19 @@ export default function Board() {
 
     const [interactiveView, setInteractiveView] = useState(true);
 
+    const colors = {
+        1: '#d81b60AA',
+        2: '#F2A51Aaa',
+        3: '#FF6363aa',
+        4: '#f88c87aa',
+        5: '#F9D1B7AA',
+        6: '#F0B8D9AA',
+        7: '#B6E1E8AA',
+        8: '#a2fd80aa',
+        9: '#a099fbaa',
+        10: '#7900FFaa',
+    };
+
     useEffect(() => {
         if (!DB) return () => {};
     }, [DB]);
@@ -145,10 +158,10 @@ export default function Board() {
                         <InteractiveView
                             DB={DB}
                             lang={lang}
-                            setLang={setLang}
+                            setLang={setLang} colors={colors}
                         />
                     ) : (
-                        <AdvancedView DB={DB} lang={lang} setLang={setLang} />
+                        <AdvancedView DB={DB} lang={lang} setLang={setLang} colors={colors} />
                     )}
                 </main>
                 <div
