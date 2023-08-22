@@ -17,7 +17,7 @@ function InteractiveView({ DB, lang, setLang, colors }) {
     const router = useRouter();
 
     const [activeBoards, setActiveBoards] = useState({});
-    const [boardStatuses, setBoardStatuses] = useState({});
+    const [boardStatuses, setBoardStatuses] = useState(null);
     const [activeQuests, setActiveQuests] = useState({});
     const [upcomingQuests, setUpcomingQuests] = useState({});
     const [completedQuests, setCompletedQuests] = useState({});
@@ -45,7 +45,7 @@ function InteractiveView({ DB, lang, setLang, colors }) {
             const tempDelete = [];
             _completedQuests = {
                 ..._completedQuests,
-                ...boardStatuses[boardId]?.completed,
+                ...(boardStatuses || {})[boardId]?.completed,
             };
 
             panels = { ...panels, ...board.panels };
@@ -107,6 +107,7 @@ function InteractiveView({ DB, lang, setLang, colors }) {
     }, [activeBoards, boardStatuses]);
 
     useEffect(() => {
+        if (!boardStatuses) return;
         localStorage.setItem(
             'Board_boardStatuses',
             JSON.stringify(boardStatuses),
@@ -247,7 +248,7 @@ function InteractiveView({ DB, lang, setLang, colors }) {
                             displayOverlay={displayOverlay}
                             colors={colors}
                             activeBoards={activeBoards}
-                            boardStatuses={boardStatuses}
+                            boardStatuses={boardStatuses || {}}
                         />
                     ))}
             </div>
@@ -261,7 +262,7 @@ function InteractiveView({ DB, lang, setLang, colors }) {
                     setSelectedBoard={setSelectedBoard}
                     selectedQuest={selectedQuest}
                     setSelectedQuest={setSelectedQuest}
-                    boardStatuses={boardStatuses}
+                    boardStatuses={boardStatuses || {}}
                 />
             )}
         </>
