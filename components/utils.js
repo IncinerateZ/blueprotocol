@@ -756,6 +756,15 @@ function termSearch(index, query, chosenMap) {
     return { [chosenMap]: cmr, ...res };
 }
 
+function statusToColor(_status) {
+    return {
+        'In Progress': 'lightgreen',
+        'Not Started': 'lightgray',
+        Inactive: '#A7A2A9',
+        Completed: '#FFE14E',
+    }[_status];
+}
+
 export {
     levenshtein,
     coordTranslate,
@@ -765,4 +774,5 @@ export {
     degToRad,
     radToDeg,
     termSearch,
+    statusToColor,
 };

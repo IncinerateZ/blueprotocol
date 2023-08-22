@@ -199,7 +199,7 @@
 }
 
 .quest {
-    border: 2px solid var(--light);
+    border: 2px solid;
     width: 205px;
     height: 270px;
     border-radius: 5px;
@@ -212,7 +212,7 @@
 }
 
 .quest:hover {
-    border: 2px solid var(--text-color);
+    filter: brightness(110%);
 }
 
 .quest h1 {
@@ -238,6 +238,7 @@
     font-size: 0.7rem;
     display: flex;
     align-items: flex-end;
+    justify-content: space-between;
     width: 90%;
     color: var(--light);
     margin-top: auto;
@@ -825,6 +826,12 @@
         margin-right: auto;
     }
 }
+@media (max-width: 552px) {
+    .questOverlayContainer {
+        transform: none;
+    }
+}
+
 @media (max-width: 600px) {
     .questOverlay {
         transform: translate(calc(-1 * (600px - 100vw) / 2), 10%);

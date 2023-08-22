@@ -5,7 +5,7 @@ import AQuestList from '@/components/Board/AQuestList';
 import AActiveQuests from '@/components/Board/AActiveQuests';
 import APassiveQuests from '@/components/Board/APassiveQuests';
 
-export default function AdvancedView({ DB, lang, setLang }) {
+export default function AdvancedView({ DB, lang, setLang, colors }) {
     const [activeBoards, setActiveBoards] = useState({});
     const [boardStatuses, setBoardStatuses] = useState({});
     const [activeQuests, setActiveQuests] = useState({});
@@ -13,19 +13,6 @@ export default function AdvancedView({ DB, lang, setLang }) {
     const [completedQuests, setCompletedQuests] = useState({});
     const [allPanels, setAllPanels] = useState({});
     const [pathQuests, setPathQuests] = useState({});
-
-    const colors = {
-        1: '#d81b60AA',
-        2: '#F2A51Aaa',
-        3: '#FF6363aa',
-        4: '#f88c87aa',
-        5: '#F9D1B7AA',
-        6: '#F0B8D9AA',
-        7: '#B6E1E8AA',
-        8: '#a2fd80aa',
-        9: '#a099fbaa',
-        10: '#7900FFaa',
-    };
 
     function groupQuests(quests) {
         let groups = {};

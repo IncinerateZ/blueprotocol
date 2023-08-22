@@ -3,14 +3,53 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
+import { statusToColor } from '../utils';
 
-export default function Quest({ e, DB, loc, displayOverlay }) {
+export default function Quest({
+    e,
+    DB,
+    loc,
+    displayOverlay,
+    colors,
+    activeBoards,
+    boardStatuses,
+}) {
     const [fallbackImage, setFallbackImage] = useState(false);
 
     const router = useRouter();
 
     const jpName =
         DB.Loc['ja_JP']['master_adventure_boards_text'].texts[e.name]?.text;
+
+    const progress = getProgress(e.id);
+
+    function getStatus(boardId) {
+        let board = boardStatuses[boardId];
+        if (
+            activeBoards[boardId] &&
+            (!board ||
+                (board &&
+                    Object.keys(board.completed).length <
+                        Object.keys(DB.boards[boardId].panels).length))
+        )
+            return 'In Progress';
+        if (!board || Object.keys(board.completed).length === 0)
+            return 'Not Started';
+        if (
+            Object.keys(board.completed).length <
+            Object.keys(DB.boards[boardId].panels).length
+        )
+            return 'Inactive';
+        return 'Completed';
+    }
+
+    function getProgress(boardId) {
+        let board = boardStatuses[boardId];
+        return {
+            completed: Object.keys(board?.completed || {}).length,
+            total: Object.keys(DB.boards[boardId].panels || {}).length,
+        };
+    }
 
     return (
         <button
@@ -19,6 +58,7 @@ export default function Quest({ e, DB, loc, displayOverlay }) {
                 backgroundColor: 'transparent',
                 color: 'var(--text-color)',
                 padding: '0',
+                borderColor: colors[activeBoards[e.id] || -1] || 'var(--light)',
             }}
             className={styles.quest}
             onClick={() => {
@@ -41,7 +81,13 @@ export default function Quest({ e, DB, loc, displayOverlay }) {
                 }}
                 className={styles.questThumbnail}
             ></Image>
-            <div className={styles.questTitleContainer}>
+            <div
+                className={styles.questTitleContainer}
+                style={{
+                    borderColor:
+                        colors[activeBoards[e.id] || -1] || 'var(--light)',
+                }}
+            >
                 <label className={styles.questTitle} htmlFor={`Quest_${e.id}`}>
                     {
                         DB.Loc[loc]['master_adventure_boards_text'].texts[
@@ -141,6 +187,25 @@ export default function Quest({ e, DB, loc, displayOverlay }) {
                 ) : (
                     <span>ID {e.id}</span>
                 )}
+                <span
+                    style={{
+                        right: 0,
+                        color: statusToColor(getStatus(e.id)),
+                        position: 'relative',
+                    }}
+                >
+                    <span
+                        style={{
+                            position: 'absolute',
+                            width: '100%',
+                            transform: 'translate(0%, -90%)',
+                            display: 'inline-block',
+                        }}
+                    >
+                        {progress.completed} / {progress.total}
+                    </span>
+                    {getStatus(e.id)}
+                </span>
             </div>
         </button>
     );

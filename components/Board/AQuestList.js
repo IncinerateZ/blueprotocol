@@ -1,6 +1,7 @@
 import styles from '@/styles/Board.module.css';
 import AQuest from './AQuest';
 import { useState } from 'react';
+import { statusToColor } from '../utils';
 
 export default function AQuestList({
     DB,
@@ -14,15 +15,6 @@ export default function AQuestList({
 }) {
     const [selectedFilter1, setFilter1] = useState('');
     const [selectedFilter2, setFilter2] = useState('');
-
-    function statusToColor(_status) {
-        return {
-            'In Progress': 'lightgreen',
-            'Not Started': 'lightgray',
-            Inactive: '#A7A2A9',
-            Completed: '#FFE14E',
-        }[_status];
-    }
 
     function toLocale(s, lang) {
         if (lang === 'en_US') return s;
