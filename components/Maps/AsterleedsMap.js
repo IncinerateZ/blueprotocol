@@ -355,6 +355,10 @@ export default function Map() {
 
         //load map names and tags
         for (let k in data) {
+            if (!data[k].display_name) {
+                console.log('Missing map name ' + k);
+                continue;
+            }
             d[data[k].display_name] = [k];
             let dblocname =
                 DB_.LocationNames[lang][

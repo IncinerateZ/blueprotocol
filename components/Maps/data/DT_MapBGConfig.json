@@ -36,7 +36,8 @@
           "Y": 0.0
         },
         "IsDividedZone": false,
-        "SortId": 0
+        "SortId": 0,
+        "MenuMapScale": 1.0
       },
       "cty01_Top": {
         "ZoneId": "cty01_Top",
@@ -64,7 +65,8 @@
           "Y": 0.0
         },
         "IsDividedZone": false,
-        "SortId": 1001
+        "SortId": 1001,
+        "MenuMapScale": 1.0
       },
       "cty02_Top": {
         "ZoneId": "cty02_Top",
@@ -92,7 +94,8 @@
           "Y": 0.0
         },
         "IsDividedZone": false,
-        "SortId": 1006
+        "SortId": 1006,
+        "MenuMapScale": 1.0
       },
       "fld001_Top": {
         "ZoneId": "fld001_Top",
@@ -120,7 +123,8 @@
           "Y": 0.0
         },
         "IsDividedZone": false,
-        "SortId": 1002
+        "SortId": 1002,
+        "MenuMapScale": 1.0
       },
       "fld001_S_Top": {
         "ZoneId": "fld001_S_Top",
@@ -148,7 +152,8 @@
           "Y": 0.0
         },
         "IsDividedZone": true,
-        "SortId": 0
+        "SortId": 0,
+        "MenuMapScale": 1.0
       },
       "fld001_E_Top": {
         "ZoneId": "fld001_E_Top",
@@ -176,7 +181,8 @@
           "Y": 0.0
         },
         "IsDividedZone": true,
-        "SortId": 0
+        "SortId": 0,
+        "MenuMapScale": 1.0
       },
       "fld001_N_Top": {
         "ZoneId": "fld001_N_Top",
@@ -204,7 +210,8 @@
           "Y": 0.0
         },
         "IsDividedZone": true,
-        "SortId": 0
+        "SortId": 0,
+        "MenuMapScale": 1.0
       },
       "fld001_W_Top": {
         "ZoneId": "fld001_W_Top",
@@ -232,7 +239,8 @@
           "Y": 0.0
         },
         "IsDividedZone": true,
-        "SortId": 0
+        "SortId": 0,
+        "MenuMapScale": 1.0
       },
       "fld002_Top": {
         "ZoneId": "fld002_Top",
@@ -260,7 +268,8 @@
           "Y": 250.0
         },
         "IsDividedZone": false,
-        "SortId": 1003
+        "SortId": 1003,
+        "MenuMapScale": 1.0
       },
       "fld002_S_Top": {
         "ZoneId": "fld002_S_Top",
@@ -288,7 +297,8 @@
           "Y": 250.0
         },
         "IsDividedZone": true,
-        "SortId": 0
+        "SortId": 0,
+        "MenuMapScale": 1.0
       },
       "fld002_E_Top": {
         "ZoneId": "fld002_E_Top",
@@ -316,7 +326,8 @@
           "Y": 250.0
         },
         "IsDividedZone": true,
-        "SortId": 0
+        "SortId": 0,
+        "MenuMapScale": 1.0
       },
       "fld002_W_Top": {
         "ZoneId": "fld002_W_Top",
@@ -344,7 +355,8 @@
           "Y": 250.0
         },
         "IsDividedZone": true,
-        "SortId": 0
+        "SortId": 0,
+        "MenuMapScale": 1.0
       },
       "fld003_Top": {
         "ZoneId": "fld003_Top",
@@ -372,7 +384,8 @@
           "Y": 120.0
         },
         "IsDividedZone": false,
-        "SortId": 1004
+        "SortId": 1004,
+        "MenuMapScale": 1.0
       },
       "fld003_C_Top": {
         "ZoneId": "fld003_C_Top",
@@ -400,7 +413,8 @@
           "Y": 120.0
         },
         "IsDividedZone": true,
-        "SortId": 0
+        "SortId": 0,
+        "MenuMapScale": 1.0
       },
       "fld003_S_Top": {
         "ZoneId": "fld003_S_Top",
@@ -428,7 +442,8 @@
           "Y": 120.0
         },
         "IsDividedZone": true,
-        "SortId": 0
+        "SortId": 0,
+        "MenuMapScale": 1.0
       },
       "fld003_E_Top": {
         "ZoneId": "fld003_E_Top",
@@ -456,7 +471,8 @@
           "Y": 120.0
         },
         "IsDividedZone": true,
-        "SortId": 0
+        "SortId": 0,
+        "MenuMapScale": 1.0
       },
       "fld004_Top": {
         "ZoneId": "fld004_Top",
@@ -484,7 +500,8 @@
           "Y": 0.0
         },
         "IsDividedZone": false,
-        "SortId": 1005
+        "SortId": 1005,
+        "MenuMapScale": 1.0
       },
       "fld004_E_Top": {
         "ZoneId": "fld004_E_Top",
@@ -512,7 +529,8 @@
           "Y": 0.0
         },
         "IsDividedZone": true,
-        "SortId": 0
+        "SortId": 0,
+        "MenuMapScale": 1.0
       },
       "fld004_S_Top": {
         "ZoneId": "fld004_S_Top",
@@ -540,7 +558,8 @@
           "Y": 0.0
         },
         "IsDividedZone": true,
-        "SortId": 0
+        "SortId": 0,
+        "MenuMapScale": 1.0
       },
       "fld004_W_Top": {
         "ZoneId": "fld004_W_Top",
@@ -568,7 +587,8 @@
           "Y": 0.0
         },
         "IsDividedZone": true,
-        "SortId": 0
+        "SortId": 0,
+        "MenuMapScale": 1.0
       },
       "fld004_C_Top": {
         "ZoneId": "fld004_C_Top",
@@ -596,7 +616,8 @@
           "Y": 0.0
         },
         "IsDividedZone": true,
-        "SortId": 0
+        "SortId": 0,
+        "MenuMapScale": 1.0
       },
       "fld004_N_Top": {
         "ZoneId": "fld004_N_Top",
@@ -624,13 +645,14 @@
           "Y": 0.0
         },
         "IsDividedZone": true,
-        "SortId": 0
+        "SortId": 0,
+        "MenuMapScale": 1.0
       },
       "fld005_Top": {
         "ZoneId": "fld005_Top",
         "Floor": 1,
         "Texture": {
-          "AssetPathName": "None",
+          "AssetPathName": "/Game/UI/Map/MapImage/fld005/UI_Map_fld005.UI_Map_fld005",
           "SubPathString": ""
         },
         "CapturePosition": {
@@ -648,17 +670,18 @@
         "UVRange": 0.069,
         "ResolutionMultiplier": 2.0,
         "MenuMapPosition": {
-          "X": 0.0,
-          "Y": 0.0
+          "X": 200.0,
+          "Y": 85.0
         },
         "IsDividedZone": false,
-        "SortId": 99999999
+        "SortId": 1007,
+        "MenuMapScale": 1.0
       },
       "fld005_C_Top": {
         "ZoneId": "fld005_C_Top",
         "Floor": 1,
         "Texture": {
-          "AssetPathName": "None",
+          "AssetPathName": "/Game/UI/Map/MapImage/fld005/UI_Map_Fld005_C.UI_Map_Fld005_C",
           "SubPathString": ""
         },
         "CapturePosition": {
@@ -676,17 +699,18 @@
         "UVRange": 0.069,
         "ResolutionMultiplier": 2.0,
         "MenuMapPosition": {
-          "X": 0.0,
-          "Y": 0.0
+          "X": 200.0,
+          "Y": 85.0
         },
         "IsDividedZone": true,
-        "SortId": 0
+        "SortId": 0,
+        "MenuMapScale": 1.0
       },
       "fld005_E_Top": {
         "ZoneId": "fld005_E_Top",
         "Floor": 1,
         "Texture": {
-          "AssetPathName": "None",
+          "AssetPathName": "/Game/UI/Map/MapImage/fld005/UI_Map_Fld005_E.UI_Map_Fld005_E",
           "SubPathString": ""
         },
         "CapturePosition": {
@@ -704,17 +728,18 @@
         "UVRange": 0.069,
         "ResolutionMultiplier": 2.0,
         "MenuMapPosition": {
-          "X": 0.0,
-          "Y": 0.0
+          "X": 200.0,
+          "Y": 85.0
         },
         "IsDividedZone": true,
-        "SortId": 0
+        "SortId": 0,
+        "MenuMapScale": 1.0
       },
       "fld005_W_Top": {
         "ZoneId": "fld005_W_Top",
         "Floor": 1,
         "Texture": {
-          "AssetPathName": "None",
+          "AssetPathName": "/Game/UI/Map/MapImage/fld005/UI_Map_Fld005_W.UI_Map_Fld005_W",
           "SubPathString": ""
         },
         "CapturePosition": {
@@ -732,17 +757,18 @@
         "UVRange": 0.069,
         "ResolutionMultiplier": 2.0,
         "MenuMapPosition": {
-          "X": 0.0,
-          "Y": 0.0
+          "X": 200.0,
+          "Y": 85.0
         },
         "IsDividedZone": true,
-        "SortId": 0
+        "SortId": 0,
+        "MenuMapScale": 1.0
       },
       "fld006_Top": {
         "ZoneId": "fld006_Top",
         "Floor": 1,
         "Texture": {
-          "AssetPathName": "None",
+          "AssetPathName": "/Game/UI/Map/MapImage/fld006/UI_Map_fld006.UI_Map_fld006",
           "SubPathString": ""
         },
         "CapturePosition": {
@@ -760,17 +786,18 @@
         "UVRange": 0.125,
         "ResolutionMultiplier": 2.0,
         "MenuMapPosition": {
-          "X": 0.0,
-          "Y": 0.0
+          "X": 5.0,
+          "Y": 30.0
         },
         "IsDividedZone": false,
-        "SortId": 99999999
+        "SortId": 1009,
+        "MenuMapScale": 1.0
       },
       "fld006_E_Top": {
         "ZoneId": "fld006_E_Top",
         "Floor": 1,
         "Texture": {
-          "AssetPathName": "None",
+          "AssetPathName": "/Game/UI/Map/MapImage/fld006/UI_Map_Fld006_E.UI_Map_Fld006_E",
           "SubPathString": ""
         },
         "CapturePosition": {
@@ -788,17 +815,18 @@
         "UVRange": 0.125,
         "ResolutionMultiplier": 2.0,
         "MenuMapPosition": {
-          "X": 0.0,
-          "Y": 0.0
+          "X": 5.0,
+          "Y": 30.0
         },
         "IsDividedZone": true,
-        "SortId": 0
+        "SortId": 0,
+        "MenuMapScale": 1.0
       },
       "fld006_W_Top": {
         "ZoneId": "fld006_W_Top",
         "Floor": 1,
         "Texture": {
-          "AssetPathName": "None",
+          "AssetPathName": "/Game/UI/Map/MapImage/fld006/UI_Map_Fld006_W.UI_Map_Fld006_W",
           "SubPathString": ""
         },
         "CapturePosition": {
@@ -816,17 +844,18 @@
         "UVRange": 0.125,
         "ResolutionMultiplier": 2.0,
         "MenuMapPosition": {
-          "X": 0.0,
-          "Y": 0.0
+          "X": 5.0,
+          "Y": 30.0
         },
         "IsDividedZone": true,
-        "SortId": 0
+        "SortId": 0,
+        "MenuMapScale": 1.0
       },
       "fld006_S_Top": {
         "ZoneId": "fld006_S_Top",
         "Floor": 1,
         "Texture": {
-          "AssetPathName": "None",
+          "AssetPathName": "/Game/UI/Map/MapImage/fld006/UI_Map_Fld006_S.UI_Map_Fld006_S",
           "SubPathString": ""
         },
         "CapturePosition": {
@@ -844,17 +873,18 @@
         "UVRange": 0.125,
         "ResolutionMultiplier": 2.0,
         "MenuMapPosition": {
-          "X": 0.0,
-          "Y": 0.0
+          "X": 5.0,
+          "Y": 30.0
         },
         "IsDividedZone": true,
-        "SortId": 0
+        "SortId": 0,
+        "MenuMapScale": 1.0
       },
       "fld007_Top": {
         "ZoneId": "fld007_Top",
         "Floor": 1,
         "Texture": {
-          "AssetPathName": "None",
+          "AssetPathName": "/Game/UI/Map/MapImage/fld007/UI_Map_fld007.UI_Map_fld007",
           "SubPathString": ""
         },
         "CapturePosition": {
@@ -876,13 +906,14 @@
           "Y": 0.0
         },
         "IsDividedZone": false,
-        "SortId": 99999999
+        "SortId": 99999999,
+        "MenuMapScale": 1.0
       },
       "fld008_Top": {
         "ZoneId": "fld008_Top",
         "Floor": 1,
         "Texture": {
-          "AssetPathName": "None",
+          "AssetPathName": "/Game/UI/Map/MapImage/fld008/UI_Map_fld008.UI_Map_fld008",
           "SubPathString": ""
         },
         "CapturePosition": {
@@ -904,7 +935,8 @@
           "Y": 0.0
         },
         "IsDividedZone": false,
-        "SortId": 0
+        "SortId": 0,
+        "MenuMapScale": 1.0
       },
       "dng004_Top_F1": {
         "ZoneId": "dng004_Top",
@@ -932,7 +964,8 @@
           "Y": 0.0
         },
         "IsDividedZone": false,
-        "SortId": 0
+        "SortId": 0,
+        "MenuMapScale": 1.0
       },
       "dng004_Top_F2": {
         "ZoneId": "dng004_Top",
@@ -960,7 +993,8 @@
           "Y": 0.0
         },
         "IsDividedZone": false,
-        "SortId": 0
+        "SortId": 0,
+        "MenuMapScale": 1.0
       },
       "dng004_Top_F3": {
         "ZoneId": "dng004_Top",
@@ -988,7 +1022,8 @@
           "Y": 0.0
         },
         "IsDividedZone": false,
-        "SortId": 0
+        "SortId": 0,
+        "MenuMapScale": 1.0
       },
       "dng004_Top_F4": {
         "ZoneId": "dng004_Top",
@@ -1016,7 +1051,8 @@
           "Y": 0.0
         },
         "IsDividedZone": false,
-        "SortId": 0
+        "SortId": 0,
+        "MenuMapScale": 1.0
       },
       "dng005_Top_F1": {
         "ZoneId": "dng005_Top",
@@ -1044,7 +1080,8 @@
           "Y": 0.0
         },
         "IsDividedZone": false,
-        "SortId": 0
+        "SortId": 0,
+        "MenuMapScale": 1.0
       },
       "dng005_Top_F2": {
         "ZoneId": "dng005_Top",
@@ -1072,7 +1109,8 @@
           "Y": 0.0
         },
         "IsDividedZone": false,
-        "SortId": 0
+        "SortId": 0,
+        "MenuMapScale": 1.0
       },
       "dng005_Top_F3": {
         "ZoneId": "dng005_Top",
@@ -1100,7 +1138,8 @@
           "Y": 0.0
         },
         "IsDividedZone": false,
-        "SortId": 0
+        "SortId": 0,
+        "MenuMapScale": 1.0
       },
       "dng005_Top_F4": {
         "ZoneId": "dng005_Top",
@@ -1128,7 +1167,8 @@
           "Y": 0.0
         },
         "IsDividedZone": false,
-        "SortId": 0
+        "SortId": 0,
+        "MenuMapScale": 1.0
       },
       "dng005_Top_F5": {
         "ZoneId": "dng005_Top",
@@ -1156,7 +1196,8 @@
           "Y": 0.0
         },
         "IsDividedZone": false,
-        "SortId": 0
+        "SortId": 0,
+        "MenuMapScale": 1.0
       },
       "dng005_Top_F6": {
         "ZoneId": "dng005_Top",
@@ -1184,7 +1225,8 @@
           "Y": 0.0
         },
         "IsDividedZone": false,
-        "SortId": 0
+        "SortId": 0,
+        "MenuMapScale": 1.0
       },
       "dng007_Top": {
         "ZoneId": "dng007_Top",
@@ -1212,7 +1254,8 @@
           "Y": 0.0
         },
         "IsDividedZone": false,
-        "SortId": 0
+        "SortId": 0,
+        "MenuMapScale": 1.0
       },
       "dng009_Top": {
         "ZoneId": "dng009_Top",
@@ -1240,7 +1283,8 @@
           "Y": 0.0
         },
         "IsDividedZone": false,
-        "SortId": 0
+        "SortId": 0,
+        "MenuMapScale": 1.0
       },
       "dng011_Top_F1": {
         "ZoneId": "dng011_Top",
@@ -1268,7 +1312,8 @@
           "Y": 0.0
         },
         "IsDividedZone": false,
-        "SortId": 0
+        "SortId": 0,
+        "MenuMapScale": 1.0
       },
       "dng011_Top_F2_a": {
         "ZoneId": "dng011_Top",
@@ -1296,7 +1341,8 @@
           "Y": 0.0
         },
         "IsDividedZone": false,
-        "SortId": 0
+        "SortId": 0,
+        "MenuMapScale": 1.0
       },
       "dng011_Top_F2_b": {
         "ZoneId": "dng011_Top",
@@ -1324,7 +1370,8 @@
           "Y": 0.0
         },
         "IsDividedZone": false,
-        "SortId": 0
+        "SortId": 0,
+        "MenuMapScale": 1.0
       },
       "dng011_Top_F3_a": {
         "ZoneId": "dng011_Top",
@@ -1352,7 +1399,8 @@
           "Y": 0.0
         },
         "IsDividedZone": false,
-        "SortId": 0
+        "SortId": 0,
+        "MenuMapScale": 1.0
       },
       "dng011_Top_F3_b": {
         "ZoneId": "dng011_Top",
@@ -1380,7 +1428,8 @@
           "Y": 0.0
         },
         "IsDividedZone": false,
-        "SortId": 0
+        "SortId": 0,
+        "MenuMapScale": 1.0
       },
       "dng011_Top_F4": {
         "ZoneId": "dng011_Top",
@@ -1408,7 +1457,8 @@
           "Y": 0.0
         },
         "IsDividedZone": false,
-        "SortId": 0
+        "SortId": 0,
+        "MenuMapScale": 1.0
       },
       "dng011_Top_F5": {
         "ZoneId": "dng011_Top",
@@ -1436,7 +1486,8 @@
           "Y": 0.0
         },
         "IsDividedZone": false,
-        "SortId": 0
+        "SortId": 0,
+        "MenuMapScale": 1.0
       },
       "dng011_Top_F6": {
         "ZoneId": "dng011_Top",
@@ -1464,13 +1515,14 @@
           "Y": 0.0
         },
         "IsDividedZone": false,
-        "SortId": 0
+        "SortId": 0,
+        "MenuMapScale": 1.0
       },
       "dng013_Top": {
         "ZoneId": "dng013_Top",
         "Floor": 1,
         "Texture": {
-          "AssetPathName": "None",
+          "AssetPathName": "/Game/UI/Map/MapImage/dng013/UI_Mapdng013.UI_Mapdng013",
           "SubPathString": ""
         },
         "CapturePosition": {
@@ -1492,7 +1544,8 @@
           "Y": 0.0
         },
         "IsDividedZone": false,
-        "SortId": 0
+        "SortId": 0,
+        "MenuMapScale": 1.0
       },
       "dng015_Top_F1": {
         "ZoneId": "dng015_Top",
@@ -1520,7 +1573,8 @@
           "Y": 0.0
         },
         "IsDividedZone": false,
-        "SortId": 0
+        "SortId": 0,
+        "MenuMapScale": 1.0
       },
       "dng015_Top_F2": {
         "ZoneId": "dng015_Top",
@@ -1548,7 +1602,8 @@
           "Y": 0.0
         },
         "IsDividedZone": false,
-        "SortId": 0
+        "SortId": 0,
+        "MenuMapScale": 1.0
       },
       "dng015_Top_F3": {
         "ZoneId": "dng015_Top",
@@ -1576,7 +1631,8 @@
           "Y": 0.0
         },
         "IsDividedZone": false,
-        "SortId": 0
+        "SortId": 0,
+        "MenuMapScale": 1.0
       },
       "dng015_Top_F4": {
         "ZoneId": "dng015_Top",
@@ -1604,7 +1660,8 @@
           "Y": 0.0
         },
         "IsDividedZone": false,
-        "SortId": 0
+        "SortId": 0,
+        "MenuMapScale": 1.0
       },
       "dng015_Top_F5": {
         "ZoneId": "dng015_Top",
@@ -1632,13 +1689,14 @@
           "Y": 0.0
         },
         "IsDividedZone": false,
-        "SortId": 0
+        "SortId": 0,
+        "MenuMapScale": 1.0
       },
       "dng017_Top": {
         "ZoneId": "dng017_Top",
         "Floor": 1,
         "Texture": {
-          "AssetPathName": "None",
+          "AssetPathName": "/Game/UI/Map/MapImage/dng017/UI_Mapdng017.UI_Mapdng017",
           "SubPathString": ""
         },
         "CapturePosition": {
@@ -1660,13 +1718,14 @@
           "Y": 0.0
         },
         "IsDividedZone": false,
-        "SortId": 0
+        "SortId": 0,
+        "MenuMapScale": 1.0
       },
       "dng019_Top": {
         "ZoneId": "dng019_Top",
         "Floor": 1,
         "Texture": {
-          "AssetPathName": "None",
+          "AssetPathName": "/Game/UI/Map/MapImage/dng019/UI_Mapdng019.UI_Mapdng019",
           "SubPathString": ""
         },
         "CapturePosition": {
@@ -1688,7 +1747,37 @@
           "Y": 0.0
         },
         "IsDividedZone": false,
-        "SortId": 0
+        "SortId": 0,
+        "MenuMapScale": 1.0
+      },
+      "dng020_Top": {
+        "ZoneId": "dng020_Top",
+        "Floor": 1,
+        "Texture": {
+          "AssetPathName": "/Game/UI/Map/MapImage/dng020/UI_Mapdng020.UI_Mapdng020",
+          "SubPathString": ""
+        },
+        "CapturePosition": {
+          "X": -48.023,
+          "Y": -33.0
+        },
+        "CaptureSize": {
+          "X": 124.444,
+          "Y": 70.0
+        },
+        "WorldMapPosition": {
+          "X": 0.0,
+          "Y": 0.0
+        },
+        "UVRange": 0.064286,
+        "ResolutionMultiplier": 2.0,
+        "MenuMapPosition": {
+          "X": 0.0,
+          "Y": 0.0
+        },
+        "IsDividedZone": false,
+        "SortId": 0,
+        "MenuMapScale": 1.0
       },
       "pat0101_Top": {
         "ZoneId": "pat0101_Top",
@@ -1716,7 +1805,8 @@
           "Y": 0.0
         },
         "IsDividedZone": false,
-        "SortId": 0
+        "SortId": 0,
+        "MenuMapScale": 1.0
       },
       "pat0102_Top": {
         "ZoneId": "pat0102_Top",
@@ -1744,13 +1834,14 @@
           "Y": 0.0
         },
         "IsDividedZone": false,
-        "SortId": 0
+        "SortId": 0,
+        "MenuMapScale": 1.0
       },
       "pat103_Top_F1": {
         "ZoneId": "par0103_Top",
         "Floor": 1,
         "Texture": {
-          "AssetPathName": "None",
+          "AssetPathName": "/Game/UI/Map/MapImage/pat0103/UI_Mappat0103_F1.UI_Mappat0103_F1",
           "SubPathString": ""
         },
         "CapturePosition": {
@@ -1772,13 +1863,14 @@
           "Y": 0.0
         },
         "IsDividedZone": false,
-        "SortId": 0
+        "SortId": 0,
+        "MenuMapScale": 1.0
       },
       "pat103_Top_F2": {
         "ZoneId": "par0103_Top",
         "Floor": 2,
         "Texture": {
-          "AssetPathName": "None",
+          "AssetPathName": "/Game/UI/Map/MapImage/pat0103/UI_Mappat0103_F2.UI_Mappat0103_F2",
           "SubPathString": ""
         },
         "CapturePosition": {
@@ -1800,18 +1892,48 @@
           "Y": 0.0
         },
         "IsDividedZone": false,
-        "SortId": 0
+        "SortId": 0,
+        "MenuMapScale": 1.0
+      },
+      "pat0104_Top": {
+        "ZoneId": "pat0104_Top",
+        "Floor": 1,
+        "Texture": {
+          "AssetPathName": "/Game/UI/Map/MapImage/pat0104/UI_Mappat0104.UI_Mappat0104",
+          "SubPathString": ""
+        },
+        "CapturePosition": {
+          "X": -27393.0,
+          "Y": -52060.0
+        },
+        "CaptureSize": {
+          "X": 92444.0,
+          "Y": 52000.0
+        },
+        "WorldMapPosition": {
+          "X": 0.0,
+          "Y": 0.0
+        },
+        "UVRange": 0.0865,
+        "ResolutionMultiplier": 1.0,
+        "MenuMapPosition": {
+          "X": 0.0,
+          "Y": 0.0
+        },
+        "IsDividedZone": false,
+        "SortId": 0,
+        "MenuMapScale": 1.0
       },
       "pat0105_Top": {
         "ZoneId": "pat0105_Top",
         "Floor": 1,
         "Texture": {
-          "AssetPathName": "None",
+          "AssetPathName": "/Game/UI/Map/MapImage/pat0105/UI_Mappat0105.UI_Mappat0105",
           "SubPathString": ""
         },
         "CapturePosition": {
-          "X": 7380.0,
-          "Y": 17770.0
+          "X": 7200.0,
+          "Y": 17760.0
         },
         "CaptureSize": {
           "X": 48000.0,
@@ -1828,13 +1950,14 @@
           "Y": 0.0
         },
         "IsDividedZone": false,
-        "SortId": 0
+        "SortId": 0,
+        "MenuMapScale": 1.0
       },
       "pat0106_Top": {
         "ZoneId": "pat0106_Top",
         "Floor": 1,
         "Texture": {
-          "AssetPathName": "None",
+          "AssetPathName": "/Game/UI/Map/MapImage/pat0106/UI_Mappat0106.UI_Mappat0106",
           "SubPathString": ""
         },
         "CapturePosition": {
@@ -1856,17 +1979,18 @@
           "Y": 0.0
         },
         "IsDividedZone": false,
-        "SortId": 0
+        "SortId": 0,
+        "MenuMapScale": 1.0
       },
       "pat0107_Top": {
         "ZoneId": "pat0107_Top",
         "Floor": 1,
         "Texture": {
-          "AssetPathName": "None",
+          "AssetPathName": "/Game/UI/Map/MapImage/pat0107/UI_Mappat0107.UI_Mappat0107",
           "SubPathString": ""
         },
         "CapturePosition": {
-          "X": -27537.0,
+          "X": -28647.0,
           "Y": -12970.0
         },
         "CaptureSize": {
@@ -1884,13 +2008,14 @@
           "Y": 0.0
         },
         "IsDividedZone": false,
-        "SortId": 0
+        "SortId": 0,
+        "MenuMapScale": 1.0
       },
       "pat0108_Top": {
         "ZoneId": "pat0108_Top",
         "Floor": 1,
         "Texture": {
-          "AssetPathName": "None",
+          "AssetPathName": "/Game/UI/Map/MapImage/pat0108/UI_Mappat0108.UI_Mappat0108",
           "SubPathString": ""
         },
         "CapturePosition": {
@@ -1912,7 +2037,8 @@
           "Y": 0.0
         },
         "IsDividedZone": false,
-        "SortId": 0
+        "SortId": 0,
+        "MenuMapScale": 1.0
       },
       "pat0201_Top_F1": {
         "ZoneId": "pat0201_Top",
@@ -1940,7 +2066,8 @@
           "Y": 0.0
         },
         "IsDividedZone": false,
-        "SortId": 0
+        "SortId": 0,
+        "MenuMapScale": 1.0
       },
       "pat0201_Top_F2": {
         "ZoneId": "pat0201_Top",
@@ -1968,7 +2095,8 @@
           "Y": 0.0
         },
         "IsDividedZone": false,
-        "SortId": 0
+        "SortId": 0,
+        "MenuMapScale": 1.0
       },
       "pat0202_Top": {
         "ZoneId": "pat0202_Top",
@@ -1996,13 +2124,14 @@
           "Y": 0.0
         },
         "IsDividedZone": false,
-        "SortId": 0
+        "SortId": 0,
+        "MenuMapScale": 1.0
       },
       "pat0203_Top": {
         "ZoneId": "pat0203_Top",
         "Floor": 1,
         "Texture": {
-          "AssetPathName": "None",
+          "AssetPathName": "/Game/UI/Map/MapImage/pat0203/UI_Mappat0203.UI_Mappat0203",
           "SubPathString": ""
         },
         "CapturePosition": {
@@ -2024,13 +2153,14 @@
           "Y": 0.0
         },
         "IsDividedZone": false,
-        "SortId": 0
+        "SortId": 0,
+        "MenuMapScale": 1.0
       },
       "pat0204_Top": {
         "ZoneId": "pat0204_Top",
         "Floor": 1,
         "Texture": {
-          "AssetPathName": "None",
+          "AssetPathName": "/Game/UI/Map/MapImage/pat0204/UI_Mappat0204.UI_Mappat0204",
           "SubPathString": ""
         },
         "CapturePosition": {
@@ -2052,41 +2182,43 @@
           "Y": 0.0
         },
         "IsDividedZone": false,
-        "SortId": 0
+        "SortId": 0,
+        "MenuMapScale": 1.0
       },
       "pat0205_Top": {
         "ZoneId": "pat0205_Top",
         "Floor": 1,
         "Texture": {
-          "AssetPathName": "None",
+          "AssetPathName": "/Game/UI/Map/MapImage/pat0205/UI_Mappat0205.UI_Mappat0205",
           "SubPathString": ""
         },
         "CapturePosition": {
-          "X": -69105.0,
-          "Y": -48764.0
+          "X": -56405.0,
+          "Y": -41764.0
         },
         "CaptureSize": {
-          "X": 106666.0,
-          "Y": 60000.0
+          "X": 81777.0,
+          "Y": 46000.0
         },
         "WorldMapPosition": {
           "X": 0.0,
           "Y": 0.0
         },
-        "UVRange": 0.075,
+        "UVRange": 0.097826,
         "ResolutionMultiplier": 1.0,
         "MenuMapPosition": {
           "X": 0.0,
           "Y": 0.0
         },
         "IsDividedZone": false,
-        "SortId": 0
+        "SortId": 0,
+        "MenuMapScale": 1.0
       },
       "pat0206_Top": {
         "ZoneId": "pat0206_Top",
         "Floor": 1,
         "Texture": {
-          "AssetPathName": "None",
+          "AssetPathName": "/Game/UI/Map/MapImage/pat0206/UI_Mappat0206.UI_Mappat0206",
           "SubPathString": ""
         },
         "CapturePosition": {
@@ -2108,7 +2240,37 @@
           "Y": 0.0
         },
         "IsDividedZone": false,
-        "SortId": 0
+        "SortId": 0,
+        "MenuMapScale": 1.0
+      },
+      "pat0207_Top": {
+        "ZoneId": "pat0207_Top",
+        "Floor": 1,
+        "Texture": {
+          "AssetPathName": "/Game/UI/Map/MapImage/pat0207/UI_Mappat0207.UI_Mappat0207",
+          "SubPathString": ""
+        },
+        "CapturePosition": {
+          "X": -27327.0,
+          "Y": -3060.0
+        },
+        "CaptureSize": {
+          "X": 53333.0,
+          "Y": 30000.0
+        },
+        "WorldMapPosition": {
+          "X": 0.0,
+          "Y": 0.0
+        },
+        "UVRange": 0.15,
+        "ResolutionMultiplier": 1.0,
+        "MenuMapPosition": {
+          "X": 0.0,
+          "Y": 0.0
+        },
+        "IsDividedZone": false,
+        "SortId": 0,
+        "MenuMapScale": 1.0
       },
       "pat0301_Top": {
         "ZoneId": "pat0301_Top",
@@ -2136,13 +2298,14 @@
           "Y": 0.0
         },
         "IsDividedZone": false,
-        "SortId": 0
+        "SortId": 0,
+        "MenuMapScale": 1.0
       },
       "pat0302_Top": {
         "ZoneId": "pat0302_Top",
         "Floor": 1,
         "Texture": {
-          "AssetPathName": "None",
+          "AssetPathName": "/Game/UI/Map/MapImage/pat0302/UI_Mappat0302.UI_Mappat0302",
           "SubPathString": ""
         },
         "CapturePosition": {
@@ -2164,13 +2327,14 @@
           "Y": 0.0
         },
         "IsDividedZone": false,
-        "SortId": 0
+        "SortId": 0,
+        "MenuMapScale": 1.0
       },
       "pat0303_Top": {
         "ZoneId": "pat0303_Top",
         "Floor": 1,
         "Texture": {
-          "AssetPathName": "None",
+          "AssetPathName": "/Game/UI/Map/MapImage/pat0303/UI_Mappat0303.UI_Mappat0303",
           "SubPathString": ""
         },
         "CapturePosition": {
@@ -2192,41 +2356,72 @@
           "Y": 0.0
         },
         "IsDividedZone": false,
-        "SortId": 0
+        "SortId": 0,
+        "MenuMapScale": 1.0
       },
       "pat0304_Top": {
         "ZoneId": "pat0304_Top",
         "Floor": 1,
         "Texture": {
-          "AssetPathName": "None",
+          "AssetPathName": "/Game/UI/Map/MapImage/pat0304/UI_Mappat0304.UI_Mappat0304",
           "SubPathString": ""
         },
         "CapturePosition": {
-          "X": -10667.0,
-          "Y": -17700.0
+          "X": -7643.0,
+          "Y": -13270.0
         },
         "CaptureSize": {
-          "X": 53333.0,
-          "Y": 30000.0
+          "X": 44444.0,
+          "Y": 25000.0
         },
         "WorldMapPosition": {
           "X": 0.0,
           "Y": 0.0
         },
-        "UVRange": 0.15,
+        "UVRange": 0.18,
         "ResolutionMultiplier": 0.5,
         "MenuMapPosition": {
           "X": 0.0,
           "Y": 0.0
         },
         "IsDividedZone": false,
-        "SortId": 0
+        "SortId": 0,
+        "MenuMapScale": 1.0
+      },
+      "pat0501_Top": {
+        "ZoneId": "pat0501_Top",
+        "Floor": 1,
+        "Texture": {
+          "AssetPathName": "/Game/UI/Map/MapImage/pat0501/UI_Mappat0501.UI_Mappat0501",
+          "SubPathString": ""
+        },
+        "CapturePosition": {
+          "X": -38335.0,
+          "Y": -46190.0
+        },
+        "CaptureSize": {
+          "X": 88888.0,
+          "Y": 50000.0
+        },
+        "WorldMapPosition": {
+          "X": 0.0,
+          "Y": 0.0
+        },
+        "UVRange": 0.09,
+        "ResolutionMultiplier": 1.0,
+        "MenuMapPosition": {
+          "X": 0.0,
+          "Y": 0.0
+        },
+        "IsDividedZone": false,
+        "SortId": 0,
+        "MenuMapScale": 1.0
       },
       "pat0505_Top": {
         "ZoneId": "pat0505_Top",
         "Floor": 1,
         "Texture": {
-          "AssetPathName": "None",
+          "AssetPathName": "/Game/UI/Map/MapImage/pat0505/UI_Mappat0505.UI_Mappat0505",
           "SubPathString": ""
         },
         "CapturePosition": {
@@ -2248,13 +2443,72 @@
           "Y": 0.0
         },
         "IsDividedZone": false,
-        "SortId": 0
+        "SortId": 0,
+        "MenuMapScale": 1.0
+      },
+      "pat0506_Top": {
+        "ZoneId": "pat0506_Top",
+        "Floor": 1,
+        "Texture": {
+          "AssetPathName": "/Game/UI/Map/MapImage/pat0506/UI_Mappat0506.UI_Mappat0506",
+          "SubPathString": ""
+        },
+        "CapturePosition": {
+          "X": -40384.0,
+          "Y": -33391.0
+        },
+        "CaptureSize": {
+          "X": 81777.0,
+          "Y": 46000.0
+        },
+        "WorldMapPosition": {
+          "X": 0.0,
+          "Y": 0.0
+        },
+        "UVRange": 0.0978,
+        "ResolutionMultiplier": 1.0,
+        "MenuMapPosition": {
+          "X": 0.0,
+          "Y": 0.0
+        },
+        "IsDividedZone": false,
+        "SortId": 0,
+        "MenuMapScale": 1.0
+      },
+      "pat0507_Top": {
+        "ZoneId": "pat0507_Top",
+        "Floor": 1,
+        "Texture": {
+          "AssetPathName": "/Game/UI/Map/MapImage/pat0507/UI_Mappat0507.UI_Mappat0507",
+          "SubPathString": ""
+        },
+        "CapturePosition": {
+          "X": -18889.0,
+          "Y": -27500.0
+        },
+        "CaptureSize": {
+          "X": 97778.0,
+          "Y": 55000.0
+        },
+        "WorldMapPosition": {
+          "X": 0.0,
+          "Y": 0.0
+        },
+        "UVRange": 0.081818,
+        "ResolutionMultiplier": 1.0,
+        "MenuMapPosition": {
+          "X": 0.0,
+          "Y": 0.0
+        },
+        "IsDividedZone": false,
+        "SortId": 0,
+        "MenuMapScale": 1.0
       },
       "pat0601_Top": {
         "ZoneId": "pat0601_Top",
         "Floor": 1,
         "Texture": {
-          "AssetPathName": "None",
+          "AssetPathName": "/Game/UI/Map/MapImage/pat0601/UI_Mappat0601.UI_Mappat0601",
           "SubPathString": ""
         },
         "CapturePosition": {
@@ -2276,18 +2530,19 @@
           "Y": 0.0
         },
         "IsDividedZone": false,
-        "SortId": 0
+        "SortId": 0,
+        "MenuMapScale": 1.0
       },
       "pat0602_Top": {
         "ZoneId": "pat0602_Top",
         "Floor": 1,
         "Texture": {
-          "AssetPathName": "None",
+          "AssetPathName": "/Game/UI/Map/MapImage/pat0602/UI_Mappat0602.UI_Mappat0602",
           "SubPathString": ""
         },
         "CapturePosition": {
-          "X": -37536.0,
-          "Y": -11284.0
+          "X": -35296.0,
+          "Y": -12004.0
         },
         "CaptureSize": {
           "X": 64000.0,
@@ -2304,13 +2559,43 @@
           "Y": 0.0
         },
         "IsDividedZone": false,
-        "SortId": 0
+        "SortId": 0,
+        "MenuMapScale": 1.0
+      },
+      "pat0603_Top": {
+        "ZoneId": "pat0603_Top",
+        "Floor": 1,
+        "Texture": {
+          "AssetPathName": "/Game/UI/Map/MapImage/pat0603/UI_Mappat0603.UI_Mappat0603",
+          "SubPathString": ""
+        },
+        "CapturePosition": {
+          "X": -3400.0,
+          "Y": -8433.0
+        },
+        "CaptureSize": {
+          "X": 50000.0,
+          "Y": 28125.0
+        },
+        "WorldMapPosition": {
+          "X": 0.0,
+          "Y": 0.0
+        },
+        "UVRange": 0.16,
+        "ResolutionMultiplier": 1.0,
+        "MenuMapPosition": {
+          "X": 0.0,
+          "Y": 0.0
+        },
+        "IsDividedZone": false,
+        "SortId": 0,
+        "MenuMapScale": 1.0
       },
       "pat0604_Top": {
         "ZoneId": "pat0604_Top",
         "Floor": 1,
         "Texture": {
-          "AssetPathName": "None",
+          "AssetPathName": "/Game/UI/Map/MapImage/pat0604/UI_Mappat0604.UI_Mappat0604",
           "SubPathString": ""
         },
         "CapturePosition": {
@@ -2332,7 +2617,153 @@
           "Y": 0.0
         },
         "IsDividedZone": false,
-        "SortId": 0
+        "SortId": 0,
+        "MenuMapScale": 1.0
+      },
+      "pat0605_Top": {
+        "ZoneId": "pat0605_Top",
+        "Floor": 1,
+        "Texture": {
+          "AssetPathName": "/Game/UI/Map/MapImage/pat0605/UI_Mappat0605.UI_Mappat0605",
+          "SubPathString": ""
+        },
+        "CapturePosition": {
+          "X": -32285.0,
+          "Y": -2240.0
+        },
+        "CaptureSize": {
+          "X": 88888.0,
+          "Y": 50000.0
+        },
+        "WorldMapPosition": {
+          "X": 0.0,
+          "Y": 0.0
+        },
+        "UVRange": 0.09,
+        "ResolutionMultiplier": 1.0,
+        "MenuMapPosition": {
+          "X": 0.0,
+          "Y": 0.0
+        },
+        "IsDividedZone": false,
+        "SortId": 0,
+        "MenuMapScale": 1.0
+      },
+      "pat0606_Top": {
+        "ZoneId": "pat0606_Top",
+        "Floor": 1,
+        "Texture": {
+          "AssetPathName": "/Game/UI/Map/MapImage/pat0606/UI_Mappat0606.UI_Mappat0606",
+          "SubPathString": ""
+        },
+        "CapturePosition": {
+          "X": -23470.0,
+          "Y": -4850.0
+        },
+        "CaptureSize": {
+          "X": 64000.0,
+          "Y": 36000.0
+        },
+        "WorldMapPosition": {
+          "X": 0.0,
+          "Y": 0.0
+        },
+        "UVRange": 0.125,
+        "ResolutionMultiplier": 1.0,
+        "MenuMapPosition": {
+          "X": 0.0,
+          "Y": 0.0
+        },
+        "IsDividedZone": false,
+        "SortId": 0,
+        "MenuMapScale": 1.0
+      },
+      "pat0701_Top": {
+        "ZoneId": "pat0701_Top",
+        "Floor": 1,
+        "Texture": {
+          "AssetPathName": "/Game/UI/Map/MapImage/pat0701/UI_Mappat0701.UI_Mappat0701",
+          "SubPathString": ""
+        },
+        "CapturePosition": {
+          "X": -28.012,
+          "Y": -8.75
+        },
+        "CaptureSize": {
+          "X": 62.222,
+          "Y": 35.0
+        },
+        "WorldMapPosition": {
+          "X": 0.0,
+          "Y": 0.0
+        },
+        "UVRange": 0.128571,
+        "ResolutionMultiplier": 1.0,
+        "MenuMapPosition": {
+          "X": 0.0,
+          "Y": 0.0
+        },
+        "IsDividedZone": false,
+        "SortId": 0,
+        "MenuMapScale": 1.0
+      },
+      "pat0702_Top": {
+        "ZoneId": "pat0702_Top",
+        "Floor": 1,
+        "Texture": {
+          "AssetPathName": "/Game/UI/Map/MapImage/pat0702/UI_Mappat0702.UI_Mappat0702",
+          "SubPathString": ""
+        },
+        "CapturePosition": {
+          "X": -37.6,
+          "Y": -15.75
+        },
+        "CaptureSize": {
+          "X": 80.0,
+          "Y": 45.0
+        },
+        "WorldMapPosition": {
+          "X": 0.0,
+          "Y": 0.0
+        },
+        "UVRange": 0.1,
+        "ResolutionMultiplier": 1.0,
+        "MenuMapPosition": {
+          "X": 0.0,
+          "Y": 0.0
+        },
+        "IsDividedZone": false,
+        "SortId": 0,
+        "MenuMapScale": 1.0
+      },
+      "pat0703_Top": {
+        "ZoneId": "pat0703_Top",
+        "Floor": 1,
+        "Texture": {
+          "AssetPathName": "/Game/UI/Map/MapImage/pat0703/UI_Mappat0703.UI_Mappat0703",
+          "SubPathString": ""
+        },
+        "CapturePosition": {
+          "X": -37150.0,
+          "Y": -14500.0
+        },
+        "CaptureSize": {
+          "X": 80.0,
+          "Y": 45.0
+        },
+        "WorldMapPosition": {
+          "X": 0.0,
+          "Y": 0.0
+        },
+        "UVRange": 0.1,
+        "ResolutionMultiplier": 1.0,
+        "MenuMapPosition": {
+          "X": 0.0,
+          "Y": 0.0
+        },
+        "IsDividedZone": false,
+        "SortId": 0,
+        "MenuMapScale": 1.0
       },
       "pat0801_Top": {
         "ZoneId": "pat0801_Top",
@@ -2360,7 +2791,8 @@
           "Y": 0.0
         },
         "IsDividedZone": false,
-        "SortId": 0
+        "SortId": 0,
+        "MenuMapScale": 1.0
       },
       "pat0802_Top": {
         "ZoneId": "pat0802_Top",
@@ -2388,7 +2820,8 @@
           "Y": 0.0
         },
         "IsDividedZone": false,
-        "SortId": 0
+        "SortId": 0,
+        "MenuMapScale": 1.0
       },
       "pat0803_Top": {
         "ZoneId": "pat0803_Top",
@@ -2416,13 +2849,14 @@
           "Y": 0.0
         },
         "IsDividedZone": false,
-        "SortId": 0
+        "SortId": 0,
+        "MenuMapScale": 1.0
       },
       "pat0804_Top": {
         "ZoneId": "pat0804_Top",
         "Floor": 1,
         "Texture": {
-          "AssetPathName": "None",
+          "AssetPathName": "/Game/UI/Map/MapImage/pat0804/UI_Mappat0804.UI_Mappat0804",
           "SubPathString": ""
         },
         "CapturePosition": {
@@ -2444,18 +2878,19 @@
           "Y": 0.0
         },
         "IsDividedZone": false,
-        "SortId": 0
+        "SortId": 0,
+        "MenuMapScale": 1.0
       },
       "pat0805_Top": {
         "ZoneId": "pat0805_Top",
         "Floor": 1,
         "Texture": {
-          "AssetPathName": "None",
+          "AssetPathName": "/Game/UI/Map/MapImage/pat0805/UI_Mappat0805.UI_Mappat0805",
           "SubPathString": ""
         },
         "CapturePosition": {
           "X": -27745.0,
-          "Y": -22711.0
+          "Y": -22955.0
         },
         "CaptureSize": {
           "X": 88888.0,
@@ -2472,13 +2907,14 @@
           "Y": 0.0
         },
         "IsDividedZone": false,
-        "SortId": 0
+        "SortId": 0,
+        "MenuMapScale": 1.0
       },
       "pat0806_Top": {
         "ZoneId": "pat0806_Top",
         "Floor": 1,
         "Texture": {
-          "AssetPathName": "None",
+          "AssetPathName": "/Game/UI/Map/MapImage/pat0806/UI_Mappat0806.UI_Mappat0806",
           "SubPathString": ""
         },
         "CapturePosition": {
@@ -2500,13 +2936,14 @@
           "Y": 0.0
         },
         "IsDividedZone": false,
-        "SortId": 0
+        "SortId": 0,
+        "MenuMapScale": 1.0
       },
       "pat0807_Top": {
         "ZoneId": "pat0807_Top",
         "Floor": 1,
         "Texture": {
-          "AssetPathName": "None",
+          "AssetPathName": "/Game/UI/Map/MapImage/pat0807/UI_Mappat0807.UI_Mappat0807",
           "SubPathString": ""
         },
         "CapturePosition": {
@@ -2528,13 +2965,43 @@
           "Y": 0.0
         },
         "IsDividedZone": false,
-        "SortId": 0
+        "SortId": 0,
+        "MenuMapScale": 1.0
+      },
+      "pat0808_Top": {
+        "ZoneId": "pat0808_Top",
+        "Floor": 1,
+        "Texture": {
+          "AssetPathName": "/Game/UI/Map/MapImage/pat0808/UI_Mappat0808.UI_Mappat0808",
+          "SubPathString": ""
+        },
+        "CapturePosition": {
+          "X": -19551.0,
+          "Y": -22649.0
+        },
+        "CaptureSize": {
+          "X": 71111.0,
+          "Y": 40000.0
+        },
+        "WorldMapPosition": {
+          "X": 0.0,
+          "Y": 0.0
+        },
+        "UVRange": 0.1125,
+        "ResolutionMultiplier": 1.0,
+        "MenuMapPosition": {
+          "X": 0.0,
+          "Y": 0.0
+        },
+        "IsDividedZone": false,
+        "SortId": 0,
+        "MenuMapScale": 1.0
       },
       "pat0901_Top": {
         "ZoneId": "pat0901_Top",
         "Floor": 1,
         "Texture": {
-          "AssetPathName": "None",
+          "AssetPathName": "/Game/UI/Map/MapImage/pat0901/UI_Mappat0901.UI_Mappat0901",
           "SubPathString": ""
         },
         "CapturePosition": {
@@ -2556,13 +3023,14 @@
           "Y": 0.0
         },
         "IsDividedZone": false,
-        "SortId": 0
+        "SortId": 0,
+        "MenuMapScale": 1.0
       },
       "pat0902_Top": {
         "ZoneId": "pat0902_Top",
         "Floor": 1,
         "Texture": {
-          "AssetPathName": "None",
+          "AssetPathName": "/Game/UI/Map/MapImage/pat0902/UI_Mappat0902.UI_Mappat0902",
           "SubPathString": ""
         },
         "CapturePosition": {
@@ -2584,13 +3052,14 @@
           "Y": 0.0
         },
         "IsDividedZone": false,
-        "SortId": 0
+        "SortId": 0,
+        "MenuMapScale": 1.0
       },
       "pat0903_Top": {
         "ZoneId": "pat0903_Top",
         "Floor": 1,
         "Texture": {
-          "AssetPathName": "None",
+          "AssetPathName": "/Game/UI/Map/MapImage/pat0903/UI_Mappat0903.UI_Mappat0903",
           "SubPathString": ""
         },
         "CapturePosition": {
@@ -2612,7 +3081,8 @@
           "Y": 0.0
         },
         "IsDividedZone": false,
-        "SortId": 0
+        "SortId": 0,
+        "MenuMapScale": 1.0
       },
       "rai001_Top": {
         "ZoneId": "rai001_Top",
@@ -2640,13 +3110,14 @@
           "Y": 0.0
         },
         "IsDividedZone": false,
-        "SortId": 0
+        "SortId": 0,
+        "MenuMapScale": 1.0
       },
       "rai002_Top": {
         "ZoneId": "rai002_Top",
         "Floor": 1,
         "Texture": {
-          "AssetPathName": "None",
+          "AssetPathName": "/Game/UI/Map/MapImage/rai002/UI_Maprai002.UI_Maprai002",
           "SubPathString": ""
         },
         "CapturePosition": {
@@ -2668,13 +3139,14 @@
           "Y": 0.0
         },
         "IsDividedZone": false,
-        "SortId": 0
+        "SortId": 0,
+        "MenuMapScale": 1.0
       },
       "min01_Top": {
         "ZoneId": "min01_Top",
         "Floor": 1,
         "Texture": {
-          "AssetPathName": "None",
+          "AssetPathName": "/Game/UI/Map/MapImage/min01/UI_Map_min01.UI_Map_min01",
           "SubPathString": ""
         },
         "CapturePosition": {
@@ -2692,11 +3164,12 @@
         "UVRange": 0.281,
         "ResolutionMultiplier": 2.0,
         "MenuMapPosition": {
-          "X": 0.0,
-          "Y": 0.0
+          "X": 260.0,
+          "Y": 110.0
         },
         "IsDividedZone": false,
-        "SortId": 0
+        "SortId": 1008,
+        "MenuMapScale": 0.83
       },
       "min007_Top": {
         "ZoneId": "min007_Top",
@@ -2724,7 +3197,8 @@
           "Y": 0.0
         },
         "IsDividedZone": false,
-        "SortId": 0
+        "SortId": 0,
+        "MenuMapScale": 1.0
       },
       "arn001_Top": {
         "ZoneId": "arn001_Top",
@@ -2752,7 +3226,8 @@
           "Y": 0.0
         },
         "IsDividedZone": false,
-        "SortId": 0
+        "SortId": 0,
+        "MenuMapScale": 1.0
       },
       "twr001_Top_F1": {
         "ZoneId": "twr001_Top",
@@ -2780,7 +3255,8 @@
           "Y": 0.0
         },
         "IsDividedZone": false,
-        "SortId": 0
+        "SortId": 0,
+        "MenuMapScale": 1.0
       },
       "twr001_Top_F2": {
         "ZoneId": "twr001_Top",
@@ -2808,7 +3284,8 @@
           "Y": 0.0
         },
         "IsDividedZone": false,
-        "SortId": 0
+        "SortId": 0,
+        "MenuMapScale": 1.0
       },
       "twr001_Top_F3": {
         "ZoneId": "twr001_Top",
@@ -2836,7 +3313,8 @@
           "Y": 0.0
         },
         "IsDividedZone": false,
-        "SortId": 0
+        "SortId": 0,
+        "MenuMapScale": 1.0
       },
       "twr001_Top_F4": {
         "ZoneId": "twr001_Top",
@@ -2864,7 +3342,8 @@
           "Y": 0.0
         },
         "IsDividedZone": false,
-        "SortId": 0
+        "SortId": 0,
+        "MenuMapScale": 1.0
       },
       "twr001_Top_F5": {
         "ZoneId": "twr001_Top",
@@ -2892,7 +3371,8 @@
           "Y": 0.0
         },
         "IsDividedZone": false,
-        "SortId": 0
+        "SortId": 0,
+        "MenuMapScale": 1.0
       },
       "twr001_Top_F6": {
         "ZoneId": "twr001_Top",
@@ -2920,7 +3400,8 @@
           "Y": 0.0
         },
         "IsDividedZone": false,
-        "SortId": 0
+        "SortId": 0,
+        "MenuMapScale": 1.0
       },
       "twr001_Top_F7": {
         "ZoneId": "twr001_Top",
@@ -2948,7 +3429,8 @@
           "Y": 0.0
         },
         "IsDividedZone": false,
-        "SortId": 0
+        "SortId": 0,
+        "MenuMapScale": 1.0
       },
       "twr001_Top_F8": {
         "ZoneId": "twr001_Top",
@@ -2976,7 +3458,8 @@
           "Y": 0.0
         },
         "IsDividedZone": false,
-        "SortId": 0
+        "SortId": 0,
+        "MenuMapScale": 1.0
       },
       "twr001_Top_F9": {
         "ZoneId": "twr001_Top",
@@ -3004,7 +3487,8 @@
           "Y": 0.0
         },
         "IsDividedZone": false,
-        "SortId": 0
+        "SortId": 0,
+        "MenuMapScale": 1.0
       },
       "twr001_Top_F10": {
         "ZoneId": "twr001_Top",
@@ -3032,7 +3516,8 @@
           "Y": 0.0
         },
         "IsDividedZone": false,
-        "SortId": 0
+        "SortId": 0,
+        "MenuMapScale": 1.0
       },
       "twr001_Top_F11": {
         "ZoneId": "twr001_Top",
@@ -3060,7 +3545,8 @@
           "Y": 0.0
         },
         "IsDividedZone": false,
-        "SortId": 0
+        "SortId": 0,
+        "MenuMapScale": 1.0
       },
       "twr001_Top_F12": {
         "ZoneId": "twr001_Top",
@@ -3088,7 +3574,8 @@
           "Y": 0.0
         },
         "IsDividedZone": false,
-        "SortId": 0
+        "SortId": 0,
+        "MenuMapScale": 1.0
       },
       "twr001_Top_F13": {
         "ZoneId": "twr001_Top",
@@ -3116,7 +3603,8 @@
           "Y": 0.0
         },
         "IsDividedZone": false,
-        "SortId": 0
+        "SortId": 0,
+        "MenuMapScale": 1.0
       },
       "twr001_Top_F14": {
         "ZoneId": "twr001_Top",
@@ -3144,7 +3632,8 @@
           "Y": 0.0
         },
         "IsDividedZone": false,
-        "SortId": 0
+        "SortId": 0,
+        "MenuMapScale": 1.0
       },
       "twr001_Top_F15": {
         "ZoneId": "twr001_Top",
@@ -3172,7 +3661,8 @@
           "Y": 0.0
         },
         "IsDividedZone": false,
-        "SortId": 0
+        "SortId": 0,
+        "MenuMapScale": 1.0
       },
       "twr001_Top_F16": {
         "ZoneId": "twr001_Top",
@@ -3200,7 +3690,8 @@
           "Y": 0.0
         },
         "IsDividedZone": false,
-        "SortId": 0
+        "SortId": 0,
+        "MenuMapScale": 1.0
       },
       "twr001_Top_F17": {
         "ZoneId": "twr001_Top",
@@ -3228,7 +3719,8 @@
           "Y": 0.0
         },
         "IsDividedZone": false,
-        "SortId": 0
+        "SortId": 0,
+        "MenuMapScale": 1.0
       },
       "twr001_Top_F18": {
         "ZoneId": "twr001_Top",
@@ -3256,7 +3748,8 @@
           "Y": 0.0
         },
         "IsDividedZone": false,
-        "SortId": 0
+        "SortId": 0,
+        "MenuMapScale": 1.0
       },
       "twr001_Top_F19": {
         "ZoneId": "twr001_Top",
@@ -3284,7 +3777,8 @@
           "Y": 0.0
         },
         "IsDividedZone": false,
-        "SortId": 0
+        "SortId": 0,
+        "MenuMapScale": 1.0
       },
       "twr001_Top_F20": {
         "ZoneId": "twr001_Top",
@@ -3312,7 +3806,8 @@
           "Y": 0.0
         },
         "IsDividedZone": false,
-        "SortId": 0
+        "SortId": 0,
+        "MenuMapScale": 1.0
       },
       "InterruptQuest": {
         "ZoneId": "None",
@@ -3340,7 +3835,8 @@
           "Y": 0.0
         },
         "IsDividedZone": false,
-        "SortId": 0
+        "SortId": 0,
+        "MenuMapScale": 1.0
       }
     }
   }
