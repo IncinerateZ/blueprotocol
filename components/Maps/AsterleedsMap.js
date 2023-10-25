@@ -30,10 +30,10 @@ export default function Map() {
     const [chosenMap, setChosenMap] = useState(
         asPath.split('#')[1] in data ? asPath.split('#')[1] : 'cty001',
     );
+    const [chosenFloor, setChosenFloor] = useState(1);
     const [markers, setMarkers] = useState({});
     const [mapLoaded, setMapLoaded] = useState(false);
     const [mapNameLocs, setMapNameLocs] = useState({});
-    const [mnlCopy, setMnlCopy] = useState(null);
 
     const [maps, setMaps] = useState({});
 
@@ -161,11 +161,16 @@ export default function Map() {
         imgOvRef?.current?.once('load', () => {
             setMapChanged(true);
         });
+    }, [chosenMap, chosenFloor]);
+
+    useEffect(() => {
+        setChosenFloor(1);
     }, [chosenMap]);
 
     useEffect(() => {
         if (chosenMap === '') return;
-        if (mapChanged && DB && Object.keys(markers).length > 0) {
+
+        if (mapConfig && mapChanged && DB && Object.keys(markers).length > 0) {
             window.history.pushState('', '', `#${chosenMap}`);
             setMapChanged(false);
             setMapLoading(false);
@@ -178,6 +183,19 @@ export default function Map() {
 
             let _selectors = {};
 
+            let floorLowBound =
+                data[chosenMap]?.floors?.[chosenFloor - 2] || -Infinity;
+            let floorHighBound =
+                data[chosenMap]?.floors?.[chosenFloor - 1] || Infinity;
+
+            let config =
+                mapConfig[
+                    data[chosenMap].map_id +
+                        (data[chosenMap]?.floors?.length > 0
+                            ? `_F${chosenFloor}`
+                            : '')
+                ];
+
             //adventure
             let pts = (DB.POI[data[chosenMap].map_id] || { dat: [] }).dat;
 
@@ -186,11 +204,10 @@ export default function Map() {
                 let pt = p;
                 if (!pt.X || !pt.Y) continue;
 
-                let c = coordTranslate(
-                    pt.X,
-                    pt.Y,
-                    mapConfig[data[chosenMap].map_id],
-                );
+                if ((pt.Z && pt.Z < floorLowBound) || pt.Z > floorHighBound)
+                    continue;
+
+                let c = coordTranslate(pt.X, pt.Y, config);
                 let x_ = c.x;
                 let y_ = c.y;
 
@@ -227,6 +244,8 @@ export default function Map() {
                 if (!_selectors.Quests) _selectors.Quests = {};
 
                 let pt = pts[p];
+                if ((pt.Z && pt.Z < floorLowBound) || pt.Z > floorHighBound)
+                    continue;
 
                 _selectors.Quests[pt.type] = {
                     selected:
@@ -238,11 +257,7 @@ export default function Map() {
                     display_name: pt.selector,
                 };
 
-                let c = coordTranslate(
-                    pt.X,
-                    pt.Y,
-                    mapConfig[data[chosenMap].map_id],
-                );
+                let c = coordTranslate(pt.X, pt.Y, config);
 
                 a.push(
                     newMarker(c.y, c.x, {
@@ -259,12 +274,10 @@ export default function Map() {
 
             for (let p in pts) {
                 let pt = pts[p];
+                if ((pt.Z && pt.Z < floorLowBound) || pt.Z > floorHighBound)
+                    continue;
 
-                let c = coordTranslate(
-                    pt.X,
-                    pt.Y,
-                    mapConfig[data[chosenMap].map_id],
-                );
+                let c = coordTranslate(pt.X, pt.Y, config);
                 let x_ = c.x;
                 let y_ = c.y;
 
@@ -331,7 +344,7 @@ export default function Map() {
                 },
             });
         }
-    }, [mapChanged, markers]);
+    }, [mapChanged, markers, chosenMap]);
 
     useEffect(() => {
         markers?.new?.arr.length > 0 &&
@@ -427,6 +440,8 @@ export default function Map() {
         for (let mapId in _cfg) {
             let o = _cfg[mapId];
             mapId = mapId.split('_')[0];
+            if (data[mapId]?.floors?.length > 0) mapId += '_F' + o.Floor;
+
             if (mapId === 'default') continue;
             if (cfg[mapId]) continue;
             cfg[mapId] = {
@@ -554,6 +569,9 @@ export default function Map() {
                 setShowLeak={setShowLeak}
                 mapRef={mapRef}
                 toggleSelector={toggleSelector}
+                floors={data[chosenMap].floors}
+                chosenFloor={chosenFloor}
+                setChosenFloor={setChosenFloor}
             />
 
             <div
@@ -610,7 +628,16 @@ export default function Map() {
                 {mapLoaded && (
                     <>
                         <ImageOverlay
-                            url={data[chosenMap]?.map_url || ''}
+                            url={
+                                data[chosenMap]?.map_url.replace(
+                                    '.webp',
+                                    `${
+                                        data[chosenMap]?.floors?.length > 0
+                                            ? `_${chosenFloor}F`
+                                            : ''
+                                    }.webp`,
+                                ) || ''
+                            }
                             whenReady={() => {}}
                             bounds={[
                                 [
@@ -631,7 +658,12 @@ export default function Map() {
                             let _loc = coordTranslate(
                                 mapNameLocs[cardinal].x,
                                 mapNameLocs[cardinal].y,
-                                mapConfig[data[chosenMap].map_id],
+                                mapConfig[
+                                    data[chosenMap].map_id +
+                                        (data[chosenMap]?.floors?.length > 0
+                                            ? `_F${chosenFloor}`
+                                            : '')
+                                ],
                             );
                             return (
                                 <div key={Math.random() * 19231}>
