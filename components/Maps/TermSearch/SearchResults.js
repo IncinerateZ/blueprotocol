@@ -25,13 +25,11 @@ export default function SearchResults({
                         key={data[map].map_id}
                     >
                         <label>
-                            {
-                                LocationNames[lang][
-                                    data[map].map_id
-                                        .replace('dng', 'pub')
-                                        .replace('pat', 'pub')
-                                ]
-                            }
+                            {LocationNames[lang][
+                                data[map].map_id
+                                    .replace('dng', 'pub')
+                                    .replace('pat', 'pub')
+                            ] || LocationNames[lang][data[map].map_id]}
                             <input
                                 type='checkbox'
                                 className='visually-hidden'

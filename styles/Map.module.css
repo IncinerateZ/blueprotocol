@@ -57,7 +57,7 @@
 }
 
 .MCL_mapsearch input {
-    all:unset;
+    all: unset;
 
     background-color: var(--light);
 
@@ -83,7 +83,7 @@
 
 .mapsearch_suggestions {
     position: absolute;
-        
+
     width: 90%;
 
     max-height: 250px;
@@ -174,18 +174,18 @@
 .Popup::-webkit-scrollbar {
     width: 2px;
 }
- 
- .Popup::-webkit-scrollbar-track {
+
+.Popup::-webkit-scrollbar-track {
     background: #f1f1f1;
 }
- 
- .Popup::-webkit-scrollbar-thumb {
+
+.Popup::-webkit-scrollbar-thumb {
     background: #888;
 }
- 
- .Popup::-webkit-scrollbar-thumb:hover {
+
+.Popup::-webkit-scrollbar-thumb:hover {
     background: #555;
-} 
+}
 
 .noSelect {
     user-select: none;
@@ -243,18 +243,18 @@
 .MCL_selectorsContainer::-webkit-scrollbar {
     width: 0.8px;
 }
- 
- .MCL_selectorsContainer::-webkit-scrollbar-track {
+
+.MCL_selectorsContainer::-webkit-scrollbar-track {
     background: transparent;
 }
- 
- .MCL_selectorsContainer::-webkit-scrollbar-thumb {
+
+.MCL_selectorsContainer::-webkit-scrollbar-thumb {
     background: silver;
 }
- 
- .MCL_selectorsContainer::-webkit-scrollbar-thumb:hover {
+
+.MCL_selectorsContainer::-webkit-scrollbar-thumb:hover {
     background: #555;
-} 
+}
 
 .selectorsHeader img {
     transform: rotate(270deg);
@@ -265,7 +265,7 @@
     transform: rotate(90deg);
 }
 
-.selectorsHeader:has(label input:checked) + .MCL_selectors{
+.selectorsHeader:has(label input:checked) + .MCL_selectors {
     max-height: 0px;
 }
 
@@ -273,7 +273,7 @@
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    
+
     max-height: 200vw;
     overflow-y: hidden;
     transition: 0.2s ease-in-out;
@@ -371,19 +371,9 @@
     transform: translateY(2.5px);
 }
 
-.TermSearchContainer {
-    position: absolute;
-    width: fit-content;
-    z-index: 999;
-    height: fit-content;
-    left: 360px;
-    padding-top: 0.5rem;
-    transition: 0.2s;
-}
-
 .TermSearch {
     width: 35px;
-    height: 35px;
+    max-height: 35px;
     cursor: pointer;
     overflow: hidden;
     transition: 0.45s;
@@ -395,12 +385,13 @@
     box-shadow: none;
     color: rgb(219, 210, 154);
     font-weight: bold;
-    text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
+    text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000,
+        1px 1px 0 #000;
 }
 
 .TermSearch:focus-within {
     width: 250px;
-    height: fit-content;
+    max-height: 20rem;
 }
 
 .TermSearch_head {
@@ -416,13 +407,13 @@
     height: 35px;
     user-select: none;
     padding: 5px;
-    background-color: var(--dark1); 
+    background-color: var(--dark1);
     border-radius: 7px;
     border: 2px solid transparent;
 }
 
 .TermSearch_head > img:hover {
-    border: 2px solid #ABAFD1;
+    border: 2px solid #abafd1;
 }
 
 .TermSearch_head input {
@@ -440,7 +431,7 @@
 }
 
 .TermSearch_head input:focus {
-    outline: none;    
+    outline: none;
 }
 
 .TermSearch_results {
@@ -448,47 +439,48 @@
     border-radius: 7px;
     overflow: hidden;
     overflow-y: auto;
-    height: 20rem;
+    max-height: 20rem;
     transition: 0.2s;
 }
 
 .TermSearch_results::-webkit-scrollbar {
     width: 5px;
 }
- 
+
 .TermSearch_results::-webkit-scrollbar-track {
     background: var(--dark2);
 }
- 
+
 .TermSearch_results::-webkit-scrollbar-thumb {
     background: var(--dark1);
 }
- 
+
 .TermSearch_results::-webkit-scrollbar-thumb:hover {
     background: #555;
-} 
+}
 .TermSearchResultsList::-webkit-scrollbar {
     width: 5px;
 }
- 
+
 .TermSearchResultsList::-webkit-scrollbar-track {
     background: var(--dark2);
 }
- 
+
 .TermSearchResultsList::-webkit-scrollbar-thumb {
     background: var(--dark1);
 }
- 
+
 .TermSearchResultsList::-webkit-scrollbar-thumb:hover {
     background: #555;
-} 
+}
 
 .TermSearchResults {
     display: flex;
     flex-direction: column;
 }
 
-.TermSearchResults span, .TermSearchResults label {
+.TermSearchResults span,
+.TermSearchResults label {
     font-size: 0.8rem;
     background-color: var(--background);
     color: var(--text-color);
@@ -504,13 +496,13 @@
 }
 
 .TermSearchResults > label::after {
-    content: "-";
+    content: '-';
     margin-left: auto;
     display: inline-block;
     margin-right: 1rem;
 }
 .TermSearchResults > label:has(input:checked)::after {
-    content: "+";
+    content: '+';
 }
 
 .TermSearchResults > label:has(input:checked) + .TermSearchResultsList {
@@ -543,4 +535,44 @@
 
 .TermSearchResultsList button:hover {
     background-color: var(--dark2);
+}
+
+.MCL_utilities {
+    display: flex;
+    flex-direction: column;
+
+    position: absolute;
+    width: fit-content;
+    z-index: 999;
+    height: fit-content;
+    left: 360px;
+    padding-top: 0.5rem;
+    transition: 0.2s;
+}
+
+.FloorPicker_container {
+    list-style-type: none;
+    padding: 0;
+}
+
+.FloorPicker_option {
+    width: 30px;
+    height: 30px;
+    user-select: none;
+    padding: 5px;
+    background-color: var(--dark2);
+    border-radius: 7px;
+    border: 2px solid var(--dark1);
+
+    color: var(--text-color);
+
+    font-weight: bold;
+
+    cursor: pointer;
+
+    margin-bottom: 0.3rem;
+}
+
+.FloorPicker_option:hover {
+    filter: brightness(150%);
 }

@@ -52,6 +52,7 @@ export default function TermSearch({
                 query: {
                     lng: r.loc.lng,
                     lat: r.loc.lat,
+                    z: r.loc.z,
                     query: query,
                 },
                 hash: map,

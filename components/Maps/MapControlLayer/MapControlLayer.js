@@ -12,6 +12,7 @@ import MapPicker from './MapPicker';
 import SelectorsSection from './Selectors/SelectorsSection';
 import Link from 'next/link';
 import TermSearch from '../TermSearch/TermSearch';
+import FloorPicker from './FloorPicker';
 
 export default function MapControlLayer({
     data,
@@ -31,6 +32,9 @@ export default function MapControlLayer({
     showLeak,
     setShowLeak,
     toggleSelector,
+    floors,
+    chosenFloor,
+    setChosenFloor,
 }) {
     const [drawn, setDrawn] = useState(true);
 
@@ -230,7 +234,7 @@ export default function MapControlLayer({
                 </label>
             </div>
             <div
-                className={styles.TermSearchContainer}
+                className={styles.MCL_utilities}
                 style={{ transform: drawn ? '' : 'translateX(-330px)' }}
             >
                 <TermSearch
@@ -241,6 +245,11 @@ export default function MapControlLayer({
                     chosenMap={chosenMap}
                     setChosenMap={setChosenMap}
                     toggleSelector={toggleSelector}
+                />
+                <FloorPicker
+                    floors={floors}
+                    chosenFloor={chosenFloor}
+                    setChosenFloor={setChosenFloor}
                 />
             </div>
         </div>
