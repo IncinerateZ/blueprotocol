@@ -19,6 +19,8 @@ function init() {
     for (let mapId in _cfg) {
         let o = _cfg[mapId];
         mapId = mapId.split('_')[0];
+        if (data[mapId]?.floors?.length > 0) mapId += '_F' + o.Floor;
+
         if (mapId === 'default') continue;
         if (cfg[mapId]) continue;
         cfg[mapId] = {
@@ -43,11 +45,29 @@ function init() {
             let pt = p;
             if (!pt.X || !pt.Y) continue;
 
-            let c = coordTranslate(
-                pt.X,
-                pt.Y,
-                mapConfig[data[chosenMap].map_id],
-            );
+            let chosenFloor = 1;
+
+            let floors = data[chosenMap]?.floors || [];
+
+            for (let f = 1; f <= (floors.length || -1) + 1; f++) {
+                let floorLowBound = floors?.[f - 2] || -Infinity;
+                let floorHighBound = floors?.[f - 1] || Infinity;
+
+                if (pt.Z >= floorLowBound && pt.Z <= floorHighBound) {
+                    chosenFloor = f;
+                    break;
+                }
+            }
+
+            let config =
+                mapConfig[
+                    data[chosenMap].map_id +
+                        (data[chosenMap]?.floors?.length > 0
+                            ? `_F${chosenFloor}`
+                            : '')
+                ];
+
+            let c = coordTranslate(pt.X, pt.Y, config);
             let x_ = c.x;
             let y_ = c.y;
 
@@ -59,6 +79,7 @@ function init() {
                     selectors: [pt.selector],
                     title: pt.treasureId || title,
                     section: 'Adventure',
+                    z: pt.Z,
                 }),
             );
         }
@@ -68,11 +89,29 @@ function init() {
         for (let p in pts) {
             let pt = pts[p];
 
-            let c = coordTranslate(
-                pt.X,
-                pt.Y,
-                mapConfig[data[chosenMap].map_id],
-            );
+            let chosenFloor = 1;
+
+            let floors = data[chosenMap]?.floors || [];
+
+            for (let f = 1; f <= (floors.length || -1) + 1; f++) {
+                let floorLowBound = floors?.[f - 2] || -Infinity;
+                let floorHighBound = floors?.[f - 1] || Infinity;
+
+                if (pt.Z >= floorLowBound && pt.Z <= floorHighBound) {
+                    chosenFloor = f;
+                    break;
+                }
+            }
+
+            let config =
+                mapConfig[
+                    data[chosenMap].map_id +
+                        (data[chosenMap]?.floors?.length > 0
+                            ? `_F${chosenFloor}`
+                            : '')
+                ];
+
+            let c = coordTranslate(pt.X, pt.Y, config);
 
             a.push(
                 newMarker(c.y, c.x, {
@@ -81,6 +120,7 @@ function init() {
                     title: p,
                     quests: pt.quests,
                     section: 'Quests',
+                    z: pt.Z,
                 }),
             );
         }
@@ -91,11 +131,29 @@ function init() {
         for (let p in pts) {
             let pt = pts[p];
 
-            let c = coordTranslate(
-                pt.X,
-                pt.Y,
-                mapConfig[data[chosenMap].map_id],
-            );
+            let chosenFloor = 1;
+
+            let floors = data[chosenMap]?.floors || [];
+
+            for (let f = 1; f <= (floors.length || -1) + 1; f++) {
+                let floorLowBound = floors?.[f - 2] || -Infinity;
+                let floorHighBound = floors?.[f - 1] || Infinity;
+
+                if (pt.Z >= floorLowBound && pt.Z <= floorHighBound) {
+                    chosenFloor = f;
+                    break;
+                }
+            }
+
+            let config =
+                mapConfig[
+                    data[chosenMap].map_id +
+                        (data[chosenMap]?.floors?.length > 0
+                            ? `_F${chosenFloor}`
+                            : '')
+                ];
+
+            let c = coordTranslate(pt.X, pt.Y, config);
             let x_ = c.x;
             let y_ = c.y;
 
@@ -108,9 +166,10 @@ function init() {
             ).Members;
 
             for (let enemy of enemies) {
-                let enemyNameId = DB.Enemies[enemy.EnemyId].name_id;
+                let enemyNameId = DB.Enemies[enemy.EnemyId]?.name_id || 0;
                 selectors_.push(
-                    DB.Loc.ja_JP.enemyparam_text.texts[enemyNameId].text,
+                    DB.Loc.ja_JP.enemyparam_text.texts[enemyNameId]?.text ||
+                        'No Data',
                 );
             }
 
@@ -120,6 +179,7 @@ function init() {
                     title: pt.Enemies[0].EnemySetId,
                     selectors: selectors_,
                     section: 'Enemies',
+                    z: pt.Z,
                 }),
             );
         }

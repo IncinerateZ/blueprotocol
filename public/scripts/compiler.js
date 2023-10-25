@@ -49,8 +49,9 @@ let mapnames = {};
 
 for (let mapname of _mapnames) {
     if (mapname.id) {
-        let mapid = mapname.map_id;
-        if (mapid.length === 0) mapid = mapname.free_exploration_id || '';
+        let mapid = mapname.map_id?.replace('pat', 'pub');
+        if (!mapid || mapid.length === 0)
+            mapid = mapname.free_exploration_id?.replace('pat', 'pub') || '';
 
         mapnames[mapid.toLowerCase()] = {
             name: mapname.name_en || mapname.name_translated,
@@ -251,7 +252,7 @@ for (let mapType in DB.EnemySets) {
                             ].c += 1;
                         }
 
-                        delete DB.EnemyHabitats[map][entry.Outer].Z;
+                        // delete DB.EnemyHabitats[map][entry.Outer].Z;
 
                         if (CQST[e1] || CQST[e2]) {
                             let _entry = e1;
@@ -351,6 +352,7 @@ for (let mapType in DB.POI) {
     let baseMapDir = `./Maps/${mapType}`;
     for (let map of fs.readdirSync(baseMapDir)) {
         if (!DB.POI[map]) DB.POI[map] = { temp: {}, dat: [] };
+        let mn = map;
         try {
             let data = fs.readFileSync(
                 `${baseMapDir}/${map}/sublevel/${map
@@ -360,27 +362,32 @@ for (let mapType in DB.POI) {
                 (err) => {},
             );
 
-            if (map.includes('cty')) {
-                let mn = map.replace('y', 'y0');
+            if (map.includes('cty')) mn = map.replace('y', 'y0');
 
-                if (!markers[mn])
-                    markers[mn] = {
-                        display_name: mapnames[mn].name,
-                        map_url: `./UI_Map${
-                            mapnames[mn]?.map_id || map.toLowerCase()
-                        }.webp`,
-                        tags: ['city'],
-                        map_id: map.toLowerCase(),
-                        markers: {
-                            new: { display_name: 'New Marker', arr: [] },
-                        },
-                    };
-
-                markers[mn].tags = [
-                    ...markers[mn].tags,
-                    mapnames[mn.toLowerCase()].name || mn.toLowerCase(),
-                ];
+            if (!markers[mn]) {
+                console.log(mn);
+                markers[mn] = {
+                    display_name: mapnames[mn.replace('pat', 'pub')].name,
+                    map_url: `./UI_Map${
+                        mapnames[mn.replace('pat', 'pub')]?.map_id.replace(
+                            'pub',
+                            'pat',
+                        ) || map.toLowerCase().replace('pub', 'pat')
+                    }.webp`,
+                    tags: ['city'],
+                    map_id: map.toLowerCase(),
+                    markers: {
+                        new: { display_name: 'New Marker', arr: [] },
+                    },
+                    floors: [],
+                };
             }
+
+            markers[mn].tags = [
+                ...markers[mn].tags,
+                mapnames[mn.toLowerCase().replace('pat', 'pub')].name ||
+                    mn.toLowerCase().replace('pat', 'pub'),
+            ];
 
             data = JSON.parse(data);
             for (let dat of data) {
@@ -405,7 +412,7 @@ for (let mapType in DB.POI) {
                         selector: poiToSelector(dat.Outer),
                     };
 
-                    delete DB.POI[map].temp[dat.Outer].Z;
+                    // delete DB.POI[map].temp[dat.Outer].Z;
                 }
                 if (dat.Type === 'BP_UtillityAreaActor_C') {
                     DB.POI[map].temp[dat.Name] = {
@@ -457,13 +464,13 @@ for (let mapType in DB.POI) {
                         selector: poiToSelector(dat.Outer),
                     };
 
-                    delete DB.POI[map].temp[dat.Outer].Z;
+                    // delete DB.POI[map].temp[dat.Outer].Z;
                 }
             }
         } catch (err) {
             err.errno !== -4058 && console.log(err);
         }
-        if (map.includes('pat')) {
+        if (map.includes('pat') || map.includes('dng')) {
             try {
                 let data = fs.readFileSync(
                     `${baseMapDir}/${map}/sublevel/${map}_SCBase.json`,
@@ -471,83 +478,112 @@ for (let mapType in DB.POI) {
                     (err) => {},
                 );
 
+                let floors = {};
+
                 data = JSON.parse(data);
                 for (let dat of data) {
-                    if (
-                        dat.Type === 'SceneComponent' &&
-                        dat.Name.includes('Root') &&
-                        !dat.Outer.includes('Sit') &&
-                        !dat.Outer.includes('Return') &&
-                        !dat.Outer.includes('Replicated') &&
-                        !dat.Outer.includes('Coin') &&
-                        !dat.Outer.includes('FieldTravel') &&
-                        !dat.Outer.includes('Temple') &&
-                        !dat.Outer.includes('Dungeon') &&
-                        !dat.Outer.includes('Water') &&
-                        !dat.Outer.includes('Spline') &&
-                        dat.Properties?.RelativeLocation
-                    ) {
-                        DB.POI[map].temp[dat.Outer] = {
-                            ...DB.POI[map].temp[dat.Outer],
-                            ...dat.Properties.RelativeLocation,
-                            type: poiToType(dat.Outer),
-                            selector: poiToSelector(dat.Outer),
-                        };
+                    if (map.includes('pat')) {
+                        if (
+                            dat.Type === 'SceneComponent' &&
+                            dat.Name.includes('Root') &&
+                            !dat.Outer.includes('Sit') &&
+                            !dat.Outer.includes('Return') &&
+                            !dat.Outer.includes('Replicated') &&
+                            !dat.Outer.includes('Coin') &&
+                            !dat.Outer.includes('FieldTravel') &&
+                            !dat.Outer.includes('Temple') &&
+                            !dat.Outer.includes('Dungeon') &&
+                            !dat.Outer.includes('Water') &&
+                            !dat.Outer.includes('Spline') &&
+                            dat.Properties?.RelativeLocation
+                        ) {
+                            DB.POI[map].temp[dat.Outer] = {
+                                ...DB.POI[map].temp[dat.Outer],
+                                ...dat.Properties.RelativeLocation,
+                                type: poiToType(dat.Outer),
+                                selector: poiToSelector(dat.Outer),
+                            };
 
-                        delete DB.POI[map].temp[dat.Outer].Z;
-                    }
-                    if (dat.Type === 'BP_UtillityAreaActor_C') {
-                        DB.POI[map].temp[dat.Name] = {
-                            ...DB.POI[map].temp[dat.Name],
-                            title: dat.Properties.LocationId?.RowName || '',
-                        };
-                    }
-                    if (
-                        (dat.Type === 'BP_DungeonActivator_C' ||
-                            dat.Type === 'BP_DungeonEntrance_C' ||
-                            dat.Type === 'SBFieldTravelTrigger' ||
-                            dat.Type.includes('FieldTravelInteraction_')) &&
-                        (dat.Properties.TravelFieldMapName ||
-                            dat.Properties.TravelFieldGameContentId)
-                    ) {
-                        DB.POI[map].temp[dat.Name] = {
-                            ...DB.POI[map].temp[dat.Name],
-                            title: (
-                                dat.Properties.TravelFieldMapName ||
-                                dat.Properties.TravelFieldGameContentId
-                            ).split('_')[0],
-                        };
-                    }
-                    if (
-                        (dat.Name === 'CollisionComp' ||
-                            dat.Name === 'SceneComponent') &&
-                        dat.Properties?.RelativeLocation &&
-                        !dat.Outer.includes('Utillity') &&
-                        !dat.Outer.includes('Blocking') &&
-                        !dat.Outer.includes('Landscape') &&
-                        !dat.Outer.includes('PlayerStart') &&
-                        !dat.Outer.includes('Spline') &&
-                        !dat.Outer.includes('Fld') &&
-                        !dat.Outer.includes('exq003') &&
-                        !dat.Outer.includes('Tutorial') &&
-                        !dat.Outer.includes('Sit') &&
-                        !dat.Outer.includes('Return') &&
-                        !dat.Outer.includes('Replicated') &&
-                        !dat.Outer.includes('Coin') &&
-                        !dat.Outer.includes('Temple') &&
-                        !dat.Outer.includes('Water') &&
-                        !dat.Outer.includes('FallDead') &&
-                        !dat.Outer.includes('Spline')
-                    ) {
-                        DB.POI[map].temp[dat.Outer] = {
-                            ...DB.POI[map].temp[dat.Outer],
-                            ...dat.Properties.RelativeLocation,
-                            type: poiToType(dat.Outer),
-                            selector: poiToSelector(dat.Outer),
-                        };
+                            // delete DB.POI[map].temp[dat.Outer].Z;
+                        }
+                        if (dat.Type === 'BP_UtillityAreaActor_C') {
+                            DB.POI[map].temp[dat.Name] = {
+                                ...DB.POI[map].temp[dat.Name],
+                                title: dat.Properties.LocationId?.RowName || '',
+                            };
+                        }
+                        if (
+                            (dat.Type === 'BP_DungeonActivator_C' ||
+                                dat.Type === 'BP_DungeonEntrance_C' ||
+                                dat.Type === 'SBFieldTravelTrigger' ||
+                                dat.Type.includes('FieldTravelInteraction_')) &&
+                            (dat.Properties.TravelFieldMapName ||
+                                dat.Properties.TravelFieldGameContentId)
+                        ) {
+                            DB.POI[map].temp[dat.Name] = {
+                                ...DB.POI[map].temp[dat.Name],
+                                title: (
+                                    dat.Properties.TravelFieldMapName ||
+                                    dat.Properties.TravelFieldGameContentId
+                                ).split('_')[0],
+                            };
+                        }
+                        if (
+                            (dat.Name === 'CollisionComp' ||
+                                dat.Name === 'SceneComponent') &&
+                            dat.Properties?.RelativeLocation &&
+                            !dat.Outer.includes('Utillity') &&
+                            !dat.Outer.includes('Blocking') &&
+                            !dat.Outer.includes('Landscape') &&
+                            !dat.Outer.includes('PlayerStart') &&
+                            !dat.Outer.includes('Spline') &&
+                            !dat.Outer.includes('Fld') &&
+                            !dat.Outer.includes('exq003') &&
+                            !dat.Outer.includes('Tutorial') &&
+                            !dat.Outer.includes('Sit') &&
+                            !dat.Outer.includes('Return') &&
+                            !dat.Outer.includes('Replicated') &&
+                            !dat.Outer.includes('Coin') &&
+                            !dat.Outer.includes('Temple') &&
+                            !dat.Outer.includes('Water') &&
+                            !dat.Outer.includes('FallDead') &&
+                            !dat.Outer.includes('Spline')
+                        ) {
+                            DB.POI[map].temp[dat.Outer] = {
+                                ...DB.POI[map].temp[dat.Outer],
+                                ...dat.Properties.RelativeLocation,
+                                type: poiToType(dat.Outer),
+                                selector: poiToSelector(dat.Outer),
+                            };
 
-                        delete DB.POI[map].temp[dat.Outer].Z;
+                            // delete DB.POI[map].temp[dat.Outer].Z;
+                        }
                     }
+
+                    //floor check
+                    if (
+                        dat.Type === 'BrushComponent' &&
+                        dat.Outer.includes('SBTraverseVolume_F')
+                    ) {
+                        let idx = dat.Outer.replace('SBTraverseVolume_F', '');
+                        let floor = parseInt(idx.substring(0, 2));
+
+                        if (floor && !isNaN(floor)) {
+                            floors[floor] = Math.max(
+                                floors[floor] || -Infinity,
+                                dat.Properties.RelativeLocation.Z,
+                            );
+                        }
+                    }
+                }
+
+                // console.log(markers);
+                // console.log(mn);
+
+                if (markers[mn]) {
+                    floors = Object.values(floors).sort((a, b) => a - b);
+                    floors.pop();
+                    markers[mn].floors = floors;
                 }
             } catch (err) {
                 err.errno !== -4058 && console.log(err);
@@ -581,7 +617,7 @@ for (let mapType in DB.POI) {
                         display_name: mapname?.name,
                         map_url: `./UI_Map${
                             mapname?.map_id?.replace('pub', 'pat') ||
-                            mn.toLowerCase()
+                            mn.toLowerCase().replace('pub', 'pat')
                         }.webp`,
                         tags: [
                             { fld: 'field', dng: 'dungeon', pat: 'dungeon' }[
@@ -612,7 +648,7 @@ for (let mapType in DB.POI) {
                             type: poiToType(o.Outer),
                             ...o.Properties.RelativeLocation,
                         };
-                        delete DB.POI[map].temp[o.Outer].Z;
+                        // delete DB.POI[map].temp[o.Outer].Z;
                     }
                     if (
                         o.Properties &&
@@ -646,7 +682,7 @@ for (let mapType in DB.POI) {
                             type: 'nappo',
                             ...o.Properties.RelativeLocation,
                         };
-                        delete DB.POI[map].temp[o.Outer].Z;
+                        // delete DB.POI[map].temp[o.Outer].Z;
                     }
             } catch (err) {}
             try {
@@ -706,7 +742,7 @@ for (let mapType in DB.POI) {
                             type: poiToType(o.Outer),
                             selector: poiToSelector(o.Outer),
                         };
-                        delete DB.POI[map].temp[o.Outer].Z;
+                        // delete DB.POI[map].temp[o.Outer].Z;
                         if (o.Outer.includes('Nappo'))
                             DB.POI[map].temp[o.Outer].title = 'Nappo';
 
@@ -843,7 +879,7 @@ for (let mapType in Quests) {
                             ...Quests[map][row.Outer],
                             ...row.Properties.RelativeLocation,
                         };
-                        delete Quests[map][row.Outer].Z;
+                        // delete Quests[map][row.Outer].Z;
                     }
                 } else {
                     if (
@@ -863,7 +899,7 @@ for (let mapType in Quests) {
                         temp[row.Outer] = {
                             ...row.Properties.RelativeLocation,
                         };
-                        delete temp[row.Outer].Z;
+                        // delete temp[row.Outer].Z;
                     }
                 }
             }

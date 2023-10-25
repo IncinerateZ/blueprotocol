@@ -24,6 +24,7 @@ function buildSummary(summaries, entity) {
         loc: {
             lng: entity.metadata.lng,
             lat: entity.metadata.lat,
+            z: entity.metadata.z,
             type: entity.type,
             section: entity.metadata.section,
             display_name: entity.metadata.selectors[0],
