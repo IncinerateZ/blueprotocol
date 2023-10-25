@@ -2,11 +2,7 @@
     "cty001": {
         "display_name": "Asterliese",
         "map_url": "./UI_MapCty001.webp",
-        "tags": [
-            "city",
-            "Asterliese",
-            "アステルリーズ"
-        ],
+        "tags": ["city", "Asterliese", "アステルリーズ"],
         "map_id": "cty01",
         "markers": {
             "new": {
@@ -18,11 +14,7 @@
     "cty002": {
         "display_name": "Salamzahd Oasis",
         "map_url": "./UI_MapCty002.webp",
-        "tags": [
-            "city",
-            "Salamzahd Oasis",
-            "サラムザート・オアシス"
-        ],
+        "tags": ["city", "Salamzahd Oasis", "サラムザート・オアシス"],
         "map_id": "cty02",
         "markers": {
             "new": {
@@ -121,14 +113,31 @@
             }
         }
     },
+    "fld005": {
+        "display_name": "West Bernhart Peninsula",
+        "map_url": "./UI_MapFld005.webp",
+        "tags": [
+            "field",
+            "West Bernhart Peninsula",
+            "West Bernhart Peninsula",
+            "West Bernhart Peninsula",
+            "ラウレーベン古戦場",
+            "孤影の城下",
+            "シュタール海岸",
+            "西バーンハルト半島"
+        ],
+        "map_id": "fld005",
+        "markers": {
+            "new": {
+                "display_name": "New Marker",
+                "arr": []
+            }
+        }
+    },
     "dng004": {
         "display_name": "Soundless City",
         "map_url": "./UI_Mapdng004.webp",
-        "tags": [
-            "dungeon",
-            "Soundless City",
-            "音無き都・追加調査"
-        ],
+        "tags": ["dungeon", "Soundless City", "音無き都・追加調査"],
         "map_id": "dng004",
         "markers": {
             "new": {
@@ -140,11 +149,7 @@
     "dng007": {
         "display_name": "Chained One's Spawnery",
         "map_url": "./UI_Mapdng007.webp",
-        "tags": [
-            "dungeon",
-            "Chained One's Spawnery",
-            "枷神の産屋・追加調査"
-        ],
+        "tags": ["dungeon", "Chained One's Spawnery", "枷神の産屋・追加調査"],
         "map_id": "dng007",
         "markers": {
             "new": {
@@ -156,12 +161,19 @@
     "dng009": {
         "display_name": "Dragon's Rive",
         "map_url": "./UI_Mapdng009.webp",
-        "tags": [
-            "dungeon",
-            "Dragon's Rive",
-            "巨竜の爪痕・追加調査"
-        ],
+        "tags": ["dungeon", "Dragon's Rive", "巨竜の爪痕・追加調査"],
         "map_id": "dng009",
+        "markers": {
+            "new": {
+                "display_name": "New Marker",
+                "arr": []
+            }
+        }
+    },
+    "dng015": {
+        "map_url": "./UI_Mapdng015.webp",
+        "tags": ["dungeon", "Halflight Hive", "暁の虫砦・追加調査"],
+        "map_id": "dng015",
         "markers": {
             "new": {
                 "display_name": "New Marker",
@@ -172,11 +184,7 @@
     "pat0102": {
         "display_name": "Steelwalker Ravine",
         "map_url": "./UI_Mappat0102.webp",
-        "tags": [
-            "dungeon",
-            "Steelwalker Ravine",
-            "機跡の谷・自由探索"
-        ],
+        "tags": ["dungeon", "Steelwalker Ravine", "機跡の谷・自由探索"],
         "map_id": "pat0102",
         "markers": {
             "new": {
@@ -188,12 +196,20 @@
     "pat0201": {
         "display_name": "Ruins of Borwam",
         "map_url": "./UI_Mappat0201.webp",
-        "tags": [
-            "dungeon",
-            "Ruins of Borwam",
-            "ボルオム遺跡・自由探索"
-        ],
+        "tags": ["dungeon", "Ruins of Borwam", "ボルオム遺跡・自由探索"],
         "map_id": "pat0201",
+        "markers": {
+            "new": {
+                "display_name": "New Marker",
+                "arr": []
+            }
+        }
+    },
+    "pat0202": {
+        "display_name": "Thieves' Falls",
+        "map_url": "./UI_Mappat0202.webp",
+        "tags": ["dungeon", "Thieves' Falls", "滝裏の盗掘痕跡・自由探索"],
+        "map_id": "pat0202",
         "markers": {
             "new": {
                 "display_name": "New Marker",
@@ -204,11 +220,7 @@
     "pat0801": {
         "display_name": "Sunlit Timberpath",
         "map_url": "./UI_Mappat0801.webp",
-        "tags": [
-            "dungeon",
-            "Sunlit Timberpath",
-            "木漏れ日射す林道・自由探索"
-        ],
+        "tags": ["dungeon", "Sunlit Timberpath", "木漏れ日射す林道・自由探索"],
         "map_id": "pat0801",
         "markers": {
             "new": {
@@ -220,11 +232,7 @@
     "pat0802": {
         "display_name": "Torchlight Thickets",
         "map_url": "./UI_Mappat0802.webp",
-        "tags": [
-            "dungeon",
-            "Torchlight Thickets",
-            "ともし火の森・自由探索"
-        ],
+        "tags": ["dungeon", "Torchlight Thickets", "ともし火の森・自由探索"],
         "map_id": "pat0802",
         "markers": {
             "new": {
@@ -236,11 +244,7 @@
     "pat0803": {
         "display_name": "Everfall Forest",
         "map_url": "./UI_Mappat0803.webp",
-        "tags": [
-            "dungeon",
-            "Everfall Forest",
-            "雨止まぬ森・自由探索"
-        ],
+        "tags": ["dungeon", "Everfall Forest", "雨止まぬ森・自由探索"],
         "map_id": "pat0803",
         "markers": {
             "new": {
@@ -252,12 +256,24 @@
     "pat0804": {
         "display_name": "Roseblush Woods",
         "map_url": "./UI_Mappat0804.webp",
+        "tags": ["dungeon", "Roseblush Woods", "緋染めの樹林・自由探索"],
+        "map_id": "pat0804",
+        "markers": {
+            "new": {
+                "display_name": "New Marker",
+                "arr": []
+            }
+        }
+    },
+    "pat0805": {
+        "display_name": "Home of the Cursed Spirits",
+        "map_url": "./UI_Mappat0805.webp",
         "tags": [
             "dungeon",
-            "Roseblush Woods",
-            "緋染めの樹林・自由探索"
+            "Home of the Cursed Spirits",
+            "呪霊たちの棲家・自由探索"
         ],
-        "map_id": "pat0804",
+        "map_id": "pat0805",
         "markers": {
             "new": {
                 "display_name": "New Marker",
@@ -268,12 +284,20 @@
     "pat0901": {
         "display_name": "Windsprite's Rostrum",
         "map_url": "./UI_Mappat0901.webp",
-        "tags": [
-            "dungeon",
-            "Windsprite's Rostrum",
-            "風精の舞台・自由探索"
-        ],
+        "tags": ["dungeon", "Windsprite's Rostrum", "風精の舞台・自由探索"],
         "map_id": "pat0901",
+        "markers": {
+            "new": {
+                "display_name": "New Marker",
+                "arr": []
+            }
+        }
+    },
+    "pat0902": {
+        "display_name": "Yellow Sand Cove",
+        "map_url": "./UI_Mappat0902.webp",
+        "tags": ["dungeon", "Yellow Sand Cove", "黄砂の入り江・自由探索"],
+        "map_id": "pat0902",
         "markers": {
             "new": {
                 "display_name": "New Marker",

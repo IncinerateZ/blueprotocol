@@ -59,8 +59,11 @@ for (let mapname of _mapnames) {
     }
 }
 
-for (let board of require('./apiext/master_adventure_board.json'))
+for (let board of require('./apiext/master_adventure_board.json')) {
+    let idstr = board.id + '';
+    if (idstr[2] === '9' && idstr[3] === '9') continue;
     DB.Boards[board.id] = board.name;
+}
 
 const CQST = {};
 let t = require(`./apiext/masterchallengequest.json`);
@@ -363,7 +366,9 @@ for (let mapType in DB.POI) {
                 if (!markers[mn])
                     markers[mn] = {
                         display_name: mapnames[mn].name,
-                        map_url: `./UI_Map${mapnames[mn].map_id}.webp`,
+                        map_url: `./UI_Map${
+                            mapnames[mn]?.map_id || map.toLowerCase()
+                        }.webp`,
                         tags: ['city'],
                         map_id: map.toLowerCase(),
                         markers: {
@@ -574,10 +579,10 @@ for (let mapType in DB.POI) {
                 if (!markers[mn]) {
                     markers[mn] = {
                         display_name: mapname?.name,
-                        map_url: `./UI_Map${mapname?.map_id.replace(
-                            'pub',
-                            'pat',
-                        )}.webp`,
+                        map_url: `./UI_Map${
+                            mapname?.map_id?.replace('pub', 'pat') ||
+                            mn.toLowerCase()
+                        }.webp`,
                         tags: [
                             { fld: 'field', dng: 'dungeon', pat: 'dungeon' }[
                                 mn.substring(0, 3)
@@ -1024,8 +1029,13 @@ for (let map in markers)
 
 let _boards = {};
 let _quests = {};
-for (let board of boards.boards) _boards[board.id] = board;
+for (let board of boards.boards) {
+    let idstr = board.id + '';
+    if (idstr[2] === '9' && idstr[3] === '9') continue;
+    _boards[board.id] = board;
+}
 for (let panel of boards.panels) {
+    if (!_boards[panel.board_id]) continue;
     if (!_boards[panel.board_id].panels) _boards[panel.board_id].panels = {};
     _boards[panel.board_id].panels[panel.id] = { ...panel };
 }

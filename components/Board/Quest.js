@@ -77,6 +77,7 @@ export default function Quest({
                 height={123}
                 alt={e.icon_id}
                 onError={() => {
+                    console.log(jpName + ' ' + e.id);
                     setFallbackImage(true);
                 }}
                 className={styles.questThumbnail}
