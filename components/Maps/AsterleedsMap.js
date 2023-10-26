@@ -204,7 +204,7 @@ export default function Map() {
                 let pt = p;
                 if (!pt.X || !pt.Y) continue;
 
-                if ((pt.Z && pt.Z < floorLowBound) || pt.Z > floorHighBound)
+                if (pt.Z && (pt.Z < floorLowBound || pt.Z > floorHighBound))
                     continue;
 
                 let c = coordTranslate(pt.X, pt.Y, config);
@@ -244,7 +244,7 @@ export default function Map() {
                 if (!_selectors.Quests) _selectors.Quests = {};
 
                 let pt = pts[p];
-                if ((pt.Z && pt.Z < floorLowBound) || pt.Z > floorHighBound)
+                if (pt.Z && (pt.Z < floorLowBound || pt.Z > floorHighBound))
                     continue;
 
                 _selectors.Quests[pt.type] = {
@@ -274,7 +274,7 @@ export default function Map() {
 
             for (let p in pts) {
                 let pt = pts[p];
-                if ((pt.Z && pt.Z < floorLowBound) || pt.Z > floorHighBound)
+                if (pt.Z && (pt.Z < floorLowBound || pt.Z > floorHighBound))
                     continue;
 
                 let c = coordTranslate(pt.X, pt.Y, config);
