@@ -1,9 +1,7 @@
 import styles from '@/styles/Map.module.css';
 import { useRouter } from 'next/router';
-import { useEffect } from 'react';
 
 export default function FloorPicker({ floors, chosenFloor, setChosenFloor }) {
-    const chosenStyle = { backgroundColor: '#f26430', borderColor: '#dd7230' };
     const router = useRouter();
 
     if (!floors || floors.length === 0) return <></>;
@@ -27,8 +25,11 @@ export default function FloorPicker({ floors, chosenFloor, setChosenFloor }) {
                 return (
                     <li key={idx}>
                         <button
-                            className={styles.FloorPicker_option}
-                            style={idx + 1 === chosenFloor ? chosenStyle : {}}
+                            className={`${styles.FloorPicker_option} ${
+                                idx + 1 === chosenFloor
+                                    ? styles.chosenFloor
+                                    : ''
+                            }`}
                             onClick={() => {
                                 router.push(
                                     {

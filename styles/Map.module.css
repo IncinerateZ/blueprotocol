@@ -574,5 +574,14 @@
 }
 
 .FloorPicker_option:hover {
-    filter: brightness(150%);
+    border: 2px solid #abafd1;
+}
+
+.chosenFloor {
+    background-color: #f26430;
+    border-color: #dd7230;
+}
+
+.chosenFloor:hover {
+    border-color: rgb(252, 181, 94);
 }
