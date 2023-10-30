@@ -1,6 +1,5 @@
 import styles from '@/styles/Map.module.css';
 import { useRouter } from 'next/router';
-import { useEffect } from 'react';
 
 export default function FloorPicker({ floors, chosenFloor, setChosenFloor }) {
     const router = useRouter();

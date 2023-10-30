@@ -49,7 +49,7 @@ export default function Map() {
     const [lang, setLang] = useState('ja_JP');
 
     const [showLeak, setShowLeak] = useState(
-        localStorage.getItem('Map_showLeak') === 'true',
+        (localStorage.getItem('Map_showLeak') || 'true') === 'true',
     );
 
     const [selectors, setSelectors] = useState({});
