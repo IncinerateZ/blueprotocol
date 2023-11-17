@@ -8,9 +8,7 @@ export default function contact() {
                 <link rel='canonical' href='https://bp.incin.net/contact' />
             </Head>
             <div style={{ margin: '2rem' }}>
-                <h1>
-                    ONLY IMPORTANT AND RELEVANT MATTERS WILL BE RESPONDED TO
-                </h1>
+                <h1>Not all messages may be responded to</h1>
                 <p>Discord: incineratez</p>
                 <p>Email: admin@incin.net</p>
                 <div
