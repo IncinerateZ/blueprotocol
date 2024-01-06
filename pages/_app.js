@@ -2,8 +2,11 @@ import Script from 'next/script';
 import '@/styles/globals.css';
 import Head from 'next/head';
 import { useEffect } from 'react';
+import { wrapper } from 'lib/store';
+import { Provider } from 'react-redux';
 
 function MyApp({ Component, pageProps }) {
+    const store = wrapper.useWrappedStore({}).store;
     useEffect(async () => {
         let version = null;
         const res = await fetch('./api/version');
@@ -56,7 +59,7 @@ function MyApp({ Component, pageProps }) {
                     name='viewport'
                     content='width=device-width, initial-scale=1.0'
                 ></meta>
-                {/* OpenGraph */}
+
                 <meta
                     property='og:url'
                     content={'https://bp.incin.net/'}
@@ -87,7 +90,6 @@ function MyApp({ Component, pageProps }) {
                     key='ogdesc'
                 />
 
-                {/* Twitter */}
                 <meta name='twitter:card' content='summary_large_image' />
                 <meta name='twitter:site' content='@The_IncinerateZ' />
                 <meta
@@ -114,9 +116,11 @@ function MyApp({ Component, pageProps }) {
                 />
                 <title>Blue Protocol Interactive Map & Resource</title>
             </Head>
-            <Component {...pageProps} />
+            <Provider store={store}>
+                <Component {...pageProps} />
+            </Provider>
         </>
     );
 }
 
-export default MyApp;
+export default wrapper.withRedux(MyApp);

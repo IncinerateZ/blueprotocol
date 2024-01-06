@@ -37,7 +37,7 @@
         "display_name": "Asteria Plains",
         "map_url": "./UI_MapFld001.webp",
         "tags": [
-            "city",
+            "field",
             "Asteria Plains",
             "Andra Basin",
             "Minster Hills",
@@ -62,7 +62,7 @@
         "display_name": "Bahamar Highlands",
         "map_url": "./UI_MapFld002.webp",
         "tags": [
-            "city",
+            "field",
             "Bahamar Highlands",
             "Quellmount's Foot",
             "Godswatch Rise",
@@ -85,7 +85,7 @@
         "display_name": "Montegnor Valley",
         "map_url": "./UI_MapFld003.webp",
         "tags": [
-            "city",
+            "field",
             "Montegnor Valley",
             "Rietz Tradeway",
             "Melisos River Basin",
@@ -108,7 +108,7 @@
         "display_name": "Evergreen Desert",
         "map_url": "./UI_MapFld004.webp",
         "tags": [
-            "city",
+            "field",
             "Evergreen Desert",
             "Old Rainfall Road",
             "Hollowed Tempest",
@@ -135,7 +135,7 @@
         "display_name": "West Bernhart Peninsula",
         "map_url": "./UI_MapFld005.webp",
         "tags": [
-            "city",
+            "field",
             "West Bernhart Peninsula",
             "West Bernhart Peninsula",
             "West Bernhart Peninsula",
@@ -158,7 +158,7 @@
         "display_name": "Soundless City",
         "map_url": "./UI_Mapdng004.webp",
         "tags": [
-            "city",
+            "dungeon",
             "Soundless City",
             "Soundless City",
             "音無き都・追加調査"
@@ -180,7 +180,7 @@
         "display_name": "Chained One's Spawnery",
         "map_url": "./UI_Mapdng007.webp",
         "tags": [
-            "city",
+            "dungeon",
             "Chained One's Spawnery",
             "Chained One's Spawnery",
             "枷神の産屋・追加調査"
@@ -198,7 +198,7 @@
         "display_name": "Dragon's Rive",
         "map_url": "./UI_Mapdng009.webp",
         "tags": [
-            "city",
+            "dungeon",
             "Dragon's Rive",
             "Dragon's Rive",
             "巨竜の爪痕・追加調査"
@@ -216,7 +216,7 @@
         "display_name": "Halflight Hive",
         "map_url": "./UI_Mapdng015.webp",
         "tags": [
-            "city",
+            "dungeon",
             "Halflight Hive",
             "Halflight Hive",
             "暁の虫砦・追加調査"
@@ -239,7 +239,7 @@
         "display_name": "Steelwalker Ravine",
         "map_url": "./UI_Mappat0102.webp",
         "tags": [
-            "city",
+            "dungeon",
             "Steelwalker Ravine",
             "Steelwalker Ravine",
             "機跡の谷・自由探索"
@@ -253,11 +253,30 @@
         },
         "floors": []
     },
+    "pat0103": {
+        "map_url": "./UI_Mappat0103.webp",
+        "tags": [
+            "dungeon",
+            "pub0103",
+            "pat0103",
+            "ソプラの山道・自由探索"
+        ],
+        "map_id": "pat0103",
+        "markers": {
+            "new": {
+                "display_name": "New Marker",
+                "arr": []
+            }
+        },
+        "floors": [
+            2953.9043
+        ]
+    },
     "pat0201": {
         "display_name": "Ruins of Borwam",
         "map_url": "./UI_Mappat0201.webp",
         "tags": [
-            "city",
+            "dungeon",
             "Ruins of Borwam",
             "Ruins of Borwam",
             "ボルオム遺跡・自由探索"
@@ -277,7 +296,7 @@
         "display_name": "Thieves' Falls",
         "map_url": "./UI_Mappat0202.webp",
         "tags": [
-            "city",
+            "dungeon",
             "Thieves' Falls",
             "Thieves' Falls",
             "滝裏の盗掘痕跡・自由探索"
@@ -291,11 +310,28 @@
         },
         "floors": []
     },
+    "pat0206": {
+        "map_url": "./UI_Mappat0206.webp",
+        "tags": [
+            "dungeon",
+            "pub0206",
+            "pat0206",
+            "カースドノール遺跡・自由探索"
+        ],
+        "map_id": "pat0206",
+        "markers": {
+            "new": {
+                "display_name": "New Marker",
+                "arr": []
+            }
+        },
+        "floors": []
+    },
     "pat0801": {
         "display_name": "Sunlit Timberpath",
         "map_url": "./UI_Mappat0801.webp",
         "tags": [
-            "city",
+            "dungeon",
             "Sunlit Timberpath",
             "Sunlit Timberpath",
             "木漏れ日射す林道・自由探索"
@@ -313,7 +349,7 @@
         "display_name": "Torchlight Thickets",
         "map_url": "./UI_Mappat0802.webp",
         "tags": [
-            "city",
+            "dungeon",
             "Torchlight Thickets",
             "Torchlight Thickets",
             "ともし火の森・自由探索"
@@ -331,7 +367,7 @@
         "display_name": "Everfall Forest",
         "map_url": "./UI_Mappat0803.webp",
         "tags": [
-            "city",
+            "dungeon",
             "Everfall Forest",
             "Everfall Forest",
             "雨止まぬ森・自由探索"
@@ -349,7 +385,7 @@
         "display_name": "Roseblush Woods",
         "map_url": "./UI_Mappat0804.webp",
         "tags": [
-            "city",
+            "dungeon",
             "Roseblush Woods",
             "Roseblush Woods",
             "緋染めの樹林・自由探索"
@@ -367,7 +403,7 @@
         "display_name": "Home of the Cursed Spirits",
         "map_url": "./UI_Mappat0805.webp",
         "tags": [
-            "city",
+            "dungeon",
             "Home of the Cursed Spirits",
             "Home of the Cursed Spirits",
             "呪霊たちの棲家・自由探索"
@@ -381,11 +417,28 @@
         },
         "floors": []
     },
+    "pat0806": {
+        "map_url": "./UI_Mappat0806.webp",
+        "tags": [
+            "dungeon",
+            "pub0806",
+            "pat0806",
+            "落日古道・自由探索"
+        ],
+        "map_id": "pat0806",
+        "markers": {
+            "new": {
+                "display_name": "New Marker",
+                "arr": []
+            }
+        },
+        "floors": []
+    },
     "pat0901": {
         "display_name": "Windsprite's Rostrum",
         "map_url": "./UI_Mappat0901.webp",
         "tags": [
-            "city",
+            "dungeon",
             "Windsprite's Rostrum",
             "Windsprite's Rostrum",
             "風精の舞台・自由探索"
@@ -403,12 +456,30 @@
         "display_name": "Yellow Sand Cove",
         "map_url": "./UI_Mappat0902.webp",
         "tags": [
-            "city",
+            "dungeon",
             "Yellow Sand Cove",
             "Yellow Sand Cove",
             "黄砂の入り江・自由探索"
         ],
         "map_id": "pat0902",
+        "markers": {
+            "new": {
+                "display_name": "New Marker",
+                "arr": []
+            }
+        },
+        "floors": []
+    },
+    "pat0903": {
+        "display_name": "Kurageto Sand Perimeter",
+        "map_url": "./UI_Mappat0903.webp",
+        "tags": [
+            "dungeon",
+            "Kurageto Sand Perimeter",
+            "Kurageto Sand Perimeter",
+            "海月灯の砂径・自由探索"
+        ],
+        "map_id": "pat0903",
         "markers": {
             "new": {
                 "display_name": "New Marker",
